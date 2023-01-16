@@ -3,6 +3,8 @@ import {useForm} from "react-hook-form";
 import {CustomInputReactHook} from "components";
 import {createLog, iranPhoneNumberRegex} from "utils/utils";
 import {Button, InputRef} from "antd";
+import useAuthFocus from "template/auth/hooks/useAuthFocus";
+import useAuthBlur from "template/auth/hooks/useAuthBlur";
 
 interface ILoginPhoneNumber {
   phoneNumber: string;
@@ -10,7 +12,6 @@ interface ILoginPhoneNumber {
 
 function LoginPhoneNumber() {
   const inputRef = useRef<InputRef>(null);
-  const submitBtn = useRef<HTMLButtonElement>(null);
   const {
     handleSubmit,
     control,
@@ -19,41 +20,10 @@ function LoginPhoneNumber() {
     mode: "all",
   });
 
+  const focus = useAuthFocus("login-btn");
+  const blur = useAuthBlur("login-btn");
+
   useEffect(() => {
-    const btn = submitBtn.current;
-
-    function focus() {
-      if (btn?.classList.contains("bottom-[40px]")) {
-        btn.classList.remove("bottom-[40px]");
-        btn.classList.add("bottom-0");
-        btn.classList.add("rounded-none");
-      }
-      if (btn?.classList.contains("left-[19px]")) {
-        btn.classList.remove("left-[19px]");
-        btn.classList.add("left-0");
-      }
-      if (btn?.classList.contains("right-[19px]")) {
-        btn.classList.remove("right-[19px]");
-        btn.classList.add("right-0");
-      }
-    }
-
-    function blur() {
-      if (btn?.classList.contains("bottom-0")) {
-        btn.classList.remove("bottom-0");
-        btn.classList.remove("rounded-none");
-        btn.classList.add("bottom-[40px]");
-      }
-      if (btn?.classList.contains("left-0")) {
-        btn.classList.remove("left-0");
-        btn.classList.add("left-[19px]");
-      }
-      if (btn?.classList.contains("right-0")) {
-        btn.classList.remove("right-0");
-        btn.classList.add("right-[19px]");
-      }
-    }
-
     if (inputRef.current?.input) {
       const input = inputRef.current.input;
 
@@ -65,7 +35,7 @@ function LoginPhoneNumber() {
         input.removeEventListener("blur", blur);
       };
     }
-  }, []);
+  }, [blur, focus]);
 
   async function onSubmit(payload: ILoginPhoneNumber) {
     createLog("payload", payload);
@@ -92,7 +62,7 @@ function LoginPhoneNumber() {
           }}
         />
         <Button
-          ref={submitBtn}
+          id="login-btn"
           htmlType="submit"
           type="primary"
           className="fixed submit-btn bottom-[40px] right-[19px] left-[19px]"

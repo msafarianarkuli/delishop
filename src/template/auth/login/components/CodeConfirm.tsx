@@ -26,7 +26,7 @@ function CodeConfirm() {
         کد ارسالی به شماره <span className="text-primary">09193777597</span> را وارد کنید
       </div>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <CustomInputReactHook
             id="code"
             control={control}

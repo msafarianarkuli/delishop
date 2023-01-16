@@ -14,7 +14,7 @@ function AntConfig({children}: IAntConfig) {
       direction="rtl"
       theme={{
         token: {colorPrimary: "#FF5C01", borderRadius: 10, fontFamily, colorText: "#2C3036"},
-        components: {Input: {colorBorder: "#575F6B"}},
+        components: {Input: {colorBorder: "#B0B8C4"}},
       }}
     >
       {children}

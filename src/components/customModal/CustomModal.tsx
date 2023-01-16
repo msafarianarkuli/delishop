@@ -23,7 +23,7 @@ function CustomModal(props: ICustomModal) {
     [classNameHeader]: classNameHeader,
   });
   const bodyClassName = classNames({
-    "px-[15px] py-3 overflow-auto": true,
+    "p-[15px] overflow-auto": true,
     [classNameBody]: classNameBody,
   });
 

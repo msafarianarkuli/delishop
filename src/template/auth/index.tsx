@@ -1,9 +1,10 @@
-import Login from "template/auth/login";
+import Register from "template/auth/register";
 
 function Auth() {
   return (
     <>
-      <Login />
+      {/*<Login />*/}
+      <Register />
     </>
   );
 }

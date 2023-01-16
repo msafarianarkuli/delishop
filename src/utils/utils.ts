@@ -51,3 +51,5 @@ export function removeFirstZero(str: string) {
   }
   return number;
 }
+
+export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

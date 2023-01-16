@@ -6,6 +6,7 @@ import {useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
 import wrapper from "redux/store";
 import "styles/globals.scss";
+import "assets/fonts/IRANSans.css";
 
 function App({Component, pageProps}: AppProps) {
   const [queryClient] = useState(() => new QueryClient());

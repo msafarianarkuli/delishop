@@ -1,5 +1,5 @@
 import {ForwardedRef, forwardRef} from "react";
-import CustomInput, {IBasicCustomInput, ICustomInputClassNames} from "lib/customInput/CustomInput";
+import CustomInput, {IBasicCustomInput, ICustomInputClassNames} from "components/customInput/CustomInput";
 import {InputRef} from "antd";
 import {Control, FieldValues, RegisterOptions, useController} from "react-hook-form";
 import {FieldPath, FieldPathValue} from "react-hook-form/dist/types";

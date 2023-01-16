@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {useForm} from "react-hook-form";
-import {CustomInputReactHook} from "lib";
+import {CustomInputReactHook} from "components";
 import {createLog, iranPhoneNumberRegex} from "utils/utils";
 import {Button, InputRef} from "antd";
 

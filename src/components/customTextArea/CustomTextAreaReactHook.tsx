@@ -1,7 +1,10 @@
 import React, {ForwardedRef, forwardRef} from "react";
 import {Control, FieldValues, RegisterOptions, useController} from "react-hook-form";
 import {FieldPath, FieldPathValue} from "react-hook-form/dist/types";
-import CustomTextArea, {IBasicCustomTextArea, ICustomTextAreaClassNames} from "lib/customTextArea/CustomTextArea";
+import CustomTextArea, {
+  IBasicCustomTextArea,
+  ICustomTextAreaClassNames,
+} from "components/customTextArea/CustomTextArea";
 import {TextAreaRef} from "antd/lib/input/TextArea";
 
 export interface ICustomTextAreaReactHook<C extends FieldValues, N extends FieldPath<C>> extends IBasicCustomTextArea {

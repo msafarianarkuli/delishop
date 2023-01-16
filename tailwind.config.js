@@ -25,9 +25,11 @@ module.exports = {
         headerNormal: "56px",
       },
       colors: {
-        primary: "#FF5C01",
+        primary: "#FF5500",
         error: "#ff4d4f",
         textColor: "#2C3036",
+        textColorLight: "#8D8D8D",
+        IconColor: "#575F6B",
       },
     },
   },

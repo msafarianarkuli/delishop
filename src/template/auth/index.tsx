@@ -1,10 +1,13 @@
-import Register from "template/auth/register";
+import Login from "template/auth/login";
+import LoginProvider from "template/auth/login/context/LoginProvider";
 
 function Auth() {
   return (
     <>
-      {/*<Login />*/}
-      <Register />
+      <LoginProvider>
+        <Login />
+      </LoginProvider>
+      {/*<Register />*/}
     </>
   );
 }

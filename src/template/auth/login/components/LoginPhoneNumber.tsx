@@ -5,12 +5,16 @@ import {createLog, iranPhoneNumberRegex} from "utils/utils";
 import {Button, InputRef} from "antd";
 import useAuthFocus from "template/auth/hooks/useAuthFocus";
 import useAuthBlur from "template/auth/hooks/useAuthBlur";
+import {sendCode} from "api";
+import useLoginAction from "template/auth/login/context/useLoginAction";
+import {loginSetCode} from "template/auth/login/context/LoginProvider";
 
 interface ILoginPhoneNumber {
-  phoneNumber: string;
+  phone: string;
 }
 
 function LoginPhoneNumber() {
+  const dispatch = useLoginAction();
   const inputRef = useRef<InputRef>(null);
   const {
     handleSubmit,
@@ -39,6 +43,14 @@ function LoginPhoneNumber() {
 
   async function onSubmit(payload: ILoginPhoneNumber) {
     createLog("payload", payload);
+    dispatch(loginSetCode(payload.phone));
+    return true;
+    try {
+      const res = await sendCode(payload);
+      createLog("res LoginPhoneNumber", res.data);
+    } catch (e) {
+      createLog("error LoginPhoneNumber", e);
+    }
   }
 
   return (
@@ -46,7 +58,7 @@ function LoginPhoneNumber() {
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <CustomInputReactHook
           ref={inputRef}
-          id="phoneNumber"
+          id="phone"
           control={control}
           classNameContainer="flex flex-col justify-center h-[50vh]"
           className="bg-transparent rounded-none border-0 border-b focus:shadow-none text-center text-[14px]"

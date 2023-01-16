@@ -8,6 +8,10 @@ interface ISendCodeRes {
   isnew: boolean;
 }
 
-export default async function sendCode<B>(body: B) {
-  return axiosService<ISendCodeRes, B>({url: API.SEND_CODE, method: "post", body});
+interface IBody {
+  phone: string;
+}
+
+export default async function sendCode(body: IBody) {
+  return axiosService<ISendCodeRes, IBody>({url: API.SEND_CODE, method: "post", body});
 }

@@ -14,49 +14,49 @@ export interface ICustomTextAreaReactHook<C extends FieldValues, N extends Field
   customTextAreaClassNames?: ICustomTextAreaClassNames;
 }
 
-const CustomTextAreaReactHook = forwardRef(
-  <C extends FieldValues, N extends FieldPath<C>>(
-    props: ICustomTextAreaReactHook<C, N>,
-    ref: ForwardedRef<TextAreaRef>
-  ) => {
-    const {
-      id,
-      control,
-      defaultValue,
-      rules,
-      customTextAreaClassNames = {},
-      classNameContainer,
-      classNameError,
-      ...rest
-    } = props;
+function TextAreaReactHook<C extends FieldValues, N extends FieldPath<C>>(
+  props: ICustomTextAreaReactHook<C, N>,
+  ref: ForwardedRef<TextAreaRef>
+) {
+  const {
+    id,
+    control,
+    defaultValue,
+    rules,
+    customTextAreaClassNames = {},
+    classNameContainer,
+    classNameError,
+    ...rest
+  } = props;
 
-    const {
-      field,
-      fieldState: {error},
-    } = useController<C, N>({
-      control,
-      name: id,
-      defaultValue,
-      rules,
-    });
+  const {
+    field,
+    fieldState: {error},
+  } = useController<C, N>({
+    control,
+    name: id,
+    defaultValue,
+    rules,
+  });
 
-    return (
-      <div className={classNameContainer}>
-        <CustomTextArea
-          ref={ref}
-          id={field.name}
-          value={field.value || ""}
-          onBlur={field.onBlur}
-          onChange={field.onChange}
-          {...customTextAreaClassNames}
-          {...rest}
-        />
-        {error?.message ? <div className={classNameError}>{error.message}</div> : null}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={classNameContainer}>
+      <CustomTextArea
+        ref={ref}
+        id={field.name}
+        value={field.value || ""}
+        onBlur={field.onBlur}
+        onChange={field.onChange}
+        {...customTextAreaClassNames}
+        {...rest}
+      />
+      {error?.message ? <div className={classNameError}>{error.message}</div> : null}
+    </div>
+  );
+}
 
-CustomTextAreaReactHook.displayName = "CustomTextAreaReactHook";
+export const CustomTextAreaReactHook = forwardRef(TextAreaReactHook) as <C extends FieldValues, N extends FieldPath<C>>(
+  props: ICustomTextAreaReactHook<C, N> & {ref?: ForwardedRef<TextAreaRef>}
+) => ReturnType<typeof TextAreaReactHook>;
 
 export default CustomTextAreaReactHook;

@@ -1,17 +1,15 @@
-import {IconRoundedRight} from "assets/icons";
-import {useRouter} from "next/router";
+import BackBtn from "components/backBtn/BackBtn";
+import {MouseEventHandler} from "react";
 
 interface ILoginHeader {
   title?: string;
+  onClick?: MouseEventHandler;
 }
 
-function AuthHeader({title}: ILoginHeader) {
-  const router = useRouter();
+function AuthHeader({title, onClick}: ILoginHeader) {
   return (
     <div className="flex items-center h-headerNormal px-4">
-      <button onClick={() => router.back()}>
-        <IconRoundedRight className="w-8 h-8 text-white drop-shadow-[-1px_4px_2px_#575F6B]" />
-      </button>
+      <BackBtn onClick={onClick} />
       <div className="flex flex-1 justify-center items-center text-[15px] font-normal">{title}</div>
     </div>
   );

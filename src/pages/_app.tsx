@@ -4,9 +4,10 @@ import Template from "template";
 import Head from "next/head";
 import {useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
+import wrapper from "redux/store";
 import "styles/globals.scss";
 
-export default function App({Component, pageProps}: AppProps) {
+function App({Component, pageProps}: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
@@ -28,3 +29,5 @@ export default function App({Component, pageProps}: AppProps) {
     </>
   );
 }
+
+export default wrapper.withRedux(App);

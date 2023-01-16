@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.submit-btn {
+  font-size: 18px;
+  height: 56px;
+  @apply font-semibold bg-primary;
+}
+
+.modal-submit-btn {
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  @apply rounded-full;
+}
+
+.secondary-btn {
+  font-size: 18px;
+  height: 56px;
+  background-image: linear-gradient(90.93deg, #e5e6ec 0%, #f2f3f6 100%),
+    linear-gradient(90.93deg, #e5e6ec 0%, #f2f3f6 100%);
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  color: #575f6b;
+  @apply rounded-full;
+}

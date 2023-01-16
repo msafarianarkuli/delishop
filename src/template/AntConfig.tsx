@@ -11,8 +11,9 @@ const fontFamily =
 function AntConfig({children}: IAntConfig) {
   return (
     <ConfigProvider
+      direction="rtl"
       theme={{
-        token: {colorPrimary: "#FF5C01", borderRadius: 10, fontFamily},
+        token: {colorPrimary: "#FF5C01", borderRadius: 10, fontFamily, colorText: "#2C3036"},
         components: {Input: {colorBorder: "#575F6B"}},
       }}
     >

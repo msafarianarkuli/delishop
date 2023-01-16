@@ -27,6 +27,7 @@ module.exports = {
       colors: {
         primary: "#FF5C01",
         error: "#ff4d4f",
+        textColor: "#2C3036",
       },
     },
   },

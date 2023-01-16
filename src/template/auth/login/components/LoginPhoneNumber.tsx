@@ -95,7 +95,7 @@ function LoginPhoneNumber() {
           ref={submitBtn}
           htmlType="submit"
           type="primary"
-          className="fixed bottom-[40px] right-[19px] left-[19px] bg-primary h-[50px] text-[20px] font-semibold"
+          className="fixed submit-btn bottom-[40px] right-[19px] left-[19px]"
           loading={isSubmitting}
         >
           ثبت

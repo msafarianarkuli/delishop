@@ -8,7 +8,7 @@ interface ITemplate {
 function Template({children}: ITemplate) {
   return (
     <AntConfig>
-      <div className="template min-h-screen anti aliased">{children}</div>
+      <div className="template min-h-screen anti aliased font-IranSans">{children}</div>
     </AntConfig>
   );
 }

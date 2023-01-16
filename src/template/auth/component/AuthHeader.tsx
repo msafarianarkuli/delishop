@@ -5,16 +5,16 @@ interface ILoginHeader {
   title?: string;
 }
 
-function LoginHeader({title}: ILoginHeader) {
+function AuthHeader({title}: ILoginHeader) {
   const router = useRouter();
   return (
-    <div className="flex items-center h-[56px] px-4">
+    <div className="flex items-center h-headerNormal px-4">
       <button onClick={() => router.back()}>
         <IconRoundedRight className="w-8 h-8 text-white drop-shadow-[-1px_4px_2px_#575F6B]" />
       </button>
-      <div className="flex flex-1 justify-center items-center">{title}</div>
+      <div className="flex flex-1 justify-center items-center text-[15px] font-normal">{title}</div>
     </div>
   );
 }
 
-export default LoginHeader;
+export default AuthHeader;

@@ -26,6 +26,7 @@ module.exports = {
       },
       colors: {
         primary: "#FF5C01",
+        error: "#ff4d4f",
       },
     },
   },

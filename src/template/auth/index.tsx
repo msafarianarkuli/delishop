@@ -1,11 +1,12 @@
-import LoginHeader from "template/login/component/LoginHeader";
+import AuthHeader from "template/auth/component/AuthHeader";
+import Login from "template/auth/login";
 
-function Login() {
+function Auth() {
   return (
-    <div>
-      <LoginHeader />
-    </div>
+    <>
+      <Login />
+    </>
   );
 }
 
-export default Login;
+export default Auth;

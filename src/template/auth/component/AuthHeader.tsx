@@ -1,5 +1,6 @@
 import BackBtn from "components/backBtn/BackBtn";
 import {useRouter} from "next/router";
+import {AppHeader} from "components";
 
 interface ILoginHeader {
   title?: string;
@@ -7,12 +8,8 @@ interface ILoginHeader {
 
 function AuthHeader({title}: ILoginHeader) {
   const router = useRouter();
-  return (
-    <div className="flex items-center h-headerNormal px-4">
-      <BackBtn onClick={() => router.back()} />
-      <div className="flex flex-1 justify-center items-center text-[15px] font-medium">{title}</div>
-    </div>
-  );
+
+  return <AppHeader right={<BackBtn onClick={() => router.back()} />} body={title} />;
 }
 
 export default AuthHeader;

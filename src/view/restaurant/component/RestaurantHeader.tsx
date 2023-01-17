@@ -9,7 +9,7 @@ function RestaurantHeaderBody() {
         <span className="font-bold">خانه</span>
         <IconArrowDown className="w-3 h-auto text-iconColor mr-1" />
       </div>
-      <div className="text-[13px] font-light max-w-[120px] truncate">کشاورز، پارک لاله، کارگر جنوبی</div>
+      <div className="text-[13px] font-light max-w-[130px] truncate">کشاورز، پارک لاله، کارگر جنوبی</div>
     </div>
   );
 }

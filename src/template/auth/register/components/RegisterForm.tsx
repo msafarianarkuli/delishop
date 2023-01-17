@@ -20,7 +20,7 @@ function RegisterForm() {
   }
 
   return (
-    <div className="sizeScreen">
+    <div className="mx-screenSpace">
       <FormProvider {...method}>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <RegisterInput

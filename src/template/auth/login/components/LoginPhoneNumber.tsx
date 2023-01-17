@@ -54,7 +54,7 @@ function LoginPhoneNumber() {
   }
 
   return (
-    <div className="w-full h-full sizeScreen">
+    <div className="w-full h-full mx-screenSpace">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <CustomInputReactHook
           ref={inputRef}

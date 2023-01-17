@@ -29,7 +29,10 @@ module.exports = {
         error: "#ff4d4f",
         textColor: "#2C3036",
         textColorLight: "#8D8D8D",
-        IconColor: "#575F6B",
+        iconColor: "#575F6B",
+      },
+      spacing: {
+        screenSpace: "19px",
       },
     },
   },

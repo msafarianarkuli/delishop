@@ -4,8 +4,8 @@ import RestaurantSort from "view/restaurant/component/RestaurantSort";
 import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantCard";
 import styles from "view/restaurant/restaurant.module.scss";
 import img1 from "assets/images/res01.png";
-import {useEffect} from "react";
 import {BottomNavigation} from "components";
+import Link from "next/link";
 
 const data = [
   {
@@ -66,16 +66,17 @@ function Restaurant() {
       <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px] pb-bottomNavigation">
         {data.map((item, index) => {
           return (
-            <RestaurantCard
-              key={index}
-              image={item.image}
-              title={item.title}
-              address={item.address}
-              description={item.description}
-              star={item.star}
-              coin={item.coin}
-              time={item.time}
-            />
+            <Link key={index} href="/restaurant/1">
+              <RestaurantCard
+                image={item.image}
+                title={item.title}
+                address={item.address}
+                description={item.description}
+                star={item.star}
+                coin={item.coin}
+                time={item.time}
+              />
+            </Link>
           );
         })}
       </div>

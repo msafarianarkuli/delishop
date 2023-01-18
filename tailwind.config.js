@@ -21,9 +21,6 @@ module.exports = {
           "Noto Color Emoji",
         ],
       },
-      height: {
-        headerNormal: "56px",
-      },
       colors: {
         primary: "#FF5500",
         error: "#ff4d4f",
@@ -33,6 +30,10 @@ module.exports = {
       },
       spacing: {
         screenSpace: "19px",
+        headerNormal: "56px",
+      },
+      transitionProperty: {
+        height: "height",
       },
     },
   },

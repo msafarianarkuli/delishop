@@ -3,7 +3,7 @@ import React from "react";
 function IconCoin({className}: {className: string}) {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
-      <g clipPath="url(#a)">
+      <g clipPath="url(#coin)">
         <path fill="#FFD100" d="M10 20c5.523 0 10-4.477 10-10S15.523 0 10 0 0 4.477 0 10s4.477 10 10 10Z" />
         <path
           fill="#FF9500"
@@ -85,7 +85,7 @@ function IconCoin({className}: {className: string}) {
         />
       </g>
       <defs>
-        <clipPath id="a">
+        <clipPath id="coin">
           <path fill="#fff" d="M0 0h20v20H0z" />
         </clipPath>
       </defs>

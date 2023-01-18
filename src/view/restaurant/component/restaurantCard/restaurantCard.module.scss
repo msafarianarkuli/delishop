@@ -1,0 +1,32 @@
+.restaurant_card_container {
+  width: 100%;
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+.restaurant_card_content {
+  padding: 10px 15px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-image: linear-gradient(310.59deg, #f2f3f6 3.8%, #e5e6ec 119.99%);
+}
+
+.restaurant_card_time_box {
+  display: flex;
+  align-items: center;
+  padding: 7px 9px;
+  border-radius: 8px;
+  box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
+  margin-right: 7px;
+}
+
+.restaurant_card_gold_box {
+  display: flex;
+  align-items: center;
+  padding: 7px 9px;
+  border-radius: 8px;
+  box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
+}

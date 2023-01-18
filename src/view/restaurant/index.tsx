@@ -5,6 +5,7 @@ import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantC
 import styles from "view/restaurant/restaurant.module.scss";
 import img1 from "assets/images/res01.png";
 import {useEffect} from "react";
+import {BottomNavigation} from "components";
 
 const data = [
   {
@@ -62,7 +63,7 @@ function Restaurant() {
         <RestaurantFilter />
         <RestaurantSort />
       </div>
-      <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
+      <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px] pb-bottomNavigation">
         {data.map((item, index) => {
           return (
             <RestaurantCard
@@ -78,6 +79,7 @@ function Restaurant() {
           );
         })}
       </div>
+      <BottomNavigation />
     </>
   );
 }

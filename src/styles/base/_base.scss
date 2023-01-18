@@ -1,6 +1,7 @@
 .template {
   background-image: linear-gradient(167.51deg, #f8f8fc -23.83%, #e1e2e8 81.74%);
 }
+
 .template:after,
 .template:before {
   display: table;
@@ -9,4 +10,10 @@
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+.inner_box {
+  padding: 7px 9px;
+  border-radius: 8px;
+  box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
 }

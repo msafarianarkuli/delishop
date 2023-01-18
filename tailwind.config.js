@@ -27,6 +27,7 @@ module.exports = {
         textColor: "#2C3036",
         textColorLight: "#8D8D8D",
         iconColor: "#575F6B",
+        borderColor: "#B0B8C4",
       },
       spacing: {
         screenSpace: "19px",

@@ -46,11 +46,11 @@ function RestaurantCard(props: IRestaurantCard) {
         <div className="flex justify-between">
           <div className="text-textColorLight text-[13px] font-light">{description}</div>
           <div className="flex items-center">
-            <div className={styles.restaurant_card_gold_box}>
+            <div className="flex items-center inner_box">
               <IconCoin className="w-4 h-4 ml-1" />
               <span className="text-[12px]">{coin}</span>
             </div>
-            <div className={styles.restaurant_card_time_box}>
+            <div className="flex items-center inner_box mr-2">
               <span className="text-[12px]">تا {time} دقیقه</span>
               <IconClock className="w-4 h-4 text-iconColor mr-1" />
             </div>

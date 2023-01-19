@@ -1,4 +1,4 @@
-import {IconClock, IconCoin, IconStarEmpty, IconStartFill} from "assets/icons";
+import {IconClock, IconCoin, IconStarOutline, IconStartFill} from "assets/icons";
 import styles from "view/restaurant/component/restaurantCard/restaurantCard.module.scss";
 import {useMemo} from "react";
 
@@ -39,7 +39,7 @@ function RestaurantCard(props: IRestaurantCard) {
               <IconStartFill key={item} className="w-4 h-auto" />
             ))}
             {starEmpty.map((item) => (
-              <IconStarEmpty key={item} className="w-4 h-auto" />
+              <IconStarOutline key={item} className="w-4 h-auto" />
             ))}
           </div>
         </div>

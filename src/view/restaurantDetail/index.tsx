@@ -5,10 +5,16 @@ import RestaurantDetailDescription from "view/restaurantDetail/component/Restaur
 import RestaurantDetailTime from "view/restaurantDetail/component/RestaurantDetailTime";
 import RestaurantDetailDelivery from "view/restaurantDetail/component/RestaurantDetailDelivery";
 import RestaurantDetailMoreInfo from "view/restaurantDetail/component/RestaurantDetailMoreInfo";
+import RestaurantDetailTab from "view/restaurantDetail/component/RestaurantDetailTab";
+import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDetailCard/RestaurantDetailCard";
+import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantDetailListTag";
+import img from "assets/images/res-detail-card.png";
+import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
 
 function RestaurantDetail() {
   return (
     <>
+      <RestaurantDetailHeader />
       <RestaurantDetailImageHeader />
       <div className="pt-6 pb-5 border-b border-borderColor px-screenSpace">
         <RestaurantDetailTitle />
@@ -18,6 +24,20 @@ function RestaurantDetail() {
         <RestaurantDetailTime />
         <RestaurantDetailDelivery />
         <RestaurantDetailMoreInfo />
+      </div>
+      <div className="pt-6 px-screenSpace">
+        <RestaurantDetailTab />
+        <div className="mt-4">
+          <RestaurantDetailListTag title="پرطرفدارها" />
+          <RestaurantDetailCard
+            image={img.src}
+            title="ساندویچ ژامبون مرغ و گوشت ۷۰% ۵۰۰گرمی (سرد)"
+            description="۵۰۰ گرم مخلوط ژامبون گوشت و مرغ ۷۰ درصد، گوجه، خیارشور، کاهو، سس مخصوص"
+            coin={15}
+            price={114500}
+            count={1}
+          />
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import img1 from "assets/images/detail-header.png";
+import img1 from "assets/images/res-detail-header.png";
 
 function RestaurantDetailImageHeader() {
   return (

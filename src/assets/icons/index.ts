@@ -5,7 +5,7 @@ import IconCoin from "assets/icons/IconCoin";
 import IconCategory from "assets/icons/IconCategory";
 import IconSort from "assets/icons/IconSort";
 import IconStartFill from "assets/icons/IconStartFill";
-import IconStarEmpty from "assets/icons/IconStarEmpty";
+import IconStarOutline from "assets/icons/IconStarOutline";
 import IconClock from "assets/icons/IconClock";
 import IconHome from "assets/icons/IconHome";
 import IconCart from "assets/icons/IconCart";
@@ -13,6 +13,8 @@ import IconSearch from "assets/icons/IconSearch";
 import IconStar from "assets/icons/IconStar";
 import IconClockSolid from "assets/icons/IconClockSolid";
 import IconMoreInfo from "assets/icons/IconMoreInfo";
+import IconAdd from "assets/icons/IconAdd";
+import IconMinus from "assets/icons/IconMinus";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -24,7 +26,7 @@ export {
   IconCategory,
   IconSort,
   IconStartFill,
-  IconStarEmpty,
+  IconStarOutline,
   IconClock,
   IconHome,
   IconCart,
@@ -32,4 +34,6 @@ export {
   IconStar,
   IconClockSolid,
   IconMoreInfo,
+  IconAdd,
+  IconMinus,
 };

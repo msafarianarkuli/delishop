@@ -1,6 +1,6 @@
 import React from "react";
 
-function IconStarEmpty({className}: {className: string}) {
+function IconStarOutline({className}: {className: string}) {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 10" fill="none">
       <path
@@ -12,4 +12,4 @@ function IconStarEmpty({className}: {className: string}) {
   );
 }
 
-export default IconStarEmpty;
+export default IconStarOutline;

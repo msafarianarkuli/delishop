@@ -11,6 +11,7 @@ import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantD
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
 import img from "assets/images/res-detail-card.png";
 import RestaurantDetailSubmitBtn from "view/restaurantDetail/component/RestaurantDetailSubmitBtn";
+import RestaurantDetailModal from "view/restaurantDetail/component/restaurantDetailModal/RestaurantDetailModal";
 
 function RestaurantDetail() {
   return (
@@ -41,6 +42,7 @@ function RestaurantDetail() {
         </div>
       </div>
       <RestaurantDetailSubmitBtn />
+      <RestaurantDetailModal open />
     </>
   );
 }

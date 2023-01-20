@@ -32,9 +32,7 @@ function Checkbox(props: IRadioButton) {
           onChange(!value);
         }}
       />
-      <div className={styles.checkbox}>
-        <div className={styles.checkbox_circle} />
-      </div>
+      <div className={styles.checkbox}>{value ? <div className={styles.checkbox_circle} /> : null}</div>
     </label>
   );
 }

@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useState} from "react";
 import {Modal, ModalProps} from "antd";
-import styles from "components/customModal/customModal.module.scss";
 import classNames from "classnames";
+import styles from "components/customModal/customModal.module.scss";
 
 interface ICustomModal extends ModalProps {
   header?: ReactNode;
@@ -36,7 +36,7 @@ function CustomModal(props: ICustomModal) {
         {...rest}
         modalRender={(node) => {
           return (
-            <div className={styles.modal__container}>
+            <div className={styles.modal_container}>
               {header ? <div className={headerClassName}>{header}</div> : null}
               {body ? <div className={bodyClassName}>{body}</div> : null}
             </div>

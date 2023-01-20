@@ -16,7 +16,7 @@ function RestaurantFilter() {
           <RestaurantFilterBtn title="دارای سکه" />
         </div>
       </div>
-      <RestaurantFilterBottomSheet open={bottomSheet} onClose={() => setBottomSheet(false)} />
+      <RestaurantFilterBottomSheet open={bottomSheet} onClose={() => setBottomSheet(false)} onClick={(value) => {}} />
     </>
   );
 }

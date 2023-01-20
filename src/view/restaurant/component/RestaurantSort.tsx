@@ -1,12 +1,15 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Button} from "antd";
 import {IconSort} from "assets/icons";
+import RestaurantSortBottomSheet from "view/restaurant/component/RestaurantSortBottomSheet";
 
 function RestaurantSort() {
   const ref = useRef<HTMLDivElement>(null);
+  const [sort, setSort] = useState({open: false, title: ""});
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
+
     function scroll() {
       const scrollPosition = window.scrollY;
       if (scrollPosition > 100) {
@@ -32,11 +35,19 @@ function RestaurantSort() {
     >
       <div className="font-medium">17 رستوران باز</div>
       <Button
+        onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}
         className="flex items-center text-primary border-0 shadow-none"
       >
-        به ترتیب...
+        {sort.title || "به ترتیب..."}
       </Button>
+      <RestaurantSortBottomSheet
+        open={sort.open}
+        onClose={(e) => setSort((prevState) => ({...prevState, open: false}))}
+        onClick={(value) => {
+          setSort({open: false, title: value.title});
+        }}
+      />
     </div>
   );
 }

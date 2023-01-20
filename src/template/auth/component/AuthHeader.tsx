@@ -1,6 +1,5 @@
-import BackBtn from "components/backBtn/BackBtn";
 import {useRouter} from "next/router";
-import {AppHeader} from "components";
+import {AppHeader, BackBtn} from "components";
 
 interface ILoginHeader {
   title?: string;

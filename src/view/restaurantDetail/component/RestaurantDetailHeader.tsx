@@ -1,5 +1,4 @@
-import {AppHeader} from "components";
-import BackBtn from "components/backBtn/BackBtn";
+import {AppHeader, BackBtn} from "components";
 import IconFavoriteOutline from "assets/icons/IconFavoriteOutline";
 
 function RestaurantDetailHeader() {

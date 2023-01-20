@@ -8,8 +8,8 @@ import RestaurantDetailMoreInfo from "view/restaurantDetail/component/Restaurant
 import RestaurantDetailTab from "view/restaurantDetail/component/RestaurantDetailTab";
 import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDetailCard/RestaurantDetailCard";
 import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantDetailListTag";
-import img from "assets/images/res-detail-card.png";
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
+import img from "assets/images/res-detail-card.png";
 
 function RestaurantDetail() {
   return (

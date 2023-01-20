@@ -1,5 +1,3 @@
-import React from "react";
-
 function IconRoundedRight({className}: {className: string}) {
   return (
     <svg

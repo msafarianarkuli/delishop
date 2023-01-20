@@ -10,6 +10,7 @@ import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDeta
 import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantDetailListTag";
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
 import img from "assets/images/res-detail-card.png";
+import RestaurantDetailSubmitBtn from "view/restaurantDetail/component/RestaurantDetailSubmitBtn";
 
 function RestaurantDetail() {
   return (
@@ -27,7 +28,7 @@ function RestaurantDetail() {
       </div>
       <div className="pt-6 px-screenSpace">
         <RestaurantDetailTab />
-        <div className="mt-4">
+        <div className="mt-4 mb-[100px]">
           <RestaurantDetailListTag title="پرطرفدارها" />
           <RestaurantDetailCard
             image={img.src}
@@ -39,6 +40,7 @@ function RestaurantDetail() {
           />
         </div>
       </div>
+      <RestaurantDetailSubmitBtn />
     </>
   );
 }

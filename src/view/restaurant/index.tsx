@@ -81,7 +81,6 @@ function Restaurant() {
           );
         })}
       </div>
-      <BottomSheet open title="انتخاب دسته بندی" height={300}></BottomSheet>
       <BottomNavigation />
     </>
   );

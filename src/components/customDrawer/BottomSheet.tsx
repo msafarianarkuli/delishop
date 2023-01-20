@@ -11,19 +11,32 @@ interface IBottomSheet extends Omit<ICustomDrawer, "placement" | "closable" | "o
 }
 
 function BottomSheet(props: IBottomSheet) {
-  const {title, classNameTitle = "", children, onClose, bodyStyle, ...rest} = props;
+  const {title, classNameTitle = "", children, onClose, bodyStyle, className = "", ...rest} = props;
   const titleClassName = classNames({
     "text-[15px] font-bold": true,
     [classNameTitle]: classNameTitle,
+  });
+
+  const tmpClassName = classNames({
+    "bg-transparent rounded-t-[15px]": true,
+    [className]: className,
   });
   return (
     <>
       <CustomDrawer
         {...rest}
-        bodyStyle={{padding: "20px 18px", ...bodyStyle}}
+        bodyStyle={{
+          padding: "20px 18px",
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          backgroundColor: "white",
+          boxShadow: "0px -4px 8px #DCDCDC",
+          ...bodyStyle,
+        }}
         onClose={onClose}
         closable={false}
         placement="bottom"
+        className={tmpClassName}
       >
         <div className="flex items-center justify-between pb-[20px] border-b border-borderColor">
           {title ? <div className={titleClassName}>{title}</div> : null}

@@ -6,6 +6,7 @@ import styles from "view/restaurant/restaurant.module.scss";
 import img1 from "assets/images/res01.png";
 import {BottomNavigation} from "components";
 import Link from "next/link";
+import BottomSheet from "components/customDrawer/BottomSheet";
 
 const data = [
   {
@@ -80,6 +81,7 @@ function Restaurant() {
           );
         })}
       </div>
+      <BottomSheet open title="انتخاب دسته بندی" height={300}></BottomSheet>
       <BottomNavigation />
     </>
   );

@@ -9,9 +9,10 @@ import RestaurantDetailTab from "view/restaurantDetail/component/RestaurantDetai
 import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDetailCard/RestaurantDetailCard";
 import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantDetailListTag";
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
-import img from "assets/images/res-detail-card.png";
 import RestaurantDetailSubmitBtn from "view/restaurantDetail/component/RestaurantDetailSubmitBtn";
 import RestaurantDetailModal from "view/restaurantDetail/component/restaurantDetailModal/RestaurantDetailModal";
+import styles from "view/restaurantDetail/restaurantDetail.module.scss";
+import img from "assets/images/res-detail-card.png";
 
 function RestaurantDetail() {
   const [modal, setModal] = useState(false);
@@ -48,6 +49,7 @@ function RestaurantDetail() {
       </div>
       <RestaurantDetailSubmitBtn />
       <RestaurantDetailModal open={modal} onCancel={() => setModal(false)} />
+      <div className={styles.restaurant_detail_gradient} />
     </>
   );
 }

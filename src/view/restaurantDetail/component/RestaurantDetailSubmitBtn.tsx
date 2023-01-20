@@ -4,7 +4,7 @@ import {IconDownload} from "assets/icons";
 
 function RestaurantDetailSubmitBtn() {
   return (
-    <div className="fixed bottom-0 right-0">
+    <div className="fixed z-10 bottom-0 right-0">
       <Button
         type="primary"
         className="submit-btn fixed flex z-10 items-center bottom-[29px] right-[27px] left-[27px] rounded-[5px]"

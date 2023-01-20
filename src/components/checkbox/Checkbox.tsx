@@ -1,7 +1,9 @@
 import classNames from "classnames";
 import styles from "components/checkbox/checkbox.module.scss";
+import {IconTick} from "assets/icons";
 
-export interface IRadioButton {
+export interface ICheckbox {
+  type?: "checkbox" | "radio";
   id: string;
   label?: string;
   value: boolean;
@@ -11,8 +13,17 @@ export interface IRadioButton {
   classNameContainer?: string;
 }
 
-function Checkbox(props: IRadioButton) {
-  const {id, label, value, classNameLabel, classNameContainer = "", onChange, labelRight = false} = props;
+function Checkbox(props: ICheckbox) {
+  const {
+    type = "checkbox",
+    id,
+    label,
+    value,
+    classNameLabel,
+    classNameContainer = "",
+    onChange,
+    labelRight = false,
+  } = props;
 
   const container = classNames({
     "flex items-center cursor-pointer select-none": true,
@@ -32,7 +43,15 @@ function Checkbox(props: IRadioButton) {
           onChange(!value);
         }}
       />
-      <div className={styles.checkbox}>{value ? <div className={styles.checkbox_circle} /> : null}</div>
+      <div className={type === "checkbox" ? styles.checkbox : styles.radio}>
+        {value ? (
+          type === "checkbox" ? (
+            <IconTick className="w-5 h-auto" />
+          ) : (
+            <div className={styles.radio_circle} />
+          )
+        ) : null}
+      </div>
     </label>
   );
 }

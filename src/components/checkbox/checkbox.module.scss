@@ -1,6 +1,16 @@
 .checkbox {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio {
+  width: 30px;
+  height: 30px;
   border-radius: 15px;
   box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
   display: flex;
@@ -8,7 +18,7 @@
   justify-content: center;
 }
 
-.checkbox_circle {
+.radio_circle {
   width: 10px;
   height: 10px;
   border-radius: 50%;

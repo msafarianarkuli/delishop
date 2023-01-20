@@ -9,10 +9,11 @@ interface IRestaurantDetailCard {
   price: number;
   coin: number;
   count?: number;
+  onAddExtraItems: () => void;
 }
 
 function RestaurantDetailCard(props: IRestaurantDetailCard) {
-  const {description, price, title, count, coin, image} = props;
+  const {description, price, title, count, coin, image, onAddExtraItems} = props;
   const [counter, setCounter] = useState(count || 0);
 
   return (
@@ -38,7 +39,11 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
         <div className="flex flex-nowrap items-center mt-4">
           <button
             className="flex items-center justify-center w-[30px] h-[30px] bg-primary rounded-full"
-            onClick={() => setCounter((prevState) => prevState + 1)}
+            onClick={() => {
+              console.log("counter", counter);
+              if (counter === 0) onAddExtraItems();
+              setCounter((prevState) => prevState + 1);
+            }}
           >
             <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />
           </button>

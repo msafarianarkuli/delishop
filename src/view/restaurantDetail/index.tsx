@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import RestaurantDetailImageHeader from "view/restaurantDetail/component/RestaurantDetailImageHeader";
 import RestaurantDetailTitle from "view/restaurantDetail/component/RestaurantDetailTitle";
 import RestaurantDetailDescription from "view/restaurantDetail/component/RestaurantDetailDescription";
@@ -14,6 +14,8 @@ import RestaurantDetailSubmitBtn from "view/restaurantDetail/component/Restauran
 import RestaurantDetailModal from "view/restaurantDetail/component/restaurantDetailModal/RestaurantDetailModal";
 
 function RestaurantDetail() {
+  const [modal, setModal] = useState(false);
+
   return (
     <>
       <RestaurantDetailHeader />
@@ -37,12 +39,15 @@ function RestaurantDetail() {
             description="۵۰۰ گرم مخلوط ژامبون گوشت و مرغ ۷۰ درصد، گوجه، خیارشور، کاهو، سس مخصوص"
             coin={15}
             price={114500}
-            count={1}
+            count={0}
+            onAddExtraItems={() => {
+              setModal(true);
+            }}
           />
         </div>
       </div>
       <RestaurantDetailSubmitBtn />
-      <RestaurantDetailModal open />
+      <RestaurantDetailModal open={modal} onCancel={() => setModal(false)} />
     </>
   );
 }

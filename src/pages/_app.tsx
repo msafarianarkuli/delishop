@@ -4,11 +4,13 @@ import Template from "template";
 import Head from "next/head";
 import {useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
+import {Provider} from "react-redux";
 import wrapper from "redux/store";
 import "styles/globals.scss";
 import "assets/fonts/IRANSans.css";
 
-function App({Component, pageProps}: AppProps) {
+function App({Component, ...rest}: AppProps) {
+  const {store, props} = wrapper.useWrappedStore(rest);
   const [queryClient] = useState(() => new QueryClient());
 
   return (
@@ -20,10 +22,12 @@ function App({Component, pageProps}: AppProps) {
         <title>دلی شاپ</title>
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Template>
-            <Component {...pageProps} />
-          </Template>
+        <Hydrate state={props.pageProps.dehydratedState}>
+          <Provider store={store}>
+            <Template>
+              <Component {...props.pageProps} />
+            </Template>
+          </Provider>
         </Hydrate>
         <ReactQueryDevtools />
       </QueryClientProvider>
@@ -31,4 +35,4 @@ function App({Component, pageProps}: AppProps) {
   );
 }
 
-export default wrapper.withRedux(App);
+export default App;

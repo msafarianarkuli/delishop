@@ -1,9 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {createWrapper} from "next-redux-wrapper";
+import templateReducer from "redux/template/templateReducer";
 
 const makeStore = () =>
   configureStore({
-    reducer: {},
+    reducer: {
+      template: templateReducer,
+    },
     devTools: process.env.NODE_ENV === "development",
   });
 

@@ -103,7 +103,7 @@ function Map(props: IMap) {
       {/*  />*/}
       {/*</Head>*/}
       <MapContainer center={center} zoom={zoom} {...rest}>
-        <MapEvent onClick={onClick} />
+        {onClick ? <MapEvent onClick={onClick} /> : null}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -115,7 +115,7 @@ function Map(props: IMap) {
   );
 }
 
-function MapEvent({onClick}: {onClick?: (event: LeafletMouseEvent) => void}) {
+function MapEvent({onClick}: {onClick: (event: LeafletMouseEvent) => void}) {
   useMapEvent("click", onClick);
 
   return null;

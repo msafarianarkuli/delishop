@@ -11,7 +11,7 @@ interface ICustomModal extends ModalProps {
 }
 
 function CustomModal(props: ICustomModal) {
-  const {header, body, classNameHeader = "", classNameBody = "", ...rest} = props;
+  const {header, body, classNameHeader = "", classNameBody = "", wrapClassName = "", ...rest} = props;
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -27,12 +27,18 @@ function CustomModal(props: ICustomModal) {
     [classNameBody]: classNameBody,
   });
 
+  const classNameWrap = classNames({
+    "backdrop-blur-sm": true,
+    [wrapClassName]: wrapClassName,
+  });
+
   if (!isClient) return null;
   return (
     <>
       <Modal
         width={390}
         centered
+        wrapClassName={classNameWrap}
         {...rest}
         modalRender={(node) => {
           return (

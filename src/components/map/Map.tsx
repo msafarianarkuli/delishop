@@ -1,6 +1,5 @@
 import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet";
 import {Icon, LatLngLiteral, LeafletMouseEvent, Point} from "leaflet";
-import Head from "next/head";
 import {useCallback} from "react";
 import pin from "./pin.svg";
 import {MapContainerProps} from "react-leaflet/lib/MapContainer";
@@ -15,7 +14,7 @@ export interface IMapPoint {
 
 export type TPoints = IMapPoint[][];
 
-export interface IMap extends Omit<MapContainerProps, "center" | "zoom"> {
+export interface IMap extends Omit<MapContainerProps, "center"> {
   centerLatitude?: number | null;
   centerLongitude?: number | null;
   points?: TPoints;
@@ -29,11 +28,20 @@ const defaultLocation: LatLngLiteral = {
   lat: 35.801392,
   lng: 51.41822,
 };
-const defaultZoom = 14;
 
 function Map(props: IMap) {
-  const {centerLatitude, centerLongitude, points, onClick, enableMap, pinIcons, onClickMarker, children, ...rest} =
-    props;
+  const {
+    centerLatitude,
+    centerLongitude,
+    points,
+    onClick,
+    enableMap,
+    pinIcons,
+    onClickMarker,
+    children,
+    zoom = 14,
+    ...rest
+  } = props;
 
   const pointsCenterLng = points?.length ? points[0][0]?.longitude : null;
   const pointsCenterLat = points?.length ? points[0][0]?.latitude : null;
@@ -94,7 +102,7 @@ function Map(props: IMap) {
       {/*    crossOrigin=""*/}
       {/*  />*/}
       {/*</Head>*/}
-      <MapContainer center={center} zoom={defaultZoom} {...rest}>
+      <MapContainer center={center} zoom={zoom} {...rest}>
         <MapEvent onClick={onClick} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

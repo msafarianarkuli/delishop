@@ -1,5 +1,11 @@
+import RestaurantInfoMap from "view/restaurantInfo/component/RestaurantInfoMap";
+
 function RestaurantInfo() {
-  return <div>RestaurantInfo</div>;
+  return (
+    <>
+      <RestaurantInfoMap />
+    </>
+  );
 }
 
 export default RestaurantInfo;

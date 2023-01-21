@@ -1,31 +1,46 @@
-import {ReactNode} from "react";
-import classNames from "classnames";
+import RestaurantDetailTitle from "view/restaurantDetail/component/RestaurantDetailTitle";
+import RestaurantDetailDescription from "view/restaurantDetail/component/RestaurantDetailDescription";
+import RestaurantDetailTime from "view/restaurantDetail/component/RestaurantDetailTime";
+import RestaurantDetailDelivery from "view/restaurantDetail/component/RestaurantDetailDelivery";
+import RestaurantDetailMoreInfo from "view/restaurantDetail/component/RestaurantDetailMoreInfo";
+import React, {useEffect, useRef} from "react";
 
-interface IRestaurantDetailSummary {
-  top: ReactNode;
-  bottom: ReactNode;
-  classNameContainer?: string;
-  classNameTop?: string;
-  classNameBottom?: string;
-}
+function RestaurantDetailSummary() {
+  const ref = useRef<HTMLDivElement>(null);
 
-function RestaurantDetailSummary(props: IRestaurantDetailSummary) {
-  const {classNameContainer = "", classNameTop = "", classNameBottom = "", top, bottom} = props;
+  useEffect(() => {
+    const div = ref.current! as HTMLDivElement;
 
-  const container = classNames({
-    "relative flex flex-col items-center justify-center text-center": true,
-    [classNameContainer]: classNameContainer,
-  });
+    function scroll() {
+      const diffTop = div.getBoundingClientRect().top;
+      const header = document.getElementById("restaurantDetailHeader")!;
+      if (diffTop > 57 && header.classList.contains("header_background")) {
+        header.classList.remove("header_background");
+      }
+      if (diffTop < 57 && !header.classList.contains("header_background")) {
+        header.classList.add("header_background");
+      }
+    }
 
-  const bottomClassName = classNames({
-    "flex items-center text-iconColor text-[13px]": true,
-    [classNameBottom]: classNameBottom,
-  });
+    document.addEventListener("scroll", scroll);
+
+    return () => {
+      document.removeEventListener("scroll", scroll);
+    };
+  }, []);
+
   return (
-    <div className={container}>
-      <div className={classNameTop}>{top}</div>
-      <div className={bottomClassName}>{bottom}</div>
-    </div>
+    <>
+      <div ref={ref} className="pt-6 pb-5 border-b border-borderColor px-screenSpace">
+        <RestaurantDetailTitle />
+        <RestaurantDetailDescription />
+      </div>
+      <div className="flex items-center justify-center py-5 border-b border-borderColor px-screenSpace">
+        <RestaurantDetailTime />
+        <RestaurantDetailDelivery />
+        <RestaurantDetailMoreInfo />
+      </div>
+    </>
   );
 }
 

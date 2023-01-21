@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 
 const data = [
@@ -21,7 +20,7 @@ const data = [
 
 function RestaurantDetailTab() {
   return (
-    <div className="flex items-center flex-nowrap overflow-auto pb-2">
+    <div id="restaurantDetailTab" className="flex items-center flex-nowrap overflow-auto h-[70px] px-screenSpace">
       {data.map((item, index) => {
         const className = classNames({
           "relative text-[15px] font-semibold ml-5 last:ml-0 whitespace-nowrap": true,

@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 function RestaurantDetailHeader() {
   const router = useRouter();
   return (
-    <div className="fixed top-0 right-0 left-0 z-10">
+    <div id="restaurantDetailHeader" className="fixed top-0 right-0 left-0 z-10">
       <AppHeader
         right={<BackBtn onClick={() => router.back()} />}
         left={

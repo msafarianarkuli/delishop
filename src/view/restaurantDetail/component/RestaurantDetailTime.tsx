@@ -1,10 +1,10 @@
 import React from "react";
 import {IconClockSolid} from "assets/icons";
-import RestaurantDetailSummary from "view/restaurantDetail/component/RestaurantDetailSummary";
+import RestaurantDetailSummaryItem from "view/restaurantDetail/component/RestaurantDetailSummaryItem";
 
 function RestaurantDetailTime() {
   return (
-    <RestaurantDetailSummary
+    <RestaurantDetailSummaryItem
       top="تا 40 دقیقه"
       bottom={
         <>

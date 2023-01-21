@@ -1,9 +1,13 @@
 import RestaurantInfoMap from "view/restaurantInfo/component/RestaurantInfoMap";
+import RestaurantInfoHeader from "view/restaurantInfo/component/RestaurantInfoHeader";
 
 function RestaurantInfo() {
   return (
     <>
-      <RestaurantInfoMap />
+      <RestaurantInfoHeader />
+      <div className="mt-headerNormal">
+        <RestaurantInfoMap />
+      </div>
     </>
   );
 }

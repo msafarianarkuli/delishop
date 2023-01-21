@@ -18,6 +18,7 @@ import IconMinus from "assets/icons/IconMinus";
 import IconClose from "assets/icons/IconClose";
 import IconDownload from "assets/icons/IconDownload";
 import IconTick from "assets/icons/IconTick";
+import IconLocation from "assets/icons/IconLocation";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -42,4 +43,5 @@ export {
   IconClose,
   IconDownload,
   IconTick,
+  IconLocation,
 };

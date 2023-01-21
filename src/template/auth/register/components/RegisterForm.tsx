@@ -34,7 +34,7 @@ function RegisterForm() {
               },
             }}
           />
-          <RegisterInput id="introCode" label="کد معرف" classNameContainer="mt-10" numerical />
+          <RegisterInput id="introCode" label="کد معرف" classNameContainer="mt-10" />
           <RegisterSubmit />
         </form>
       </FormProvider>

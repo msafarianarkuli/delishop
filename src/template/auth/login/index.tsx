@@ -1,10 +1,10 @@
 import LoginPhoneNumber from "template/auth/login/components/LoginPhoneNumber";
 import AuthHeader from "template/auth/component/AuthHeader";
-import useLogin from "template/auth/login/context/useLogin";
+import useAuth from "template/auth/hooks/useAuth";
 import LoginModalCode from "template/auth/login/components/LoginModalCode";
 
 function Login() {
-  const {isCode} = useLogin();
+  const {isCode} = useAuth();
   return (
     <>
       <AuthHeader title="ورود یا ثبت نام" />

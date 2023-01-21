@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {CustomInputReactHook} from "components";
 import {Button} from "antd";
-import useLoginAction from "template/auth/login/context/useLoginAction";
-import {loginSetPhone} from "template/auth/login/context/LoginProvider";
-import useLogin from "template/auth/login/context/useLogin";
+import useAuthAction from "template/auth/hooks/useAuthAction";
+import {authRegister, authSetPhone} from "template/auth/context/AuthProvider";
+import useAuth from "template/auth/hooks/useAuth";
 import LoginReSendBtn from "template/auth/login/components/LoginReSendBtn";
 
 interface ICodeConfirm {
@@ -12,20 +12,26 @@ interface ICodeConfirm {
 }
 
 function LoginCodeConfirm() {
-  const dispatch = useLoginAction();
-  const {phone} = useLogin();
+  const dispatch = useAuthAction();
+  const {phone, isCode} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
     handleSubmit,
     control,
     formState: {isSubmitting},
+    reset,
   } = useForm<ICodeConfirm>({
     mode: "all",
   });
 
+  useEffect(() => {
+    if (!isCode) reset();
+  }, [isCode, reset]);
+
   function onSubmit(payload: ICodeConfirm) {
     console.log("payload", payload);
+    dispatch(authRegister());
   }
 
   return (
@@ -51,7 +57,7 @@ function LoginCodeConfirm() {
             }}
           />
           <div className="flex items-center justify-center mt-8">
-            <Button loading={isSubmitting || isLoading} onClick={() => dispatch(loginSetPhone())} type="ghost">
+            <Button loading={isSubmitting || isLoading} onClick={() => dispatch(authSetPhone())} type="ghost">
               تغییر شماره
             </Button>
           </div>

@@ -6,15 +6,15 @@ import {Button, InputRef} from "antd";
 import useAuthFocus from "template/auth/hooks/useAuthFocus";
 import useAuthBlur from "template/auth/hooks/useAuthBlur";
 import {sendCode} from "api";
-import useLoginAction from "template/auth/login/context/useLoginAction";
-import {loginSetCode} from "template/auth/login/context/LoginProvider";
+import useAuthAction from "template/auth/hooks/useAuthAction";
+import {authSetCode} from "template/auth/context/AuthProvider";
 
 interface ILoginPhoneNumber {
   phone: string;
 }
 
 function LoginPhoneNumber() {
-  const dispatch = useLoginAction();
+  const dispatch = useAuthAction();
   const inputRef = useRef<InputRef>(null);
   const {
     handleSubmit,
@@ -43,7 +43,7 @@ function LoginPhoneNumber() {
 
   async function onSubmit(payload: ILoginPhoneNumber) {
     createLog("payload", payload);
-    dispatch(loginSetCode(payload.phone));
+    dispatch(authSetCode(payload.phone));
     return true;
     try {
       const res = await sendCode(payload);

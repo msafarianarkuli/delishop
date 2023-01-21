@@ -2,7 +2,7 @@ import React, {Dispatch, SetStateAction, useCallback, useEffect, useState} from 
 import {Button} from "antd";
 import {sendCode} from "api";
 import {createLog} from "utils/utils";
-import useLogin from "template/auth/login/context/useLogin";
+import useAuth from "template/auth/hooks/useAuth";
 
 interface ILoginReSendBtn {
   isSubmitting: boolean;
@@ -10,10 +10,10 @@ interface ILoginReSendBtn {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const tmpTimer = 10;
+const tmpTimer = 120;
 
 function LoginReSendBtn({isLoading, isSubmitting, setIsLoading}: ILoginReSendBtn) {
-  const {phone, isCode} = useLogin();
+  const {phone, isCode} = useAuth();
   const [time, setTime] = useState(tmpTimer);
 
   useEffect(() => {

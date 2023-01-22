@@ -3,6 +3,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import RegisterSubmit from "template/auth/register/components/RegisterSubmit";
 import RegisterInput from "template/auth/register/components/RegisterInput";
 import {createLog} from "utils/utils";
+import {useRouter} from "next/router";
 
 export interface IRegisterForm {
   name: string;
@@ -10,13 +11,15 @@ export interface IRegisterForm {
 }
 
 function RegisterForm() {
+  const router = useRouter();
   const method = useForm<IRegisterForm>({
     mode: "all",
   });
   const {handleSubmit} = method;
 
-  function onSubmit(payload: IRegisterForm) {
+  async function onSubmit(payload: IRegisterForm) {
     createLog("payload", payload);
+    await router.push("/restaurant");
   }
 
   return (

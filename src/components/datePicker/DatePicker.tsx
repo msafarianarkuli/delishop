@@ -45,7 +45,9 @@ function DatePicker(props: IDatePicker) {
             <button onClick={onCancel}>
               <IconClose className="w-3 h-3 text-iconColor ml-1" />
             </button>
-          ) : null
+          ) : (
+            <span />
+          )
         }
         onClick={(e) => {
           setOpen(true);

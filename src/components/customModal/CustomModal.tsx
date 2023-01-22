@@ -8,10 +8,19 @@ interface ICustomModal extends ModalProps {
   body?: ReactNode;
   classNameBody?: string;
   classNameHeader?: string;
+  classNameContainer?: string;
 }
 
 function CustomModal(props: ICustomModal) {
-  const {header, body, classNameHeader = "", classNameBody = "", wrapClassName = "", ...rest} = props;
+  const {
+    header,
+    body,
+    classNameHeader = "",
+    classNameBody = "",
+    wrapClassName = "",
+    classNameContainer = "",
+    ...rest
+  } = props;
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -32,6 +41,11 @@ function CustomModal(props: ICustomModal) {
     [wrapClassName]: wrapClassName,
   });
 
+  const containerClassName = classNames({
+    [styles.modal_container]: true,
+    [classNameContainer]: classNameContainer,
+  });
+
   if (!isClient) return null;
   return (
     <>
@@ -42,7 +56,7 @@ function CustomModal(props: ICustomModal) {
         {...rest}
         modalRender={() => {
           return (
-            <div className={styles.modal_container}>
+            <div className={containerClassName}>
               {header ? <div className={headerClassName}>{header}</div> : null}
               {body ? <div className={bodyClassName}>{body}</div> : null}
             </div>

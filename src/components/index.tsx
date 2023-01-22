@@ -11,6 +11,9 @@ import Checkbox from "components/checkbox/Checkbox";
 import BackBtn from "components/backBtn/BackBtn";
 import CustomDrawer from "components/customDrawer/CustomDrawer";
 import BottomSheet from "components/customDrawer/BottomSheet";
+import DatePicker from "components/datePicker/DatePicker";
+import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
+
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
 export {
@@ -26,4 +29,6 @@ export {
   CustomDrawer,
   BottomSheet,
   Map,
+  DatePicker,
+  DatePickerReactHook,
 };

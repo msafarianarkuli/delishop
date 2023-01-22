@@ -4,19 +4,21 @@ import ProfileInput from "view/profile/component/ProfileInput";
 import {Button} from "antd";
 import {IconLogoutDark} from "assets/icons";
 import useProfileAction from "view/profile/context/useProfileAction";
+import {DatePickerReactHook} from "components";
+import {DayValue} from "@hassanmojab/react-modern-calendar-datepicker";
 
 interface IProfileForm {
   name: string;
-  birthday: string;
+  birthday: DayValue;
   email: string;
   gender: string;
-  anniversary: string;
+  anniversary: DayValue;
 }
 
 function ProfileForm() {
   const setModal = useProfileAction();
   const methods = useForm<IProfileForm>();
-  const {handleSubmit} = methods;
+  const {handleSubmit, control} = methods;
 
   function onSubmit(payload: IProfileForm) {
     createLog("payload", payload);
@@ -37,7 +39,12 @@ function ProfileForm() {
               },
             }}
           />
-          <ProfileInput id="birthday" label="تاریخ تولد" classNameContainer="mb-7" placeholder="1370/5/8" />
+          <DatePickerReactHook
+            id="birthday"
+            classNameContainer="mb-7"
+            control={control}
+            inputProps={{label: "تاریخ تولد", placeholder: "1370/5/8"}}
+          />
           <ProfileInput
             id="email"
             label="آدرس الکترونیک"
@@ -46,11 +53,11 @@ function ProfileForm() {
             className="dir-ltr"
           />
           <ProfileInput id="gender" label="جنسیت" classNameContainer="mb-7" placeholder="مرد" />
-          <ProfileInput
+          <DatePickerReactHook
             id="anniversary"
-            label="تاریخ سالگرد ازدواج"
             classNameContainer="mb-7"
-            placeholder="1390/10/12"
+            control={control}
+            inputProps={{label: "تاریخ سالگرد ازدواج", placeholder: "1390/10/12"}}
           />
           <div className="flex justify-center mb-7 mt-10">
             <Button

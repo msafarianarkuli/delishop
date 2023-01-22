@@ -44,7 +44,7 @@ function LoginReSendBtn({isLoading, isSubmitting, setIsLoading}: ILoginReSendBtn
     <>
       <Button
         loading={isSubmitting || isLoading}
-        className="secondary-btn w-full border-transparent text-[15px]"
+        className="secondary-btn w-full text-[15px]"
         disabled={time > 0}
         onClick={reSendCode}
       >

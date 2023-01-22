@@ -8,6 +8,14 @@
   content: " ";
 }
 
+.dir-rtl {
+  direction: rtl;
+}
+
+.dir-ltr {
+  direction: ltr;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }

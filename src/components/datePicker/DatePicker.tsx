@@ -9,7 +9,8 @@ import {IconClose} from "assets/icons";
 
 export type TDatePickInputProps = Omit<ICustomInput, "readOnly" | "value" | "onChange" | "prefix" | "id">;
 
-export interface IDatePicker extends Omit<CalendarProps<DayValue>, "locale"> {
+export interface IDatePicker
+  extends Omit<CalendarProps<DayValue>, "locale" | "colorPrimary" | "colorPrimaryLight" | "shouldHighlightWeekends"> {
   id: string;
   value: DayValue;
   inputProps?: TDatePickInputProps;
@@ -65,6 +66,9 @@ function DatePicker(props: IDatePicker) {
             locale="fa"
             calendarClassName={classNameCalender}
             value={value}
+            colorPrimary="#FF5500"
+            colorPrimaryLight="rgba(255, 85, 0, 0.4)"
+            shouldHighlightWeekends
             onChange={(day) => {
               setOpen(false);
               onChange?.(day);

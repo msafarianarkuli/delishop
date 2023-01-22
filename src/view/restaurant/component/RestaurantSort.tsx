@@ -43,7 +43,7 @@ function RestaurantSort() {
       </Button>
       <RestaurantSortBottomSheet
         open={sort.open}
-        onClose={(e) => setSort((prevState) => ({...prevState, open: false}))}
+        onClose={() => setSort((prevState) => ({...prevState, open: false}))}
         onClick={(value) => {
           setSort({open: false, title: value.title});
         }}

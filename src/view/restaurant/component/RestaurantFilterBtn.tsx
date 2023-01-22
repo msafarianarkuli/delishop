@@ -8,7 +8,11 @@ interface IRestaurantFilterBtn {
 }
 
 function RestaurantFilterBtn({title, onClick}: IRestaurantFilterBtn) {
-  return <Button className={styles.restaurant_filter_btn}>{title}</Button>;
+  return (
+    <Button onClick={onClick} className={styles.restaurant_filter_btn}>
+      {title}
+    </Button>
+  );
 }
 
 export default RestaurantFilterBtn;

@@ -2,11 +2,9 @@ import RestaurantHeader from "view/restaurant/component/RestaurantHeader";
 import RestaurantFilter from "view/restaurant/component/RestaurantFilter";
 import RestaurantSort from "view/restaurant/component/RestaurantSort";
 import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantCard";
-import styles from "view/restaurant/restaurant.module.scss";
 import img1 from "assets/images/res01.png";
-import {BottomNavigation, Checkbox} from "components";
+import {BottomNavigation} from "components";
 import Link from "next/link";
-import BottomSheet from "components/customDrawer/BottomSheet";
 
 const data = [
   {

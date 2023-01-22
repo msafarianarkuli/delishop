@@ -40,7 +40,7 @@ function CustomModal(props: ICustomModal) {
         centered
         wrapClassName={classNameWrap}
         {...rest}
-        modalRender={(node) => {
+        modalRender={() => {
           return (
             <div className={styles.modal_container}>
               {header ? <div className={headerClassName}>{header}</div> : null}

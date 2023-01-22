@@ -23,6 +23,6 @@ const templateReducer = createSlice({
   },
 });
 
-const {actions, reducer} = templateReducer;
+const {reducer} = templateReducer;
 
 export default reducer;

@@ -13,6 +13,8 @@ import CustomDrawer from "components/customDrawer/CustomDrawer";
 import BottomSheet from "components/customDrawer/BottomSheet";
 import DatePicker from "components/datePicker/DatePicker";
 import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
+import CustomSelect from "components/customSelect/CustomSelect";
+import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -31,4 +33,6 @@ export {
   Map,
   DatePicker,
   DatePickerReactHook,
+  CustomSelect,
+  CustomSelectReactHook,
 };

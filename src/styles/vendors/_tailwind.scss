@@ -35,3 +35,16 @@
     background: transparent;
   }
 }
+
+.select-form {
+  width: 100%;
+  margin-top: 10px;
+
+  & .ant-select-selector {
+    display: flex;
+    align-items: center;
+    height: 60px !important;
+    background-image: linear-gradient(274.88deg, #f2f3f6 0%, #e5e6ec 190.36%),
+      linear-gradient(91.28deg, #dfdfdf -92.85%, rgba(217, 217, 217, 0) 100%);
+  }
+}

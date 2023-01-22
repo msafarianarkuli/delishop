@@ -4,7 +4,7 @@ import ProfileInput from "view/profile/component/ProfileInput";
 import {Button} from "antd";
 import {IconLogoutDark} from "assets/icons";
 import useProfileAction from "view/profile/context/useProfileAction";
-import {DatePickerReactHook} from "components";
+import {CustomSelectReactHook, DatePickerReactHook} from "components";
 import {DayValue} from "@hassanmojab/react-modern-calendar-datepicker";
 
 interface IProfileForm {
@@ -14,6 +14,17 @@ interface IProfileForm {
   gender: string;
   anniversary: DayValue;
 }
+
+const gender = [
+  {
+    value: "man",
+    label: "مرد",
+  },
+  {
+    value: "woman",
+    label: "زن",
+  },
+];
 
 function ProfileForm() {
   const setModal = useProfileAction();
@@ -52,7 +63,16 @@ function ProfileForm() {
             placeholder="m.s.karimi.ubuntu@gmail.com"
             className="dir-ltr"
           />
-          <ProfileInput id="gender" label="جنسیت" classNameContainer="mb-7" placeholder="مرد" />
+          {/*<ProfileInput id="gender" label="جنسیت" classNameContainer="mb-7" placeholder="مرد" />*/}
+          <CustomSelectReactHook
+            id="gender"
+            label="جنسیت"
+            control={control}
+            options={gender}
+            placeholder="زن"
+            classNameContainer="mb-7"
+            className="select-form"
+          />
           <DatePickerReactHook
             id="anniversary"
             classNameContainer="mb-7"

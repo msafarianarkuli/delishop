@@ -2,7 +2,8 @@ import {FormProvider, useForm} from "react-hook-form";
 import {createLog} from "utils/utils";
 import ProfileInput from "view/profile/component/ProfileInput";
 import {Button} from "antd";
-import {IconLogout} from "assets/icons";
+import {IconLogoutDark} from "assets/icons";
+import useProfileAction from "view/profile/context/useProfileAction";
 
 interface IProfileForm {
   name: string;
@@ -13,6 +14,7 @@ interface IProfileForm {
 }
 
 function ProfileForm() {
+  const setModal = useProfileAction();
   const methods = useForm<IProfileForm>();
   const {handleSubmit} = methods;
 
@@ -52,9 +54,10 @@ function ProfileForm() {
           />
           <div className="flex justify-center mb-7 mt-10">
             <Button
+              onClick={() => setModal(true)}
               htmlType="button"
-              icon={<IconLogout className="w-5 h-5 ml-2" />}
-              className="flex items-center secondary-btn text-[15px] px-12 h-[50px]"
+              icon={<IconLogoutDark className="w-5 h-5 ml-2" />}
+              className="flex items-center secondary-btn text-[15px] px-12"
             >
               خروج از حساب کاربری
             </Button>

@@ -1,9 +1,9 @@
 import {Button} from "antd";
 import {CustomInput} from "components";
 import {IconRoundedLeft, IconRoundedRight} from "assets/icons";
-import styles from "view/wallet/component/walletCard/walletCard.module.scss";
 import {ChangeEvent, useCallback, useState} from "react";
 import {onlyNumberValue} from "utils/utils";
+import styles from "view/wallet/component/walletCard/walletCard.module.scss";
 
 function WalletCard() {
   const [number, setNumber] = useState<string>("");
@@ -59,7 +59,7 @@ function WalletCard() {
           <IconRoundedLeft className="w-6 h-6 mx-auto" />
         </Button>
       </div>
-      <Button type="primary" className="submit-btn h-[38px] text-[15px] w-full">
+      <Button type="primary" className="submit-btn h-[40px] text-[15px] w-full">
         پرداخت
       </Button>
     </div>

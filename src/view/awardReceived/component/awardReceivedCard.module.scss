@@ -1,0 +1,68 @@
+@import "src/styles/utils/variables";
+
+.award_received_card_container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(91.25deg, #e5e6ec -43.87%, #f2f3f6 100.13%);
+
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+.award_received_card_content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px 15px;
+}
+
+.award_received_card_ticket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  padding: 10px 15px;
+  border-right: 1px dashed $textColor;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    top: 0px;
+    left: 62.5px;
+    width: 15px;
+    height: 7.5px;
+    background-image: linear-gradient(91.25deg, #e5e6ec -43.87%, #f2f3f6 100.13%);
+    box-shadow: 0 0 15px rgb(237 238 242) inset;
+    border-bottom-left-radius: 7.5px;
+    border-bottom-right-radius: 7.5px;
+  }
+
+  &:after {
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 62.5px;
+    width: 15px;
+    height: 7.5px;
+    background-image: linear-gradient(91.25deg, #e5e6ec -43.87%, #f2f3f6 100.13%);
+    box-shadow: 0 0 15px rgb(36 65 93 / 12%) inset;
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
+  }
+}
+
+.award_received_card_copy {
+  padding: 3px 20px;
+  margin: 0 12px;
+  background: linear-gradient(293.8deg, #edeef2 0%, #f2f3f6 118.73%);
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  color: $primary;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+}

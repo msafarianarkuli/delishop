@@ -16,6 +16,8 @@ import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
 import CustomSelect from "components/customSelect/CustomSelect";
 import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook";
 import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
+import WalletTabRoute from "components/appTabRoute/component/walletTabRoute/WalletTabRoute";
+import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -37,4 +39,6 @@ export {
   CustomSelect,
   CustomSelectReactHook,
   AppHeaderCoin,
+  WalletTabRoute,
+  WalletAppHeader,
 };

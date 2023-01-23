@@ -1,13 +1,13 @@
 import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
 import {WalletTabRoute} from "components";
 
-function Wallet() {
+function HistoryCoin() {
   return (
     <>
       <WalletAppHeader />
-      <WalletTabRoute active="wallet" />
+      <WalletTabRoute active="historyCoin" />
     </>
   );
 }
 
-export default Wallet;
+export default HistoryCoin;

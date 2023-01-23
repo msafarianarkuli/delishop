@@ -1,11 +1,11 @@
-import AwardReceivedHeader from "view/awardReceived/component/AwardReceivedHeader";
-import AwardReceivedTab from "view/awardReceived/component/AwardReceivedTab";
+import {WalletTabRoute} from "components";
+import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
 
 function AwardReceived() {
   return (
     <>
-      <AwardReceivedHeader />
-      <AwardReceivedTab />
+      <WalletAppHeader />
+      <WalletTabRoute active="awardReceived" />
     </>
   );
 }

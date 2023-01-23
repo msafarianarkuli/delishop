@@ -1,6 +1,6 @@
 import React from "react";
 import {useRouter} from "next/router";
-import {AppHeader, BackBtn} from "components";
+import {AppHeader, AppHeaderBackBtn} from "components";
 import Link from "next/link";
 
 function RestaurantCommentHeaderBody() {
@@ -20,7 +20,7 @@ function RestaurantCommentHeader() {
   const router = useRouter();
   return (
     <div className="fixed z-[10000] top-0 right-0 left-0 header_background">
-      <AppHeader right={<BackBtn onClick={() => router.back()} />} body={<RestaurantCommentHeaderBody />} />
+      <AppHeader right={<AppHeaderBackBtn onClick={() => router.back()} />} body={<RestaurantCommentHeaderBody />} />
     </div>
   );
 }

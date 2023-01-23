@@ -1,6 +1,5 @@
-import {AppHeader} from "components";
-import {IconArrowDown, IconCoin, IconMenu} from "assets/icons";
-import styles from "view/restaurant/restaurant.module.scss";
+import {AppHeader, AppHeaderCoin} from "components";
+import {IconArrowDown, IconMenu} from "assets/icons";
 
 function RestaurantHeaderBody() {
   return (
@@ -10,16 +9,6 @@ function RestaurantHeaderBody() {
         <IconArrowDown className="w-3 h-auto text-iconColor mr-1" />
       </div>
       <div className="text-[13px] font-light max-w-[130px] truncate">کشاورز، پارک لاله، کارگر جنوبی</div>
-    </div>
-  );
-}
-
-function RestaurantHeaderLeft() {
-  return (
-    <div className={styles.restaurant_header_left}>
-      <IconCoin className="w-5 h-5" />
-      <div className="font-medium mx-2">9610</div>
-      <div className="text-[13px] font-light">سکه</div>
     </div>
   );
 }
@@ -34,7 +23,7 @@ function RestaurantHeaderRight() {
 
 function RestaurantHeader() {
   return (
-    <AppHeader right={<RestaurantHeaderRight />} body={<RestaurantHeaderBody />} left={<RestaurantHeaderLeft />} />
+    <AppHeader right={<RestaurantHeaderRight />} body={<RestaurantHeaderBody />} left={<AppHeaderCoin coin={9610} />} />
   );
 }
 

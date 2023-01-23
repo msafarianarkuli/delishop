@@ -1,4 +1,4 @@
-import {AppHeader, BackBtn} from "components";
+import {AppHeader, AppHeaderBackBtn} from "components";
 import {useRouter} from "next/router";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ function RestaurantInfoHeader() {
   const router = useRouter();
   return (
     <div className="fixed z-[10000] top-0 right-0 left-0 header_background">
-      <AppHeader right={<BackBtn onClick={() => router.back()} />} body={<RestaurantInfoHeaderBody />} />
+      <AppHeader right={<AppHeaderBackBtn onClick={() => router.back()} />} body={<RestaurantInfoHeaderBody />} />
     </div>
   );
 }

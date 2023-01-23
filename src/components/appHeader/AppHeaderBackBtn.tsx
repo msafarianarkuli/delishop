@@ -5,7 +5,7 @@ interface IBackBtn {
   onClick?: MouseEventHandler;
 }
 
-function BackBtn({onClick}: IBackBtn) {
+function AppHeaderBackBtn({onClick}: IBackBtn) {
   return (
     <button onClick={onClick}>
       <IconRoundedRight className="w-8 h-8 text-white drop-shadow-[-1px_4px_2px_#575F6B]" />
@@ -13,4 +13,4 @@ function BackBtn({onClick}: IBackBtn) {
   );
 }
 
-export default BackBtn;
+export default AppHeaderBackBtn;

@@ -8,13 +8,14 @@ import CustomModal from "components/customModal/CustomModal";
 import AppHeader from "components/appHeader/AppHeader";
 import BottomNavigation from "components/bottomNavigation/BottomNavigation";
 import Checkbox from "components/checkbox/Checkbox";
-import BackBtn from "components/backBtn/BackBtn";
+import AppHeaderBackBtn from "components/appHeader/AppHeaderBackBtn";
 import CustomDrawer from "components/customDrawer/CustomDrawer";
 import BottomSheet from "components/customDrawer/BottomSheet";
 import DatePicker from "components/datePicker/DatePicker";
 import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
 import CustomSelect from "components/customSelect/CustomSelect";
 import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook";
+import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -27,7 +28,7 @@ export {
   AppHeader,
   BottomNavigation,
   Checkbox,
-  BackBtn,
+  AppHeaderBackBtn,
   CustomDrawer,
   BottomSheet,
   Map,
@@ -35,4 +36,5 @@ export {
   DatePickerReactHook,
   CustomSelect,
   CustomSelectReactHook,
+  AppHeaderCoin,
 };

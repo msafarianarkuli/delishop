@@ -1,11 +1,25 @@
-<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g clip-path="url(#clip0_38_96)">
-        <path d="M50 8.33331C33.875 8.33331 20.8333 21.375 20.8333 37.5C20.8333 59.375 50 91.6667 50 91.6667C50 91.6667 79.1666 59.375 79.1666 37.5C79.1666 21.375 66.125 8.33331 50 8.33331ZM50 47.9166C44.25 47.9166 39.5833 43.25 39.5833 37.5C39.5833 31.75 44.25 27.0833 50 27.0833C55.75 27.0833 60.4166 31.75 60.4166 37.5C60.4166 43.25 55.75 47.9166 50 47.9166Z"
-              fill="#FF6565"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="103" fill="none">
+    <g filter="url(#a)">
+        <path fill="url(#b)"
+              d="M25.5 46.895c-3.362 0-6.57-.675-9.5-1.895l6.666 33.657A2.896 2.896 0 0 0 25.5 81a2.896 2.896 0 0 0 2.834-2.343L35 45a24.661 24.661 0 0 1-9.5 1.895Z"/>
     </g>
+    <rect width="50" height="50" x="1" fill="#fff" rx="25"/>
+    <circle cx="26" cy="25" r="20" fill="#FF5C01"/>
     <defs>
-        <clipPath id="clip0_38_96">
-            <rect width="100" height="100" fill="white"/>
-        </clipPath>
+        <linearGradient id="b" x1="25.5" x2="25.5" y1="45" y2="81" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#575F6B"/>
+            <stop offset="1" stop-color="#2C3036"/>
+        </linearGradient>
+        <filter id="a" width="51" height="68" x="0" y="35" color-interpolation-filters="sRGB"
+                filterUnits="userSpaceOnUse">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="6"/>
+            <feGaussianBlur stdDeviation="8"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_28_4533"/>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_28_4533" result="shape"/>
+        </filter>
     </defs>
 </svg>

@@ -59,7 +59,7 @@ function Map(props: IMap) {
         const icon = new Icon({
           iconUrl: url,
           iconRetinaUrl: url,
-          iconSize: new Point(40, 40),
+          iconSize: new Point(35, 71),
         });
         const baseId = Math.round(Math.random() * new Date().getTime());
         const tmp = point.map((item, idx) => {

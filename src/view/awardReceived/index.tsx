@@ -1,5 +1,11 @@
+import AwardReceivedHeader from "view/awardReceived/component/AwardReceivedHeader";
+
 function AwardReceived() {
-  return <div>AwardReceived</div>;
+  return (
+    <>
+      <AwardReceivedHeader />
+    </>
+  );
 }
 
 export default AwardReceived;

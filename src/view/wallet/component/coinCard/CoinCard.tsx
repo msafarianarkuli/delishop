@@ -1,5 +1,6 @@
-import styles from "view/wallet/component/coinCard/coinCard.module.scss";
 import {Button} from "antd";
+import ReactSlider from "react-slider";
+import styles from "view/wallet/component/coinCard/coinCard.module.scss";
 
 function CoinCard() {
   return (
@@ -10,7 +11,24 @@ function CoinCard() {
         <span className="mr-2">سکه</span>
       </div>
       <div>افزایش اعتبار کیف پول از گنجینه</div>
-      <div className="my-5">slider</div>
+      <div className="my-5">
+        <ReactSlider
+          min={0}
+          max={100}
+          step={1}
+          className="coin_slider"
+          trackClassName="coin_slider_track"
+          renderThumb={(props) => {
+            return (
+              <div {...props}>
+                <div className="line" />
+                <div className="line" />
+                <div className="line" />
+              </div>
+            );
+          }}
+        />
+      </div>
       <div className="flex">
         <div className="flex flex-1 justify-center items-center inner_box h-[40px] ml-3">
           <span>{(10000).toLocaleString("en-US")}</span>

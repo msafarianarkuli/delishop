@@ -1,0 +1,45 @@
+.coin_slider {
+  height: 12px;
+  width: 100%;
+  //box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
+
+  & .coin_slider_track {
+    height: 100%;
+    border-radius: 6px;
+
+    &.coin_slider_track-0 {
+      background-image: linear-gradient(90deg, rgba(255, 85, 0, 0.2) -6.7%, #ff5500 95%);
+      box-shadow: -1px 2px 6px #fa8111;
+    }
+
+    &.coin_slider_track-1 {
+      box-shadow: -4px -4px 5px #ffffff inset, 2px 2px 8px rgb(36 65 93 / 45%) inset;
+    }
+  }
+
+  & .thumb {
+    height: 24px;
+    width: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .line {
+      height: 18px;
+      width: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+    & .line:nth-child(even) {
+      margin: 0 3px;
+    }
+  }
+
+  & .thumb-0 {
+    top: -6px;
+    background-image: linear-gradient(310.59deg, #f2f3f6 3.8%, #e5e6ec 119.99%);
+    outline: none;
+    border-radius: 12px;
+    box-shadow: -3px -3px 20px #ffffff, 2px 2px 20px rgba(36, 65, 93, 0.302);
+  }
+}

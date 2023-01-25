@@ -46,7 +46,7 @@ function Checkbox(props: ICheckbox) {
       <div className={type === "checkbox" ? styles.checkbox : styles.radio}>
         {value ? (
           type === "checkbox" ? (
-            <IconTick className="w-5 h-auto" />
+            <IconTick className="w-4 h-auto" />
           ) : (
             <div className={styles.radio_circle} />
           )

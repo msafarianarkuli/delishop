@@ -10,15 +10,15 @@ const AddressMapLocation = dynamic(() => import("view/address/component/addressM
 function AddressMap() {
   return (
     <AddressMapProvider>
-      <div className="relative w-full h-screen">
+      <>
         <AddressMapHeader />
         <AddressMapLocation />
-        <div className="absolute z-[10000] bottom-[40px] right-[19px] left-[19px] pointer-events-none">
+        <div className="fixed z-[10000] bottom-[40px] right-[19px] left-[19px] pointer-events-none">
           <AddressMapCurrentLocation />
           <AddressMapAddress />
           <AddressMapSubmit />
         </div>
-      </div>
+      </>
     </AddressMapProvider>
   );
 }

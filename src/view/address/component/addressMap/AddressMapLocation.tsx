@@ -39,7 +39,7 @@ function AddressMapLocation() {
 
   return (
     <Map
-      className="w-full h-full"
+      className="w-full h-screen"
       points={[location]}
       onClick={(event) => {
         createLog("AddressMap event", event);

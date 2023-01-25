@@ -1,6 +1,7 @@
 import styles from "view/awardReceived/component/awardReceivedCard.module.scss";
 import {IconAward} from "assets/icons";
 import {Button} from "antd";
+import line from "assets/images/line.png";
 
 interface IAwardReceivedCard {
   title: string;
@@ -24,6 +25,9 @@ function AwardReceivedCard(props: IAwardReceivedCard) {
       </div>
       <div className={styles.award_received_card_ticket}>
         <IconAward className="w-10 h-auto text-primary" />
+        <div className="absolute right-[-1px] top-[8px] bottom-0 w-[1px]">
+          <img src={line.src} className="w-full h-full object-center object-cover" />
+        </div>
       </div>
     </div>
   );

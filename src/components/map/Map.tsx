@@ -5,8 +5,8 @@ import pin from "./pin.svg";
 import {MapContainerProps} from "react-leaflet/lib/MapContainer";
 
 export interface IMapPoint {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lng: number;
   title?: string | null;
 
   [x: string]: any;
@@ -43,8 +43,8 @@ function Map(props: IMap) {
     ...rest
   } = props;
 
-  const pointsCenterLng = points?.length ? points[0][0]?.longitude : null;
-  const pointsCenterLat = points?.length ? points[0][0]?.latitude : null;
+  const pointsCenterLng = points?.length ? points[0][0]?.lng : null;
+  const pointsCenterLat = points?.length ? points[0][0]?.lat : null;
 
   const center = {
     lng: centerLongitude || pointsCenterLng || defaultLocation.lng,
@@ -64,8 +64,8 @@ function Map(props: IMap) {
         const baseId = Math.round(Math.random() * new Date().getTime());
         const tmp = point.map((item, idx) => {
           const position: LatLngLiteral = {
-            lat: item.latitude,
-            lng: item.longitude,
+            lat: item.lat,
+            lng: item.lng,
           };
           return (
             <Marker

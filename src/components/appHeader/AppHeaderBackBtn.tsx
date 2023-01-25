@@ -3,11 +3,12 @@ import {MouseEventHandler} from "react";
 
 interface IBackBtn {
   onClick?: MouseEventHandler;
+  className?: string;
 }
 
-function AppHeaderBackBtn({onClick}: IBackBtn) {
+function AppHeaderBackBtn({onClick, className}: IBackBtn) {
   return (
-    <button onClick={onClick}>
+    <button className={className} onClick={onClick}>
       <IconRoundedRight className="w-8 h-8 text-white drop-shadow-[-1px_4px_2px_#575F6B]" />
     </button>
   );

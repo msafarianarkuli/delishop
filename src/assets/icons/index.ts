@@ -23,6 +23,8 @@ import IconLogoutDark from "assets/icons/IconLogoutDark";
 import IconLogoutLight from "assets/icons/IconLogoutLight";
 import IconAward from "assets/icons/IconAward";
 import IconRoundedLeft from "assets/icons/IconRoundedLeft";
+import IconLocationPin from "assets/icons/IconLocationPin";
+import IconCurrentLocation from "assets/icons/IconCurrentLocation";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -52,4 +54,6 @@ export {
   IconLogoutLight,
   IconAward,
   IconRoundedLeft,
+  IconLocationPin,
+  IconCurrentLocation,
 };

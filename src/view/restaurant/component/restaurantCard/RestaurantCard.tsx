@@ -51,7 +51,7 @@ function RestaurantCard(props: IRestaurantCard) {
               <span className="text-[12px]">{coin}</span>
             </div>
             <div className="flex items-center inner_box mr-2">
-              <span className="text-[12px]">تا {time} دقیقه</span>
+              <span className="text-[12px] whitespace-nowrap">تا {time} دقیقه</span>
               <IconClock className="w-4 h-4 text-iconColor mr-1" />
             </div>
           </div>

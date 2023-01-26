@@ -18,6 +18,7 @@ function Address() {
             return (
               <AddressCard
                 key={item}
+                id={item.toString()}
                 title="خانه"
                 address="تهران، جاده مخصوص تهران کرج خیابان ملک پلاک 5"
                 onClickDelete={() => setModal(true)}

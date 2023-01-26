@@ -7,11 +7,13 @@ import {MouseEventHandler} from "react";
 interface IAddressCard {
   title: string;
   address: string;
+  id: string;
   onClickDelete: MouseEventHandler;
 }
 
-function AddressCard({title, address, onClickDelete}: IAddressCard) {
+function AddressCard(props: IAddressCard) {
   const router = useRouter();
+  const {title, address, onClickDelete, id} = props;
   return (
     <div className={styles.address_card_container}>
       <div className="text-[16px] font-semibold w-1/6 text-center">{title}</div>
@@ -21,7 +23,7 @@ function AddressCard({title, address, onClickDelete}: IAddressCard) {
           <IconDeleteAddress className="w-5 h-5" />
         </Button>
         <Button
-          onClick={() => router.push("/address/create")}
+          onClick={() => router.push(`/address/create/${id}`)}
           className="w-4 h-4 border-0 rounded-none p-0 mt-4 shadow-none"
         >
           <IconEditAddress className="w-4 h-4" />

@@ -1,8 +1,13 @@
-import React from "react";
 import AddressCreateForm from "view/addressCreate/component/AddressCreateForm";
 import AddressCreateHeader from "view/addressCreate/component/AddressCreateHeader";
+import {createLog} from "utils/utils";
 
-function AddressCreate() {
+interface IAddressCreate {
+  isEdit?: boolean;
+}
+
+function AddressCreate({isEdit}: IAddressCreate) {
+  createLog("AddressCreate isEdit", isEdit);
   return (
     <>
       <AddressCreateHeader />

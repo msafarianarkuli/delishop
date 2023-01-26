@@ -48,3 +48,9 @@
       linear-gradient(91.28deg, #dfdfdf -92.85%, rgba(217, 217, 217, 0) 100%);
   }
 }
+
+.input-transparent {
+  & input {
+    background-color: transparent;
+  }
+}

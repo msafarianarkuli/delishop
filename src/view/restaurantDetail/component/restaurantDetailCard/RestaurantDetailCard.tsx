@@ -47,15 +47,19 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
           >
             <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />
           </button>
-          <div className="text-center w-[30px]">{counter}</div>
-          <button
-            className={styles.restaurant_detail_card_minus}
-            onClick={() => {
-              if (counter > 0) setCounter((prevState) => prevState - 1);
-            }}
-          >
-            <IconMinus className="w-[15px] h-auto" />
-          </button>
+          {counter ? (
+            <>
+              <div className="text-center w-[30px]">{counter}</div>
+              <button
+                className={styles.restaurant_detail_card_minus}
+                onClick={() => {
+                  if (counter > 0) setCounter((prevState) => prevState - 1);
+                }}
+              >
+                <IconMinus className="w-[15px] h-auto" />
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
     </div>

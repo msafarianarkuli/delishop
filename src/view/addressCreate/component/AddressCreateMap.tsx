@@ -1,8 +1,10 @@
 import {Map} from "components";
 import styles from "view/addressCreate/addressCreate.module.scss";
 import {IconEditAddress} from "assets/icons";
+import {useRouter} from "next/router";
 
 function AddressCreateMap() {
+  const router = useRouter();
   return (
     <div className={styles.address_create_map_container}>
       <Map
@@ -11,12 +13,16 @@ function AddressCreateMap() {
         points={[[{title: "لوکیشن من", lat: 35.704431, lng: 51.392746}]]}
         zoomControl={false}
       />
-      <div className="flex items-center px-[10px] py-[20px]">
+      <button
+        className="flex items-center text-right w-full px-[10px] py-[20px]"
+        type="button"
+        onClick={() => router.push("/address/map")}
+      >
         <div className="w-[calc(100%-18px)] truncate text-textColorLight pl-2">محدوده:45 متری شیوا</div>
         <div>
           <IconEditAddress className="w-[18px] h-[18px]" />
         </div>
-      </div>
+      </button>
     </div>
   );
 }

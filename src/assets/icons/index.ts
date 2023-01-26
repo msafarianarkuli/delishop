@@ -26,6 +26,8 @@ import IconRoundedLeft from "assets/icons/IconRoundedLeft";
 import IconLocationPin from "assets/icons/IconLocationPin";
 import IconCurrentLocation from "assets/icons/IconCurrentLocation";
 import IconEditAddress from "assets/icons/IconEditAddress";
+import IconAddAddress from "assets/icons/IconAddAddress";
+import IconDeleteAddress from "assets/icons/IconDeleteAddress";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -58,4 +60,6 @@ export {
   IconLocationPin,
   IconCurrentLocation,
   IconEditAddress,
+  IconAddAddress,
+  IconDeleteAddress,
 };

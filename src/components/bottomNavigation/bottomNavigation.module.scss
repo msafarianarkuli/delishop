@@ -1,0 +1,16 @@
+.bottom_navigation_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #e1e2e8;
+
+  &:after {
+    position: absolute;
+    content: " ";
+    background-image: linear-gradient(270deg, rgba(255, 122, 0, 0) 0%, #ff5c01 50.62%, rgba(255, 122, 0, 0) 100%);
+    width: 50%;
+    height: 1.2px;
+    top: -1px;
+  }
+}

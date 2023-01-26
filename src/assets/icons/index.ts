@@ -28,6 +28,7 @@ import IconCurrentLocation from "assets/icons/IconCurrentLocation";
 import IconEditAddress from "assets/icons/IconEditAddress";
 import IconAddAddress from "assets/icons/IconAddAddress";
 import IconDeleteAddress from "assets/icons/IconDeleteAddress";
+import IconOrder from "assets/icons/IconOrder";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -62,4 +63,5 @@ export {
   IconEditAddress,
   IconAddAddress,
   IconDeleteAddress,
+  IconOrder,
 };

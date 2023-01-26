@@ -1,6 +1,6 @@
 import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet";
 import {Icon, LatLngLiteral, LeafletMouseEvent, Point} from "leaflet";
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 import pin from "./pin.svg";
 import {MapContainerProps} from "react-leaflet/lib/MapContainer";
 
@@ -42,6 +42,14 @@ function Map(props: IMap) {
     zoom = 14,
     ...rest
   } = props;
+
+  useEffect(() => {
+    const copyRight = document.getElementsByClassName("leaflet-control-attribution leaflet-control");
+    // createLog("copyRight", copyRight);
+    if (copyRight.length) {
+      copyRight[0].remove();
+    }
+  }, []);
 
   const pointsCenterLng = points?.length ? points[0][0]?.lng : null;
   const pointsCenterLat = points?.length ? points[0][0]?.lat : null;

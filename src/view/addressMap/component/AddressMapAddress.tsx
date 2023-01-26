@@ -1,8 +1,8 @@
 import {useMemo} from "react";
-import styles from "view/address/address.module.scss";
 import {Button, Spin} from "antd";
 import {IconLocationPin, IconSearch} from "assets/icons";
-import useAddressMap from "view/address/component/addressMap/context/useAddressMap";
+import useAddressMap from "view/addressMap/context/useAddressMap";
+import styles from "view/addressMap/addressMap.module.scss";
 
 function AddressMapAddress() {
   const {address, addressLoading} = useAddressMap();

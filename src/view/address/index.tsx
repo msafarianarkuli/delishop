@@ -1,11 +1,5 @@
-import AddressMap from "view/address/component/addressMap/AddressMap";
-
 function Address() {
-  return (
-    <>
-      <AddressMap />
-    </>
-  );
+  return <>address</>;
 }
 
 export default Address;

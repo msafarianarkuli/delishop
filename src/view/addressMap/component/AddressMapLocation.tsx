@@ -3,13 +3,10 @@ import {Map} from "components";
 import {useEffect, useState} from "react";
 import {IMapPoint} from "components/map/Map";
 import getAddressFromMap from "api/getAddressFromMap";
-import useAddressMapAction from "view/address/component/addressMap/context/useAddressMapAction";
-import {
-  setAddressMapAddress,
-  setAddressMapAddressLoading,
-} from "view/address/component/addressMap/context/AddressMapProvider";
+import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
+import {setAddressMapAddress, setAddressMapAddressLoading} from "view/addressMap/context/AddressMapProvider";
 import {useMap} from "react-leaflet";
-import useAddressMap from "view/address/component/addressMap/context/useAddressMap";
+import useAddressMap from "view/addressMap/context/useAddressMap";
 
 function AddressMapLocation() {
   const [location, setLocation] = useState<IMapPoint[]>([]);

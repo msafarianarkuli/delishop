@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {Button} from "antd";
 import {IconCurrentLocation} from "assets/icons";
 import {createLog} from "utils/utils";
-import {setAddressMapCurrentLocation} from "view/address/component/addressMap/context/AddressMapProvider";
-import useAddressMapAction from "view/address/component/addressMap/context/useAddressMapAction";
+import {setAddressMapCurrentLocation} from "view/addressMap/context/AddressMapProvider";
+import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
 
 function AddressMapCurrentLocation() {
   const [loading, setLoading] = useState(false);

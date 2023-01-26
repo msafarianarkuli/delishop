@@ -3,8 +3,10 @@ import {Button, Spin} from "antd";
 import {IconLocationPin, IconSearch} from "assets/icons";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import styles from "view/addressMap/addressMap.module.scss";
+import {useRouter} from "next/router";
 
 function AddressMapAddress() {
+  const router = useRouter();
   const {address, addressLoading} = useAddressMap();
 
   const showAddress = useMemo(() => {
@@ -22,7 +24,10 @@ function AddressMapAddress() {
     <div className={styles.address_map_address_box}>
       <IconLocationPin className="w-[24px] h-auto" />
       <div className="w-[calc(100%-48px)] truncate px-2">{showAddress}</div>
-      <Button className="border-0 p-0 rounded shadow-none">
+      <Button
+        className="border-0 p-0 rounded shadow-none pointer-events-auto"
+        onClick={() => router.push("/address/map/search")}
+      >
         <IconSearch className="w-[24px] h-auto text-iconColor" />
       </Button>
     </div>

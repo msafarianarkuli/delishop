@@ -31,6 +31,13 @@ import IconDeleteAddress from "assets/icons/IconDeleteAddress";
 import IconOrder from "assets/icons/IconOrder";
 import IconRestaurant from "assets/icons/IconRestaurant";
 import IconSuperMarket from "assets/icons/IconSuperMarket";
+import IconCafe from "assets/icons/IconCafe";
+import IconFruit from "assets/icons/IconFruit";
+import IconProtein from "assets/icons/IconProtein";
+import IconDairy from "assets/icons/IconDairy";
+import IconConfection from "assets/icons/IconConfection";
+import IconBread from "assets/icons/IconBread";
+import IconMore from "assets/icons/IconMore";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -68,4 +75,11 @@ export {
   IconOrder,
   IconRestaurant,
   IconSuperMarket,
+  IconCafe,
+  IconFruit,
+  IconProtein,
+  IconDairy,
+  IconConfection,
+  IconBread,
+  IconMore,
 };

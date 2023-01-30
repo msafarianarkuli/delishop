@@ -12,7 +12,7 @@ export type TDataCustomSwiper = IDataCustomSwiperItem[];
 
 interface ICustomSwiper extends SwiperProps {
   data: TDataCustomSwiper;
-  renderItem: (item: IDataCustomSwiperItem, index: number) => ReactNode;
+  renderItem: (item: IDataCustomSwiperItem, index: number, data: TDataCustomSwiper) => ReactNode;
 }
 
 function CustomSwiper(props: ICustomSwiper) {
@@ -22,7 +22,7 @@ function CustomSwiper(props: ICustomSwiper) {
       {data.map((item, index) => {
         return (
           <SwiperSlide {...item.swiperSlideProps} key={index}>
-            {renderItem(item, index)}
+            {renderItem(item, index, data)}
           </SwiperSlide>
         );
       })}

@@ -1,4 +1,4 @@
-.home_category_box {
+.home_main_category_box {
   position: relative;
   width: 100%;
   padding-bottom: 31%;
@@ -13,4 +13,13 @@
 .home_gradient {
   height: 178px;
   background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, rgba(0, 0, 0, 0.497733) 100%);
+}
+
+.home_other_category_box {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background-image: linear-gradient(310.59deg, #f2f3f6 3.8%, #e5e6ec 119.99%);
+  box-shadow: -4px -4px 30px #ffffff, 3px 3px 20px rgba(36, 65, 93, 0.302);
+  border-radius: 20px;
 }

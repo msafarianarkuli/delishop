@@ -1,27 +1,21 @@
-import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
+import {TIcons} from "assets/icons";
 import classNames from "classnames";
 import styles from "components/bottomNavigation/bottomNavigation.module.scss";
+import Link from "next/link";
 
-const data = [
-  {
-    icon: IconHome,
-    title: "خانه",
-  },
-  {
-    icon: IconCart,
-    title: "سبد خرید",
-  },
-  {
-    icon: IconSearch,
-    title: "جستجو",
-  },
-  {
-    icon: IconOrder,
-    title: "سفارشات",
-  },
-];
+interface IDataBottomNavigationitem {
+  icon: TIcons;
+  title: string;
+  link: string;
+}
 
-function BottomNavigation() {
+export type TDataBottomNavigation = IDataBottomNavigationitem[];
+
+interface IBottomNavigation {
+  data: TDataBottomNavigation;
+}
+
+function BottomNavigation({data}: IBottomNavigation) {
   return (
     <div className="fixed bottom-0 right-0 left-0">
       <div className={`${styles.bottom_navigation_container} h-bottomNavigation max-width-screen`}>
@@ -32,10 +26,10 @@ function BottomNavigation() {
           });
           const Icon = item.icon;
           return (
-            <div key={index} className="flex flex-col items-center">
+            <Link key={index} href={item.link} className="flex flex-col items-center">
               <Icon className={icon} />
               <div className="font-medium text-[13px] mt-1">{item.title}</div>
-            </div>
+            </Link>
           );
         })}
       </div>

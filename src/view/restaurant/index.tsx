@@ -5,6 +5,8 @@ import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantC
 import img1 from "assets/images/res01.png";
 import {BottomNavigation} from "components";
 import Link from "next/link";
+import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
+import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigation";
 
 const arr = Array.from(new Array(5), (_, i) => ({
   id: i + 1,
@@ -16,6 +18,29 @@ const arr = Array.from(new Array(5), (_, i) => ({
   coin: 15,
   time: 35,
 }));
+
+const data: TDataBottomNavigation = [
+  {
+    icon: IconHome,
+    title: "خانه",
+    link: "/restaurant",
+  },
+  {
+    icon: IconCart,
+    title: "سبد خرید",
+    link: "/restaurant/cart",
+  },
+  {
+    icon: IconSearch,
+    title: "جستجو",
+    link: "/restaurant",
+  },
+  {
+    icon: IconOrder,
+    title: "سفارشات",
+    link: "/restaurant/order",
+  },
+];
 
 function Restaurant() {
   return (
@@ -42,7 +67,7 @@ function Restaurant() {
           );
         })}
       </div>
-      <BottomNavigation />
+      <BottomNavigation data={data} />
     </>
   );
 }

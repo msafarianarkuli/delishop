@@ -2,7 +2,7 @@ import React, {Dispatch, SetStateAction, useCallback, useEffect, useState} from 
 import {Button} from "antd";
 import {sendCode} from "api";
 import {createLog} from "utils/utils";
-import useAuth from "template/auth/hooks/useAuth";
+import useAuth from "view/auth/hooks/useAuth";
 
 interface ILoginReSendBtn {
   isSubmitting: boolean;

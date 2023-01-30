@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {AuthContextAction} from "template/auth/context/AuthProvider";
+import {AuthContextAction} from "view/auth/context/AuthProvider";
 
 function useAuthAction() {
   return useContext(AuthContextAction);

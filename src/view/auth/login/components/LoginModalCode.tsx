@@ -1,6 +1,6 @@
 import React from "react";
 import {CustomModal} from "components";
-import LoginCodeConfirm from "template/auth/login/components/LoginCodeConfirm";
+import LoginCodeConfirm from "view/auth/login/components/LoginCodeConfirm";
 
 interface ILoginCode {
   open: boolean;

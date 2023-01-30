@@ -1,11 +1,5 @@
-import Auth from "template/auth";
-
 function Home() {
-  return (
-    <div>
-      <Auth />
-    </div>
-  );
+  return <div>home page</div>;
 }
 
 export default Home;

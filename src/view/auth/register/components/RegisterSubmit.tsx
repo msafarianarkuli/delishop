@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "antd";
 import {useFormContext} from "react-hook-form";
-import {IRegisterForm} from "template/auth/register/components/RegisterForm";
+import {IRegisterForm} from "view/auth/register/components/RegisterForm";
 
 function RegisterSubmit() {
   const {

@@ -1,9 +1,9 @@
 import {RegisterOptions, useFormContext} from "react-hook-form";
-import {IRegisterForm} from "template/auth/register/components/RegisterForm";
+import {IRegisterForm} from "view/auth/register/components/RegisterForm";
 import {useEffect, useRef} from "react";
 import {InputRef} from "antd";
-import useAuthFocus from "template/auth/hooks/useAuthFocus";
-import useAuthBlur from "template/auth/hooks/useAuthBlur";
+import useAuthFocus from "view/auth/hooks/useAuthFocus";
+import useAuthBlur from "view/auth/hooks/useAuthBlur";
 import {CustomInputReactHook} from "components";
 
 interface IRegisterInput {

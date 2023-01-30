@@ -3,11 +3,11 @@ import {useForm} from "react-hook-form";
 import {CustomInputReactHook} from "components";
 import {createLog, iranPhoneNumberRegex} from "utils/utils";
 import {Button, InputRef} from "antd";
-import useAuthFocus from "template/auth/hooks/useAuthFocus";
-import useAuthBlur from "template/auth/hooks/useAuthBlur";
+import useAuthFocus from "view/auth/hooks/useAuthFocus";
+import useAuthBlur from "view/auth/hooks/useAuthBlur";
 import {sendCode} from "api";
-import useAuthAction from "template/auth/hooks/useAuthAction";
-import {authSetCode} from "template/auth/context/AuthProvider";
+import useAuthAction from "view/auth/hooks/useAuthAction";
+import {authSetCode} from "view/auth/context/AuthProvider";
 
 interface ILoginPhoneNumber {
   phone: string;

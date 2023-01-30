@@ -13,9 +13,11 @@ function AddressMap() {
       <AddressMapHeader />
       <AddressMapLocation />
       <div className="fixed z-[10000] bottom-[40px] right-[19px] left-[19px] pointer-events-none">
-        <AddressMapCurrentLocation />
-        <AddressMapAddress />
-        <AddressMapSubmit />
+        <div className="w-full max-w-[662px] mx-auto">
+          <AddressMapCurrentLocation />
+          <AddressMapAddress />
+          <AddressMapSubmit />
+        </div>
       </div>
     </AddressMapProvider>
   );

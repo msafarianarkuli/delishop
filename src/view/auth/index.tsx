@@ -1,7 +1,7 @@
-import Login from "template/auth/login";
-import AuthProvider from "template/auth/context/AuthProvider";
-import Register from "template/auth/register";
-import useAuth from "template/auth/hooks/useAuth";
+import Login from "view/auth/login";
+import AuthProvider from "view/auth/context/AuthProvider";
+import Register from "view/auth/register";
+import useAuth from "view/auth/hooks/useAuth";
 
 function AuthStatus() {
   const {isRegister} = useAuth();

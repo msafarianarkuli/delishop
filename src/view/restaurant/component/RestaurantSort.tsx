@@ -31,7 +31,7 @@ function RestaurantSort() {
   return (
     <div
       ref={ref}
-      className="flex items-center justify-between px-screenSpace h-[32px] overflow-hidden transition-height"
+      className="flex items-center justify-between px-screenSpace h-[32px] overflow-hidden transition-height max-width-screen"
     >
       <div className="font-medium">17 رستوران باز</div>
       <Button

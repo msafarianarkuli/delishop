@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {CustomInputReactHook} from "components";
 import {Button} from "antd";
-import useAuthAction from "template/auth/hooks/useAuthAction";
-import {authRegister, authSetPhone} from "template/auth/context/AuthProvider";
-import useAuth from "template/auth/hooks/useAuth";
-import LoginReSendBtn from "template/auth/login/components/LoginReSendBtn";
+import useAuthAction from "view/auth/hooks/useAuthAction";
+import {authRegister, authSetPhone} from "view/auth/context/AuthProvider";
+import useAuth from "view/auth/hooks/useAuth";
+import LoginReSendBtn from "view/auth/login/components/LoginReSendBtn";
 
 interface ICodeConfirm {
   code: string;

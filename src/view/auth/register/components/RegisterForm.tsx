@@ -1,7 +1,7 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import RegisterSubmit from "template/auth/register/components/RegisterSubmit";
-import RegisterInput from "template/auth/register/components/RegisterInput";
+import RegisterSubmit from "view/auth/register/components/RegisterSubmit";
+import RegisterInput from "view/auth/register/components/RegisterInput";
 import {createLog} from "utils/utils";
 import {useRouter} from "next/router";
 

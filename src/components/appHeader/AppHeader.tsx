@@ -23,7 +23,7 @@ function AppHeader(props: IAppHeader) {
   } = props;
 
   const container = classNames({
-    "flex items-center h-headerNormal px-screenSpace": true,
+    "flex items-center h-headerNormal px-screenSpace max-width-screen": true,
     "justify-between": !body,
     [classNameContainer]: classNameContainer,
   });

@@ -8,11 +8,12 @@ function RestaurantFilter() {
 
   return (
     <>
-      <div className="flex items-center px-screenSpace">
+      <div className="flex items-center px-screenSpace max-width-screen">
         <RestaurantCategory onClick={() => setBottomSheet(true)} />
         <div className="flex flex-1 flex-nowrap overflow-auto py-5 px-2">
           <RestaurantFilterBtn title="کباب" />
           <RestaurantFilterBtn title="ایرانی" />
+          <RestaurantFilterBtn title="دارای سکه" />
           <RestaurantFilterBtn title="دارای سکه" />
         </div>
       </div>

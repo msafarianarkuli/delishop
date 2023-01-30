@@ -1,7 +1,7 @@
-import LoginPhoneNumber from "template/auth/login/components/LoginPhoneNumber";
-import AuthHeader from "template/auth/component/AuthHeader";
-import useAuth from "template/auth/hooks/useAuth";
-import LoginModalCode from "template/auth/login/components/LoginModalCode";
+import LoginPhoneNumber from "view/auth/login/components/LoginPhoneNumber";
+import AuthHeader from "view/auth/component/AuthHeader";
+import useAuth from "view/auth/hooks/useAuth";
+import LoginModalCode from "view/auth/login/components/LoginModalCode";
 
 function Login() {
   const {isCode} = useAuth();

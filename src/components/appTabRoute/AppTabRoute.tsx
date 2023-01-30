@@ -14,7 +14,7 @@ interface IAppTabRoute {
 function AppTabRoute(props: IAppTabRoute) {
   const {routes, classNameContainer = "", classNameItem = "", classNameItemActive = ""} = props;
   const container = classNames({
-    "flex w-full items-center h-headerNormal": true,
+    "flex w-full items-center h-headerNormal max-width-screen": true,
     [classNameContainer]: classNameContainer,
   });
   return (

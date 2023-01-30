@@ -20,7 +20,10 @@ const data = [
 
 function RestaurantDetailTab() {
   return (
-    <div id="restaurantDetailTab" className="flex items-center flex-nowrap overflow-auto h-[70px] px-screenSpace">
+    <div
+      id="restaurantDetailTab"
+      className="flex items-center flex-nowrap overflow-auto h-[70px] px-screenSpace max-width-screen"
+    >
       {data.map((item, index) => {
         const className = classNames({
           "relative text-[15px] font-semibold ml-5 last:ml-0 whitespace-nowrap": true,

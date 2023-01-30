@@ -6,53 +6,16 @@ import img1 from "assets/images/res01.png";
 import {BottomNavigation} from "components";
 import Link from "next/link";
 
-const data = [
-  {
-    image: img1.src,
-    title: "ساندویچ برگر 99",
-    address: "خیابان ولی عصر",
-    description: "فست فود برگر پیتزا ساندویچ",
-    star: 4,
-    coin: 15,
-    time: 35,
-  },
-  {
-    image: img1.src,
-    title: "ساندویچ برگر 99",
-    address: "خیابان ولی عصر",
-    description: "فست فود برگر پیتزا ساندویچ",
-    star: 4,
-    coin: 15,
-    time: 35,
-  },
-  {
-    image: img1.src,
-    title: "ساندویچ برگر 99",
-    address: "خیابان ولی عصر",
-    description: "فست فود برگر پیتزا ساندویچ",
-    star: 4,
-    coin: 15,
-    time: 35,
-  },
-  {
-    image: img1.src,
-    title: "ساندویچ برگر 99",
-    address: "خیابان ولی عصر",
-    description: "فست فود برگر پیتزا ساندویچ",
-    star: 4,
-    coin: 15,
-    time: 35,
-  },
-  {
-    image: img1.src,
-    title: "ساندویچ برگر 99",
-    address: "خیابان ولی عصر",
-    description: "فست فود برگر پیتزا ساندویچ",
-    star: 4,
-    coin: 15,
-    time: 35,
-  },
-];
+const arr = Array.from(new Array(5), (_, i) => ({
+  id: i + 1,
+  image: img1.src,
+  title: "ساندویچ برگر 99",
+  address: "خیابان ولی عصر",
+  description: "فست فود برگر پیتزا ساندویچ",
+  star: 4,
+  coin: 15,
+  time: 35,
+}));
 
 function Restaurant() {
   return (
@@ -63,9 +26,9 @@ function Restaurant() {
         <RestaurantSort />
       </div>
       <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px] pb-bottomNavigation">
-        {data.map((item, index) => {
+        {arr.map((item) => {
           return (
-            <Link key={index} href="/restaurant/1">
+            <Link key={item.id} href={`/restaurant/${item.id}`}>
               <RestaurantCard
                 image={item.image}
                 title={item.title}

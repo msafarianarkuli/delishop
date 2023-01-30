@@ -18,6 +18,8 @@ import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook
 import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
 import WalletTabRoute from "components/appTabRoute/component/walletTabRoute/WalletTabRoute";
 import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
+import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
+import AppHeaderLocation from "components/appHeader/AppHeaderLocation";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -41,4 +43,6 @@ export {
   AppHeaderCoin,
   WalletTabRoute,
   WalletAppHeader,
+  AppHeaderMenu,
+  AppHeaderLocation,
 };

@@ -20,6 +20,7 @@ import WalletTabRoute from "components/appTabRoute/component/walletTabRoute/Wall
 import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
 import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
 import AppHeaderLocation from "components/appHeader/AppHeaderLocation";
+import CustomSwiper from "components/customSwiper/CustomSwiper";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -45,4 +46,5 @@ export {
   WalletAppHeader,
   AppHeaderMenu,
   AppHeaderLocation,
+  CustomSwiper,
 };

@@ -26,7 +26,7 @@ function HomeBest() {
           <IconRoundedLeft className="w-5 h-5" />
         </div>
       </div>
-      <div className="flex items-center overflow-auto pb-5">
+      <div className="flex items-center overflow-auto pb-5 mb-28">
         {arr.map((item) => {
           return (
             <HomeBestCard

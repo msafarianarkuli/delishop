@@ -4,6 +4,7 @@ import HomeCategory from "view/home/component/HomeCategory";
 import HomeBest from "view/home/component/HomeBest";
 import HomeGradient from "view/home/component/HomeGradient";
 import HomeAdsSlider from "view/home/component/HomeAdsSlider";
+import HomeBottomNavigation from "view/home/component/HomeBottomNavigation";
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
       <HomeCategory />
       <HomeAdsSlider />
       <HomeBest />
+      <HomeBottomNavigation />
       <HomeGradient />
     </>
   );

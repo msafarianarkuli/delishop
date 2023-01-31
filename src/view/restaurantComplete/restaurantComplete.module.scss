@@ -2,7 +2,7 @@
 
 .restaurant_complete_delivery_time_container {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
   background-image: linear-gradient(275.18deg, #f2f3f6 0%, #e5e6ec 146.05%);
   border: 1px solid $borderColor;

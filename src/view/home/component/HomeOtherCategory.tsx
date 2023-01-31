@@ -42,6 +42,7 @@ function HomeOtherCategory() {
   return (
     <>
       <CustomSwiper
+        slidesPerGroup={3}
         slidesPerView={3}
         spaceBetween={14}
         modules={[Pagination]}

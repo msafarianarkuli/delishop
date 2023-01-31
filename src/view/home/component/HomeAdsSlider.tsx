@@ -1,24 +1,25 @@
 import {CustomSwiper} from "components";
 import {TDataCustomSwiper} from "components/customSwiper/CustomSwiper";
 import {Pagination} from "swiper";
+import img from "assets/images/banner.png";
 import "swiper/css/pagination";
 
 const data: TDataCustomSwiper = [
   {
     title: 1,
-    image: "https://picsum.photos/390/195",
+    image: img.src,
   },
   {
     title: 2,
-    image: "https://picsum.photos/390/195",
+    image: img.src,
   },
   {
     title: 3,
-    image: "https://picsum.photos/390/195",
+    image: img.src,
   },
   {
     title: 4,
-    image: "https://picsum.photos/390/195",
+    image: img.src,
   },
 ];
 

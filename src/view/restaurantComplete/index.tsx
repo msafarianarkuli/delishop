@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 
 function RestaurantComplete() {
   const router = useRouter();
-  const [state, setState] = useState<number>(1);
+  const [state, setState] = useState<number>(2);
   return (
     <>
       <RestaurantCompleteHeader

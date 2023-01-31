@@ -1,11 +1,12 @@
 import classNames from "classnames";
 import styles from "components/checkbox/checkbox.module.scss";
 import {IconTick} from "assets/icons";
+import {ReactNode} from "react";
 
 export interface ICheckbox {
   type?: "checkbox" | "radio";
   id: string;
-  label?: string;
+  label?: ReactNode;
   value: boolean;
   onChange: (value: boolean) => void;
   labelRight?: boolean;

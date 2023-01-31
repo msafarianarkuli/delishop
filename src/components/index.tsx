@@ -22,6 +22,7 @@ import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
 import AppHeaderLocation from "components/appHeader/AppHeaderLocation";
 import CustomSwiper from "components/customSwiper/CustomSwiper";
 import AppHeaderDelete from "components/appHeader/AppHeaderDelete";
+import SubmitBuyBtn from "components/customButton/SubmitBuyBtn";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -49,4 +50,5 @@ export {
   AppHeaderLocation,
   CustomSwiper,
   AppHeaderDelete,
+  SubmitBuyBtn,
 };

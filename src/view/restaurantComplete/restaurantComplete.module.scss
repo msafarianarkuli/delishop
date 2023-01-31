@@ -1,0 +1,13 @@
+@import "src/styles/utils/variables";
+
+.restaurant_complete_delivery_time_container {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  background-image: linear-gradient(275.18deg, #f2f3f6 0%, #e5e6ec 146.05%);
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  padding: 20px;
+  margin-bottom: 100px;
+}

@@ -52,4 +52,9 @@ export function removeFirstZero(str: string) {
   return number;
 }
 
+export function number2Digit(num: number) {
+  if (num < 10) return `0${num}`;
+  return num.toString();
+}
+
 export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

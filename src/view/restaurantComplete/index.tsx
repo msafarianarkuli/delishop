@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 
 function RestaurantComplete() {
   const router = useRouter();
-  const [state, setState] = useState<number>(2);
+  const [state, setState] = useState<number>(1);
   return (
     <>
       <RestaurantCompleteHeader
@@ -19,7 +19,7 @@ function RestaurantComplete() {
           }
         }}
       />
-      {state === 1 ? <RestaurantCompletePartOne /> : <RestaurantCompletePartTwo />}
+      <div className="mb-[100px]">{state === 1 ? <RestaurantCompletePartOne /> : <RestaurantCompletePartTwo />}</div>
       <RestaurantCompleteSubmitBtn
         step={state}
         onClick={() => {

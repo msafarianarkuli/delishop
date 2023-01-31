@@ -39,6 +39,9 @@ import IconConfection from "assets/icons/IconConfection";
 import IconBread from "assets/icons/IconBread";
 import IconMore from "assets/icons/IconMore";
 import IconDeleteCart from "assets/icons/IconDeleteCart";
+import IconWallet from "assets/icons/IconWallet";
+import IconBank from "assets/icons/IconBank";
+import IconCash from "assets/icons/IconCash";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -84,4 +87,7 @@ export {
   IconBread,
   IconMore,
   IconDeleteCart,
+  IconWallet,
+  IconBank,
+  IconCash,
 };

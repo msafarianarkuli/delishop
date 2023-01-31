@@ -1,5 +1,3 @@
-import React from "react";
-
 function IconHome({className}: {className: string}) {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" stroke="currentColor">

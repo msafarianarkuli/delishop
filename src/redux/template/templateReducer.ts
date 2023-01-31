@@ -1,18 +1,23 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {HYDRATE} from "next-redux-wrapper";
+import {RootState} from "redux/store";
 
 interface ITemplateReducer {
-  isOpenDrawer: boolean;
+  isDrawerOpen: boolean;
 }
 
 const initialState: ITemplateReducer = {
-  isOpenDrawer: false,
+  isDrawerOpen: false,
 };
 
 const templateReducer = createSlice({
   name: "template",
   initialState,
-  reducers: {},
+  reducers: {
+    setIsDrawerOpen: (state, action: PayloadAction<boolean>) => {
+      state.isDrawerOpen = action.payload;
+    },
+  },
   extraReducers: {
     [HYDRATE]: (state, action) => {
       return {
@@ -23,6 +28,10 @@ const templateReducer = createSlice({
   },
 });
 
-const {reducer} = templateReducer;
+const {reducer, actions} = templateReducer;
+
+export const selectIsDrawerOpen = (state: RootState) => state.template.isDrawerOpen;
+
+export const {setIsDrawerOpen} = actions;
 
 export default reducer;

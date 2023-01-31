@@ -42,6 +42,14 @@ import IconDeleteCart from "assets/icons/IconDeleteCart";
 import IconWallet from "assets/icons/IconWallet";
 import IconBank from "assets/icons/IconBank";
 import IconCash from "assets/icons/IconCash";
+import IconDrawerFavorite from "assets/icons/IconDrawerFavorite";
+import IconDrawerGame from "assets/icons/IconDrawerGame";
+import IconMessageSolid from "assets/icons/IconMessageSolid";
+import IconOrderSolid from "assets/icons/IconOrderSolid";
+import IconShareSolid from "assets/icons/IconShareSolid";
+import IconSupportSolid from "assets/icons/IconSupportSolid";
+import IconTagSolid from "assets/icons/IconTagSolid";
+import IconWalletSolid from "assets/icons/IconWalletSolid";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -90,4 +98,12 @@ export {
   IconWallet,
   IconBank,
   IconCash,
+  IconDrawerFavorite,
+  IconDrawerGame,
+  IconMessageSolid,
+  IconOrderSolid,
+  IconShareSolid,
+  IconSupportSolid,
+  IconTagSolid,
+  IconWalletSolid,
 };

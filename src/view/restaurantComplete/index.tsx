@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import RestaurantCompleteHeader from "view/restaurantComplete/component/RestaurantCompleteHeader";
 import RestaurantCompleteSubmitBtn from "view/restaurantComplete/component/RestaurantCompleteSubmitBtn";
 import RestaurantCompletePartOne from "view/restaurantComplete/component/RestaurantCompletePartOne";
@@ -8,6 +8,11 @@ import {useRouter} from "next/router";
 function RestaurantComplete() {
   const router = useRouter();
   const [state, setState] = useState<number>(1);
+
+  useEffect(() => {
+    window.scrollTo({top: 0});
+  }, [state]);
+
   return (
     <>
       <RestaurantCompleteHeader

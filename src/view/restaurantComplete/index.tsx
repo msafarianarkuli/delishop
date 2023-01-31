@@ -1,19 +1,31 @@
+import {useState} from "react";
 import RestaurantCompleteHeader from "view/restaurantComplete/component/RestaurantCompleteHeader";
-import RestaurantCompleteList from "view/restaurantComplete/component/RestaurantCompleteList";
-import RestaurantCompleteSuggestion from "view/restaurantComplete/component/RestaurantCompleteSuggestion";
-import RestaurantCompleteDescription from "view/restaurantComplete/component/RestaurantCompleteDescription";
-import RestaurantCompleteDeliveryTime from "view/restaurantComplete/component/RestaurantCompleteDeliveryTime";
 import RestaurantCompleteSubmitBtn from "view/restaurantComplete/component/RestaurantCompleteSubmitBtn";
+import RestaurantCompletePartOne from "view/restaurantComplete/component/RestaurantCompletePartOne";
+import RestaurantCompletePartTwo from "view/restaurantComplete/component/RestaurantCompletePartTwo";
+import {useRouter} from "next/router";
 
 function RestaurantComplete() {
+  const router = useRouter();
+  const [state, setState] = useState<number>(1);
   return (
     <>
-      <RestaurantCompleteHeader />
-      <RestaurantCompleteList />
-      <RestaurantCompleteSuggestion />
-      <RestaurantCompleteDescription />
-      <RestaurantCompleteDeliveryTime />
-      <RestaurantCompleteSubmitBtn />
+      <RestaurantCompleteHeader
+        onClick={() => {
+          if (state === 1) {
+            router.back();
+          } else {
+            setState(1);
+          }
+        }}
+      />
+      {state === 1 ? <RestaurantCompletePartOne /> : <RestaurantCompletePartTwo />}
+      <RestaurantCompleteSubmitBtn
+        step={state}
+        onClick={() => {
+          setState(2);
+        }}
+      />
     </>
   );
 }

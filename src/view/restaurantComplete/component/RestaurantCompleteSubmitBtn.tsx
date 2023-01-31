@@ -1,12 +1,18 @@
 import {SubmitBuyBtn} from "components";
 import {IconRoundedRight} from "assets/icons";
+import {MouseEventHandler} from "react";
 
-function RestaurantCompleteSubmitBtn() {
+interface IRestaurantCompleteSubmitBtn {
+  onClick: MouseEventHandler;
+  step: number;
+}
+
+function RestaurantCompleteSubmitBtn({onClick, step}: IRestaurantCompleteSubmitBtn) {
   return (
     <SubmitBuyBtn
-      onClick={() => {}}
+      onClick={onClick}
       right={<IconRoundedRight className="w-5 h-5" />}
-      body="ادامه(2)"
+      body={<>{step === 1 ? "ادامه(2)" : "پرداخت نهایی"}</>}
       left={
         <>
           {" "}

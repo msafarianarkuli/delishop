@@ -11,3 +11,15 @@
   padding: 20px;
   margin-bottom: 100px;
 }
+
+.restaurant_complete_payment_type_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(33.3333% - 6px);
+  height: 100%;
+  background-color: #edeef2;
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  border-radius: 10px;
+}

@@ -38,7 +38,7 @@ const data: TDataBottomNavigation = [
   {
     icon: IconOrder,
     title: "سفارشات",
-    link: "/restaurant/order",
+    link: "/restaurant/order/active",
   },
 ];
 

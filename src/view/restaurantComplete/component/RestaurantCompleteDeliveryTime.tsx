@@ -2,7 +2,7 @@ import styles from "view/restaurantComplete/restaurantComplete.module.scss";
 import {Checkbox} from "components";
 import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
 import {useEffect, useState} from "react";
-import {number2Digit} from "utils/utils";
+import {number2Digits} from "utils/utils";
 
 interface IDeliverTime {
   from: number;
@@ -46,9 +46,9 @@ function RestaurantCompleteDeliveryTime() {
                 classNameLabel="mr-2"
                 label={
                   <>
-                    <span>{number2Digit(item.from) + ":00"}</span>
+                    <span>{number2Digits(item.from) + ":00"}</span>
                     <span className="mx-1">تا</span>
-                    <span>{number2Digit(item.to) + ":00"}</span>
+                    <span>{number2Digits(item.to) + ":00"}</span>
                   </>
                 }
                 value={deliveryTime?.from === item.from}

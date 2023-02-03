@@ -52,7 +52,7 @@ export function removeFirstZero(str: string) {
   return number;
 }
 
-export function number2Digit(num: number) {
+export function number2Digits(num: number) {
   if (num < 10) return `0${num}`;
   return num.toString();
 }

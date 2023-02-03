@@ -4,6 +4,13 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        mobile: "360px",
+        sm: "576px",
+        md: "768px",
+        lg: "900px",
+        xl: "1200px",
+      },
       fontFamily: {
         IranSans: [
           "IRANSans",

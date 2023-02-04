@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import jalaliday from "jalaliday";
 import styles from "view/restaurantOrderPrevious/component/restaurantOrderPreviousCard/restaurantOrderPreviousCard.module.scss";
 import {number2Digits} from "utils/utils";
+import Link from "next/link";
 
 dayjs.extend(jalaliday);
 
@@ -16,6 +17,7 @@ interface IRestaurantOrderPreviousCardOrdersItem {
 type TRestaurantOrderPreviousCardOrders = IRestaurantOrderPreviousCardOrdersItem[];
 
 interface IRestaurantOrderPreviousCard {
+  id: string;
   receiptNumber: number;
   date: string;
   image: string;
@@ -44,6 +46,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     coin,
     date,
     hasRate,
+    id,
   } = props;
   return (
     <div className={styles.restaurant_order_previous_card_container}>
@@ -100,10 +103,13 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
         </div>
       </div>
       {hasRate ? (
-        <div className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor">
+        <Link
+          href={`/restaurant/order/${id}`}
+          className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor"
+        >
           <div className="text-[15px]">به سفارش خود امتیاز دهید</div>
           <IconRoundedLeft className="w-5 h-5 mr-1" />
-        </div>
+        </Link>
       ) : null}
       <div className="flex items-center mt-5 mx-[27px]">
         <Button

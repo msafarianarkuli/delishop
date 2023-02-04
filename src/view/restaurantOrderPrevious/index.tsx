@@ -36,6 +36,7 @@ function RestaurantOrderPrevious() {
           return (
             <RestaurantOrderPreviousCard
               key={index}
+              id={(index + 1).toString()}
               title={item.title}
               address={item.address}
               receiptNumber={item.receiptNumber}

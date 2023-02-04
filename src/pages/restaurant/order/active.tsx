@@ -1,4 +1,4 @@
-import RestaurantOrderActive from "view/restaurantOrderActivePage";
+import RestaurantOrderActive from "view/restaurantOrderActive";
 
 function RestaurantOrderActivePage() {
   return (

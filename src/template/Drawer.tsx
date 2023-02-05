@@ -74,7 +74,7 @@ function Drawer() {
     <CustomDrawer
       placement="right"
       width={320}
-      className={styles.drawer}
+      className={`${styles.drawer} text-textColor`}
       rootClassName="z-[10000]"
       open={isDrawerOpen}
       closable={false}
@@ -93,10 +93,10 @@ function Drawer() {
       </div>
       <div className="flex items-center justify-between mt-[40px] px-[19px] pb-[32px] border-b border-borderColor">
         <div className="font-medium text-[15px]">محمد صادق کریمی</div>
-        <div className="flex items-center text-primary">
+        <Link href="/profile" onClick={onClose} className="flex items-center text-primary">
           <div className="font-medium">اطلاعات کاربر</div>
           <IconRoundedLeft className="w-5 h-5" />
-        </div>
+        </Link>
       </div>
       <div className="flex flex-col flex-1 overflow-auto">
         {data.map((item, index) => {

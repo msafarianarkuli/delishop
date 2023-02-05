@@ -32,7 +32,7 @@ function AppHeader(props: IAppHeader) {
     [classNameRight]: classNameRight,
   });
   const bodyClassName = classNames({
-    "flex flex-1 items-center justify-center font-medium text-[15px]": true,
+    "flex flex-1 items-center justify-center font-semibold text-[15px]": true,
     [classNameBody]: classNameBody,
   });
   const leftClassName = classNames({

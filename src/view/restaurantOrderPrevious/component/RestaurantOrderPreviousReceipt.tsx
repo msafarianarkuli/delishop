@@ -32,7 +32,7 @@ function RestaurantOrderPreviousReceipt(props: IRestaurantOrderPreviousReceipt) 
       <div>
         {orders.map((item, index) => {
           return (
-            <div key={index} className="flex items-center justify-between mb-3 first:mt-3 text-[15px] font-medium">
+            <div key={index} className="flex items-center justify-between mb-5 first:mt-5 text-[15px] font-medium">
               <div>{item.title}</div>
               <div>
                 <span>{item.price.toLocaleString("en-US")}</span>
@@ -42,14 +42,14 @@ function RestaurantOrderPreviousReceipt(props: IRestaurantOrderPreviousReceipt) 
           );
         })}
       </div>
-      <div className="flex items-center justify-between mb-3 text-[15px] font-medium">
+      <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
         <div className="text-primary">مجموع سفارش</div>
         <div>
           <span>310,000</span>
           <span className="mr-1 text-[13px]">تومان</span>
         </div>
       </div>
-      <div className="flex items-center justify-between mb-3 text-[15px] font-medium">
+      <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
         <div>هزینه ارسال</div>
         <div>
           <span>7,500</span>

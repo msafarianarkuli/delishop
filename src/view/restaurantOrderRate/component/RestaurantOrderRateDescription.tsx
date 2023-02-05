@@ -1,20 +1,16 @@
-import {useState} from "react";
-import {CustomTextArea} from "components";
+import {CustomTextAreaReactHook} from "components";
+import {useFormContext} from "react-hook-form";
 import styles from "view/restaurantOrderRate/restaurantOrderRate.module.scss";
 
 function RestaurantOrderRateDescription() {
-  const [text, setText] = useState("");
+  const {control} = useFormContext();
 
   return (
-    <CustomTextArea
+    <CustomTextAreaReactHook
+      control={control}
       id="description"
       classNameContainer="mb-5"
       className={styles.restaurant_order_rate_description}
-      value={text}
-      onChange={(e) => {
-        const value = e.target.value;
-        setText(value);
-      }}
       rows={7}
       placeholder="تجربه شما از این سفارش ...."
     />

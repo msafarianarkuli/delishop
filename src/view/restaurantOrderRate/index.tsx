@@ -3,12 +3,27 @@ import RestaurantOrderRateCard from "view/restaurantOrderRate/component/restaura
 import RestaurantOrderRateDescription from "view/restaurantOrderRate/component/RestaurantOrderRateDescription";
 import dayjs from "dayjs";
 import jalaliday from "jalaliday";
-import {number2Digits} from "utils/utils";
+import {createLog, number2Digits} from "utils/utils";
+import {FormProvider, useForm} from "react-hook-form";
+import RestaurantOrderRateSubmit from "view/restaurantOrderRate/component/RestaurantOrderRateSubmit";
 
 dayjs.extend(jalaliday);
 
+interface IOrderRateForm {
+  delivery: number;
+  quality: number;
+  description: number;
+}
+
 function RestaurantOrderRate() {
   const date = new Date().toISOString();
+  const methods = useForm<IOrderRateForm>();
+  const {handleSubmit} = methods;
+
+  async function onSubmit(payload: IOrderRateForm) {
+    createLog("payload", payload);
+  }
+
   return (
     <>
       <RestaurantOrderRateHeader />
@@ -24,9 +39,14 @@ function RestaurantOrderRate() {
           </div>
         </div>
         <div className="mt-7">
-          <RestaurantOrderRateCard title="تحویل سفارشتان چطور بود؟" />
-          <RestaurantOrderRateCard title="کیفیت سفارش شما چطور بود؟" />
-          <RestaurantOrderRateDescription />
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <RestaurantOrderRateCard id="delivery" title="تحویل سفارشتان چطور بود؟" />
+              <RestaurantOrderRateCard id="quality" title="کیفیت سفارش شما چطور بود؟" />
+              <RestaurantOrderRateDescription />
+              <RestaurantOrderRateSubmit />
+            </form>
+          </FormProvider>
         </div>
       </div>
     </>

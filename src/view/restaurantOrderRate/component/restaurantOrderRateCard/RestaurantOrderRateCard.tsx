@@ -1,19 +1,27 @@
 import styles from "view/restaurantOrderRate/component/restaurantOrderRateCard/restaurantOrderRateCard.module.scss";
-import {useState} from "react";
 import ReactSlider from "react-slider";
 import {IconStar} from "assets/icons";
+import {useController, useFormContext} from "react-hook-form";
+import {RegisterOptions} from "react-hook-form/dist/types/validator";
 
 interface IRestaurantOrderRateCard {
+  id: string;
   title: string;
+  rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled">;
 }
 
 function RestaurantOrderRateCard(props: IRestaurantOrderRateCard) {
-  const {title} = props;
-  const [rate, setRate] = useState(3.6);
+  const {title, id, rules} = props;
+  const {control} = useFormContext();
+  const {field} = useController({
+    name: id,
+    control,
+    rules,
+  });
   return (
     <div className={styles.restaurant_order_rate_card_container}>
       <div className="text-[16px] font-semibold">{title}</div>
-      <div className="text-[25px] font-light">{rate}</div>
+      <div className="text-[25px] font-light">{field.value}</div>
       <ReactSlider
         min={0}
         max={5}
@@ -27,9 +35,9 @@ function RestaurantOrderRateCard(props: IRestaurantOrderRateCard) {
             </div>
           );
         }}
-        value={rate}
+        value={field.value}
         onChange={(value) => {
-          setRate(value);
+          field.onChange(value);
         }}
       />
     </div>

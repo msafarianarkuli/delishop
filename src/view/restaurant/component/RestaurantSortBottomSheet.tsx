@@ -26,7 +26,7 @@ const data = [
 function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
   const {open, onClose, onClick} = props;
   return (
-    <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={370}>
+    <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={260}>
       {data.map((item, index) => {
         return (
           <Button

@@ -7,6 +7,7 @@ interface IDataBottomNavigationitem {
   icon: TIcons;
   title: string;
   link: string;
+  active: boolean;
 }
 
 export type TDataBottomNavigation = IDataBottomNavigationitem[];
@@ -22,13 +23,17 @@ function BottomNavigation({data}: IBottomNavigation) {
         {data.map((item, index) => {
           const icon = classNames({
             "w-7 h-7": true,
-            "text-primary": index === 0,
+            "text-primary": item.active,
+          });
+          const text = classNames({
+            "font-medium text-[13px] mt-1": true,
+            "text-primary": item.active,
           });
           const Icon = item.icon;
           return (
             <Link key={index} href={item.link} className="flex flex-col items-center">
               <Icon className={icon} />
-              <div className="font-medium text-[13px] mt-1">{item.title}</div>
+              <div className={text}>{item.title}</div>
             </Link>
           );
         })}

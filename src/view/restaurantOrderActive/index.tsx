@@ -1,6 +1,7 @@
-import {RestaurantOrderAppHeader} from "components";
+import {BottomNavigation, RestaurantOrderAppHeader} from "components";
 import RestaurantOrderActiveCard from "view/restaurantOrderActive/component/restaurantOrderActiveCard/RestaurantOrderActiveCard";
 import img from "assets/images/res-order-logo.png";
+import useRestaurantNavigation from "hooks/useRestaurantNavigation";
 
 const arr = Array.from(new Array(10), () => ({
   title: "رستوران آریایی",
@@ -14,10 +15,11 @@ const arr = Array.from(new Array(10), () => ({
 }));
 
 function RestaurantOrderActive() {
+  const data = useRestaurantNavigation("order");
   return (
     <>
       <RestaurantOrderAppHeader active="active" />
-      <div className="mt-headerNormal px-[10px]">
+      <div className="mt-headerNormal px-[10px] mb-bottomNavigation">
         {arr.map((item, index) => {
           return (
             <RestaurantOrderActiveCard
@@ -35,6 +37,7 @@ function RestaurantOrderActive() {
           );
         })}
       </div>
+      <BottomNavigation data={data} />
     </>
   );
 }

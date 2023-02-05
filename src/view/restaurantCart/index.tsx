@@ -1,6 +1,8 @@
 import RestaurantCartHeader from "view/restaurantCart/component/RestaurantCartHeader";
 import RestaurantCartCard from "view/restaurantCart/component/restaurantCartCard/RestaurantCartCard";
 import {useRouter} from "next/router";
+import {BottomNavigation} from "components";
+import useRestaurantNavigation from "hooks/useRestaurantNavigation";
 
 const arr = Array.from(new Array(5), (_, i) => ({
   id: i + 1,
@@ -20,10 +22,11 @@ const arr = Array.from(new Array(5), (_, i) => ({
 
 function RestaurantCart() {
   const router = useRouter();
+  const data = useRestaurantNavigation("cart");
   return (
     <>
       <RestaurantCartHeader />
-      <div className="px-screenSpace mt-headerNormal">
+      <div className="px-screenSpace mt-headerNormal mb-bottomNavigation">
         <div>
           {arr.map((item) => {
             return (
@@ -39,6 +42,7 @@ function RestaurantCart() {
           })}
         </div>
       </div>
+      <BottomNavigation data={data} />
     </>
   );
 }

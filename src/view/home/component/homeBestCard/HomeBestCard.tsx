@@ -36,10 +36,10 @@ function HomeBestCard(props: IHomeBestCard) {
           </div>
           <div className="flex items-center flex-row-reverse">
             {starFill.map((item) => (
-              <IconStartFill key={item} className="w-4 h-auto" />
+              <IconStartFill key={item} className="w-3 h-auto mr-[1px] last:mr-0" />
             ))}
             {starEmpty.map((item) => (
-              <IconStarOutline key={item} className="w-4 h-auto" />
+              <IconStarOutline key={item} className="w-3 h-auto mr-[1px] last:mr-0" />
             ))}
           </div>
         </div>

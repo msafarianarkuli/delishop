@@ -74,7 +74,7 @@ function Drawer() {
     <CustomDrawer
       placement="right"
       width={320}
-      className={`${styles.drawer} text-textColor`}
+      className={`${styles.drawer} text-textColor font-IranSans text-[14px]`}
       rootClassName="z-[10000]"
       open={isDrawerOpen}
       closable={false}

@@ -2,6 +2,7 @@ import {BottomNavigation, RestaurantOrderAppHeader} from "components";
 import RestaurantOrderActiveCard from "view/restaurantOrderActive/component/restaurantOrderActiveCard/RestaurantOrderActiveCard";
 import img from "assets/images/res-order-logo.png";
 import useRestaurantNavigation from "hooks/useRestaurantNavigation";
+import {useRouter} from "next/router";
 
 const arr = Array.from(new Array(10), () => ({
   title: "رستوران آریایی",
@@ -16,6 +17,7 @@ const arr = Array.from(new Array(10), () => ({
 
 function RestaurantOrderActive() {
   const data = useRestaurantNavigation("order");
+  const router = useRouter();
   return (
     <>
       <RestaurantOrderAppHeader active="active" />
@@ -32,7 +34,9 @@ function RestaurantOrderActive() {
               coin={item.coin}
               receiptNumber={item.receiptNumber}
               deliveryTime={item.deliveryTime}
-              onClickSubmit={() => {}}
+              onClickSubmit={() => {
+                router.push(`/restaurant/order/${index + 1}`);
+              }}
             />
           );
         })}

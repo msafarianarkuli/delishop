@@ -1,5 +1,3 @@
-import React from "react";
-
 function IconSort({className}: {className: string}) {
   return (
     <svg

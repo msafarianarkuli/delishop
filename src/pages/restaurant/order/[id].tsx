@@ -1,11 +1,11 @@
-import RestaurantOrderRate from "view/restaurantOrderRate";
+import RestaurantOrderDetail from "view/restaurantOrderDetail";
 
-function RestaurantOrderRatePage() {
+function RestaurantOrderDetailPage() {
   return (
     <>
-      <RestaurantOrderRate />
+      <RestaurantOrderDetail />
     </>
   );
 }
 
-export default RestaurantOrderRatePage;
+export default RestaurantOrderDetailPage;

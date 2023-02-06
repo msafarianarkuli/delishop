@@ -104,7 +104,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
       </div>
       {hasRate ? (
         <Link
-          href={`/restaurant/order/${id}`}
+          href={`/restaurant/order/rate/${id}`}
           className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor"
         >
           <div className="text-[15px]">به سفارش خود امتیاز دهید</div>

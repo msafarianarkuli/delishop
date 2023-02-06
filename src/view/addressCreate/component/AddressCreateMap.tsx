@@ -8,7 +8,7 @@ function AddressCreateMap() {
   return (
     <div className={styles.address_create_map_container}>
       <Map
-        className="w-full h-[100px] rounded-[10px] border border-borderColor"
+        className="w-full h-[100px] z-0 rounded-[10px] border border-borderColor"
         zoom={17}
         points={[[{title: "لوکیشن من", lat: 35.704431, lng: 51.392746}]]}
         zoomControl={false}

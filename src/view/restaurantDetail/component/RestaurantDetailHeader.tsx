@@ -1,5 +1,4 @@
-import {AppHeader, AppHeaderBackBtn} from "components";
-import IconFavoriteOutline from "assets/icons/IconFavoriteOutline";
+import {AppHeader, AppHeaderBackBtn, AppHeaderFavorite} from "components";
 import {useRouter} from "next/router";
 
 function RestaurantDetailHeaderBody() {
@@ -17,11 +16,7 @@ function RestaurantDetailHeader() {
       <AppHeader
         right={<AppHeaderBackBtn type="white" onClick={() => router.back()} />}
         body={<RestaurantDetailHeaderBody />}
-        left={
-          <button>
-            <IconFavoriteOutline className="w-6 h-6 text-white" />
-          </button>
-        }
+        left={<AppHeaderFavorite type="white" />}
       />
     </div>
   );

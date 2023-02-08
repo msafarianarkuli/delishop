@@ -18,7 +18,7 @@ const cat = [
 
 function HomeMainCategory() {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full px-[50px]">
       {cat.map((item, index) => {
         const container = classNames({
           [styles.home_main_category_box]: true,

@@ -16,6 +16,7 @@ function RestaurantComment() {
             <div key={item} className="mb-5">
               <RestaurantCommentItem
                 name="الناز"
+                comment="خیلی عالی بود دستخوش دمت گرم"
                 date="5 مهر 1401"
                 star={4}
                 tag="خوراک کباب کوبیده"

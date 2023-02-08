@@ -3,6 +3,7 @@ import {IconStar} from "assets/icons";
 
 interface IRestaurantCommentItem {
   name: string;
+  comment: string;
   date: string;
   star: number;
   tag: string;
@@ -10,7 +11,7 @@ interface IRestaurantCommentItem {
 }
 
 function RestaurantCommentItem(props: IRestaurantCommentItem) {
-  const {tag, answer, star, date, name} = props;
+  const {tag, answer, star, date, name, comment} = props;
   return (
     <>
       <div className="text-[17px] mb-1">{name}</div>
@@ -21,6 +22,7 @@ function RestaurantCommentItem(props: IRestaurantCommentItem) {
           <span className="h-[15px]">{star}</span>
         </div>
       </div>
+      <div className="my-4">{comment}</div>
       <div className="flex">
         <div className="w-auto py-1 px-5 rounded bg-[#D0D2DB] text-[12px] font-light mt-2 mb-3">{tag}</div>
       </div>

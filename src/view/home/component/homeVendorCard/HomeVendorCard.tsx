@@ -1,4 +1,4 @@
-import styles from "view/home/component/homeBestCard/homeBestCard.module.scss";
+import styles from "view/home/component/homeVendorCard/homeVendorCard.module.scss";
 import {useMemo} from "react";
 import {IconClock, IconCoin, IconStarOutline, IconStartFill} from "assets/icons";
 
@@ -14,7 +14,7 @@ interface IHomeBestCard {
 
 const maxStar = 5;
 
-function HomeBestCard(props: IHomeBestCard) {
+function HomeVendorCard(props: IHomeBestCard) {
   const {image, coin, address, star, title, time, description} = props;
 
   const starFill = useMemo(() => Array.from(new Array(star < maxStar ? Math.round(star) : 0), (_, i) => i + 1), [star]);
@@ -61,4 +61,4 @@ function HomeBestCard(props: IHomeBestCard) {
   );
 }
 
-export default HomeBestCard;
+export default HomeVendorCard;

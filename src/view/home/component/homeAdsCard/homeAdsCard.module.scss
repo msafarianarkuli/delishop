@@ -1,12 +1,7 @@
-.home_card_container {
-  min-width: 360px;
+.home_ads_card_container {
   background-image: linear-gradient(310.59deg, #f2f3f6 3.8%, #e5e6ec 119.99%);
   box-shadow: -2px -2px 14px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.302);
   border-radius: 12px;
   overflow: hidden;
-  margin-left: 10px;
-
-  &:first-child {
-    margin-right: 20px;
-  }
+  margin: 18px 0;
 }

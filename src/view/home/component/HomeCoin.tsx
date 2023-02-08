@@ -1,6 +1,6 @@
-import HomeVendorCard from "view/home/component/homeVendorCard/HomeVendorCard";
-import {IconRoundedLeft} from "assets/icons";
 import HomeTitle from "view/home/component/HomeTitle";
+import {IconRoundedLeft} from "assets/icons";
+import HomeVendorCard from "view/home/component/homeVendorCard/HomeVendorCard";
 import img1 from "assets/images/res01.png";
 
 const arr = Array.from(new Array(5), (_, i) => ({
@@ -14,11 +14,11 @@ const arr = Array.from(new Array(5), (_, i) => ({
   time: 35,
 }));
 
-function HomeBest() {
+function HomeCoin() {
   return (
     <div>
       <div className="flex items-center justify-between px-screenSpace mb-5">
-        <HomeTitle title="برترین ها" />
+        <HomeTitle title="سکه دار ها" />
         <div className="flex items-center text-primary text-[15px] font-semibold">
           <span>همه</span>
           <IconRoundedLeft className="w-5 h-5" />
@@ -44,4 +44,4 @@ function HomeBest() {
   );
 }
 
-export default HomeBest;
+export default HomeCoin;

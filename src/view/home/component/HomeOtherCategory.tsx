@@ -5,6 +5,7 @@ import Link from "next/link";
 import classNames from "classnames";
 import {Autoplay, Pagination} from "swiper";
 import "swiper/css/pagination";
+import {useEffect, useState} from "react";
 import styles from "view/home/home.module.scss";
 
 const data: TDataCustomSwiper = [
@@ -39,11 +40,18 @@ const data: TDataCustomSwiper = [
 ];
 
 function HomeOtherCategory() {
+  const [slidesPreView, setSlidePerView] = useState(1);
+
+  useEffect(() => {
+    setSlidePerView(3);
+  }, []);
+
   return (
     <>
       <CustomSwiper
         slidesPerGroup={3}
-        slidesPerView={3}
+        // slidesPerView={3}
+        slidesPerView={slidesPreView}
         spaceBetween={0}
         modules={[Pagination, Autoplay]}
         pagination={{
@@ -64,7 +72,10 @@ function HomeOtherCategory() {
           });
           return (
             <div className="pl-[5px] pr-[15px]">
-              <div className={styles.home_other_category_box}>
+              <div
+                className={styles.home_other_category_box}
+                style={{paddingBottom: slidesPreView === 1 ? "29.42%%" : "100%"}}
+              >
                 <Link href="/" className="absolute flex flex-col items-center justify-center w-full h-full">
                   <Icon className={iconClassName} />
                   <div className="mt-2">{item.title}</div>

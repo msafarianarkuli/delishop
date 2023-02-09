@@ -1,8 +1,8 @@
+import React from "react";
 import {CustomSwiper} from "components";
-import {TDataCustomSwiper} from "components/customSwiper/CustomSwiper";
 import {Autoplay, Pagination} from "swiper";
-import img from "assets/images/banner.png";
-import "swiper/css/pagination";
+import img from "assets/images/banner2.png";
+import {TDataCustomSwiper} from "components/customSwiper/CustomSwiper";
 
 const data: TDataCustomSwiper = [
   {
@@ -23,9 +23,9 @@ const data: TDataCustomSwiper = [
   },
 ];
 
-function HomeAdsSlider() {
+function HomeAdsSwiper2() {
   return (
-    <div className="px-screenSpace mb-5">
+    <div className="mb-5 mt-10">
       <CustomSwiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
@@ -43,13 +43,9 @@ function HomeAdsSlider() {
         data={data}
         renderItem={(item) => {
           return (
-            <div className="relative pb-[50%]">
+            <div className="relative pb-[34%]">
               <div className="absolute w-full h-full">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover object-center rounded-[10px]"
-                />
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover object-center" />
               </div>
             </div>
           );
@@ -59,4 +55,4 @@ function HomeAdsSlider() {
   );
 }
 
-export default HomeAdsSlider;
+export default HomeAdsSwiper2;

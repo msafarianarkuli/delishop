@@ -45,7 +45,12 @@ function HomeAdsSwiper() {
           return (
             <div className="relative pb-[50%]">
               <div className="absolute w-full h-full">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover object-center" />
+                <img
+                  loading="lazy"
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover object-center"
+                />
               </div>
             </div>
           );

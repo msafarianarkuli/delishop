@@ -24,7 +24,6 @@ function Home() {
       <HomeAdsSwiper2 />
       <HomeCoin />
       <HomeUp />
-      {/*<div className="w-1 h-32" />*/}
       <HomeBottomNavigation />
       <HomeGradient />
     </>

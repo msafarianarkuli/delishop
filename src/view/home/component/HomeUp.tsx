@@ -14,7 +14,7 @@ function HomeUp() {
           </div>
         </div>
         <div className="absolute w-full h-full">
-          <img loading="lazy" src={img.src} alt="home-up" className="w-full h-full object-center object-cover" />
+          <img src={img.src} alt="home-up" className="w-full h-full object-center object-cover" />
         </div>
       </div>
     </div>

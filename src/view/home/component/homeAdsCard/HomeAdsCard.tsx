@@ -12,7 +12,7 @@ function HomeAdsCard(props: IHomeAdsCard) {
   return (
     <div className={styles.home_ads_card_container}>
       <div className="relative w-full pb-[34%]">
-        <img loading="lazy" src={image} alt={title} className="absolute w-full h-full object-center object-cover" />
+        <img src={image} alt={title} className="absolute w-full h-full object-center object-cover" />
       </div>
       <div className="flex items-center justify-between p-4">
         <div className="truncate text-[15] mr-1">{title}</div>

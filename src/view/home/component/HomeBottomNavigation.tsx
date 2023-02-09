@@ -19,7 +19,7 @@ function HomeBottomNavigation() {
           {data.map((item, index) => {
             return (
               <div key={index} className="h-[78px] w-full ml-2 last:ml-0">
-                <img loading="lazy" src={item.image} alt={item.title} className="w-auto h-auto rounded-[6px] mx-auto" />
+                <img src={item.image} alt={item.title} className="w-auto h-auto rounded-[6px] mx-auto" />
                 <div className="text-[13px] text-center mt-1">{item.title}</div>
               </div>
             );

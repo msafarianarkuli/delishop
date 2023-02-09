@@ -10,12 +10,14 @@ import HomeDeliBlog from "view/home/component/HomeDeliBlog";
 import HomeAdsSell from "view/home/component/HomeAdsSell";
 import HomeCoin from "view/home/component/HomeCoin";
 import HomeUp from "view/home/component/HomeUp";
+import HomeOrder from "view/home/component/HomeOrder";
 
 function Home() {
   return (
     <>
       <HomeHeader />
       <HomeSearch />
+      <HomeOrder />
       <HomeCategory />
       <HomeAdsSwiper />
       <HomeBest />

@@ -3,6 +3,7 @@ import RestaurantDetailListTag from "view/restaurantDetail/component/RestaurantD
 import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDetailCard/RestaurantDetailCard";
 import styles from "view/restaurantDetail/restaurantDetail.module.scss";
 import img from "assets/images/res-detail-card.png";
+import Link from "next/link";
 
 interface IRestaurantDetailList {
   onClick: () => void;
@@ -39,7 +40,7 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
       <RestaurantDetailListTag title="پرطرفدارها" />
       {arr.map((item) => {
         return (
-          <div key={item} className="mb-5">
+          <Link href={`product/${item}`} key={item} className="block mb-5">
             <RestaurantDetailCard
               image={img.src}
               title="ساندویچ ژامبون مرغ و گوشت ۷۰% ۵۰۰گرمی (سرد)"
@@ -49,7 +50,7 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
               count={0}
               onAddExtraItems={onClick}
             />
-          </div>
+          </Link>
         );
       })}
     </div>

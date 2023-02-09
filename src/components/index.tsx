@@ -26,6 +26,7 @@ import SubmitBuyBtn from "components/customButton/SubmitBuyBtn";
 import RestaurantInfoAppHeader from "components/appHeader/component/RestaurantInfoAppHeader";
 import RestaurantOrderAppHeader from "components/appHeader/component/RestaurantOrderAppHeader";
 import AppHeaderFavorite from "components/appHeader/AppHeaderFavorite";
+import Counter from "components/counter/Counter";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -57,4 +58,5 @@ export {
   RestaurantInfoAppHeader,
   RestaurantOrderAppHeader,
   AppHeaderFavorite,
+  Counter,
 };

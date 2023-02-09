@@ -11,7 +11,7 @@ function HomeAdsCard(props: IHomeAdsCard) {
   const {title, image, more} = props;
   return (
     <div className={styles.home_ads_card_container}>
-      <div className="relative w-full pb-[34%] bg-red-500">
+      <div className="relative w-full pb-[34%]">
         <img loading="lazy" src={image} alt={title} className="absolute w-full h-full object-center object-cover" />
       </div>
       <div className="flex items-center justify-between p-4">

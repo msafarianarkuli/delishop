@@ -60,7 +60,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <img src={image} className="w-[48px] h-[48px] object-center object-cover rounded-[6px]" />
+          <img src={image} alt={title} className="w-[48px] h-[48px] object-center object-cover rounded-[6px]" />
           <div className="text-[15px]">
             <span className="font-semibold mx-1">{title}</span>
             <span>({address})</span>

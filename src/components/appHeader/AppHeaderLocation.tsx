@@ -1,14 +1,14 @@
-import {IconArrowDown} from "assets/icons";
+import {IconLocationPin} from "assets/icons";
 import Link from "next/link";
 
 function AppHeaderLocation() {
   return (
-    <Link href="/address" className="block text-[14px]">
-      <div className="flex items-center justify-center">
-        <span className="font-bold">خانه</span>
-        <IconArrowDown className="w-3 h-auto text-iconColor mr-1" />
+    <Link href="/address" className="block text-[13px]">
+      <div className="flex items-center">
+        <IconLocationPin className="w-4 h-4 text-iconColor ml-1" />
+        <span className="font-semibold">خانه:</span>
+        <div className="font-light mobile:max-w-[140px] max-w-[110px] truncate">کشاورز، پارک لاله، کارگر جنوبی</div>
       </div>
-      <div className="text-[13px] font-light max-w-[130px] truncate">کشاورز، پارک لاله، کارگر جنوبی</div>
     </Link>
   );
 }

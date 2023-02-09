@@ -74,7 +74,7 @@ function HomeOtherCategory() {
             <div className="pl-[5px] pr-[15px]">
               <div
                 className={styles.home_other_category_box}
-                style={{paddingBottom: slidesPreView === 1 ? "29.42%%" : "100%"}}
+                style={{paddingBottom: slidesPreView === 1 ? "29.42%" : "100%"}}
               >
                 <Link href="/" className="absolute flex flex-col items-center justify-center w-full h-full">
                   <Icon className={iconClassName} />

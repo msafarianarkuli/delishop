@@ -9,6 +9,7 @@ import HomeAdsSwiper2 from "view/home/component/HomeAdsSwiper2";
 import HomeDeliBlog from "view/home/component/HomeDeliBlog";
 import HomeAdsSell from "view/home/component/HomeAdsSell";
 import HomeCoin from "view/home/component/HomeCoin";
+import HomeUp from "view/home/component/HomeUp";
 
 function Home() {
   return (
@@ -22,7 +23,8 @@ function Home() {
       <HomeAdsSell />
       <HomeAdsSwiper2 />
       <HomeCoin />
-      <div className="w-1 h-32" />
+      <HomeUp />
+      {/*<div className="w-1 h-32" />*/}
       <HomeBottomNavigation />
       <HomeGradient />
     </>

@@ -4,7 +4,7 @@ import img from "assets/images/res-order-logo.png";
 function HomeOrder() {
   return (
     <div className="px-screenSpace mt-5">
-      <HomeOrderCard deliveryTime="14:45" image={img.src} />
+      <HomeOrderCard title="آریایی" address="وردآورد" deliveryTime="14:45" image={img.src} />
     </div>
   );
 }

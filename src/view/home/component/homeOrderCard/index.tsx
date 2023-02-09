@@ -8,10 +8,12 @@ import {IconRoundedLeft} from "assets/icons";
 interface IHomeOrderCard {
   deliveryTime: string;
   image: string;
+  title: string;
+  address: string;
 }
 
 function HomeOrderCard(props: IHomeOrderCard) {
-  const {deliveryTime, image} = props;
+  const {deliveryTime, image, address, title} = props;
 
   const [step, setStep] = useState(1);
 
@@ -60,8 +62,8 @@ function HomeOrderCard(props: IHomeOrderCard) {
         <div className="flex items-center">
           <img src={image} className="w-[48px] h-[48px] object-center object-cover rounded-[6px]" />
           <div className="text-[15px]">
-            <span className="font-semibold mx-1">آریایی</span>
-            <span>(وردآورد)</span>
+            <span className="font-semibold mx-1">{title}</span>
+            <span>({address})</span>
           </div>
         </div>
         <Link href="/restaurant/order/1?map=1" className="flex items-center text-primary">

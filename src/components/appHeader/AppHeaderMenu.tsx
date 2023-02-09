@@ -6,7 +6,7 @@ import {setIsDrawerOpen} from "redux/template/templateReducer";
 function AppHeaderMenu() {
   const dispatch = useDispatch<AppDispatch>();
   return (
-    <button onClick={() => dispatch(setIsDrawerOpen(true))}>
+    <button aria-label="menu" onClick={() => dispatch(setIsDrawerOpen(true))}>
       <IconMenu className="w-7 h-auto" />
     </button>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Autoplay, Pagination} from "swiper";
 import img from "assets/images/product-detail.png";
 import {CustomSwiper} from "components";
@@ -24,11 +24,18 @@ const data: TDataCustomSwiper = [
 ];
 
 function RestaurantProductDetailSwiper() {
+  const [slidesPreView, setSlidesPreView] = useState<number>(1);
+
+  useEffect(() => {
+    setSlidesPreView(1.5);
+  }, []);
+
   return (
     <>
       <CustomSwiper
         modules={[Pagination, Autoplay]}
-        slidesPerView={1.5}
+        // slidesPerView={1.5}
+        slidesPerView={slidesPreView}
         slidesPerGroup={1}
         spaceBetween={10}
         className="pb-10 restaurant_product_detail_swiper"
@@ -36,15 +43,19 @@ function RestaurantProductDetailSwiper() {
         pagination={{
           clickable: true,
         }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-          stopOnLastSlide: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        //   stopOnLastSlide: false,
+        // }}
         data={data}
         renderItem={(item) => {
           return (
-            <div className="relative pb-[100%] bg-red-500 rounded-full">
+            <div
+              className="relative bg-red-500 rounded-full"
+              style={{paddingBottom: slidesPreView === 1 ? "65.9%" : "100%"}}
+            >
+              {/*<div className="relative pb-[65.9%] bg-red-500 rounded-full">*/}
               <div className="absolute w-full h-full">
                 <img
                   src={item.image}

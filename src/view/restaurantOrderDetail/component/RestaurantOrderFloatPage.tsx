@@ -1,19 +1,17 @@
 import styles from "view/restaurantOrderDetail/restaurantOrderDetail.module.scss";
 import {IconRoundedTop} from "assets/icons";
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import RestaurantOrderDetailContent from "view/restaurantOrderDetail/component/RestaurantOrderDetailContent";
 
-function RestaurantOrderFloatPage() {
-  const [height, setHeight] = useState(0);
+interface IRestaurantOrderFloatPage {
+  height: number;
+}
+
+function RestaurantOrderFloatPage(props: IRestaurantOrderFloatPage) {
+  const {height} = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const div = document.getElementById("restaurantOrderDetailContentPartOne") as HTMLDivElement;
-    const initialHeight = 36 + 20;
-    setHeight(div.scrollHeight + initialHeight);
-  }, []);
 
   function onClick() {
     const containerDiv = containerRef.current as HTMLDivElement;

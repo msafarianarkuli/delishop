@@ -9,7 +9,9 @@ interface IRestaurantDetailList {
   onClick: () => void;
 }
 
-const arr = Array.from(new Array(10), (_, i) => i + 1);
+const arr1 = Array.from(new Array(5), (_, i) => i + 1);
+const arr2 = Array.from(new Array(3), (_, i) => i + 1);
+const arr3 = Array.from(new Array(1), (_, i) => i + 1);
 
 function RestaurantDetailList({onClick}: IRestaurantDetailList) {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,8 +39,40 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
 
   return (
     <div ref={ref} className="mb-[100px] px-screenSpace">
-      <RestaurantDetailListTag title="پرطرفدارها" />
-      {arr.map((item) => {
+      <RestaurantDetailListTag id="restaurantDetailMost" title="پرطرفدارها" />
+      {arr1.map((item) => {
+        return (
+          <Link href={`product/${item}`} key={item} className="block mb-5">
+            <RestaurantDetailCard
+              image={img.src}
+              title="ساندویچ ژامبون مرغ و گوشت ۷۰% ۵۰۰گرمی (سرد)"
+              description="۵۰۰ گرم مخلوط ژامبون گوشت و مرغ ۷۰ درصد، گوجه، خیارشور، کاهو، سس مخصوص"
+              coin={15}
+              price={114500}
+              count={0}
+              onAddExtraItems={onClick}
+            />
+          </Link>
+        );
+      })}
+      <RestaurantDetailListTag id="restaurantDetailPerson" title="تک نفره" />
+      {arr2.map((item) => {
+        return (
+          <Link href={`product/${item}`} key={item} className="block mb-5">
+            <RestaurantDetailCard
+              image={img.src}
+              title="ساندویچ ژامبون مرغ و گوشت ۷۰% ۵۰۰گرمی (سرد)"
+              description="۵۰۰ گرم مخلوط ژامبون گوشت و مرغ ۷۰ درصد، گوجه، خیارشور، کاهو، سس مخصوص"
+              coin={15}
+              price={114500}
+              count={0}
+              onAddExtraItems={onClick}
+            />
+          </Link>
+        );
+      })}
+      <RestaurantDetailListTag id="restaurantDetailFamily" title="خانواده" />
+      {arr3.map((item) => {
         return (
           <Link href={`product/${item}`} key={item} className="block mb-5">
             <RestaurantDetailCard

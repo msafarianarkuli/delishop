@@ -34,7 +34,6 @@ function RestaurantProductDetailSwiper() {
     <>
       <CustomSwiper
         modules={[Pagination, Autoplay]}
-        // slidesPerView={1.5}
         slidesPerView={slidesPreView}
         slidesPerGroup={1}
         spaceBetween={10}
@@ -55,7 +54,6 @@ function RestaurantProductDetailSwiper() {
               className="relative bg-red-500 rounded-full"
               style={{paddingBottom: slidesPreView === 1 ? "65.9%" : "100%"}}
             >
-              {/*<div className="relative pb-[65.9%] bg-red-500 rounded-full">*/}
               <div className="absolute w-full h-full">
                 <img
                   src={item.image}

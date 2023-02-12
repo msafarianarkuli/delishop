@@ -21,7 +21,7 @@ function AntConfig({children}: IAntConfig) {
           colorLinkActive: "#FF5C01",
           colorLinkHover: "#FF5C01",
         },
-        components: {Input: {colorBorder: "#B0B8C4"}},
+        components: {Input: {colorBorder: "#B0B8C4"}, Select: {colorBorder: "#B0B8C4"}},
       }}
     >
       {children}

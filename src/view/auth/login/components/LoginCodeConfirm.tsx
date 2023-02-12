@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {CustomInputReactHook} from "components";
 import {Button} from "antd";
 import useAuthAction from "view/auth/hooks/useAuthAction";
-import {authRegister, authSetPhone} from "view/auth/context/AuthProvider";
+import {authSetPhone} from "view/auth/context/AuthProvider";
 import useAuth from "view/auth/hooks/useAuth";
 import LoginReSendBtn from "view/auth/login/components/LoginReSendBtn";
+import {createLog} from "utils/utils";
+import {signIn} from "next-auth/react";
+import {useRouter} from "next/router";
 
 interface ICodeConfirm {
   code: string;
@@ -15,6 +18,7 @@ function LoginCodeConfirm() {
   const dispatch = useAuthAction();
   const {phone, isCode} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -29,9 +33,21 @@ function LoginCodeConfirm() {
     if (!isCode) reset();
   }, [isCode, reset]);
 
-  function onSubmit(payload: ICodeConfirm) {
+  async function onSubmit(payload: ICodeConfirm) {
     console.log("payload", payload);
-    dispatch(authRegister());
+    try {
+      const res = await signIn("credentials", {
+        phoneNumber: phone,
+        code: payload.code,
+        redirect: false,
+        // callbackUrl: router.query.callbackUrl as string || "/restaurant"
+      });
+      createLog("res LoginCodeConfirm", res);
+      await router.replace((router.query.callbackUrl as string) || "/restaurant");
+    } catch (e) {
+      createLog("err LoginCodeConfirm", e);
+    }
+    // dispatch(authRegister());
   }
 
   return (

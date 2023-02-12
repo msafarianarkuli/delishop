@@ -10,6 +10,10 @@ module.exports = (phase) => {
     if (isDev) {
       return [
         {
+          source: "/api/auth/:path*",
+          destination: "/api/auth/:path*",
+        },
+        {
           source: "/api/:path*",
           destination: env.DOMAIN + "/api/:path*",
         },

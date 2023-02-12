@@ -1,8 +1,8 @@
-import React from "react";
 import {CustomModal} from "components";
 import {IconLogoutLight} from "assets/icons";
 import useProfile from "view/profile/context/useProfile";
 import useProfileAction from "view/profile/context/useProfileAction";
+import {signOut} from "next-auth/react";
 import {Button} from "antd";
 
 function ProfileLogoutModalBody() {
@@ -11,7 +11,15 @@ function ProfileLogoutModalBody() {
     <>
       <div className="text-center my-5">می خواهید از حساب کاربری خود خارج شوید؟</div>
       <div className="flex items-center">
-        <Button type="primary" className="submit-btn modal-submit-btn w-full ml-5">
+        <Button
+          onClick={() =>
+            signOut({
+              callbackUrl: "/",
+            })
+          }
+          type="primary"
+          className="submit-btn modal-submit-btn w-full ml-5"
+        >
           بله
         </Button>
         <Button onClick={() => setModal(false)} className="secondary-btn w-full h-[50px]">

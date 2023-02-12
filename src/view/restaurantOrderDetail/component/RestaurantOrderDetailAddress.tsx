@@ -11,7 +11,7 @@ function RestaurantOrderDetailAddress(props: IRestaurantOrderDetailAddress) {
         <span>ارسال به:</span>
         <span className="mr-1">{title}</span>
       </div>
-      <div className="text-[15px] truncate mt-2">{address}</div>
+      <div className="text-[15px] mt-2">{address}</div>
     </div>
   );
 }

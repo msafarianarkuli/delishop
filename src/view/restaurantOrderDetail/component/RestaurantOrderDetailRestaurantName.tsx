@@ -1,4 +1,6 @@
 import {IconRoundedLeft} from "assets/icons";
+import Link from "next/link";
+import {useRouter} from "next/router";
 
 interface IRestaurantOrderDetailRestaurantName {
   image: string;
@@ -7,6 +9,7 @@ interface IRestaurantOrderDetailRestaurantName {
 }
 
 function RestaurantOrderDetailRestaurantName(props: IRestaurantOrderDetailRestaurantName) {
+  const router = useRouter();
   const {title, address, image} = props;
   return (
     <div className="flex items-center justify-between px-screenSpace mt-8 mb-5">
@@ -15,7 +18,9 @@ function RestaurantOrderDetailRestaurantName(props: IRestaurantOrderDetailRestau
         <span className="text-[17px] mx-2">{title}</span>
         <span className="text-[15px] text-textColorLight">({address})</span>
       </div>
-      <IconRoundedLeft className="w-7 h-7 text-primary" />
+      <Link href={`/restaurant/${router.query.id}`}>
+        <IconRoundedLeft className="w-7 h-7 text-primary" />
+      </Link>
     </div>
   );
 }

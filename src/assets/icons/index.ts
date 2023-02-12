@@ -52,6 +52,7 @@ import IconTagSolid from "assets/icons/IconTagSolid";
 import IconWalletSolid from "assets/icons/IconWalletSolid";
 import IconSupport from "assets/icons/IconSupport";
 import IconRoundedTop from "assets/icons/IconRoundedTop";
+import IconRoundedDown from "assets/icons/IconRoundedDown";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -110,4 +111,5 @@ export {
   IconWalletSolid,
   IconSupport,
   IconRoundedTop,
+  IconRoundedDown,
 };

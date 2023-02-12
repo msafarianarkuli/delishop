@@ -4,6 +4,7 @@ import RestaurantProductDetailTitle from "view/restaurantProductDetail/component
 import RestaurantProductDetailDescription from "view/restaurantProductDetail/component/RestaurantProductDetailDescription";
 import RestaurantProductDetailPrice from "view/restaurantProductDetail/component/RestaurantProductDetailPrice";
 import RestaurantProductDetailComment from "view/restaurantProductDetail/component/RestaurantProductDetailComment";
+import RestaurantProductDetailExtra from "view/restaurantProductDetail/component/RestaurantProductDetailExtra";
 
 function RestaurantProductDetail() {
   return (
@@ -14,6 +15,7 @@ function RestaurantProductDetail() {
         <RestaurantProductDetailTitle />
         <RestaurantProductDetailDescription />
         <RestaurantProductDetailPrice />
+        <RestaurantProductDetailExtra />
         <RestaurantProductDetailComment />
       </div>
     </>

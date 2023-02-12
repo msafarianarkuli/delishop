@@ -43,11 +43,11 @@ function RestaurantProductDetailSwiper() {
         pagination={{
           clickable: true,
         }}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        //   stopOnLastSlide: false,
-        // }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+          stopOnLastSlide: false,
+        }}
         data={data}
         renderItem={(item) => {
           return (

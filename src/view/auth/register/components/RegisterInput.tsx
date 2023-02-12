@@ -1,5 +1,4 @@
 import {RegisterOptions, useFormContext} from "react-hook-form";
-import {IRegisterForm} from "view/auth/register/components/RegisterForm";
 import {useEffect, useRef} from "react";
 import {InputRef} from "antd";
 import useAuthFocus from "view/auth/hooks/useAuthFocus";
@@ -16,7 +15,7 @@ interface IRegisterInput {
 
 function RegisterInput(props: IRegisterInput) {
   const {id, rules, label, classNameContainer, numerical} = props;
-  const {control} = useFormContext<IRegisterForm>();
+  const {control} = useFormContext();
   const ref = useRef<InputRef>(null);
 
   const focus = useAuthFocus("register-btn");

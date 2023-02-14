@@ -23,7 +23,7 @@ function HomeMainCategory() {
         const container = classNames({
           [styles.home_main_category_box]: true,
           "ml-[15px] border-primary": index === 0,
-          "border-[#066FAA]": index === 1,
+          "border-primarySupermarket": index === 1,
         });
         const Icon = item.icon;
         return (

@@ -1,4 +1,4 @@
-import {IconClock, IconCoin, IconStarOutline, IconStartFill} from "assets/icons";
+import {IconClock, IconCoin, IconStarOutline, IconStarFill} from "assets/icons";
 import styles from "view/restaurant/component/restaurantCard/restaurantCard.module.scss";
 import {useMemo} from "react";
 
@@ -36,7 +36,7 @@ function RestaurantCard(props: IRestaurantCard) {
           </div>
           <div className="flex items-center flex-row-reverse">
             {starFill.map((item) => (
-              <IconStartFill key={item} className="w-3 h-auto mr-[1px] last:mr-0" />
+              <IconStarFill key={item} className="w-3 h-auto mr-[1px] last:mr-0" />
             ))}
             {starEmpty.map((item) => (
               <IconStarOutline key={item} className="w-3 h-auto mr-[1px] last:mr-0" />

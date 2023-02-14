@@ -33,7 +33,7 @@ function RestaurantSort() {
       ref={ref}
       className="flex items-center justify-between px-screenSpace h-[32px] overflow-hidden transition-height max-width-screen"
     >
-      <div className="font-medium">17 رستوران باز</div>
+      <div className="font-medium text-[15px]">17 رستوران باز</div>
       <Button
         onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}

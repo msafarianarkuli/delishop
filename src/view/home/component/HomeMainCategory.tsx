@@ -12,7 +12,7 @@ const cat = [
   {
     title: "سوپرمارکت",
     icon: IconSuperMarket,
-    link: "/",
+    link: "/supermarket",
   },
 ];
 

@@ -1,8 +1,7 @@
-import React from "react";
-import BottomSheet from "components/customDrawer/BottomSheet";
 import {Button, DrawerProps} from "antd";
+import BottomSheet from "components/customDrawer/BottomSheet";
 
-interface IRestaurantFilterBottomSheet {
+interface ISuperMarketSortBottomSheet {
   open: boolean;
   onClose: DrawerProps["onClose"];
   onClick: (value: any) => void;
@@ -23,7 +22,7 @@ const data = [
   },
 ];
 
-function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
+function SupermarketSortBottomSheet(props: ISuperMarketSortBottomSheet) {
   const {open, onClose, onClick} = props;
   return (
     <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={265}>
@@ -32,7 +31,7 @@ function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
           <Button
             onClick={() => onClick(item)}
             key={index}
-            className="w-full h-[45px] text-right border-0 border-b border-borderColor rounded-none"
+            className="supermarket_btn w-full h-[45px] text-right border-0 border-b border-borderColor rounded-none"
           >
             {item.title}
           </Button>
@@ -42,4 +41,4 @@ function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
   );
 }
 
-export default RestaurantSortBottomSheet;
+export default SupermarketSortBottomSheet;

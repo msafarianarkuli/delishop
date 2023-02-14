@@ -27,7 +27,7 @@ function Restaurant() {
         <RestaurantFilter />
         <RestaurantSort />
       </div>
-      <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px] pb-bottomNavigation">
+      <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
         {arr.map((item) => {
           return (
             <Link key={item.id} href={`/restaurant/${item.id}`}>
@@ -44,6 +44,7 @@ function Restaurant() {
           );
         })}
       </div>
+      <div className="w-full h-bottomNavigation" />
       <BottomNavigation data={data} />
     </>
   );

@@ -1,25 +1,43 @@
 import {TIcons} from "assets/icons";
 import classNames from "classnames";
 import styles from "components/bottomNavigation/bottomNavigation.module.scss";
+import {ElementType, useMemo} from "react";
 import Link from "next/link";
 
 interface IDataBottomNavigationitem {
   icon: TIcons;
   title: string;
-  link: string;
+  link?: string;
   active: boolean;
+  onClick?: () => void;
 }
 
 export type TDataBottomNavigation = IDataBottomNavigationitem[];
 
 interface IBottomNavigation {
   data: TDataBottomNavigation;
+  primary?: "restaurant" | "supermarket";
 }
 
-function BottomNavigation({data}: IBottomNavigation) {
+function BottomNavigation(props: IBottomNavigation) {
+  const {data, primary = "restaurant"} = props;
+  const primaryColor = useMemo(() => {
+    let color = "";
+    if (primary === "restaurant") color = "text-primary";
+    if (primary === "supermarket") color = "text-primarySupermarket";
+    return color;
+  }, [primary]);
+
+  const container = classNames({
+    "h-bottomNavigation max-width-screen": true,
+    [styles.bottom_navigation_container]: true,
+    [styles.bottom_navigation_container_restaurant]: primary === "restaurant",
+    [styles.bottom_navigation_container_supermarket]: primary === "supermarket",
+  });
+
   return (
     <div className="fixed bottom-0 right-0 left-0">
-      <div className={`${styles.bottom_navigation_container} h-bottomNavigation max-width-screen`}>
+      <div className={container}>
         {data.map((item, index) => {
           const icon = classNames({
             "w-7 h-7": true,
@@ -27,14 +45,16 @@ function BottomNavigation({data}: IBottomNavigation) {
           });
           const text = classNames({
             "font-medium text-[13px] mt-1": true,
-            "text-primary": item.active,
+            [primaryColor]: item.active,
           });
           const Icon = item.icon;
+          const className = "flex flex-col items-center";
+          const Component: ElementType = item.link ? Link : "button";
           return (
-            <Link key={index} href={item.link} className="flex flex-col items-center">
+            <Component key={index} {...(item.link ? {href: item.link} : {onClick: item.onClick})} className={className}>
               <Icon className={icon} />
               <div className={text}>{item.title}</div>
-            </Link>
+            </Component>
           );
         })}
       </div>

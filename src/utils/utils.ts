@@ -57,4 +57,30 @@ export function number2Digits(num: number) {
   return num.toString();
 }
 
+export const removeLastSlashUrl = (url: string) => {
+  let tmp = url;
+  if (url.length > 1 && url?.search(/\/$/) !== -1) {
+    tmp = url.replace(/\/$/, "");
+  }
+  return tmp;
+};
+
+export const separatePathnameAndQuerySearch = (url: string) => {
+  let querySearch = "";
+  let pathname = "";
+  if (url.search(/\?/) != -1) {
+    const index = url.indexOf("?");
+    querySearch = url.substring(index);
+    pathname = url.substring(0, index);
+    pathname = removeLastSlashUrl(pathname);
+  } else {
+    pathname = url;
+  }
+
+  return {
+    querySearch,
+    pathname,
+  };
+};
+
 export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

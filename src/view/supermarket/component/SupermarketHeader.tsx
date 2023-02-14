@@ -8,7 +8,7 @@ function SupermarketHeader() {
     <div className="fixed z-10 top-0 right-0 left-0 header_background">
       <AppHeader
         left={<AppHeaderCoin coin={1964} />}
-        body={<AppHeaderLocation />}
+        body={<AppHeaderLocation supermarket />}
         right={<AppHeaderBackBtn onClick={() => router.back()} />}
       />
     </div>

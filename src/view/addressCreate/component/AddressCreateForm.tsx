@@ -1,9 +1,9 @@
 import {FormProvider, useForm} from "react-hook-form";
 import {createLog} from "utils/utils";
 import {IMapPoint} from "components/map/Map";
-import {Button} from "antd";
 import AddressCreateFormInput from "view/addressCreate/component/AddressCreateFormInput";
 import AddressCreateMap from "view/addressCreate/component/AddressCreateMap";
+import AddressCreateFormSubmit from "view/addressCreate/component/AddressCreateFormSubmit";
 
 interface IAddressCreateForm {
   location: IMapPoint;
@@ -69,9 +69,7 @@ function AddressCreateForm() {
           numerical
           className="dir-ltr"
         />
-        <Button htmlType="submit" type="primary" className="submit-btn w-full mt-2 mb-5">
-          ثبت
-        </Button>
+        <AddressCreateFormSubmit />
       </form>
     </FormProvider>
   );

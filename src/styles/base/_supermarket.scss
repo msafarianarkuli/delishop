@@ -1,16 +1,12 @@
-.supermarket_btn {
-  & > div {
-    display: none;
-  }
+@import "src/styles/utils/variables";
 
+.supermarket_btn {
   &:not(:disabled):active {
     color: #005691 !important;
-    //border-color: #005691 !important;
   }
 
   &:not(:disabled):hover {
     color: #2089c4 !important;
-    //border-color: #2089C4 !important;
   }
 }
 
@@ -21,5 +17,11 @@
 
   &:not(:disabled):hover {
     border-color: #2089c4 !important;
+  }
+}
+
+.supermarket-spin {
+  & .ant-spin-dot-item {
+    background-color: $primarySupermarket;
   }
 }

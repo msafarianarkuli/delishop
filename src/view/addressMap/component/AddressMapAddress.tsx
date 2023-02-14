@@ -4,21 +4,30 @@ import {IconLocationPin, IconSearch} from "assets/icons";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import styles from "view/addressMap/addressMap.module.scss";
 import {useRouter} from "next/router";
+import classNames from "classnames";
+import {TUseTypeColor} from "hooks/useTypeColor";
 
-function AddressMapAddress() {
+interface IAddressMapAddress {
+  type: TUseTypeColor;
+}
+
+function AddressMapAddress({type}: IAddressMapAddress) {
   const router = useRouter();
   const {address, addressLoading} = useAddressMap();
 
   const showAddress = useMemo(() => {
+    const spinClassName = classNames({
+      "supermarket-spin": type === "supermarket",
+    });
     if (addressLoading) {
       return (
         <div className="flex flex-1 justify-center items-center pt-1">
-          <Spin size="default" />
+          <Spin size="default" className={spinClassName} />
         </div>
       );
     }
     return address;
-  }, [address, addressLoading]);
+  }, [address, addressLoading, type]);
 
   return (
     <div className={styles.address_map_address_box}>

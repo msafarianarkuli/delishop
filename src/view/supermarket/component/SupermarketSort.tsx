@@ -37,7 +37,7 @@ function SupermarketSort() {
       <Button
         onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}
-        className="supermarket_btn flex items-center text-primarySupermarket border-0 shadow-none"
+        className="btn_remove_effect supermarket_btn flex items-center text-primarySupermarket border-0 shadow-none"
       >
         {sort.title || "به ترتیب..."}
       </Button>

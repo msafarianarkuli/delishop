@@ -13,6 +13,15 @@
   }
 }
 
+.submit-btn-supermarket {
+  font-size: 18px;
+  height: 56px;
+  @apply font-semibold bg-primarySupermarket;
+  &:hover {
+    background-color: $primarySupermarket !important;
+  }
+}
+
 .modal-submit-btn {
   height: 50px;
   box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);

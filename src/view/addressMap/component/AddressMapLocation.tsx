@@ -7,16 +7,17 @@ import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
 import {setAddressMapAddress, setAddressMapAddressLoading} from "view/addressMap/context/AddressMapProvider";
 import {useMap} from "react-leaflet";
 import useAddressMap from "view/addressMap/context/useAddressMap";
+import useMapPin from "hooks/useMapPin";
 
 function AddressMapLocation() {
   const [location, setLocation] = useState<IMapPoint[]>([]);
   const dispatch = useAddressMapAction();
+  const pin = useMapPin();
 
   useEffect(() => {
     if (location?.length) {
       const loc = location[0];
       createLog("loc", loc);
-      // setAddressLoading(true);
       dispatch(setAddressMapAddressLoading(true));
       getAddressFromMap({
         lat: loc.lat,
@@ -38,6 +39,7 @@ function AddressMapLocation() {
     <Map
       className="w-full h-screen"
       points={[location]}
+      pinIcons={pin}
       onClick={(event) => {
         createLog("AddressMap event", event);
         setLocation([

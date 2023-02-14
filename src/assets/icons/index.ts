@@ -54,6 +54,7 @@ import IconSupport from "assets/icons/IconSupport";
 import IconRoundedTop from "assets/icons/IconRoundedTop";
 import IconRoundedDown from "assets/icons/IconRoundedDown";
 import IconAccount from "assets/icons/IconAccount";
+import IconFilter from "assets/icons/IconFilter";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -114,4 +115,5 @@ export {
   IconRoundedTop,
   IconRoundedDown,
   IconAccount,
+  IconFilter,
 };

@@ -1,5 +1,12 @@
+import SupermarketCategoryHeader from "view/supermarketCategory/component/SupermarketCategoryHeader";
+
 function SupermarketCategory() {
-  return <div>supermarketCategory</div>;
+  return (
+    <>
+      <SupermarketCategoryHeader />
+      <div className="mt-headerNormal"></div>
+    </>
+  );
 }
 
 export default SupermarketCategory;

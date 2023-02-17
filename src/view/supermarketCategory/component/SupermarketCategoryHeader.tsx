@@ -44,7 +44,7 @@ function SupermarketCategoryHeaderBody() {
   }, [router.query?.id]);
 
   return (
-    <div className="w-full flex items-center overflow-auto">
+    <div className="w-full flex items-center overflow-auto h-headerNormal">
       {data.map((item, index) => {
         const id = router.query?.id as string;
         const container = classNames({

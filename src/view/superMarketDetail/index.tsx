@@ -15,11 +15,44 @@ const data = {
   coin: 15,
 };
 
-const arr = Array.from(new Array(20), (_, i) => ({
-  id: i + 1,
-  title: "دستمال و شوینده",
-  image: img1.src,
-}));
+// const arr = Array.from(new Array(20), (_, i) => ({
+//   id: i + 1,
+//   title: "دستمال و شوینده",
+//   image: img1.src,
+// }));
+
+const arr = [
+  {
+    id: 1,
+    title: "دستمال و شوینده",
+    image: img1.src,
+  },
+  {
+    id: 2,
+    title: "لبنیات",
+    image: img1.src,
+  },
+  {
+    id: 3,
+    title: "خواربار و نان",
+    image: img1.src,
+  },
+  {
+    id: 4,
+    title: "آرایشی و بهداشتی",
+    image: img1.src,
+  },
+  {
+    id: 5,
+    title: "میوه و سبزیجات",
+    image: img1.src,
+  },
+  {
+    id: 6,
+    title: "نوشیدنی ها",
+    image: img1.src,
+  },
+];
 
 function SuperMarketDetail() {
   return (

@@ -4,9 +4,9 @@ import RestaurantDetailTab from "view/restaurantDetail/component/RestaurantDetai
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
 import RestaurantDetailSubmitBtn from "view/restaurantDetail/component/RestaurantDetailSubmitBtn";
 import RestaurantDetailModal from "view/restaurantDetail/component/restaurantDetailModal/RestaurantDetailModal";
-import styles from "view/restaurantDetail/restaurantDetail.module.scss";
 import RestaurantDetailSummary from "view/restaurantDetail/component/RestaurantDetailSummary";
 import RestaurantDetailList from "view/restaurantDetail/component/RestaurantDetailList";
+import {BottomPageGradient} from "components";
 
 function RestaurantDetail() {
   const [modal, setModal] = useState(false);
@@ -20,7 +20,7 @@ function RestaurantDetail() {
       <RestaurantDetailList onClick={() => setModal(true)} />
       <RestaurantDetailSubmitBtn />
       <RestaurantDetailModal open={modal} onCancel={() => setModal(false)} />
-      <div className={styles.restaurant_detail_gradient} />
+      <BottomPageGradient />
     </>
   );
 }

@@ -27,6 +27,7 @@ import RestaurantInfoAppHeader from "components/appHeader/component/RestaurantIn
 import RestaurantOrderAppHeader from "components/appHeader/component/RestaurantOrderAppHeader";
 import AppHeaderFavorite from "components/appHeader/AppHeaderFavorite";
 import Counter from "components/counter/Counter";
+import BottomPageGradient from "components/bottomPageGradient";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -59,4 +60,5 @@ export {
   RestaurantOrderAppHeader,
   AppHeaderFavorite,
   Counter,
+  BottomPageGradient,
 };

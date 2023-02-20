@@ -1,9 +1,9 @@
-import SuperMarketDetail from "view/superMarketDetail";
+import SupermarketDetail from "view/supermarketDetail";
 
 function SupermarketDetailPage() {
   return (
     <>
-      <SuperMarketDetail />
+      <SupermarketDetail />
     </>
   );
 }

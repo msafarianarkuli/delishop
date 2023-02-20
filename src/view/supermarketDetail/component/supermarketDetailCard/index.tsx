@@ -1,4 +1,4 @@
-import styles from "view/superMarketDetail/component/superMarketDetailCard/superMarketDetail.module.scss";
+import styles from "view/supermarketDetail/component/supermarketDetailCard/supermarketDetail.module.scss";
 
 interface ISuperMarketDetailCard {
   title: string;

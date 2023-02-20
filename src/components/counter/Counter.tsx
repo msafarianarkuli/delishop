@@ -12,6 +12,7 @@ interface ICounter {
   showMinusOnlyPositiveNumber?: boolean;
   showNumberOnlyPositiveNumber?: boolean;
   className?: string;
+  primaryType?: "default" | "supermarket";
 }
 
 function Counter(props: ICounter) {
@@ -24,6 +25,7 @@ function Counter(props: ICounter) {
     showMinusOnlyPositiveNumber,
     showNumberOnlyPositiveNumber,
     className = "",
+    primaryType = "default",
   } = props;
   const [counter, setCounter] = useState(initialValue || 0);
 
@@ -55,11 +57,16 @@ function Counter(props: ICounter) {
     "flex flex-nowrap items-center": true,
     [className]: className,
   });
+  const addClassName = classNames({
+    "flex items-center justify-center w-[30px] h-[30px] rounded-full": true,
+    "bg-primary": primaryType === "default",
+    "bg-primarySupermarket": primaryType === "supermarket",
+  });
 
   return (
     <div className={container}>
       <button
-        className="flex items-center justify-center w-[30px] h-[30px] bg-primary rounded-full"
+        className={addClassName}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();

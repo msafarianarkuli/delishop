@@ -1,13 +1,18 @@
 import SupermarketCategoryHeader from "view/supermarketCategory/component/SupermarketCategoryHeader";
-import SupermarketCategorySubCategory from "view/supermarketCategory/component/SupermarketCategorySubCategory";
+import SupermarketCategoryList from "view/supermarketCategory/component/SupermarketCategoryList";
+import {BottomNavigation, BottomPageGradient} from "components";
+import useSupermarketNavigation from "hooks/useSupermarketNavigation";
 
 function SupermarketCategory() {
+  const data = useSupermarketNavigation();
+
   return (
     <>
       <SupermarketCategoryHeader />
-      <div className="mt-headerNormal">
-        <SupermarketCategorySubCategory />
-      </div>
+      <SupermarketCategoryList />
+      <BottomPageGradient />
+      <div className="w-full h-bottomNavigation" />
+      <BottomNavigation primary="supermarket" data={data} />
     </>
   );
 }

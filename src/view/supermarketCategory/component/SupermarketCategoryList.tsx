@@ -3,6 +3,7 @@ import SupermarketCategorySubCategory from "view/supermarketCategory/component/S
 import SupermarketCategoryItemHeader from "view/supermarketCategory/component/SupermarketCategoryItemHeader";
 import SupermarketCategoryCard from "view/supermarketCategory/component/supermarketCategoryCard";
 import img from "assets/images/supermarket_category_item.png";
+import Link from "next/link";
 
 const arr = Array.from(new Array(10), (_, i) => ({
   id: i + 1,
@@ -26,14 +27,15 @@ function SupermarketCategoryList() {
             <div className="flex overflow-auto py-5 pr-screenSpace">
               {arr.map((item, index) => {
                 return (
-                  <SupermarketCategoryCard
-                    key={index}
-                    title={item.title}
-                    image={item.image}
-                    price={item.price}
-                    coin={item.coin}
-                    description={item.description}
-                  />
+                  <Link key={index} href={`/supermarket/product/${item.id}`}>
+                    <SupermarketCategoryCard
+                      title={item.title}
+                      image={item.image}
+                      price={item.price}
+                      coin={item.coin}
+                      description={item.description}
+                    />
+                  </Link>
                 );
               })}
             </div>

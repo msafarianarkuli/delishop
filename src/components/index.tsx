@@ -28,6 +28,7 @@ import RestaurantOrderAppHeader from "components/appHeader/component/RestaurantO
 import AppHeaderFavorite from "components/appHeader/AppHeaderFavorite";
 import Counter from "components/counter/Counter";
 import BottomPageGradient from "components/bottomPageGradient";
+import ProductDetailSwiper from "components/customSwiper/ProductDetailSwiper";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -61,4 +62,5 @@ export {
   AppHeaderFavorite,
   Counter,
   BottomPageGradient,
+  ProductDetailSwiper,
 };

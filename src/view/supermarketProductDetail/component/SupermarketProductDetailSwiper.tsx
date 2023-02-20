@@ -1,7 +1,6 @@
-import React from "react";
-import img from "assets/images/product-detail.png";
 import {ProductDetailSwiper} from "components";
 import {TDataCustomSwiper} from "components/customSwiper/CustomSwiper";
+import img from "assets/images/supermarket_product_detail.png";
 
 const data: TDataCustomSwiper = [
   {
@@ -22,8 +21,8 @@ const data: TDataCustomSwiper = [
   },
 ];
 
-function RestaurantProductDetailSwiper() {
+function SupermarketProductDetailSwiper() {
   return <ProductDetailSwiper data={data} />;
 }
 
-export default RestaurantProductDetailSwiper;
+export default SupermarketProductDetailSwiper;

@@ -68,3 +68,19 @@
     background-color: transparent;
   }
 }
+
+.supermarket_switch {
+  @apply bg-iconColor;
+
+  &:where(.css-dev-only-do-not-override-we0jvz).ant-switch.ant-switch-checked {
+    @apply bg-primarySupermarket;
+  }
+
+  &:where(.css-dev-only-do-not-override-we0jvz).ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+    @apply bg-primarySupermarket;
+  }
+
+  &:where(.css-dev-only-do-not-override-we0jvz).ant-switch:hover:not(.ant-switch-disabled) {
+    @apply bg-iconColor;
+  }
+}

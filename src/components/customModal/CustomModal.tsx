@@ -5,20 +5,24 @@ import styles from "components/customModal/customModal.module.scss";
 
 interface ICustomModal extends ModalProps {
   header?: ReactNode;
+  footer?: ReactNode;
   body?: ReactNode;
   classNameBody?: string;
   classNameHeader?: string;
+  classNameFooter?: string;
   classNameContainer?: string;
 }
 
 function CustomModal(props: ICustomModal) {
   const {
     header,
+    footer,
     body,
     classNameHeader = "",
     classNameBody = "",
     wrapClassName = "",
     classNameContainer = "",
+    classNameFooter = "",
     ...rest
   } = props;
   const [isClient, setIsClient] = useState(false);
@@ -34,6 +38,11 @@ function CustomModal(props: ICustomModal) {
   const bodyClassName = classNames({
     "p-[15px] overflow-auto": true,
     [classNameBody]: classNameBody,
+  });
+
+  const footerClassName = classNames({
+    "px-[15px]": true,
+    [classNameFooter]: classNameFooter,
   });
 
   const classNameWrap = classNames({
@@ -59,6 +68,7 @@ function CustomModal(props: ICustomModal) {
             <div className={containerClassName}>
               {header ? <div className={headerClassName}>{header}</div> : null}
               {body ? <div className={bodyClassName}>{body}</div> : null}
+              {footer ? <div className={footerClassName}>{footer}</div> : null}
             </div>
           );
         }}

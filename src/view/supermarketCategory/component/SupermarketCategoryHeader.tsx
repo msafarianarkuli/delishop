@@ -4,6 +4,8 @@ import {useRouter} from "next/router";
 import {IconFilter} from "assets/icons";
 import classNames from "classnames";
 import Link from "next/link";
+import useSupermarketCategoryFilterAction from "view/supermarketCategory/component/context/useSupermarketCategoryFilterAction";
+import {setSupermarketCategoryFilterOpen} from "view/supermarketCategory/component/context/SupermarketCategoryFilterProvider";
 
 const data = [
   {
@@ -61,17 +63,23 @@ function SupermarketCategoryHeaderBody() {
   );
 }
 
+function SupermarketCategoryHeaderLeft() {
+  const dispatch = useSupermarketCategoryFilterAction();
+
+  return (
+    <button onClick={() => dispatch(setSupermarketCategoryFilterOpen(true))}>
+      <IconFilter className="w-8 h-8 text-textColor" />
+    </button>
+  );
+}
+
 function SupermarketCategoryHeader() {
   const router = useRouter();
   return (
     <div className="fixed z-10 top-0 left-0 right-0 header_background">
       <AppHeader
         classNameContainer="border-b border-borderColor"
-        left={
-          <button>
-            <IconFilter className="w-8 h-8 text-textColor" />
-          </button>
-        }
+        left={<SupermarketCategoryHeaderLeft />}
         right={<AppHeaderBackBtn onClick={() => router.back()} />}
         body={<SupermarketCategoryHeaderBody />}
         classNameBody="overflow-hidden"

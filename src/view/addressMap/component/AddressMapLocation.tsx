@@ -2,12 +2,12 @@ import {createLog} from "utils/utils";
 import {Map} from "components";
 import {useEffect, useState} from "react";
 import {IMapPoint} from "components/map/Map";
-import getAddressFromMap from "api/getAddressFromMap";
 import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
 import {setAddressMapAddress, setAddressMapAddressLoading} from "view/addressMap/context/AddressMapProvider";
 import {useMap} from "react-leaflet";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import useMapPin from "hooks/useMapPin";
+import {getAddressFromMap} from "api";
 
 function AddressMapLocation() {
   const [location, setLocation] = useState<IMapPoint[]>([]);

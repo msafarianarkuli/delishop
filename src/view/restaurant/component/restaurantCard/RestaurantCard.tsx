@@ -8,7 +8,7 @@ interface IRestaurantCard {
   address: string;
   description: string;
   star: number;
-  time: number;
+  time: string;
   coin: number;
 }
 
@@ -44,7 +44,7 @@ function RestaurantCard(props: IRestaurantCard) {
           </div>
         </div>
         <div className="flex justify-between">
-          <div className="text-textColorLight text-[13px] font-light">{description}</div>
+          <div className="text-textColorLight text-[13px] font-light truncate">{description}</div>
           <div className="flex items-center">
             <div className="flex items-center inner_box">
               <IconCoin className="w-4 h-4 ml-1" />

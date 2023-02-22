@@ -1,22 +1,9 @@
 import RestaurantHeader from "view/restaurant/component/RestaurantHeader";
 import RestaurantFilter from "view/restaurant/component/RestaurantFilter";
 import RestaurantSort from "view/restaurant/component/RestaurantSort";
-import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantCard";
-import img1 from "assets/images/res01.png";
 import {BottomNavigation} from "components";
-import Link from "next/link";
 import useRestaurantNavigation from "hooks/useRestaurantNavigation";
-
-const arr = Array.from(new Array(5), (_, i) => ({
-  id: i + 1,
-  image: img1.src,
-  title: "ساندویچ برگر 99",
-  address: "خیابان ولی عصر",
-  description: "فست فود برگر پیتزا ساندویچ",
-  star: 4,
-  coin: 15,
-  time: 35,
-}));
+import RestaurantList from "view/restaurant/component/RestaurantList";
 
 function Restaurant() {
   const data = useRestaurantNavigation();
@@ -27,23 +14,7 @@ function Restaurant() {
         <RestaurantFilter />
         <RestaurantSort />
       </div>
-      <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
-        {arr.map((item) => {
-          return (
-            <Link key={item.id} href={`/restaurant/${item.id}`}>
-              <RestaurantCard
-                image={item.image}
-                title={item.title}
-                address={item.address}
-                description={item.description}
-                star={item.star}
-                coin={item.coin}
-                time={item.time}
-              />
-            </Link>
-          );
-        })}
-      </div>
+      <RestaurantList />
       <div className="w-full h-bottomNavigation" />
       <BottomNavigation data={data} />
     </>

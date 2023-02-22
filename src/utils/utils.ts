@@ -83,4 +83,28 @@ export const separatePathnameAndQuerySearch = (url: string) => {
   };
 };
 
+type TPaginationCalc = ({page, count}: {page?: number; count?: number}) => {skip: number; take: number};
+export const paginationCalc: TPaginationCalc = ({page = 1, count = 20}) => {
+  const skip = (page - 1) * count;
+  const take = page * count - 1;
+  return {
+    skip,
+    take,
+  };
+};
+
+type THasNextPage = ({page, total, count}: {page: number; total: number; count?: number}) => boolean;
+export const hasNextPage: THasNextPage = ({page = 1, total, count = 20}) => page * count > total;
+
+export const createPaginationParams = (query: {[x: string]: any}) => {
+  let params: {[x: string]: any} = {...query};
+  if (params?.page && !Array.isArray(params.page) && !isNaN(+params.page)) {
+    const {skip, take} = paginationCalc({page: +params.page});
+    params.skip = skip;
+    params.take = take;
+    delete params.page;
+  }
+  return params;
+};
+
 export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

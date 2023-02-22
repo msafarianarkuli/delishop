@@ -1,27 +1,21 @@
-const {PHASE_DEVELOPMENT_SERVER} = require("next/constants");
-
 module.exports = (phase) => {
-  const isDev = phase === PHASE_DEVELOPMENT_SERVER;
-  // const env = {
-  //   DOMAIN: isDev ? "https://apitest.delishop.me" : "",
-  // };
-  const DOMAIN = isDev ? process.env.DOMAIN_API : "";
+  const DOMAIN = process.env.DOMAIN_API;
 
   async function rewrites() {
-    if (isDev) {
-      return [
-        {
-          source: "/api/auth/:path*",
-          destination: "/api/auth/:path*",
-        },
-        {
-          source: "/api/:path*",
-          destination: DOMAIN + "/api/:path*",
-        },
-      ];
-    } else {
-      return [];
-    }
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: "/api/auth/:path*",
+      },
+      {
+        source: "/api/:path*",
+        destination: DOMAIN + "/api/:path*",
+      },
+      {
+        source: "/img/:path*",
+        destination: DOMAIN + "/img/:path*",
+      },
+    ];
   }
 
   /** @type {import("next").NextConfig} */

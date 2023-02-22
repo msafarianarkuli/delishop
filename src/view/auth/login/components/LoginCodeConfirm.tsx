@@ -8,23 +8,30 @@ import useAuth from "view/auth/hooks/useAuth";
 import LoginReSendBtn from "view/auth/login/components/LoginReSendBtn";
 import {createLog} from "utils/utils";
 import {signIn} from "next-auth/react";
-import {useRouter} from "next/router";
+import {SignInResponse} from "next-auth/react/types";
 
 interface ICodeConfirm {
   code: string;
+}
+
+function isSignInResponse(obj: any): obj is SignInResponse {
+  return (
+    obj.hasOwnProperty("error") && obj.hasOwnProperty("status") && obj.hasOwnProperty("ok") && obj.hasOwnProperty("url")
+  );
 }
 
 function LoginCodeConfirm() {
   const dispatch = useAuthAction();
   const {phone, isCode} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  // const router = useRouter();
 
   const {
     handleSubmit,
     control,
     formState: {isSubmitting},
     reset,
+    setError,
   } = useForm<ICodeConfirm>({
     mode: "all",
   });
@@ -37,17 +44,20 @@ function LoginCodeConfirm() {
     console.log("payload", payload);
     try {
       const res = await signIn("credentials", {
-        phoneNumber: phone,
+        phone,
         code: payload.code,
         redirect: false,
         // callbackUrl: router.query.callbackUrl as string || "/restaurant"
       });
       createLog("res LoginCodeConfirm", res);
-      await router.replace((router.query.callbackUrl as string) || "/restaurant");
-    } catch (e) {
+      if (isSignInResponse(res)) {
+        setError("code", {message: res.error});
+      } else {
+        // await router.replace((router.query.callbackUrl as string) || "/restaurant");
+      }
+    } catch (e: unknown) {
       createLog("err LoginCodeConfirm", e);
     }
-    // dispatch(authRegister());
   }
 
   return (

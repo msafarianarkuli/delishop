@@ -43,11 +43,10 @@ function LoginPhoneNumber() {
 
   async function onSubmit(payload: ILoginPhoneNumber) {
     createLog("payload", payload);
-    dispatch(authSetCode(payload.phone));
-    return true;
     try {
       const res = await sendCode(payload);
       createLog("res LoginPhoneNumber", res.data);
+      dispatch(authSetCode(res.data.data.phone));
     } catch (e) {
       createLog("error LoginPhoneNumber", e);
     }

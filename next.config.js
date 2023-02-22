@@ -2,9 +2,10 @@ const {PHASE_DEVELOPMENT_SERVER} = require("next/constants");
 
 module.exports = (phase) => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER;
-  const env = {
-    DOMAIN: isDev ? "https://apitest.aryiaei.com" : "",
-  };
+  // const env = {
+  //   DOMAIN: isDev ? "https://apitest.delishop.me" : "",
+  // };
+  const DOMAIN = isDev ? process.env.DOMAIN_API : "";
 
   async function rewrites() {
     if (isDev) {
@@ -15,7 +16,7 @@ module.exports = (phase) => {
         },
         {
           source: "/api/:path*",
-          destination: env.DOMAIN + "/api/:path*",
+          destination: DOMAIN + "/api/:path*",
         },
       ];
     } else {
@@ -27,7 +28,7 @@ module.exports = (phase) => {
   const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
-    env,
+    // env,
     rewrites,
   };
 

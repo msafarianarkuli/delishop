@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import {JWT} from "next-auth/jwt";
 import {User} from "types/interfaces";
 import axios, {AxiosError} from "axios";
+import {NextApiRequest, NextApiResponse} from "next";
 
 type sessionToken = JWT & User;
 
@@ -29,7 +30,7 @@ interface ILoginRes {
   };
 }
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -73,25 +74,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error(message);
           // return null;
         }
-        // console.log('req',req)
-        // Add logic here to look up the user from the credentials supplied
-        // const user = {
-        //   id: new Date().getTime().toString(),
-        //   name: "محمد صادق",
-        //   phoneNumber: phone,
-        //   token: "token",
-        //   userName: "mskarimi",
-        // };
-        // return user;
-        // if (user) {
-        //   // Any object returned will be saved in `user` property of the JWT
-        //   return user;
-        // } else {
-        //   // If you return null then an error will be displayed advising the user to check their details.
-        //   return null;
-        //
-        //   // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        // }
       },
     }),
   ],
@@ -99,6 +81,10 @@ export const authOptions: NextAuthOptions = {
     async jwt({token, user}) {
       // console.log("jwt token", token);
       // console.log("jwt user", user);
+      const name = req.query?.name;
+      if (name && !Array.isArray(name)) {
+        token.name = decodeURI(name);
+      }
       return {...token, ...user};
     },
     async session({session, token}: {session: Session; token: sessionToken}) {
@@ -129,6 +115,10 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth",
     signOut: "/",
   },
+});
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  return NextAuth(req, res, authOptions(req));
 };
 
-export default NextAuth(authOptions);
+export default handler;

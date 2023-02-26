@@ -41,7 +41,6 @@ function LoginCodeConfirm() {
   }, [isCode, reset]);
 
   async function onSubmit(payload: ICodeConfirm) {
-    console.log("payload", payload);
     try {
       const res = await signIn("credentials", {
         phone,
@@ -51,9 +50,9 @@ function LoginCodeConfirm() {
       });
       createLog("res LoginCodeConfirm", res);
       if (isSignInResponse(res)) {
-        setError("code", {message: res.error});
-      } else {
-        // await router.replace((router.query.callbackUrl as string) || "/restaurant");
+        if (res.status !== 200) {
+          setError("code", {message: res.error});
+        }
       }
     } catch (e: unknown) {
       createLog("err LoginCodeConfirm", e);

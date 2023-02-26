@@ -45,7 +45,7 @@ export function axiosService<Response = any, Body = any>(props: IAxiosService<Bo
     options.headers = Object.assign(options.headers || {}, headers);
   }
   if (token) {
-    options.headers = Object.assign(options.headers || {}, {Authorization: token});
+    options.headers = Object.assign(options.headers || {}, {Authorization: "Bearer " + token});
   }
 
   if (noCache) {

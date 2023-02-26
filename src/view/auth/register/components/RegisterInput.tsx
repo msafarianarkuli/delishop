@@ -6,7 +6,7 @@ import useAuthBlur from "view/auth/hooks/useAuthBlur";
 import {CustomInputReactHook} from "components";
 
 interface IRegisterInput {
-  id: "name" | "introCode";
+  id: "name" | "introPhone";
   label: string;
   classNameContainer?: string;
   numerical?: boolean;

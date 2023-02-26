@@ -1,6 +1,7 @@
 import {IconLocationPin} from "assets/icons";
 import Link from "next/link";
 import {useMemo} from "react";
+import {useSession} from "next-auth/react";
 
 interface IAppHeaderLocation {
   supermarket?: boolean;
@@ -8,12 +9,14 @@ interface IAppHeaderLocation {
 
 function AppHeaderLocation(props: IAppHeaderLocation) {
   const {supermarket} = props;
+  const {status} = useSession();
 
   const url = useMemo(() => {
-    let url = "/address";
+    let url = "/address/map";
+    if (status === "authenticated") url = "/address";
     if (supermarket) url += "?supermarket=1";
     return url;
-  }, [supermarket]);
+  }, [status, supermarket]);
 
   return (
     <Link href={url} className="block text-[13px]">

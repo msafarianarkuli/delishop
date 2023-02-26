@@ -14,6 +14,8 @@ const initialState: IAddressMapReducer = {
   locationData: null,
 };
 
+export const addressMapLocalStorageKey = "addressMap";
+
 const addressMapReducer = createSlice({
   name: "addressMap",
   initialState,

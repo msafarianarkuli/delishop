@@ -2,6 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {createWrapper} from "next-redux-wrapper";
 import templateReducer from "redux/template/templateReducer";
 import addressMapReducer from "redux/addressMap/addressMapReducer";
+import {addressMapMiddleware} from "redux/addressMap/addressMapMiddleware";
 
 const makeStore = () =>
   configureStore({
@@ -10,6 +11,7 @@ const makeStore = () =>
       addressMap: addressMapReducer,
     },
     devTools: process.env.NODE_ENV === "development",
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addressMapMiddleware.middleware),
   });
 
 const store = makeStore();

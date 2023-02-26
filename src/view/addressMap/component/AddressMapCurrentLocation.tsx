@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Button} from "antd";
 import {IconCurrentLocation} from "assets/icons";
 import {createLog} from "utils/utils";
-import {setAddressMapCurrentLocation} from "view/addressMap/context/AddressMapProvider";
+import {setAddressMapContextCurrentLocation} from "view/addressMap/context/AddressMapProvider";
 import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
 
 function AddressMapCurrentLocation() {
@@ -13,7 +13,7 @@ function AddressMapCurrentLocation() {
     createLog("position", position);
     setLoading(false);
     dispatch(
-      setAddressMapCurrentLocation({
+      setAddressMapContextCurrentLocation({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       })

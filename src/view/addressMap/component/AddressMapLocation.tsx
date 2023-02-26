@@ -3,7 +3,11 @@ import {Map} from "components";
 import {useEffect, useState} from "react";
 import {IMapPoint} from "components/map/Map";
 import useAddressMapAction from "view/addressMap/context/useAddressMapAction";
-import {setAddressMapAddress, setAddressMapAddressLoading} from "view/addressMap/context/AddressMapProvider";
+import {
+  setAddressMapContextAddress,
+  setAddressMapContextAddressLoading,
+  setAddressMapContextLocation,
+} from "view/addressMap/context/AddressMapProvider";
 import {useMap} from "react-leaflet";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import useMapPin from "hooks/useMapPin";
@@ -17,21 +21,20 @@ function AddressMapLocation() {
   useEffect(() => {
     if (location?.length) {
       const loc = location[0];
-      createLog("loc", loc);
-      dispatch(setAddressMapAddressLoading(true));
+      dispatch(setAddressMapContextAddressLoading(true));
       getAddressFromMap({
         lat: loc.lat,
         lng: loc.lng,
       })
         .then((res) => {
-          createLog("res", res.data);
-          dispatch(setAddressMapAddress(res.data.formatted_address || ""));
+          // createLog("res", res.data);
+          dispatch(setAddressMapContextAddress(res.data));
         })
         .catch((err) => {
           createLog("err", err);
-          dispatch(setAddressMapAddress(""));
+          dispatch(setAddressMapContextAddress());
         })
-        .finally(() => dispatch(setAddressMapAddressLoading(false)));
+        .finally(() => dispatch(setAddressMapContextAddressLoading(false)));
     }
   }, [dispatch, location]);
 
@@ -41,14 +44,13 @@ function AddressMapLocation() {
       points={[location]}
       pinIcons={pin}
       onClick={(event) => {
-        createLog("AddressMap event", event);
-        setLocation([
-          {
-            lat: event.latlng.lat,
-            lng: event.latlng.lng,
-            title: "لوکیشسن من",
-          },
-        ]);
+        // createLog("AddressMap event", event);
+        const location = {
+          lat: event.latlng.lat,
+          lng: event.latlng.lng,
+        };
+        dispatch(setAddressMapContextLocation(location));
+        setLocation([location]);
       }}
     >
       <CurrentLocation />

@@ -1,9 +1,11 @@
 import {createContext, Dispatch, ReactNode, useReducer} from "react";
 import {IMapPoint} from "components/map/Map";
+import {IGetAddressFromMapRes} from "api/getAddressFromMap";
 
 const SET_CURRENT_LOCATION = "currentLocation";
 const SET_ADDRESS = "address";
 const SET_ADDRESS_LOADING = "loading";
+const SET_LOCATION = "location";
 
 interface IAddressMapProvider {
   children: ReactNode;
@@ -16,7 +18,9 @@ interface IAction {
 
 interface IAddressMapContext {
   currentLocation?: IMapPoint;
+  location?: IMapPoint;
   address?: string;
+  addressData?: IGetAddressFromMapRes;
   addressLoading: boolean;
 }
 
@@ -37,12 +41,18 @@ function reducer(state: IAddressMapContext, action: IAction) {
     case SET_ADDRESS:
       return {
         ...state,
-        address: action.payload,
+        address: action.payload?.formatted_address || "",
+        addressData: action.payload,
       };
     case SET_ADDRESS_LOADING:
       return {
         ...state,
         addressLoading: action.payload,
+      };
+    case SET_LOCATION:
+      return {
+        ...state,
+        location: action.payload,
       };
     default:
       return state;
@@ -58,7 +68,8 @@ function AddressMapProvider({children}: IAddressMapProvider) {
   );
 }
 
-export const setAddressMapCurrentLocation = (payload: IMapPoint) => ({type: SET_CURRENT_LOCATION, payload});
-export const setAddressMapAddress = (payload: string) => ({type: SET_ADDRESS, payload});
-export const setAddressMapAddressLoading = (payload: boolean) => ({type: SET_ADDRESS_LOADING, payload});
+export const setAddressMapContextCurrentLocation = (payload: IMapPoint) => ({type: SET_CURRENT_LOCATION, payload});
+export const setAddressMapContextAddress = (payload?: IGetAddressFromMapRes) => ({type: SET_ADDRESS, payload});
+export const setAddressMapContextAddressLoading = (payload: boolean) => ({type: SET_ADDRESS_LOADING, payload});
+export const setAddressMapContextLocation = (payload: IMapPoint) => ({type: SET_LOCATION, payload});
 export default AddressMapProvider;

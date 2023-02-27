@@ -7,10 +7,15 @@ import RestaurantDetailModal from "view/restaurantDetail/component/restaurantDet
 import RestaurantDetailSummary from "view/restaurantDetail/component/RestaurantDetailSummary";
 import RestaurantDetailList from "view/restaurantDetail/component/RestaurantDetailList";
 import {BottomPageGradient} from "components";
+import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 
 function RestaurantDetail() {
   const [modal, setModal] = useState(false);
+  const {error} = useRestaurantDetailData();
 
+  if (error?.status === 404) {
+    return <div>موردی یافت نشد</div>;
+  }
   return (
     <>
       <RestaurantDetailHeader />

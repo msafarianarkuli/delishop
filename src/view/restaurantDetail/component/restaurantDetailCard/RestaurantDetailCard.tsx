@@ -3,7 +3,7 @@ import {Counter} from "components";
 import styles from "view/restaurantDetail/component/restaurantDetailCard/restaurantDetailCard.module.scss";
 
 interface IRestaurantDetailCard {
-  image: string;
+  image?: string | null;
   title: string;
   description: string;
   price: number;
@@ -18,9 +18,11 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
 
   return (
     <div className={styles.restaurant_detail_card}>
-      <div className="flex flex-col flex-1 ml-2">
-        <div className="text-[15px]">{title}</div>
-        <div className="text-[13px] text-iconColor my-2">{description}</div>
+      <div className="flex flex-col flex-1 ml-2 justify-between">
+        <div>
+          <div className="text-[15px]">{title}</div>
+          <div className="text-[13px] text-iconColor my-2">{description}</div>
+        </div>
         <div className="flex items-center">
           <div>
             <span>{price?.toLocaleString("en-US")}</span>
@@ -34,7 +36,7 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
       </div>
       <div className="flex flex-col items-center w-[100px]">
         <div className="w-[100px] h-[100px]">
-          <img src={image} alt={title} className="w-full h-full object-center object-cover" />
+          <img src={image || ""} alt={title} className="w-full h-full object-center object-cover rounded-[16px]" />
         </div>
         <Counter
           className="mt-4"

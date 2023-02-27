@@ -1,9 +1,15 @@
-import img1 from "assets/images/res-detail-header.png";
+import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 
 function RestaurantDetailImageHeader() {
+  const {data} = useRestaurantDetailData();
+
   return (
     <div className="relative w-full pb-[45.6%]">
-      <img src={img1.src} className="absolute inset-0 w-full h-full object-center object-cover" />
+      <img
+        src={data?.vendor?.banner || ""}
+        alt={data?.vendor?.name}
+        className="absolute inset-0 w-full h-full object-center object-cover"
+      />
     </div>
   );
 }

@@ -9,7 +9,7 @@ interface IGetVendorDetailProps {
 
 type TGetVendorDetail = ({isServer, id}: IGetVendorDetailProps) => Promise<IGetVendorDetailData>;
 const getVendorDetail: TGetVendorDetail = async ({isServer, id}) => {
-  let url = API.GET_VENDORS_LIST;
+  let url = API.GET_VENDORS_DETAIL;
   if (isServer) {
     url = API.DOMAIN + API.GET_VENDORS_DETAIL;
   }

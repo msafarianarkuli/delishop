@@ -1,38 +1,34 @@
 import classNames from "classnames";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import styles from "view/restaurantDetail/restaurantDetail.module.scss";
-
-const data = [
-  {
-    title: "پر طرفدارها",
-    id: "restaurantDetailMost",
-  },
-  {
-    title: "تک نفره",
-    id: "restaurantDetailPerson",
-  },
-  {
-    title: "خانواده",
-    id: "restaurantDetailFamily",
-  },
-];
+import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
+import {IGetVendorDetailMenusGroups} from "types/interfaceVendorDetail";
 
 const initialIndex = 0;
 
 function RestaurantDetailTab() {
   const [active, setActive] = useState(initialIndex);
+  const {data: res} = useRestaurantDetailData();
+  const data = useMemo(() => {
+    const tmp: IGetVendorDetailMenusGroups[] = [];
+    if (res?.menus?.groups?.length) {
+      for (const item of res.menus.groups) {
+        if (item.products.length) {
+          tmp.push(item);
+        }
+      }
+    }
+    return tmp;
+  }, [res?.menus?.groups]);
+
   useEffect(() => {
     let index = initialIndex;
-    // const ids: string[] = [];
     const deviceHeight = window.innerHeight;
-    // for (const item of data) {
-    //   if (item.id) ids.push(item.id);
-    // }
 
     function scroll() {
       const percent: any[] = [];
-      data.forEach((item) => {
-        const element = document.getElementById(item.id) as HTMLDivElement;
+      data?.forEach((item) => {
+        const element = document.getElementById(item.name) as HTMLDivElement;
         const tmpHeight = element.getBoundingClientRect().top;
         const tmpPercent = (tmpHeight / deviceHeight) * 100;
         // console.log("percent", tmpHeight, tmpPercent);
@@ -53,7 +49,7 @@ function RestaurantDetailTab() {
       // console.log("finalItem", finalItem);
       let tmpIndex: number | undefined;
       if (finalItem) {
-        tmpIndex = data.findIndex((item) => item.id === finalItem.id);
+        tmpIndex = data?.findIndex((item) => item.id === finalItem.id) || 0;
         if (index !== tmpIndex) setActive(tmpIndex);
         index = tmpIndex;
       }
@@ -66,7 +62,7 @@ function RestaurantDetailTab() {
     return () => {
       window.removeEventListener("scroll", scroll);
     };
-  }, []);
+  }, [data]);
 
   const onClick = useCallback((id: string) => {
     const tab = document.getElementById("restaurantDetailTab") as HTMLDivElement;
@@ -84,8 +80,8 @@ function RestaurantDetailTab() {
       offset += tabHeight * 2 + tabHeight;
     }
     const final = top - body - offset;
-    console.log("final", final);
-    window.scrollTo({top: final});
+    // console.log("final", final);
+    window.scrollTo({top: final, behavior: "smooth"});
   }, []);
 
   return (
@@ -93,15 +89,15 @@ function RestaurantDetailTab() {
       id="restaurantDetailTab"
       className="flex items-center flex-nowrap overflow-auto h-[70px] px-screenSpace max-width-screen"
     >
-      {data.map((item, index) => {
+      {data?.map((item, index) => {
         const className = classNames({
           "relative text-[15px] font-semibold ml-5 last:ml-0 whitespace-nowrap": true,
           "after:content-[' '] after:absolute after:bottom-[-3px] after:right-1/3 after:h-[2px] after:w-1/3 after:bg-primary after:rounded-full":
             index == active,
         });
         return (
-          <div onClick={() => onClick(item.id)} key={index} className={className}>
-            {item.title}
+          <div onClick={() => onClick(item.name)} key={index} className={className}>
+            {item.displayname}
           </div>
         );
       })}

@@ -29,7 +29,7 @@ function AppTabRoute(props: IAppTabRoute) {
           [classNameItemActive]: classNameItemActive && item.active,
         });
         return (
-          <Link key={index} className={className} href={item.link}>
+          <Link key={index} className={className} href={item.link} replace>
             {item.title}
           </Link>
         );

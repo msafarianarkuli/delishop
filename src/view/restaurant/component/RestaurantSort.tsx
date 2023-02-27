@@ -1,11 +1,45 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {Button} from "antd";
 import {IconSort} from "assets/icons";
 import RestaurantSortBottomSheet from "view/restaurant/component/RestaurantSortBottomSheet";
+import {useRouter} from "next/router";
+import usePathnameQuery from "hooks/usePathnameQuery";
+
+const data = [
+  {
+    title: "بالاترین سکه",
+    value: "point",
+  },
+  {
+    title: "نزدیک ترین",
+    value: "closest",
+  },
+  {
+    title: "جدید ترین",
+    value: "new",
+  },
+  {
+    title: "ارزان ترین",
+    value: "cheapest",
+  },
+];
 
 function RestaurantSort() {
   const ref = useRef<HTMLDivElement>(null);
-  const [sort, setSort] = useState({open: false, title: ""});
+  const router = useRouter();
+  const [sort, setSort] = useState({open: false, title: "", value: ""});
+  const {querySearch, pathname} = usePathnameQuery();
+  const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
+
+  useEffect(() => {
+    if (router.isReady && router.query.sort) {
+      const value = router.query.sort;
+      const item = data.find((item) => item.value === value);
+      if (item) {
+        setSort({open: false, title: item.title, value: item.value});
+      }
+    }
+  }, [router.isReady, router.query.sort]);
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -44,8 +78,16 @@ function RestaurantSort() {
       <RestaurantSortBottomSheet
         open={sort.open}
         onClose={() => setSort((prevState) => ({...prevState, open: false}))}
-        onClick={(value) => {
-          setSort({open: false, title: value.title});
+        data={data}
+        onClick={(item) => {
+          const querySort = router.query.sort;
+          if (querySort && !Array.isArray(querySort) && item.value === querySort) {
+            setSort((prevState) => ({...prevState, open: false}));
+          } else {
+            query.set("sort", item.value);
+            const url = pathname + "?" + query.toString();
+            router.push(url);
+          }
         }}
       />
     </div>

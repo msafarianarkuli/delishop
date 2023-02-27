@@ -107,4 +107,18 @@ export const createPaginationParams = (query: {[x: string]: any}) => {
   return params;
 };
 
+export const createKeyForUseQuery = (keys: (string | number)[], key?: string | string[]): (string | number)[] => {
+  const tmp = [...keys];
+  if (key) {
+    if (Array.isArray(key)) {
+      if (key.length) {
+        tmp.push(...key);
+      }
+    } else {
+      tmp.push(key);
+    }
+  }
+  return tmp;
+};
+
 export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

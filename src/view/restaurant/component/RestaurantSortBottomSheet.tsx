@@ -6,25 +6,11 @@ interface IRestaurantFilterBottomSheet {
   open: boolean;
   onClose: DrawerProps["onClose"];
   onClick: (value: any) => void;
+  data: {title: string; value: string}[];
 }
 
-const data = [
-  {
-    title: "بالاترین سکه",
-  },
-  {
-    title: "نزدیک ترین",
-  },
-  {
-    title: "جدید ترین",
-  },
-  {
-    title: "ارزان ترین",
-  },
-];
-
 function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
-  const {open, onClose, onClick} = props;
+  const {open, onClose, onClick, data} = props;
   return (
     <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={265}>
       {data.map((item, index) => {

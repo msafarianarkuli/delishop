@@ -6,27 +6,21 @@ import {IGetRestaurantsRes} from "api/getRestaurants";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
-
-interface IRestaurantData {
-  data?: IGetRestaurantsRes;
-  isLoading: boolean;
-  isFetching: boolean;
-  error: any;
-}
+import {IDataContextProvider} from "types/interfaces";
 
 interface IRestaurantDataProvider {
   children: JSX.Element;
   initialData?: IGetRestaurantsRes;
 }
 
-const initialState: IRestaurantData = {
+const initialState: IDataContextProvider<IGetRestaurantsRes> = {
   data: undefined,
   error: null,
   isFetching: false,
   isLoading: false,
 };
 
-const RestaurantDataContext = createContext<IRestaurantData>(initialState);
+const RestaurantDataContext = createContext<IDataContextProvider<IGetRestaurantsRes>>(initialState);
 
 export const QUERY_KEY_RESTAURANT = "restaurant";
 

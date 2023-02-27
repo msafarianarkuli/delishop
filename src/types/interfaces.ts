@@ -12,6 +12,13 @@ export interface User {
   anniversary_date?: string | null;
 }
 
+export interface IDataContextProvider<T> {
+  data?: T;
+  isLoading: boolean;
+  isFetching: boolean;
+  error: any;
+}
+
 export interface IGetVendorsListRes {
   data: {
     vendors: TGetVendorsListResVendors;

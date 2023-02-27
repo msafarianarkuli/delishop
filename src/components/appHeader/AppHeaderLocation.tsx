@@ -2,6 +2,7 @@ import {IconLocationPin} from "assets/icons";
 import Link from "next/link";
 import {useMemo} from "react";
 import {useSession} from "next-auth/react";
+import usePathnameQuery from "hooks/usePathnameQuery";
 
 interface IAppHeaderLocation {
   supermarket?: boolean;
@@ -10,13 +11,17 @@ interface IAppHeaderLocation {
 function AppHeaderLocation(props: IAppHeaderLocation) {
   const {supermarket} = props;
   const {status} = useSession();
+  const query = useMemo(() => new URLSearchParams(""), []);
+  const {pathname} = usePathnameQuery();
 
   const url = useMemo(() => {
     let url = "/address/map";
     if (status === "authenticated") url = "/address";
-    if (supermarket) url += "?supermarket=1";
+    if (supermarket) query.set("supermarket", "1");
+    if (pathname && pathname !== "/") query.set("callbackUrl", encodeURI(pathname));
+    url += `?${query.toString()}`;
     return url;
-  }, [status, supermarket]);
+  }, [pathname, query, status, supermarket]);
 
   return (
     <Link href={url} className="block text-[13px]">

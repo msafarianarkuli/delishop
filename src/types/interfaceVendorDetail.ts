@@ -17,16 +17,8 @@ export interface IGetVendorsDetailVendor {
   about: string | null;
   min_cart: number;
   max_sendtime: string;
-  open_hours: {
-    sa: string;
-    su: string;
-    mo: string;
-    tu: string;
-    we: string;
-    th: string;
-    fr: string;
-  };
-  logo?: string | null;
+  open_hours: IGetVendorsDetailVendorOpenHours;
+  logo?: string;
   banner?: string | null;
   long: number;
   lat: number;
@@ -43,6 +35,16 @@ export interface IGetVendorsDetailVendor {
     displayname: string;
     logo?: string | null;
   }[];
+}
+
+export interface IGetVendorsDetailVendorOpenHours {
+  sa: string;
+  su: string;
+  mo: string;
+  tu: string;
+  we: string;
+  th: string;
+  fr: string;
 }
 
 export interface IGetVendorDetailMenus {
@@ -66,6 +68,7 @@ export interface IGetVendorDetailMenusGroupsProducts {
   unit_fid: number;
   description_te: string;
   price_class: number;
+  point: number;
   productKinds: IGetVendorDetailMenusGroupsProductsProductKinds[];
   extras: IGetVendorDetailMenusGroupsProductsExtras[];
 }

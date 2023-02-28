@@ -48,7 +48,7 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
                     image={item.productKinds[0]?.photo_igu}
                     title={item.displayname}
                     description={item.productKinds[0]?.description}
-                    coin={item.productKinds[0]?.quality}
+                    coin={item?.point}
                     price={item.productKinds[0]?.price}
                     count={0}
                     onAddExtraItems={onClick}

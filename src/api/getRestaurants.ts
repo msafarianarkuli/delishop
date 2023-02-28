@@ -1,6 +1,6 @@
 import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
-import {IGetVendorsListRes, TGetVendorsListResVendors} from "types/interfaces";
+import {IGetVendorsListRes, TGetVendorsListResVendors} from "types/interfaceVendorsList";
 
 interface IGetRestaurantsProps {
   params?: object;

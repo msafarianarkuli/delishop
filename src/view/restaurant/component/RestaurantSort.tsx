@@ -4,6 +4,8 @@ import {IconSort} from "assets/icons";
 import RestaurantSortBottomSheet from "view/restaurant/component/RestaurantSortBottomSheet";
 import {useRouter} from "next/router";
 import usePathnameQuery from "hooks/usePathnameQuery";
+import RestaurantOpen from "view/restaurant/component/RestaurantOpen";
+import {restaurantSortQuery} from "view/restaurant/context/RestaurantDataProvider";
 
 const data = [
   {
@@ -18,28 +20,29 @@ const data = [
     title: "جدید ترین",
     value: "new",
   },
-  {
-    title: "ارزان ترین",
-    value: "cheapest",
-  },
 ];
 
+const initialValue = {
+  open: false,
+  title: "",
+  value: "",
+};
 function RestaurantSort() {
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [sort, setSort] = useState({open: false, title: "", value: ""});
+  const [sort, setSort] = useState(initialValue);
   const {querySearch, pathname} = usePathnameQuery();
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
 
   useEffect(() => {
-    if (router.isReady && router.query.sort) {
-      const value = router.query.sort;
+    if (router.isReady && query.get(restaurantSortQuery)) {
+      const value = query.get(restaurantSortQuery);
       const item = data.find((item) => item.value === value);
       if (item) {
         setSort({open: false, title: item.title, value: item.value});
       }
     }
-  }, [router.isReady, router.query.sort]);
+  }, [query, router.isReady]);
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -67,7 +70,7 @@ function RestaurantSort() {
       ref={ref}
       className="flex items-center justify-between px-screenSpace h-[32px] overflow-hidden transition-height max-width-screen"
     >
-      <div className="font-medium text-[15px]">17 رستوران باز</div>
+      <RestaurantOpen />
       <Button
         onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}
@@ -80,14 +83,16 @@ function RestaurantSort() {
         onClose={() => setSort((prevState) => ({...prevState, open: false}))}
         data={data}
         onClick={(item) => {
-          const querySort = router.query.sort;
+          const querySort = query.get(restaurantSortQuery);
           if (querySort && !Array.isArray(querySort) && item.value === querySort) {
-            setSort((prevState) => ({...prevState, open: false}));
+            query.delete(restaurantSortQuery);
+            setSort(initialValue);
           } else {
-            query.set("sort", item.value);
-            const url = pathname + "?" + query.toString();
-            router.push(url);
+            query.set(restaurantSortQuery, item.value);
           }
+          const finalQuery = query.toString() ? "?" + query.toString() : "";
+          const url = pathname + finalQuery;
+          router.push(url);
         }}
       />
     </div>

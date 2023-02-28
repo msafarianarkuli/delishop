@@ -1,11 +1,11 @@
 import NextAuth, {NextAuthOptions, Session} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {JWT} from "next-auth/jwt";
-import {User} from "types/interfaces";
+import {IUser} from "types/interfaces";
 import axios, {AxiosError} from "axios";
 import {NextApiRequest, NextApiResponse} from "next";
 
-type sessionToken = JWT & User;
+type sessionToken = JWT & IUser;
 
 interface ILoginRes {
   user: {
@@ -48,7 +48,7 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
         try {
           const res = await axios.post<ILoginRes>(url, body);
           const {auth, user} = res.data;
-          const data: User = {
+          const data: IUser = {
             useId: user.id,
             name: user.name,
             phone: user.phone,

@@ -1,12 +1,24 @@
+@import "src/styles/utils/variables";
+
 .restaurant_category_btn {
   display: flex;
   align-items: center;
-  padding: 10px 18px;
+  padding: 10px 18px 10px 0;
   border-width: 0;
   border-radius: 99999px;
-  background-image: linear-gradient(309.34deg, #f2f3f6 -13.68%, #e5e6ec 171.92%);
   box-shadow: -4px -4px 20px #ffffff, 3px 3px 20px rgba(36, 65, 93, 0.302);
   font-size: 12px;
+}
+
+.restaurant_category_btn_unselect {
+  background-image: linear-gradient(309.34deg, #f2f3f6 -13.68%, #e5e6ec 171.92%);
+  padding-left: 18px;
+}
+
+.restaurant_category_btn_selected {
+  background-color: $primary;
+  color: #ffffff;
+  padding-left: 8px;
 }
 
 .restaurant_filter_btn {
@@ -16,8 +28,21 @@
   padding: 10px 7px;
   border-width: 0;
   border-radius: 10px;
-  background-image: linear-gradient(309.34deg, #f2f3f6 -13.68%, #e5e6ec 171.92%);
   box-shadow: -4px -4px 20px #ffffff, 3px 3px 20px rgba(36, 65, 93, 0.302);
   margin-right: 6px;
   font-size: 12px;
+}
+
+.restaurant_filter_btn_selected {
+  background-color: $primary;
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff !important;
+    background-color: $primary !important;
+  }
+}
+
+.restaurant_filter_btn_unselect {
+  background-image: linear-gradient(309.34deg, #f2f3f6 -13.68%, #e5e6ec 171.92%);
 }

@@ -24,6 +24,9 @@ const RestaurantDataContext = createContext<IDataContextProvider<IGetRestaurants
 
 export const QUERY_KEY_RESTAURANT = "restaurant";
 
+export const restaurantSortQuery = "sort";
+export const restaurantTagQuery = "tag[]";
+
 const staleTime = 10 * 60 * 1000;
 
 function RestaurantDataProvider(props: IRestaurantDataProvider) {
@@ -39,8 +42,11 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
         tmpParams.lat = location.lat;
         tmpParams.log = location.lng;
       }
-      if (router.query?.sort) {
-        tmpParams.sort = router.query.sort;
+      if (router.query.hasOwnProperty(restaurantSortQuery)) {
+        tmpParams[restaurantSortQuery] = router.query[restaurantSortQuery];
+      }
+      if (router.query.hasOwnProperty(restaurantTagQuery)) {
+        tmpParams[restaurantTagQuery] = router.query[restaurantTagQuery];
       }
     }
     return tmpParams;
@@ -48,12 +54,18 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
 
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [QUERY_KEY_RESTAURANT];
-    const sort = router.query?.sort;
     const page = router.query?.page;
-    tmpKeys = createKeyForUseQuery(tmpKeys, sort);
     tmpKeys = createKeyForUseQuery(tmpKeys, page);
+    if (router.query.hasOwnProperty(restaurantSortQuery)) {
+      const sort = router.query[restaurantSortQuery];
+      tmpKeys = createKeyForUseQuery(tmpKeys, sort);
+    }
+    if (router.query.hasOwnProperty(restaurantTagQuery)) {
+      const tag = router.query[restaurantTagQuery];
+      tmpKeys = createKeyForUseQuery(tmpKeys, tag);
+    }
     return tmpKeys;
-  }, [router.query?.page, router.query?.sort]);
+  }, [router.query]);
 
   const useQueryEnabled = useMemo(() => isStorageLoaded && router.isReady, [isStorageLoaded, router.isReady]);
 

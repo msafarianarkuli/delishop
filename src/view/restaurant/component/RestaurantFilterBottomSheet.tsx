@@ -1,50 +1,24 @@
-import React from "react";
+import {useEffect, useRef, useState} from "react";
 import BottomSheet from "components/customDrawer/BottomSheet";
 import {IconCategory} from "assets/icons";
-import fastFood from "assets/images/fastfood.png";
-import irani from "assets/images/irani.png";
-import kabab from "assets/images/kabab.png";
-import salad from "assets/images/salad.png";
-import seafood from "assets/images/seafood.png";
 import {Button, DrawerProps} from "antd";
+import {IGetVendorsTagsDataItem, TGetVendorsTagsData} from "types/interfaceVendorsTags";
 
 interface IRestaurantFilterBottomSheet {
+  data: TGetVendorsTagsData;
   open: boolean;
   onClose: DrawerProps["onClose"];
-  onClick: (value: any) => void;
+  onClick: (value: IGetVendorsTagsDataItem) => void;
 }
 
-const data = [
-  {
-    title: "فست فود",
-    image: fastFood.src,
-  },
-  {
-    title: "ایرانی",
-    image: irani.src,
-  },
-  {
-    title: "کباب",
-    image: kabab.src,
-  },
-  {
-    title: "سالاد",
-    image: salad.src,
-  },
-  {
-    title: "دریایی",
-    image: seafood.src,
-  },
-];
+interface IRestaurantFilterBottomSheetList {
+  data: TGetVendorsTagsData;
+  onClick: (value: IGetVendorsTagsDataItem) => void;
+}
 
-function RestaurantFilterBottomSheet(props: IRestaurantFilterBottomSheet) {
-  const {open, onClose, onClick} = props;
+function RestaurantFilterBottomSheetList({data, onClick}: IRestaurantFilterBottomSheetList) {
   return (
-    <BottomSheet open={open} onClose={onClose} title="انتخاب دسته بندی" height={370}>
-      <div className="flex items-center py-[12px] text-primary border-b border-borderColor">
-        <IconCategory className="w-5 h-auto ml-1" />
-        <div>همه دسته ها</div>
-      </div>
+    <>
       {data.map((item, index) => {
         return (
           <Button
@@ -52,12 +26,41 @@ function RestaurantFilterBottomSheet(props: IRestaurantFilterBottomSheet) {
             onClick={() => onClick(item)}
             className="flex w-full h-[45px] px-0 items-center border-0 border-b border-borderColor rounded-none"
           >
-            <img src={item.image} className="w-5 h-5 object-cover object-center ml-2" />
-            <div>{item.title}</div>
+            <img src={item.logo} alt={item.name} className="w-5 h-5 object-cover object-center ml-2" />
+            <div>{item.displayname}</div>
           </Button>
         );
       })}
-    </BottomSheet>
+    </>
+  );
+}
+
+function RestaurantFilterBottomSheet(props: IRestaurantFilterBottomSheet) {
+  const {open, onClose, onClick, data} = props;
+  const [height, setHeight] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const div = ref.current as HTMLDivElement;
+    if (div.scrollHeight) {
+      const tmpHeight = div.scrollHeight + 130;
+      setHeight(Math.min(tmpHeight, 400));
+    }
+  }, [data]);
+
+  return (
+    <>
+      <div ref={ref} className="fixed -right-[100%]">
+        <RestaurantFilterBottomSheetList data={data} onClick={onClick} />
+      </div>
+      <BottomSheet open={open} onClose={onClose} title="انتخاب دسته بندی" height={height}>
+        <div className="flex items-center py-[12px] text-primary border-b border-borderColor">
+          <IconCategory className="w-5 h-auto ml-1" />
+          <div>همه دسته ها</div>
+        </div>
+        <RestaurantFilterBottomSheetList data={data} onClick={onClick} />
+      </BottomSheet>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ interface IRestaurantFilterBottomSheet {
 function RestaurantSortBottomSheet(props: IRestaurantFilterBottomSheet) {
   const {open, onClose, onClick, data} = props;
   return (
-    <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={265}>
+    <BottomSheet open={open} onClose={onClose} title="به ترتیب ..." height={220}>
       {data.map((item, index) => {
         return (
           <Button

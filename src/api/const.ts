@@ -11,5 +11,6 @@ export const API = {
   //vendors
   GET_VENDORS_CATEGORY: "/api/vendors/categories",
   GET_VENDORS_LIST: "/api/vendors/filter",
-  GET_VENDORS_DETAIL: "/api/vendors/{id}",
+  GET_VENDOR_DETAIL: "/api/vendors/{id}",
+  GET_VENDORS_TAGS: "/api/vendors/tags",
 };

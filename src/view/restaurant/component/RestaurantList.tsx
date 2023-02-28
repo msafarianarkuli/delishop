@@ -10,7 +10,7 @@ function RestaurantList() {
     <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
       {data?.vendors?.map((item) => {
         return (
-          <Link key={item.id} href={`/restaurant/${item.id}`}>
+          <Link key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
             <RestaurantCard
               image={item.logo}
               title={item.name}

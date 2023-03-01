@@ -1,8 +1,13 @@
 import {CustomModal} from "components";
 import {Button} from "antd";
-import {MouseEventHandler} from "react";
+import {MouseEventHandler, useCallback} from "react";
 import useTypeColor from "hooks/useTypeColor";
 import classNames from "classnames";
+import {
+  setAddressDeleteClose,
+  useAddressDelete,
+  useAddressDeleteAction,
+} from "view/address/context/AddressDeleteProvider";
 
 interface IAddressDeleteModal {
   open: boolean;
@@ -34,8 +39,15 @@ function AddressDeleteModalBody(props: Omit<IAddressDeleteModal, "open">) {
   );
 }
 
-function AddressDeleteModal(props: IAddressDeleteModal) {
-  const {open, onClickOk, onClickCancel} = props;
+function AddressDeleteModal() {
+  // const {open, onClickOk, onClickCancel} = props;
+  const {open} = useAddressDelete();
+  const dispatch = useAddressDeleteAction();
+
+  const onClickCancel = useCallback(() => {
+    dispatch(setAddressDeleteClose());
+  }, [dispatch]);
+
   return (
     <>
       <CustomModal
@@ -43,7 +55,7 @@ function AddressDeleteModal(props: IAddressDeleteModal) {
         open={open}
         header="حذف آدرس"
         classNameHeader="justify-center"
-        body={<AddressDeleteModalBody onClickCancel={onClickCancel} onClickOk={onClickOk} />}
+        body={<AddressDeleteModalBody onClickCancel={onClickCancel} onClickOk={onClickCancel} />}
       />
     </>
   );

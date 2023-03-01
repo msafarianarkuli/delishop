@@ -1,9 +1,9 @@
 import {ProfileWalletAppHeader, ProfileWalletTabRoute} from "components";
-import HistoryCoinCard from "view/historycoin/component/historyCoinCard/HistoryCoinCard";
+import ProfileHistoryCoinCard from "view/profileHistorycoin/component/profileHistoryCoinCard/ProfileHistoryCoinCard";
 
 const arr = Array.from(new Array(20), (_, i) => i + 1);
 
-function HistoryCoin() {
+function ProfileHistoryCoin() {
   return (
     <>
       <ProfileWalletAppHeader />
@@ -11,7 +11,7 @@ function HistoryCoin() {
       <div className="px-screenSpace mt-[132px]">
         {arr.map((item) => {
           return (
-            <HistoryCoinCard
+            <ProfileHistoryCoinCard
               key={item}
               coin={750}
               time="18:27"
@@ -26,4 +26,4 @@ function HistoryCoin() {
   );
 }
 
-export default HistoryCoin;
+export default ProfileHistoryCoin;

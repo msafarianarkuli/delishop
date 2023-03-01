@@ -1,4 +1,4 @@
-import styles from "view/historycoin/component/historyCoinCard/historyCoinCard.module.scss";
+import styles from "view/profileHistorycoin/component/profileHistoryCoinCard/profileHistoryCoinCard.module.scss";
 
 interface IHistoryCoinCard {
   coin: number;
@@ -8,10 +8,10 @@ interface IHistoryCoinCard {
   status: string;
 }
 
-function HistoryCoinCard(props: IHistoryCoinCard) {
+function ProfileHistoryCoinCard(props: IHistoryCoinCard) {
   const {time, date, description, coin, status} = props;
   return (
-    <div className={styles.history_coin_card_container}>
+    <div className={styles.profile_history_coin_card_container}>
       <div className="flex items-center justify-between">
         <div>
           <span>{coin}</span>
@@ -30,4 +30,4 @@ function HistoryCoinCard(props: IHistoryCoinCard) {
   );
 }
 
-export default HistoryCoinCard;
+export default ProfileHistoryCoinCard;

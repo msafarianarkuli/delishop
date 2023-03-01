@@ -1,19 +1,21 @@
 import AddressCard from "view/address/component/addressCard/AddressCard";
 import {setAddressDeleteData, useAddressDeleteAction} from "view/address/context/AddressDeleteProvider";
-
-const arr = Array.from(new Array(5), (_, i) => i + 1);
+import {useAddressData} from "view/address/context/AddressDataProvider";
 
 function AddressList() {
   const dispatch = useAddressDeleteAction();
+  const {data, isLoading} = useAddressData();
+
+  if (isLoading) return <div>loading ...</div>;
   return (
     <div>
-      {arr.map((item) => {
+      {data?.map((item) => {
         return (
           <AddressCard
-            key={item}
-            id={item.toString()}
-            title="خانه"
-            address="تهران، جاده مخصوص تهران کرج خیابان ملک پلاک 5"
+            key={item.id}
+            id={item.id.toString()}
+            title={item.title}
+            address={item.address}
             onClickDelete={() => dispatch(setAddressDeleteData())}
           />
         );

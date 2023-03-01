@@ -21,7 +21,7 @@ function useRedirectToMap() {
       } else {
         url = `/address/map`;
       }
-      url += `?${query}`;
+      url += query.toString() ? `?${query.toString()}` : "";
       router.replace(url);
     }
   }, [isStorageLoaded, location, pathname, query, router, status]);

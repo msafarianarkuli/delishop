@@ -6,7 +6,7 @@ type TGetVendorsTags = () => Promise<TGetVendorsTagsData>;
 
 export const VENDORS_TAGS_KEY = "vendorsTags";
 
-const getVendorsTags: TGetVendorsTags = () => {
+const getVendorsTags: TGetVendorsTags = async () => {
   const url = API.GET_VENDORS_TAGS;
   return axiosService<IGetVendorsTagsRes>({url, method: "get"}).then((res) => res.data.data);
 };

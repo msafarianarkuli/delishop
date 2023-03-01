@@ -14,4 +14,7 @@ export const API = {
   GET_VENDOR_DETAIL: "/api/vendors/{id}",
   GET_VENDORS_TAGS: "/api/vendors/tags",
   GET_VENDOR_COMMENTS: "/api/vendors/{id}/comment",
+
+  //user
+  GET_USER_ADDRESSES: "/api/users/addresses",
 };

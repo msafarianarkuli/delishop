@@ -22,7 +22,7 @@ function AppHeaderLocation(props: IAppHeaderLocation) {
     if (status === "authenticated") url = "/address";
     if (supermarket) query.set("supermarket", "1");
     if (pathname && pathname !== "/") query.set("callbackUrl", encodeURI(pathname));
-    url += `?${query.toString()}`;
+    url += query.toString() ? `?${query.toString()}` : "";
     return url;
   }, [pathname, query, status, supermarket]);
 

@@ -23,7 +23,7 @@ function RestaurantCommentDataProvider({children}: {children: JSX.Element}) {
   const params = useMemo(() => {
     let tmpParams: {[x: string]: any} = {};
     if (router.isReady) {
-      const tmpQuery = router.query;
+      const tmpQuery = {...router.query};
       delete tmpQuery.id;
       tmpParams = createPaginationParams(router.query);
     }

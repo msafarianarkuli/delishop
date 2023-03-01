@@ -1,14 +1,25 @@
+@import "src/styles/utils/variables";
+
 .address_card_container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-image: linear-gradient(275.18deg, #f2f3f6 0%, #e5e6ec 146.05%);
   box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
   border-radius: 10px;
   padding: 14px 15px;
   margin-bottom: 15px;
+  cursor: pointer;
 
   &:first-child {
     margin-top: 20px;
   }
+}
+
+.address_card_container_selected {
+  background-color: $primary;
+  color: #ffffff;
+}
+
+.address_card_container_unselected {
+  background-image: linear-gradient(275.18deg, #f2f3f6 0%, #e5e6ec 146.05%);
 }

@@ -9,14 +9,14 @@ import {
   useAddressDeleteAction,
 } from "view/address/context/AddressDeleteProvider";
 
-interface IAddressDeleteModal {
-  open: boolean;
+interface AddressDeleteModalBody {
+  loading: boolean;
   onClickOk: MouseEventHandler;
   onClickCancel: MouseEventHandler;
 }
 
-function AddressDeleteModalBody(props: Omit<IAddressDeleteModal, "open">) {
-  const {onClickOk, onClickCancel} = props;
+function AddressDeleteModalBody(props: AddressDeleteModalBody) {
+  const {onClickOk, onClickCancel, loading} = props;
   const type = useTypeColor();
   const container = classNames({
     "modal-submit-btn w-full ml-5": true,
@@ -28,10 +28,10 @@ function AddressDeleteModalBody(props: Omit<IAddressDeleteModal, "open">) {
     <>
       <div className="text-center py-8">می خواهید آدرس مورد نظر را حذف کنید؟</div>
       <div className="flex items-center">
-        <Button onClick={onClickOk} type="primary" className={container}>
+        <Button loading={loading} onClick={onClickOk} type="primary" className={container}>
           حذف
         </Button>
-        <Button onClick={onClickCancel} className="secondary-btn w-full">
+        <Button loading={loading} onClick={onClickCancel} className="secondary-btn w-full">
           خیر
         </Button>
       </div>
@@ -55,7 +55,7 @@ function AddressDeleteModal() {
         open={open}
         header="حذف آدرس"
         classNameHeader="justify-center"
-        body={<AddressDeleteModalBody onClickCancel={onClickCancel} onClickOk={onClickCancel} />}
+        body={<AddressDeleteModalBody loading={false} onClickCancel={onClickCancel} onClickOk={onClickCancel} />}
       />
     </>
   );

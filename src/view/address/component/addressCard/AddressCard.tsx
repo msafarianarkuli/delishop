@@ -1,34 +1,45 @@
 import {Button} from "antd";
-import {IconDeleteAddress, IconEditAddress} from "assets/icons";
+import {IconDeleteAddress, IconDeleteAddressLight, IconEditAddress, IconEditAddressLight} from "assets/icons";
 import {useRouter} from "next/router";
 import styles from "view/address/component/addressCard/addressCard.module.scss";
 import {MouseEventHandler} from "react";
 import useQuerySearchClient from "hooks/useQuerySearchClient";
+import classNames from "classnames";
 
 interface IAddressCard {
   title: string;
   address: string;
   id: string;
+  onClick: MouseEventHandler;
   onClickDelete: MouseEventHandler;
+  selected?: boolean;
 }
 
 function AddressCard(props: IAddressCard) {
+  const {title, address, onClickDelete, id, selected, onClick} = props;
   const router = useRouter();
-  const {title, address, onClickDelete, id} = props;
   const query = useQuerySearchClient();
+  const container = classNames({
+    [styles.address_card_container]: true,
+    [styles.address_card_container_selected]: selected,
+    [styles.address_card_container_unselected]: !selected,
+  });
   return (
-    <div className={styles.address_card_container}>
+    <div onClick={onClick} className={container}>
       <div className="text-[16px] font-semibold w-1/6 text-center">{title}</div>
       <div className="flex flex-1 text-[13px] font-light px-6">{address}</div>
       <div className="flex flex-col items-center justify-center">
         <Button onClick={onClickDelete} className="w-5 h-5 border-0 rounded-none p-0 shadow-none">
-          <IconDeleteAddress className="w-5 h-5" />
+          {selected ? <IconDeleteAddressLight className="w-5 h-5" /> : <IconDeleteAddress className="w-5 h-5" />}
         </Button>
         <Button
-          onClick={() => router.push(`/address/create/${id}${query}`)}
+          onClick={(e) => {
+            e.stopPropagation();
+            router.push(`/address/create/${id}${query}`);
+          }}
           className="w-4 h-4 border-0 rounded-none p-0 mt-4 shadow-none"
         >
-          <IconEditAddress className="w-4 h-4" />
+          {selected ? <IconEditAddressLight className="w-4 h-4" /> : <IconEditAddress className="w-4 h-4" />}
         </Button>
       </div>
     </div>

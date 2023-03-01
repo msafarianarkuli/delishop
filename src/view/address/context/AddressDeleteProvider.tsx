@@ -1,10 +1,12 @@
 import React, {createContext, Dispatch, useContext, useReducer} from "react";
+import {IGetUserAddressesListAddressesItem} from "types/interfaceUserAddress";
 
 const SET_DATA = "setDate";
 const CLOSE_MODAL = "closeModal";
 
 interface IAddressDelete {
   open: boolean;
+  data?: IGetUserAddressesListAddressesItem | null;
 }
 
 interface IAction {
@@ -24,10 +26,12 @@ function reducer(state: IAddressDelete, action: IAction): IAddressDelete {
     case SET_DATA:
       return {
         open: true,
+        data: action.payload,
       };
     case CLOSE_MODAL:
       return {
         open: false,
+        data: null,
       };
     default:
       return state;
@@ -43,7 +47,7 @@ function AddressDeleteProvider({children}: {children: JSX.Element[]}) {
   );
 }
 
-export const setAddressDeleteData = () => ({type: SET_DATA});
+export const setAddressDeleteData = (payload: IGetUserAddressesListAddressesItem) => ({type: SET_DATA, payload});
 export const setAddressDeleteClose = () => ({type: CLOSE_MODAL});
 
 export default AddressDeleteProvider;

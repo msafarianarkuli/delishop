@@ -3,23 +3,30 @@ import {HYDRATE} from "next-redux-wrapper";
 import {IGetAddressFromMapRes} from "api/getAddressFromMap";
 import {IMapPoint} from "components/map/Map";
 import {RootState} from "redux/store";
+import {IGetUserAddressesListAddressesItem} from "types/interfaceUserAddress";
 
 interface ISetAddressMap {
   location?: IMapPoint | null;
   locationData?: IGetAddressFromMapRes | null;
 }
 
+type TSetUserAddress = IGetUserAddressesListAddressesItem | null;
+
 interface IAddressMapReducer extends ISetAddressMap {
   isStorageLoaded: boolean;
+  isUserAddressStorageLoaded: boolean;
+  userAddress?: TSetUserAddress;
 }
 
 const initialState: IAddressMapReducer = {
   location: null,
   locationData: null,
   isStorageLoaded: false,
+  isUserAddressStorageLoaded: false,
 };
 
 export const addressMapLocalStorageKey = "addressMap";
+export const userAddressLocalStorageKey = "userAddress";
 
 const addressMapReducer = createSlice({
   name: "addressMap",
@@ -34,6 +41,13 @@ const addressMapReducer = createSlice({
       state.location = action.payload?.location || null;
       state.isStorageLoaded = true;
     },
+    setUserAddress: (state, action: PayloadAction<TSetUserAddress>) => {
+      state.userAddress = action.payload;
+    },
+    setUserAddressFromStorage: (state, action: PayloadAction<TSetUserAddress>) => {
+      state.userAddress = action?.payload || null;
+      state.isUserAddressStorageLoaded = true;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -47,9 +61,9 @@ const addressMapReducer = createSlice({
 
 const {reducer, actions} = addressMapReducer;
 
-export const {setAddressMap, setAddressMapFromStorage} = actions;
+export const {setAddressMap, setAddressMapFromStorage, setUserAddress, setUserAddressFromStorage} = actions;
 export const selectAddressMap = (state: RootState) => state.addressMap;
-export const selectAddressMapLocation = (state: RootState) => state.addressMap.location;
 export const selectAddressMapLocationData = (state: RootState) => state.addressMap.locationData;
+export const selectUserAddress = (state: RootState) => state.addressMap.userAddress;
 
 export default reducer;

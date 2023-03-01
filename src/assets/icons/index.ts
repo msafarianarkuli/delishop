@@ -55,6 +55,8 @@ import IconRoundedTop from "assets/icons/IconRoundedTop";
 import IconRoundedDown from "assets/icons/IconRoundedDown";
 import IconAccount from "assets/icons/IconAccount";
 import IconFilter from "assets/icons/IconFilter";
+import IconDeleteAddressLight from "assets/icons/IconDeleteAddressLight";
+import IconEditAddressLight from "assets/icons/IconEditAddressLight";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -116,4 +118,6 @@ export {
   IconRoundedDown,
   IconAccount,
   IconFilter,
+  IconDeleteAddressLight,
+  IconEditAddressLight,
 };

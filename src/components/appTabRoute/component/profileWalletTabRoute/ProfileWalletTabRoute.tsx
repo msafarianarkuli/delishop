@@ -1,26 +1,26 @@
 import AppTabRoute from "components/appTabRoute/AppTabRoute";
 import {useMemo} from "react";
-import styles from "components/appTabRoute/component/walletTabRoute/walletTabRoute.module.scss";
+import styles from "components/appTabRoute/component/profileWalletTabRoute/profileWalletTabRoute.module.scss";
 
 interface IWalletTabRoute {
   active: "wallet" | "awardReceived" | "historyCoin";
 }
 
-function WalletTabRoute({active}: IWalletTabRoute) {
+function ProfileWalletTabRoute({active}: IWalletTabRoute) {
   const routes = useMemo(() => {
     return [
       {
-        link: "/wallet",
+        link: "/profile/wallet",
         title: "کیف پول",
         active: active === "wallet",
       },
       {
-        link: "/awardreceived",
+        link: "/profile/awardreceived",
         title: "جایزه دریافتی",
         active: active === "awardReceived",
       },
       {
-        link: "/historycoin",
+        link: "/profile/historycoin",
         title: "آمار گنجینه",
         active: active === "historyCoin",
       },
@@ -28,10 +28,10 @@ function WalletTabRoute({active}: IWalletTabRoute) {
   }, [active]);
 
   return (
-    <div className={styles.wallet_tab_route}>
+    <div className={styles.profile_wallet_tab_route}>
       <AppTabRoute routes={routes} classNameContainer="px-screenSpace" classNameItem="w-1/3" />
     </div>
   );
 }
 
-export default WalletTabRoute;
+export default ProfileWalletTabRoute;

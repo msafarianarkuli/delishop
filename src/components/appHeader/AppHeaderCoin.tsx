@@ -8,7 +8,7 @@ interface IAppHeaderCoin {
 
 function AppHeaderCoin({coin}: IAppHeaderCoin) {
   return (
-    <Link href="/wallet" className={styles.app_header_coin_container}>
+    <Link href="/profile/wallet" className={styles.app_header_coin_container}>
       <IconCoin className="w-5 h-5" />
       <div className="h-5 text-[15px] font-medium mx-2">{coin}</div>
     </Link>

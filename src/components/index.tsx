@@ -16,8 +16,8 @@ import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
 import CustomSelect from "components/customSelect/CustomSelect";
 import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook";
 import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
-import WalletTabRoute from "components/appTabRoute/component/walletTabRoute/WalletTabRoute";
-import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
+import ProfileWalletTabRoute from "components/appTabRoute/component/profileWalletTabRoute/ProfileWalletTabRoute";
+import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
 import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
 import AppHeaderLocation from "components/appHeader/AppHeaderLocation";
 import CustomSwiper from "components/customSwiper/CustomSwiper";
@@ -50,8 +50,8 @@ export {
   CustomSelect,
   CustomSelectReactHook,
   AppHeaderCoin,
-  WalletTabRoute,
-  WalletAppHeader,
+  ProfileWalletTabRoute,
+  ProfileWalletAppHeader,
   AppHeaderMenu,
   AppHeaderLocation,
   CustomSwiper,

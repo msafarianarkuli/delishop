@@ -1,5 +1,5 @@
-import {WalletTabRoute} from "components";
-import WalletAppHeader from "components/appHeader/component/WalletAppHeader";
+import {ProfileWalletTabRoute} from "components";
+import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
 import AwardReceivedCard from "view/awardReceived/component/AwardReceivedCard";
 
 const arr = Array.from(new Array(10), (_, i) => i + 1);
@@ -7,8 +7,8 @@ const arr = Array.from(new Array(10), (_, i) => i + 1);
 function AwardReceived() {
   return (
     <>
-      <WalletAppHeader />
-      <WalletTabRoute active="awardReceived" />
+      <ProfileWalletAppHeader />
+      <ProfileWalletTabRoute active="awardReceived" />
       <div className="px-screenSpace mt-[132px]">
         {arr.map((item) => {
           return (

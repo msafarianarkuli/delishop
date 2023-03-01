@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import ReactSlider from "react-slider";
-import styles from "view/wallet/component/coinCard/coinCard.module.scss";
+import styles from "view/profileWallet/component/profileWalletCoinCard/profileWalletCoinCard.module.scss";
 
-function CoinCard() {
+function ProfileWalletCoinCard() {
   return (
-    <div className={styles.coin_card_container}>
+    <div className={styles.profile_wallet_coin_card_container}>
       <div>گنجینه</div>
       <div className="text-center text-[30px] font-light my-5">
         <span>{9610}</span>
@@ -42,4 +42,4 @@ function CoinCard() {
   );
 }
 
-export default CoinCard;
+export default ProfileWalletCoinCard;

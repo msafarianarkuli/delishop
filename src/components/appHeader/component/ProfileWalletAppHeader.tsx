@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 import {AppHeader, AppHeaderBackBtn, AppHeaderCoin} from "components/index";
 
-function WalletAppHeader() {
+function ProfileWalletAppHeader() {
   const router = useRouter();
   return (
     <div className="fixed z-10 top-0 right-0 left-0 header_background">
@@ -10,4 +10,4 @@ function WalletAppHeader() {
   );
 }
 
-export default WalletAppHeader;
+export default ProfileWalletAppHeader;

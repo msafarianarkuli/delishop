@@ -1,4 +1,4 @@
-.wallet_card_container {
+.profile_wallet_card_container {
   width: 100%;
   box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
   border-radius: 10px;
@@ -7,7 +7,7 @@
   margin: 20px 0;
 }
 
-.wallet_card_input {
+.profile_wallet_card_input {
   background-image: linear-gradient(274.88deg, #f2f3f6 0%, #e5e6ec 190.36%),
     linear-gradient(91.28deg, #dfdfdf -92.85%, rgba(217, 217, 217, 0) 100%);
   border-radius: 10px;
@@ -22,7 +22,7 @@
   }
 }
 
-.wallet_card_btn {
+.profile_wallet_card_btn {
   height: 40px;
   width: 40px;
   border: 0;

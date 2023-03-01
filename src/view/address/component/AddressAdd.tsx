@@ -3,11 +3,11 @@ import {IconAddAddress} from "assets/icons";
 import Link from "next/link";
 import classNames from "classnames";
 import useTypeColor from "hooks/useTypeColor";
-import useQuerySearchClient from "hooks/useQuerySearchClient";
+import usePathnameQuery from "hooks/usePathnameQuery";
 
 function AddressAdd() {
   const type = useTypeColor();
-  const query = useQuerySearchClient();
+  const {querySearch} = usePathnameQuery();
 
   const container = classNames({
     [styles.address_add]: true,
@@ -16,7 +16,7 @@ function AddressAdd() {
   });
 
   return (
-    <Link href={`/address/create${query}`} className={container}>
+    <Link href={`/address/create${querySearch}`} className={container}>
       <IconAddAddress className="w-[18px] h-[18px]" />
       <div className="mr-2">افزودن آدرس جدید</div>
     </Link>

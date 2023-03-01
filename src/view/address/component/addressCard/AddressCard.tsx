@@ -3,8 +3,9 @@ import {IconDeleteAddress, IconDeleteAddressLight, IconEditAddress, IconEditAddr
 import {useRouter} from "next/router";
 import styles from "view/address/component/addressCard/addressCard.module.scss";
 import {MouseEventHandler} from "react";
-import useQuerySearchClient from "hooks/useQuerySearchClient";
 import classNames from "classnames";
+import usePathnameQuery from "hooks/usePathnameQuery";
+import useTypeColor from "hooks/useTypeColor";
 
 interface IAddressCard {
   title: string;
@@ -18,10 +19,12 @@ interface IAddressCard {
 function AddressCard(props: IAddressCard) {
   const {title, address, onClickDelete, id, selected, onClick} = props;
   const router = useRouter();
-  const query = useQuerySearchClient();
+  const {querySearch} = usePathnameQuery();
+  const type = useTypeColor();
   const container = classNames({
     [styles.address_card_container]: true,
-    [styles.address_card_container_selected]: selected,
+    [styles.address_card_container_selected]: selected && type === "default",
+    [styles.address_card_container_selected_supermarket]: selected && type === "supermarket",
     [styles.address_card_container_unselected]: !selected,
   });
   return (
@@ -35,7 +38,7 @@ function AddressCard(props: IAddressCard) {
         <Button
           onClick={(e) => {
             e.stopPropagation();
-            router.push(`/address/create/${id}${query}`);
+            router.push(`/address/create/${id}${querySearch}`);
           }}
           className="w-4 h-4 border-0 rounded-none p-0 mt-4 shadow-none"
         >

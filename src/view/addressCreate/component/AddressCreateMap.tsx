@@ -2,13 +2,13 @@ import {Map} from "components";
 import styles from "view/addressCreate/addressCreate.module.scss";
 import {IconEditAddress} from "assets/icons";
 import {useRouter} from "next/router";
-import useQuerySearchClient from "hooks/useQuerySearchClient";
 import useMapPin from "hooks/useMapPin";
+import usePathnameQuery from "hooks/usePathnameQuery";
 
 function AddressCreateMap() {
   const router = useRouter();
-  const query = useQuerySearchClient();
   const pin = useMapPin();
+  const {querySearch} = usePathnameQuery();
 
   return (
     <div className={styles.address_create_map_container}>
@@ -22,7 +22,7 @@ function AddressCreateMap() {
       <button
         className="flex items-center text-right w-full px-[10px] py-[20px]"
         type="button"
-        onClick={() => router.push(`/address/map${query}`)}
+        onClick={() => router.push(`/address/map${querySearch}`)}
       >
         <div className="w-[calc(100%-18px)] truncate text-textColorLight pl-2">محدوده:45 متری شیوا</div>
         <div>

@@ -1,12 +1,10 @@
 import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {separatePathnameAndQuerySearch} from "utils/utils";
+import usePathnameQuery from "hooks/usePathnameQuery";
 
 export type TUseTypeColor = "default" | "supermarket" | null;
 
 function useTypeColor() {
-  const router = useRouter();
-  const {querySearch} = separatePathnameAndQuerySearch(router.asPath);
+  const {querySearch} = usePathnameQuery();
   const [type, setType] = useState<TUseTypeColor>(null);
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 export interface IGetVendorCommentsListRes {
   data: {
     comments: TGetVendorCommentsComments;
+    totalCount: number;
   };
-  totalCount: number;
 }
 
 export type TGetVendorCommentsComments = IGetVendorCommentsListCommentsItem[];

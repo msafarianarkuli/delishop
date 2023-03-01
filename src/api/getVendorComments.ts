@@ -27,7 +27,7 @@ const getVendorComments: TGetVendorComments = async ({isServer, id, params}) => 
   };
   return axiosService<IGetVendorCommentsListRes>({url, method: "get", params: tmpParams}).then((res) => ({
     comments: res.data.data.comments,
-    totalCount: res.data.totalCount,
+    totalCount: res.data.data?.totalCount,
   }));
 };
 

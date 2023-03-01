@@ -1,10 +1,10 @@
 import {ProfileWalletTabRoute} from "components";
 import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
-import AwardReceivedCard from "view/awardReceived/component/AwardReceivedCard";
+import ProfileAwardReceivedCard from "view/ProfileAwardReceived/component/ProfileAwardReceivedCard";
 
 const arr = Array.from(new Array(10), (_, i) => i + 1);
 
-function AwardReceived() {
+function ProfileAwardReceived() {
   return (
     <>
       <ProfileWalletAppHeader />
@@ -12,7 +12,7 @@ function AwardReceived() {
       <div className="px-screenSpace mt-[132px]">
         {arr.map((item) => {
           return (
-            <AwardReceivedCard
+            <ProfileAwardReceivedCard
               key={item}
               title="سفارش غذا از اپلیکیشن آریایی"
               discount="NSH-RM-21"
@@ -25,4 +25,4 @@ function AwardReceived() {
   );
 }
 
-export default AwardReceived;
+export default ProfileAwardReceived;

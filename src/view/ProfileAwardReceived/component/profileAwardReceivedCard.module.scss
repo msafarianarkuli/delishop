@@ -1,6 +1,6 @@
 @import "src/styles/utils/variables";
 
-.award_received_card_container {
+.profile_award_received_card_container {
   position: relative;
   display: flex;
   width: 100%;
@@ -14,21 +14,20 @@
   }
 }
 
-.award_received_card_content {
+.profile_award_received_card_content {
   display: flex;
   flex: 1;
   flex-direction: column;
   padding: 10px 15px;
 }
 
-.award_received_card_ticket {
+.profile_award_received_card_ticket {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 70px;
   padding: 10px 15px;
-  //border-right: 1px dashed $textColor;
 
   &:before {
     content: " ";
@@ -57,7 +56,7 @@
   }
 }
 
-.award_received_card_copy {
+.profile_award_received_card_copy {
   padding: 3px 20px;
   margin: 0 12px;
   background: linear-gradient(293.8deg, #edeef2 0%, #f2f3f6 118.73%);

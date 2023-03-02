@@ -23,7 +23,9 @@ function AddressMapLocation() {
 
   useEffect(() => {
     if (isStorageLoaded && selectedLocation?.lat && selectedLocation?.lng) {
-      setLocation([{lat: selectedLocation?.lat, lng: selectedLocation?.lng}]);
+      const tmpLocation = {lat: selectedLocation?.lat, lng: selectedLocation?.lng};
+      dispatch(setAddressMapContextLocation(tmpLocation));
+      setLocation([tmpLocation]);
     }
   }, []);
 
@@ -53,7 +55,6 @@ function AddressMapLocation() {
       points={[location]}
       pinIcons={pin}
       onClick={(event) => {
-        // createLog("AddressMap event", event);
         const location = {
           lat: event.latlng.lat,
           lng: event.latlng.lng,
@@ -62,9 +63,23 @@ function AddressMapLocation() {
         setLocation([location]);
       }}
     >
+      <EditLocation />
       <CurrentLocation />
     </Map>
   );
+}
+
+function EditLocation() {
+  const {location, isStorageLoaded} = useSelector(selectAddressMap);
+  const map = useMap();
+
+  useEffect(() => {
+    if (location?.lat && location?.lng && isStorageLoaded) {
+      map.flyTo({lat: location.lat, lng: location.lng}, map.getZoom());
+    }
+  }, [map]);
+
+  return null;
 }
 
 function CurrentLocation() {

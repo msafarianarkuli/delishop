@@ -13,12 +13,13 @@ import usePathnameQuery from "hooks/usePathnameQuery";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {setAddressMap} from "redux/addressMap/addressMapReducer";
+import {Method} from "axios";
 
 export interface IAddressCreateForm {
   location: IMapPoint;
   title: string;
   address: string;
-  addressDetail: string;
+  description: string;
   tel: string;
 }
 
@@ -27,6 +28,7 @@ interface IAddressFormCreateBody {
   latitude: number;
   tel: string;
   address: string;
+  description: string;
   title: string;
 }
 
@@ -36,7 +38,7 @@ interface IAddressFormCreateRes {
   };
 }
 
-function AddressCreateForm({defaultValues}: {defaultValues?: IAddressCreateForm}) {
+function AddressCreateForm({defaultValues, isEdit}: {defaultValues?: IAddressCreateForm; isEdit?: boolean}) {
   const {data} = useSession();
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -52,13 +54,21 @@ function AddressCreateForm({defaultValues}: {defaultValues?: IAddressCreateForm}
       latitude: payload.location.lat,
       longitude: payload.location.lng,
       title: payload.title.trim(),
-      address: payload.address.trim() + "، " + payload.addressDetail.trim(),
+      address: payload.address.trim(),
+      description: payload.description.trim(),
       tel: payload.tel.trim(),
     };
     try {
+      let url = API.CREATE_USER_ADDRESS;
+      let method: Method = "post";
+      const id = router.query.id;
+      if (isEdit && id && !Array.isArray(id)) {
+        url = API.UPDATE_USER_ADDRESS.replace("{id}", id);
+        method = "put";
+      }
       const res = await axiosService<IAddressFormCreateRes, IAddressFormCreateBody>({
-        url: API.CREATE_USER_ADDRESS,
-        method: "post",
+        url,
+        method,
         body,
         token: data?.user.token,
       });
@@ -100,7 +110,7 @@ function AddressCreateForm({defaultValues}: {defaultValues?: IAddressCreateForm}
           }}
         />
         <AddressCreateFormInput
-          id="addressDetail"
+          id="description"
           label="جزئیات آدرس"
           classNameContainer="mb-7"
           placeholder="پلاک 56 واحد مدیریت"

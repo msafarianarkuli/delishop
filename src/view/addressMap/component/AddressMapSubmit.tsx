@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "redux/store";
 import {setAddressMap} from "redux/addressMap/addressMapReducer";
 import {useRouter} from "next/router";
+import usePathnameQuery from "hooks/usePathnameQuery";
+import {useMemo} from "react";
 
 interface IAddressMapSubmit {
   type: TUseTypeColor;
@@ -15,6 +17,8 @@ function AddressMapSubmit({type}: IAddressMapSubmit) {
   const {addressLoading, addressData, location} = useAddressMap();
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
+  const {querySearch} = usePathnameQuery();
+  const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
 
   const container = classNames({
     "pointer-events-auto w-full": true,
@@ -28,16 +32,17 @@ function AddressMapSubmit({type}: IAddressMapSubmit) {
       type="primary"
       className={container}
       onClick={() => {
+        const callbackUrl = query.get("callbackUrl");
         if (location && addressData) {
           dispatch(
             setAddressMap({
               location,
               locationData: addressData,
+              isEdit: callbackUrl?.search("/create/") !== -1,
             })
           );
         }
-        const callbackUrl = router.query.callbackUrl;
-        if (callbackUrl && !Array.isArray(callbackUrl)) {
+        if (callbackUrl) {
           router.replace(decodeURI(callbackUrl));
         } else {
           router.replace("/");

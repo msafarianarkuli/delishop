@@ -11,6 +11,7 @@ export interface IGetUserAddressesListAddressesItem {
   title: string;
   ownername: string;
   address: string;
+  description: string;
   latitude: number;
   longitude: number;
   tel: string;

@@ -8,6 +8,7 @@ import {IGetUserAddressesListAddressesItem} from "types/interfaceUserAddress";
 interface ISetAddressMap {
   location?: IMapPoint | null;
   locationData?: IGetAddressFromMapRes | null;
+  isEdit?: boolean;
 }
 
 type TSetUserAddress = IGetUserAddressesListAddressesItem | null;
@@ -35,6 +36,7 @@ const addressMapReducer = createSlice({
     setAddressMap: (state, action: PayloadAction<ISetAddressMap>) => {
       state.locationData = action.payload.locationData;
       state.location = action.payload.location;
+      state.isEdit = !!action.payload?.isEdit;
     },
     setAddressMapFromStorage: (state, action: PayloadAction<ISetAddressMap>) => {
       state.locationData = action.payload?.locationData || null;
@@ -63,7 +65,5 @@ const {reducer, actions} = addressMapReducer;
 
 export const {setAddressMap, setAddressMapFromStorage, setUserAddress, setUserAddressFromStorage} = actions;
 export const selectAddressMap = (state: RootState) => state.addressMap;
-export const selectAddressMapLocationData = (state: RootState) => state.addressMap.locationData;
-export const selectUserAddress = (state: RootState) => state.addressMap.userAddress;
 
 export default reducer;

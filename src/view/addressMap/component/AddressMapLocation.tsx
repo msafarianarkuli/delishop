@@ -12,11 +12,20 @@ import {useMap} from "react-leaflet";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import useMapPin from "hooks/useMapPin";
 import {getAddressFromMap} from "api";
+import {useSelector} from "react-redux";
+import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 
 function AddressMapLocation() {
   const [location, setLocation] = useState<IMapPoint[]>([]);
+  const {location: selectedLocation, isStorageLoaded} = useSelector(selectAddressMap);
   const dispatch = useAddressMapAction();
   const pin = useMapPin();
+
+  useEffect(() => {
+    if (isStorageLoaded && selectedLocation?.lat && selectedLocation?.lng) {
+      setLocation([{lat: selectedLocation?.lat, lng: selectedLocation?.lng}]);
+    }
+  }, []);
 
   useEffect(() => {
     if (location?.length) {

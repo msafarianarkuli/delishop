@@ -55,7 +55,16 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
       }
     }
     return tmpParams;
-  }, [isStorageLoaded, location?.lat, location?.lng, router.isReady, router.query]);
+  }, [
+    isStorageLoaded,
+    isUserAddressStorageLoaded,
+    location?.lat,
+    location?.lng,
+    router.isReady,
+    router.query,
+    userAddress?.latitude,
+    userAddress?.longitude,
+  ]);
 
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [QUERY_KEY_RESTAURANT];
@@ -72,7 +81,10 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
     return tmpKeys;
   }, [router.query]);
 
-  const useQueryEnabled = useMemo(() => isStorageLoaded && router.isReady, [isStorageLoaded, router.isReady]);
+  const useQueryEnabled = useMemo(
+    () => isStorageLoaded && isUserAddressStorageLoaded && router.isReady,
+    [isStorageLoaded, isUserAddressStorageLoaded, router.isReady]
+  );
 
   const result = useQuery(keys, () => getRestaurants({params}), {staleTime, enabled: useQueryEnabled});
 

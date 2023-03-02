@@ -1,15 +1,20 @@
 import AddressCard from "view/address/component/addressCard/AddressCard";
 import {setAddressDeleteData, useAddressDeleteAction} from "view/address/context/AddressDeleteProvider";
 import {useAddressData} from "view/address/context/AddressDataProvider";
-import {useEffect} from "react";
+import {useEffect, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAddressMap, setUserAddress} from "redux/addressMap/addressMapReducer";
+import usePathnameQuery from "hooks/usePathnameQuery";
+import {useRouter} from "next/router";
 
 function AddressList() {
   const dispatch = useDispatch();
   const dispatchAddressDelete = useAddressDeleteAction();
   const {data, isLoading} = useAddressData();
   const {userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
+  const {querySearch} = usePathnameQuery();
+  const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
+  const router = useRouter();
 
   useEffect(() => {
     if (!userAddress && data?.length && isUserAddressStorageLoaded) {
@@ -28,7 +33,13 @@ function AddressList() {
             id={item.id.toString()}
             title={item.title}
             address={item.address}
-            onClick={() => dispatch(setUserAddress(item))}
+            onClick={() => {
+              dispatch(setUserAddress(item));
+              const callbackUrl = query.get("callbackUrl");
+              if (callbackUrl) {
+                router.push(callbackUrl);
+              }
+            }}
             onClickDelete={(e) => {
               e.stopPropagation();
               dispatchAddressDelete(setAddressDeleteData(item));

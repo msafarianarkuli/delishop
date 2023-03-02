@@ -19,4 +19,5 @@ export const API = {
   GET_USER_ADDRESSES: "/api/users/addresses",
   CREATE_USER_ADDRESS: "/api/users/addresses",
   UPDATE_USER_ADDRESS: "/api/users/addresses/{id}",
+  DELETE_USER_ADDRESS: "/api/users/addresses/{id}",
 };

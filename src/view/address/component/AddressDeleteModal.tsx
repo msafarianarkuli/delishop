@@ -1,6 +1,6 @@
 import {CustomModal} from "components";
 import {Button} from "antd";
-import {MouseEventHandler, useCallback} from "react";
+import {MouseEventHandler, useCallback, useState} from "react";
 import useTypeColor from "hooks/useTypeColor";
 import classNames from "classnames";
 import {
@@ -8,6 +8,14 @@ import {
   useAddressDelete,
   useAddressDeleteAction,
 } from "view/address/context/AddressDeleteProvider";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAddressMap, setUserAddress} from "redux/addressMap/addressMapReducer";
+import {axiosService} from "utils/axiosService";
+import {API} from "api/const";
+import {useSession} from "next-auth/react";
+import {createLog} from "utils/utils";
+import {useQueryClient} from "react-query";
+import {useAddressData, USER_ADDRESSES_KEY} from "view/address/context/AddressDataProvider";
 
 interface AddressDeleteModalBody {
   loading: boolean;
@@ -41,12 +49,42 @@ function AddressDeleteModalBody(props: AddressDeleteModalBody) {
 
 function AddressDeleteModal() {
   // const {open, onClickOk, onClickCancel} = props;
-  const {open} = useAddressDelete();
+  const {open, data} = useAddressDelete();
   const dispatch = useAddressDeleteAction();
+  const {userAddress} = useSelector(selectAddressMap);
+  const {data: userData, status} = useSession();
+  const dispatchRedux = useDispatch();
+  const queryClient = useQueryClient();
+  const {data: addressList} = useAddressData();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onClickCancel = useCallback(() => {
-    dispatch(setAddressDeleteClose());
-  }, [dispatch]);
+    if (!isLoading) {
+      dispatch(setAddressDeleteClose());
+    }
+  }, [dispatch, isLoading]);
+
+  const onClickOk = useCallback(() => {
+    const id = data?.id;
+    if (status === "authenticated" && id) {
+      setIsLoading(true);
+      const url = API.DELETE_USER_ADDRESS.replace("{id}", id.toString());
+      axiosService({url, method: "delete", token: userData?.user.token})
+        .then((res) => {
+          createLog("AddressDeleteModal err", res);
+          queryClient.invalidateQueries(USER_ADDRESSES_KEY);
+          if (id === userAddress?.id) {
+            const tmp = addressList?.filter((item) => item.id !== id);
+            if (tmp?.length) {
+              dispatchRedux(setUserAddress(tmp[0]));
+            }
+          }
+          dispatch(setAddressDeleteClose());
+        })
+        .catch((err) => createLog("AddressDeleteModal err", err))
+        .finally(() => setIsLoading(false));
+    }
+  }, [data?.id, dispatch, dispatchRedux, queryClient, status, userAddress?.id, userData?.user.token]);
 
   return (
     <>
@@ -55,7 +93,7 @@ function AddressDeleteModal() {
         open={open}
         header="حذف آدرس"
         classNameHeader="justify-center"
-        body={<AddressDeleteModalBody loading={false} onClickCancel={onClickCancel} onClickOk={onClickCancel} />}
+        body={<AddressDeleteModalBody loading={isLoading} onClickCancel={onClickCancel} onClickOk={onClickOk} />}
       />
     </>
   );

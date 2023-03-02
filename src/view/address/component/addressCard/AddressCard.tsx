@@ -29,7 +29,7 @@ function AddressCard(props: IAddressCard) {
   });
   return (
     <div onClick={onClick} className={container}>
-      <div className="text-[16px] font-semibold w-1/6 text-center">{title}</div>
+      <div className="text-[16px] font-semibold w-1/6 text-center break-words">{title}</div>
       <div className="flex flex-1 text-[13px] font-light px-6">{address}</div>
       <div className="flex flex-col items-center justify-center">
         <Button onClick={onClickDelete} className="w-5 h-5 border-0 rounded-none p-0 shadow-none">

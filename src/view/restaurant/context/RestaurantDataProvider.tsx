@@ -32,15 +32,20 @@ const staleTime = 10 * 60 * 1000;
 function RestaurantDataProvider(props: IRestaurantDataProvider) {
   const {children} = props;
   const router = useRouter();
-  const {isStorageLoaded, location} = useSelector(selectAddressMap);
+  const {isStorageLoaded, location, userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
 
   const params = useMemo(() => {
     let tmpParams: {[x: string]: any} = {};
     if (router.isReady) {
       tmpParams = createPaginationParams(router.query);
-      if (location?.lat && location.lng && isStorageLoaded) {
-        tmpParams.lat = location.lat;
-        tmpParams.log = location.lng;
+      if (isUserAddressStorageLoaded && isStorageLoaded) {
+        if (userAddress?.latitude && userAddress.longitude) {
+          tmpParams.lat = userAddress.latitude;
+          tmpParams.log = userAddress.longitude;
+        } else if (location?.lat && location?.lng) {
+          tmpParams.lat = location.lat;
+          tmpParams.log = location.lng;
+        }
       }
       if (router.query.hasOwnProperty(restaurantSortQuery)) {
         tmpParams[restaurantSortQuery] = router.query[restaurantSortQuery];

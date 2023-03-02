@@ -8,12 +8,13 @@ import usePathnameQuery from "hooks/usePathnameQuery";
 function useRedirectToMap() {
   const router = useRouter();
   const {status} = useSession();
-  const {location, isStorageLoaded} = useSelector(selectAddressMap);
+  const {location, isStorageLoaded, isUserAddressStorageLoaded, userAddress} = useSelector(selectAddressMap);
   const {querySearch, pathname} = usePathnameQuery();
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
 
   useEffect(() => {
-    if ((!location?.lat || !location.lng) && isStorageLoaded) {
+    const noLocation = !location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude;
+    if (isStorageLoaded && isUserAddressStorageLoaded && noLocation) {
       let url = "";
       query.set("callbackUrl", encodeURI(pathname));
       if (status === "authenticated") {
@@ -24,7 +25,17 @@ function useRedirectToMap() {
       url += query.toString() ? `?${query.toString()}` : "";
       router.replace(url);
     }
-  }, [isStorageLoaded, location, pathname, query, router, status]);
+  }, [
+    isStorageLoaded,
+    isUserAddressStorageLoaded,
+    location,
+    pathname,
+    query,
+    router,
+    status,
+    userAddress?.latitude,
+    userAddress?.longitude,
+  ]);
 
   return null;
 }

@@ -10,10 +10,10 @@ import useRedirectToMap from "hooks/useRedirectToMap";
 
 function Restaurant() {
   const data = useRestaurantNavigation();
-  const {location} = useSelector(selectAddressMap);
+  const {location, userAddress} = useSelector(selectAddressMap);
   useRedirectToMap();
 
-  if (!location?.lat || !location.lng) return null;
+  if (!location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude) return null;
   return (
     <>
       <div className="fixed z-10 top-0 right-0 left-0 header_background">

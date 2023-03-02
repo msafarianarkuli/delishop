@@ -21,7 +21,7 @@ function LocalStorageData() {
   useEffect(() => {
     const userAddress = localStorage.getItem(userAddressLocalStorageKey);
     const data = userAddress ? JSON.parse(userAddress) : null;
-    if (data && status === "authenticated") {
+    if (status === "authenticated") {
       dispatch(setUserAddressFromStorage(data));
     } else if (status === "unauthenticated") {
       localStorage.removeItem(userAddressLocalStorageKey);

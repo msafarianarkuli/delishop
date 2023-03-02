@@ -42,6 +42,9 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
           <Fragment key={item.name}>
             <RestaurantDetailListTag id={item.name} title={item.displayname} />
             {item.products.map((item) => {
+              const price = item.productKinds[0]?.price || 0;
+              const addedPercent = item.price_class / 100;
+              const finalPrice = price + price * addedPercent;
               return (
                 <Link key={item.id} href={`product/${item.id}`} className="block mb-5">
                   <RestaurantDetailCard
@@ -49,7 +52,7 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
                     title={item.displayname}
                     description={item.productKinds[0]?.description}
                     coin={item?.point}
-                    price={item.productKinds[0]?.price}
+                    price={finalPrice}
                     count={0}
                     onAddExtraItems={onClick}
                   />

@@ -4,7 +4,7 @@ import {useMemo} from "react";
 import {useSession} from "next-auth/react";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import {useSelector} from "react-redux";
-import {selectAddressMapLocationData} from "redux/addressMap/addressMapReducer";
+import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 
 interface IAppHeaderLocation {
   supermarket?: boolean;
@@ -12,10 +12,16 @@ interface IAppHeaderLocation {
 
 function AppHeaderLocation(props: IAppHeaderLocation) {
   const {supermarket} = props;
-  const locationData = useSelector(selectAddressMapLocationData);
+  const {locationData, userAddress} = useSelector(selectAddressMap);
   const {status} = useSession();
   const query = useMemo(() => new URLSearchParams(""), []);
   const {pathname} = usePathnameQuery();
+
+  const title = useMemo(() => userAddress?.title || "", [userAddress?.title]);
+  const address = useMemo(
+    () => userAddress?.address || locationData?.formatted_address || "انتخاب آدرس",
+    [locationData?.formatted_address, userAddress?.address]
+  );
 
   const url = useMemo(() => {
     let url = "/address/map";
@@ -30,8 +36,8 @@ function AppHeaderLocation(props: IAppHeaderLocation) {
     <Link href={url} className="block text-[13px]">
       <div className="flex items-center">
         <IconLocationPin className="w-4 h-4 text-iconColor ml-1" />
-        <span className="font-semibold">خانه:</span>
-        <div className="font-light mobile:max-w-[140px] max-w-[110px] truncate">{locationData?.formatted_address}</div>
+        {title ? <span className="font-semibold">{title}:</span> : null}
+        <div className="font-light mobile:max-w-[140px] max-w-[110px] truncate">{address}</div>
       </div>
     </Link>
   );

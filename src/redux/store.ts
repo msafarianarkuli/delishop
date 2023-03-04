@@ -2,6 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import {createWrapper} from "next-redux-wrapper";
 import templateReducer from "redux/template/templateReducer";
 import addressMapReducer from "redux/addressMap/addressMapReducer";
+import cartReducer from "redux/cart/cartReducer";
 import {addressMapMiddleware} from "redux/addressMap/addressMapMiddleware";
 
 const makeStore = () =>
@@ -9,6 +10,7 @@ const makeStore = () =>
     reducer: {
       template: templateReducer,
       addressMap: addressMapReducer,
+      cart: cartReducer,
     },
     devTools: process.env.NODE_ENV === "development",
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addressMapMiddleware.middleware),

@@ -2,18 +2,19 @@ import {IconCoin} from "assets/icons";
 import {Counter} from "components";
 import styles from "view/restaurantDetail/component/restaurantDetailCard/restaurantDetailCard.module.scss";
 
-interface IRestaurantDetailCard {
+export interface IRestaurantDetailCard {
   image?: string | null;
   title: string;
   description: string;
   price: number;
   coin: number;
   count?: number;
-  onAddExtraItems: () => void;
+  onAddClick?: (count: number) => void;
+  onMinusClick?: (count: number) => void;
 }
 
 function RestaurantDetailCard(props: IRestaurantDetailCard) {
-  const {description, price, title, count, coin, image, onAddExtraItems} = props;
+  const {description, price, title, count, coin, image, onAddClick, onMinusClick} = props;
   // const [counter, setCounter] = useState(count || 0);
 
   return (
@@ -40,10 +41,11 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
         </div>
         <Counter
           className="mt-4"
-          initialValue={count}
+          count={count}
           showNumberOnlyPositiveNumber
           showMinusOnlyPositiveNumber
-          onAddClick={() => onAddExtraItems()}
+          onAddClick={onAddClick}
+          onMinusClick={onMinusClick}
         />
       </div>
     </div>

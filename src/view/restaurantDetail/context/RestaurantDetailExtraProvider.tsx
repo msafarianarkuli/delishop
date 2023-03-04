@@ -4,6 +4,8 @@ import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDe
 interface IRestaurantDetailExtra {
   data?: IGetVendorDetailMenusGroupsProductsExtras[];
   isOpen: boolean;
+  id: number;
+  price: number;
 }
 
 interface IAction {
@@ -14,6 +16,8 @@ interface IAction {
 const initialState: IRestaurantDetailExtra = {
   data: [],
   isOpen: false,
+  id: 0,
+  price: 0,
 };
 
 export const SET_DATA = "data";
@@ -27,12 +31,16 @@ function reducer(state: IRestaurantDetailExtra, action: IAction): IRestaurantDet
     case SET_DATA:
       return {
         isOpen: true,
-        data: action.payload,
+        data: action.payload.data,
+        id: action.payload.id,
+        price: action.payload.price,
       };
     case CLOSE:
       return {
         isOpen: false,
         data: [],
+        id: 0,
+        price: 0,
       };
     default:
       return state;
@@ -48,7 +56,11 @@ function RestaurantDetailExtraProvider({children}: {children: JSX.Element[]}) {
   );
 }
 
-export const setRestaurantDetailExtraData = (payload: IGetVendorDetailMenusGroupsProductsExtras[]) => ({
+export const setRestaurantDetailExtraData = (payload: {
+  data: IGetVendorDetailMenusGroupsProductsExtras[];
+  id: number;
+  price: number;
+}) => ({
   type: SET_DATA,
   payload,
 });

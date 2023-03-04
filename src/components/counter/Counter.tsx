@@ -1,10 +1,10 @@
 import {IconAdd, IconMinus} from "assets/icons";
-import {ReactNode, useState} from "react";
+import {ReactNode} from "react";
 import classNames from "classnames";
 import styles from "components/counter/counter.module.scss";
 
 interface ICounter {
-  initialValue?: number;
+  count?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
   addIcon?: ReactNode;
@@ -17,7 +17,7 @@ interface ICounter {
 
 function Counter(props: ICounter) {
   const {
-    initialValue,
+    count = 0,
     onMinusClick,
     onAddClick,
     addIcon,
@@ -27,24 +27,25 @@ function Counter(props: ICounter) {
     className = "",
     primaryType = "default",
   } = props;
-  const [counter, setCounter] = useState(initialValue || 0);
+
+  // const [counter, setCounter] = useState(initialValue || 0);
 
   function showNumber() {
-    if (showNumberOnlyPositiveNumber && counter <= 0) return null;
-    return <div className="text-[17px] font-bold text-center w-[30px]">{counter}</div>;
+    if (showNumberOnlyPositiveNumber && count <= 0) return null;
+    return <div className="text-[17px] font-bold text-center w-[30px]">{count}</div>;
   }
 
   function showMinusBtn() {
-    if (showMinusOnlyPositiveNumber && counter <= 0) return null;
+    if (showMinusOnlyPositiveNumber && count <= 0) return null;
     return (
       <button
         className={styles.counter_minus}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (counter > 0) {
-            onMinusClick?.(counter - 1);
-            setCounter((prevState) => prevState - 1);
+          if (count > 0) {
+            onMinusClick?.(count - 1);
+            // setCounter((prevState) => prevState - 1);
           }
         }}
       >
@@ -70,8 +71,8 @@ function Counter(props: ICounter) {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          onAddClick?.(counter + 1);
-          setCounter((prevState) => prevState + 1);
+          onAddClick?.(count + 1);
+          // setCounter((prevState) => prevState + 1);
         }}
       >
         {addIcon ? addIcon : <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />}

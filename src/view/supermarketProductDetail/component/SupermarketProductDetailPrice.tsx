@@ -13,7 +13,7 @@ function SupermarketProductDetailPrice(props: ISupermarketProductDetailPrice) {
         <span className="text-[20px]">{price.toLocaleString("en-US")}</span>
         <span className="mr-1 text-[17px] text-iconColor">تومان</span>
       </div>
-      <Counter primaryType="supermarket" initialValue={count} />
+      <Counter primaryType="supermarket" count={count} />
     </div>
   );
 }

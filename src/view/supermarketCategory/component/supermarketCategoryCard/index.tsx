@@ -23,7 +23,7 @@ function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
   return (
     <div className={styles.supermarket_category_card_container}>
       <Counter
-        initialValue={count}
+        count={count}
         // className={styles.supermarket_category_card_counter}
         className={counterClassNames}
         primaryType="supermarket"

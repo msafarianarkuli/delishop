@@ -3,6 +3,8 @@ import {Button} from "antd";
 import {MouseEventHandler, useEffect, useState} from "react";
 import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDetail";
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
+import {useDispatch, useSelector} from "react-redux";
+import {ICartReducerCartItemExtraItem, selectCartTotalPrice, setCartItem} from "redux/cart/cartReducer";
 
 interface IRestaurantDetailModalBody {
   onClick: MouseEventHandler;
@@ -13,13 +15,21 @@ interface IRestaurantDetailModalBodyData extends IGetVendorDetailMenusGroupsProd
 }
 
 function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
-  const {data: extraData, isOpen} = useRestaurantDetailExtra();
+  const {data: extraData, isOpen, id, price} = useRestaurantDetailExtra();
   const [data, setData] = useState<IRestaurantDetailModalBodyData[]>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useDispatch();
+  const totalCartPrice = useSelector(selectCartTotalPrice);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTotalPrice(totalCartPrice + price);
+    }
+  }, [isOpen, price, totalCartPrice]);
 
   useEffect(() => {
     if (isOpen) {
       if (extraData?.length) {
-        console.log("extraData", extraData);
         const tmp: IRestaurantDetailModalBodyData[] = [];
         for (const item of extraData) {
           tmp.push({
@@ -33,8 +43,6 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
       }
     }
   }, [extraData, isOpen]);
-
-  console.log("data", data);
 
   return (
     <>
@@ -55,6 +63,13 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
                   }
                   tmp.push(el);
                 }
+                let tmpPrice = totalPrice;
+                if (value) {
+                  tmpPrice += item.price;
+                } else {
+                  tmpPrice -= item.price;
+                }
+                setTotalPrice(tmpPrice);
                 setData(tmp);
               }}
             />
@@ -68,12 +83,28 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
       <div className="px-[10px] mt-10">
         <Button
           onClick={(e) => {
+            const extra: ICartReducerCartItemExtraItem[] = [];
+            for (const item of data) {
+              if (item.isSelected) {
+                extra.push({
+                  id: item.id,
+                  price: item.price,
+                });
+              }
+            }
+            dispatch(
+              setCartItem({
+                id,
+                extra,
+                price,
+              })
+            );
             onClick(e);
           }}
           type="primary"
           className="submit-btn modal-submit-btn w-full text-[15px]"
         >
-          <span className="ml-1">افزودن</span>(<span>{(162500).toLocaleString("en-US")}</span>
+          <span className="ml-1">افزودن</span>(<span>{totalPrice.toLocaleString("en-US")}</span>
           <span>تومان</span>)
         </Button>
       </div>

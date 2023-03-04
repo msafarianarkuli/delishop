@@ -8,15 +8,17 @@ import {
   setRestaurantDetailExtraData,
   useRestaurantDetailExtraAction,
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
-
-// interface IRestaurantDetailList {
-//   onClick: () => void;
-// }
+import {useDispatch, useSelector} from "react-redux";
+import {removeCartLastItem, selectCart, setCartItem, setCartVendorId} from "redux/cart/cartReducer";
+import {useRouter} from "next/router";
 
 function RestaurantDetailList() {
   const ref = useRef<HTMLDivElement>(null);
   const {data} = useRestaurantDetailData();
-  const dispatch = useRestaurantDetailExtraAction();
+  const dispatchModal = useRestaurantDetailExtraAction();
+  const dispatch = useDispatch();
+  const {vendorId, cartItems} = useSelector(selectCart);
+  const router = useRouter();
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -47,22 +49,42 @@ function RestaurantDetailList() {
           <Fragment key={item.name}>
             <RestaurantDetailListTag id={item.name} title={item.displayname} />
             {item.products.map((item) => {
-              const price = item.productKinds[0]?.price || 0;
+              if (!item.productKinds.length) return null;
+              const product = item.productKinds[0];
+              const price = product?.price || 0;
               const addedPercent = item.price_class / 100;
               const finalPrice = price + price * addedPercent;
+              const count = cartItems[product.id]?.length || 0;
               return (
                 <Link key={item.id} href={`product/${item.id}`} className="block mb-5">
                   <RestaurantDetailCard
-                    image={item.productKinds[0]?.photo_igu}
+                    image={product?.photo_igu}
                     title={item.displayname}
-                    description={item.productKinds[0]?.description}
+                    description={product?.description}
                     coin={item?.point}
                     price={finalPrice}
-                    count={0}
-                    onAddExtraItems={() => {
-                      if (item.extras?.length) {
-                        dispatch(setRestaurantDetailExtraData([...item.extras]));
+                    count={count}
+                    onAddClick={() => {
+                      const id = router.query.id;
+                      if (id && !Array.isArray(id)) {
+                        if (vendorId !== id) {
+                          dispatch(setCartVendorId(id));
+                        }
+                        if (item.extras?.length) {
+                          dispatchModal(
+                            setRestaurantDetailExtraData({
+                              data: [...item.extras],
+                              id: product.id,
+                              price: finalPrice,
+                            })
+                          );
+                        } else {
+                          dispatch(setCartItem({id: product.id, price: finalPrice}));
+                        }
                       }
+                    }}
+                    onMinusClick={() => {
+                      dispatch(removeCartLastItem(product.id));
                     }}
                   />
                 </Link>

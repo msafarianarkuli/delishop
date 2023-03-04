@@ -4,14 +4,19 @@ import RestaurantDetailCard from "view/restaurantDetail/component/restaurantDeta
 import styles from "view/restaurantDetail/restaurantDetail.module.scss";
 import Link from "next/link";
 import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
+import {
+  setRestaurantDetailExtraData,
+  useRestaurantDetailExtraAction,
+} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 
-interface IRestaurantDetailList {
-  onClick: () => void;
-}
+// interface IRestaurantDetailList {
+//   onClick: () => void;
+// }
 
-function RestaurantDetailList({onClick}: IRestaurantDetailList) {
+function RestaurantDetailList() {
   const ref = useRef<HTMLDivElement>(null);
   const {data} = useRestaurantDetailData();
+  const dispatch = useRestaurantDetailExtraAction();
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -54,7 +59,11 @@ function RestaurantDetailList({onClick}: IRestaurantDetailList) {
                     coin={item?.point}
                     price={finalPrice}
                     count={0}
-                    onAddExtraItems={onClick}
+                    onAddExtraItems={() => {
+                      if (item.extras?.length) {
+                        dispatch(setRestaurantDetailExtraData([...item.extras]));
+                      }
+                    }}
                   />
                 </Link>
               );

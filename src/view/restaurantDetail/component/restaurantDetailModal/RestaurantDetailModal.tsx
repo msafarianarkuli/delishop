@@ -1,19 +1,25 @@
 import {CustomModal} from "components";
 import RestaurantDetailModalBody from "view/restaurantDetail/component/restaurantDetailModal/RestaurantDetailModalBody";
-import {MouseEventHandler} from "react";
+import {useCallback} from "react";
+import {
+  setRestaurantDetailExtraClose,
+  useRestaurantDetailExtra,
+  useRestaurantDetailExtraAction,
+} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 
-interface IRestaurantDetailModalMore {
-  open: boolean;
-  onCancel: MouseEventHandler;
-}
+function RestaurantDetailModal() {
+  const {isOpen} = useRestaurantDetailExtra();
+  const dispatch = useRestaurantDetailExtraAction();
 
-function RestaurantDetailModal(props: IRestaurantDetailModalMore) {
-  const {open, onCancel} = props;
+  const onCancel = useCallback(() => {
+    dispatch(setRestaurantDetailExtraClose());
+  }, [dispatch]);
+
   return (
     <>
       <CustomModal
         onCancel={onCancel}
-        open={open}
+        open={isOpen}
         header={<div className="w-full text-[15px] text-center font-medium">افزودن موارد دیگر</div>}
         body={<RestaurantDetailModalBody onClick={onCancel} />}
         classNameBody="px-0"

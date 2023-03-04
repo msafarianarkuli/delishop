@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import RestaurantDetailImageHeader from "view/restaurantDetail/component/RestaurantDetailImageHeader";
 import RestaurantDetailTab from "view/restaurantDetail/component/RestaurantDetailTab";
 import RestaurantDetailHeader from "view/restaurantDetail/component/RestaurantDetailHeader";
@@ -8,25 +7,25 @@ import RestaurantDetailSummary from "view/restaurantDetail/component/RestaurantD
 import RestaurantDetailList from "view/restaurantDetail/component/RestaurantDetailList";
 import {BottomPageGradient} from "components";
 import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
+import RestaurantDetailExtraProvider from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 
 function RestaurantDetail() {
-  const [modal, setModal] = useState(false);
   const {error} = useRestaurantDetailData();
 
   if (error?.status === 404) {
     return <div>موردی یافت نشد</div>;
   }
   return (
-    <>
+    <RestaurantDetailExtraProvider>
       <RestaurantDetailHeader />
       <RestaurantDetailImageHeader />
       <RestaurantDetailSummary />
       <RestaurantDetailTab />
-      <RestaurantDetailList onClick={() => setModal(true)} />
+      <RestaurantDetailList />
       <RestaurantDetailSubmitBtn />
-      <RestaurantDetailModal open={modal} onCancel={() => setModal(false)} />
+      <RestaurantDetailModal />
       <BottomPageGradient />
-    </>
+    </RestaurantDetailExtraProvider>
   );
 }
 

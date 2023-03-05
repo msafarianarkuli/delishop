@@ -1,10 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "redux/store";
 
-interface ICartReducer {
+export interface ICartReducer {
   vendorId: string | null;
   totalPrice: number;
   totalOrderCount: number;
+  isLoadedFromStorage: boolean;
   cartItems: {
     [x: number]: ICartReducerCartItem[];
   };
@@ -29,7 +30,10 @@ const initialState: ICartReducer = {
   cartItems: {},
   totalPrice: 0,
   totalOrderCount: 0,
+  isLoadedFromStorage: false,
 };
+
+export const CartLocalStorageKey = "cart";
 
 const cartReducer = createSlice({
   name: "cart",
@@ -37,6 +41,9 @@ const cartReducer = createSlice({
   reducers: {
     setCartVendorId: (state, action: PayloadAction<string | null>) => {
       state.vendorId = action.payload;
+      state.cartItems = {};
+      state.totalPrice = 0;
+      state.totalOrderCount = 0;
     },
     setCartItem: (state, action: PayloadAction<ISetCartItem>) => {
       const cartItem = state.cartItems;
@@ -69,12 +76,19 @@ const cartReducer = createSlice({
         state.totalPrice -= price + totalExtraPrice;
       }
     },
+    setCartFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
+      state.vendorId = action.payload?.vendorId || initialState.vendorId;
+      state.cartItems = action.payload?.cartItems || initialState.cartItems;
+      state.totalOrderCount = action.payload?.totalOrderCount || initialState.totalOrderCount;
+      state.totalPrice = action.payload?.totalPrice || initialState.totalPrice;
+      state.isLoadedFromStorage = true;
+    },
   },
 });
 
 const {reducer, actions} = cartReducer;
 
-export const {setCartVendorId, setCartItem, removeCartLastItem} = actions;
+export const {setCartVendorId, setCartItem, removeCartLastItem, setCartFromStorage} = actions;
 export const selectCart = (state: RootState) => state.cart;
 export const selectCartTotalOrderCount = (state: RootState) => state.cart.totalOrderCount;
 export const selectCartTotalPrice = (state: RootState) => state.cart.totalPrice;

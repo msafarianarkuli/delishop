@@ -5,9 +5,11 @@ import {
   setUserAddress,
   userAddressLocalStorageKey,
 } from "redux/addressMap/addressMapReducer";
+import {AppStartListening} from "redux/store";
 
 export const addressMapMiddleware = createListenerMiddleware();
-addressMapMiddleware.startListening({
+const addAppListener = addressMapMiddleware.startListening as AppStartListening;
+addAppListener({
   actionCreator: setAddressMap,
   effect: (action) => {
     if (localStorage) {
@@ -16,7 +18,7 @@ addressMapMiddleware.startListening({
   },
 });
 
-addressMapMiddleware.startListening({
+addAppListener({
   actionCreator: setUserAddress,
   effect: (action) => {
     if (localStorage) {

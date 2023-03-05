@@ -1,9 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore, TypedStartListening} from "@reduxjs/toolkit";
 import {createWrapper} from "next-redux-wrapper";
 import templateReducer from "redux/template/templateReducer";
 import addressMapReducer from "redux/addressMap/addressMapReducer";
 import cartReducer from "redux/cart/cartReducer";
 import {addressMapMiddleware} from "redux/addressMap/addressMapMiddleware";
+import {cartMiddleware} from "redux/cart/cartMiddleware";
 
 const makeStore = () =>
   configureStore({
@@ -13,7 +14,8 @@ const makeStore = () =>
       cart: cartReducer,
     },
     devTools: process.env.NODE_ENV === "development",
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(addressMapMiddleware.middleware),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(addressMapMiddleware.middleware, cartMiddleware.middleware),
   });
 
 const store = makeStore();
@@ -22,5 +24,7 @@ const wrapper = createWrapper(makeStore, {debug: process.env.NODE_ENV === "devel
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export type AppStartListening = TypedStartListening<RootState, AppDispatch>;
 
 export default wrapper;

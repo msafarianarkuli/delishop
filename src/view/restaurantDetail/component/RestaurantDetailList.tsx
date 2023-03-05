@@ -13,7 +13,7 @@ import {
   removeCartRestaurantLastItem,
   selectCartRestaurant,
   setCartRestaurantItem,
-  setCartRestaurantVendorId,
+  setCartRestaurantVendorData,
 } from "redux/cart/cartRestaurantReducer";
 import {useRouter} from "next/router";
 
@@ -73,7 +73,12 @@ function RestaurantDetailList() {
                       const id = router.query.id;
                       if (id && !Array.isArray(id)) {
                         if (vendorId !== id) {
-                          dispatch(setCartRestaurantVendorId(id));
+                          dispatch(
+                            setCartRestaurantVendorData({
+                              vendorId: id,
+                              title: data?.vendor?.name,
+                            })
+                          );
                         }
                         if (item.extras?.length) {
                           dispatchModal(
@@ -81,10 +86,11 @@ function RestaurantDetailList() {
                               data: [...item.extras],
                               id: product.id,
                               price: finalPrice,
+                              title: item.displayname,
                             })
                           );
                         } else {
-                          dispatch(setCartRestaurantItem({id: product.id, price: finalPrice}));
+                          dispatch(setCartRestaurantItem({id: product.id, price: finalPrice, title: item.displayname}));
                         }
                       }
                     }}

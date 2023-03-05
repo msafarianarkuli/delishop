@@ -2,55 +2,71 @@ import styles from "view/restaurantCart/component/restaurantCartCard/restaurantC
 import {Button} from "antd";
 import {MouseEventHandler} from "react";
 
-interface IDataRestaurantCartCardItem {
+export interface IRestaurantCartCardDataItem {
   count: number;
   title: string;
   price: number;
-  extra?: string;
-  extraPrice?: number;
+  extra?: IDataRestaurantCartCardItemExtra[];
 }
 
-export type TDataRestaurantCartCard = IDataRestaurantCartCardItem[];
+interface IDataRestaurantCartCardItemExtra {
+  name: string;
+  price: number;
+}
 
-interface IRestaurantCartCard {
+export type TRestaurantCartCardData = IRestaurantCartCardDataItem[];
+
+export interface IRestaurantCartCard {
   title: string;
-  address: string;
-  data: TDataRestaurantCartCard;
+  data: TRestaurantCartCardData;
   onClickOk: MouseEventHandler;
   onClickRemove: MouseEventHandler;
 }
 
 function RestaurantCartCard(props: IRestaurantCartCard) {
-  const {title, address, data, onClickOk, onClickRemove} = props;
+  const {title, data, onClickOk, onClickRemove} = props;
   return (
     <div className={styles.restaurant_cart_card_container}>
       <div className="flex items-center px-5 h-[50px] bg-[#2C3036] text-white">
         <span>{title}</span>
-        <span className="mr-1">({address})</span>
+        {/*<span className="mr-1">({address})</span>*/}
       </div>
       <div className="px-5 py-3">
         {data.map((item, index) => {
           return (
             <div key={index} className="py-3 border-t last:border-b border-borderColor">
               <div className="flex items-center justify-between">
-                <div>
-                  <span className="ml-1">({item.count})</span>
+                <div className="text-[15px]">
                   <span>{item.title}</span>
+                  <span className="font-extralight mr-1">({item.count})</span>
                 </div>
-                <div className="whitespace-nowrap">
+                <div className="whitespace-nowrap text-[13px]">
                   <span>{item.price.toLocaleString("en-US")}</span>
                   <span className="mr-1">تومان</span>
                 </div>
               </div>
-              {item.extra && item.extraPrice ? (
-                <div className="flex items-center justify-between mt-2">
-                  <div className="truncate text-[13px] font-light ml-2">{item.extra}</div>
-                  <div className="whitespace-nowrap">
-                    <span>{item.extraPrice.toLocaleString("en-US")}</span>
-                    <span className="mr-1">تومان</span>
-                  </div>
-                </div>
-              ) : null}
+              <div className="flex flex-wrap">
+                {item.extra?.map((element, idx) => {
+                  return (
+                    <div key={idx} className="flex text-[11px] mt-1">
+                      <div className="ml-1">{element.name}</div>
+                      <div className="whitespace-nowrap">
+                        (<span>{element.price.toLocaleString("en-US")}</span>
+                        <span className="mr-1">تومان</span>)
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {/*{item.extra && item.extraPrice ? (*/}
+              {/*  <div className="flex items-center justify-between mt-2">*/}
+              {/*    <div className="truncate text-[13px] font-light ml-2">{item.extra}</div>*/}
+              {/*    <div className="whitespace-nowrap">*/}
+              {/*      <span>{item.extraPrice.toLocaleString("en-US")}</span>*/}
+              {/*      <span className="mr-1">تومان</span>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*) : null}*/}
             </div>
           );
         })}

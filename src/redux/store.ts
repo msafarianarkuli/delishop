@@ -4,7 +4,7 @@ import templateReducer from "redux/template/templateReducer";
 import addressMapReducer from "redux/addressMap/addressMapReducer";
 import cartRestaurantReducer from "redux/cart/cartRestaurantReducer";
 import {addressMapMiddleware} from "redux/addressMap/addressMapMiddleware";
-import {cartMiddleware} from "redux/cart/cartMiddleware";
+import {cartRestaurantMiddleware} from "redux/cart/cartRestaurantMiddleware";
 
 const makeStore = () =>
   configureStore({
@@ -15,7 +15,7 @@ const makeStore = () =>
     },
     devTools: process.env.NODE_ENV === "development",
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(addressMapMiddleware.middleware, cartMiddleware.middleware),
+      getDefaultMiddleware().concat(addressMapMiddleware.middleware, cartRestaurantMiddleware.middleware),
   });
 
 const store = makeStore();

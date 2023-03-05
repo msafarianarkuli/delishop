@@ -6,6 +6,7 @@ interface IRestaurantDetailExtra {
   isOpen: boolean;
   id: number;
   price: number;
+  title: string;
 }
 
 interface IAction {
@@ -18,6 +19,7 @@ const initialState: IRestaurantDetailExtra = {
   isOpen: false,
   id: 0,
   price: 0,
+  title: "",
 };
 
 export const SET_DATA = "data";
@@ -34,6 +36,7 @@ function reducer(state: IRestaurantDetailExtra, action: IAction): IRestaurantDet
         data: action.payload.data,
         id: action.payload.id,
         price: action.payload.price,
+        title: action.payload.title,
       };
     case CLOSE:
       return {
@@ -41,6 +44,7 @@ function reducer(state: IRestaurantDetailExtra, action: IAction): IRestaurantDet
         data: [],
         id: 0,
         price: 0,
+        title: "",
       };
     default:
       return state;
@@ -60,6 +64,7 @@ export const setRestaurantDetailExtraData = (payload: {
   data: IGetVendorDetailMenusGroupsProductsExtras[];
   id: number;
   price: number;
+  title: string;
 }) => ({
   type: SET_DATA,
   payload,

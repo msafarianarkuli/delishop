@@ -1,32 +1,14 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "redux/store";
+import {
+  ICartRestaurantReducer,
+  ISetCartRestaurantItem,
+  ISetCartRestaurantVendorData,
+} from "redux/cart/cartRestaurantInterface";
 
-export interface ICartReducer {
-  vendorId: string | null;
-  totalPrice: number;
-  totalOrderCount: number;
-  isLoadedFromStorage: boolean;
-  cartItems: {
-    [x: number]: ICartReducerCartItem[];
-  };
-}
-
-interface ICartReducerCartItem {
-  extra?: ICartReducerCartItemExtraItem[];
-  price: number;
-}
-
-export interface ICartReducerCartItemExtraItem {
-  id: number;
-  price: number;
-}
-
-interface ISetCartItem extends ICartReducerCartItem {
-  id: number;
-}
-
-const initialState: ICartReducer = {
+const initialState: ICartRestaurantReducer = {
   vendorId: null,
+  title: null,
   cartItems: {},
   totalPrice: 0,
   totalOrderCount: 0,
@@ -39,22 +21,24 @@ const cartRestaurantReducer = createSlice({
   name: "cartRestaurant",
   initialState,
   reducers: {
-    setCartRestaurantVendorId: (state, action: PayloadAction<string | null>) => {
-      state.vendorId = action.payload;
+    setCartRestaurantVendorData: (state, action: PayloadAction<ISetCartRestaurantVendorData>) => {
+      state.vendorId = action.payload.vendorId;
+      state.title = action.payload.title;
       state.cartItems = {};
       state.totalPrice = 0;
       state.totalOrderCount = 0;
     },
-    setCartRestaurantItem: (state, action: PayloadAction<ISetCartItem>) => {
+    setCartRestaurantItem: (state, action: PayloadAction<ISetCartRestaurantItem>) => {
       const cartItem = state.cartItems;
       const payload = action.payload;
       const extra = payload.extra || [];
       const totalExtraPrice = extra?.reduce((arr, current) => arr + current.price, 0);
       const price = payload.price;
+      const title = payload.title;
       if (cartItem[payload.id]) {
-        cartItem[payload.id].push({extra, price});
+        cartItem[payload.id].push({extra, price, title});
       } else {
-        cartItem[payload.id] = [{extra, price}];
+        cartItem[payload.id] = [{extra, price, title}];
       }
       state.totalOrderCount += 1;
       state.totalPrice += price + totalExtraPrice;
@@ -76,11 +60,15 @@ const cartRestaurantReducer = createSlice({
         state.totalPrice -= price + totalExtraPrice;
       }
     },
-    setCartRestaurantFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
+    setCartRestaurantFromStorage: (
+      state,
+      action: PayloadAction<Omit<ICartRestaurantReducer, "isLoadedFromStorage">>
+    ) => {
       state.vendorId = action.payload?.vendorId || initialState.vendorId;
       state.cartItems = action.payload?.cartItems || initialState.cartItems;
       state.totalOrderCount = action.payload?.totalOrderCount || initialState.totalOrderCount;
       state.totalPrice = action.payload?.totalPrice || initialState.totalPrice;
+      state.title = action.payload?.title || initialState.title;
       state.isLoadedFromStorage = true;
     },
   },
@@ -89,7 +77,7 @@ const cartRestaurantReducer = createSlice({
 const {reducer, actions} = cartRestaurantReducer;
 
 export const {
-  setCartRestaurantVendorId,
+  setCartRestaurantVendorData,
   setCartRestaurantItem,
   removeCartRestaurantLastItem,
   setCartRestaurantFromStorage,

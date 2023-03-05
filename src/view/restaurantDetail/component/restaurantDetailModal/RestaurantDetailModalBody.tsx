@@ -4,11 +4,8 @@ import {MouseEventHandler, useEffect, useState} from "react";
 import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDetail";
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  ICartReducerCartItemExtraItem,
-  selectCartRestaurantTotalPrice,
-  setCartRestaurantItem,
-} from "redux/cart/cartRestaurantReducer";
+import {selectCartRestaurantTotalPrice, setCartRestaurantItem} from "redux/cart/cartRestaurantReducer";
+import {ICartRestaurantReducerCartItemExtraItem} from "redux/cart/cartRestaurantInterface";
 
 interface IRestaurantDetailModalBody {
   onClick: MouseEventHandler;
@@ -19,7 +16,7 @@ interface IRestaurantDetailModalBodyData extends IGetVendorDetailMenusGroupsProd
 }
 
 function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
-  const {data: extraData, isOpen, id, price} = useRestaurantDetailExtra();
+  const {data: extraData, isOpen, id, price, title} = useRestaurantDetailExtra();
   const [data, setData] = useState<IRestaurantDetailModalBodyData[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
@@ -87,12 +84,13 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
       <div className="px-[10px] mt-10">
         <Button
           onClick={(e) => {
-            const extra: ICartReducerCartItemExtraItem[] = [];
+            const extra: ICartRestaurantReducerCartItemExtraItem[] = [];
             for (const item of data) {
               if (item.isSelected) {
                 extra.push({
                   id: item.id,
                   price: item.price,
+                  name: item.name,
                 });
               }
             }
@@ -101,6 +99,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
                 id,
                 extra,
                 price,
+                title,
               })
             );
             onClick(e);

@@ -10,6 +10,7 @@ interface IDataBottomNavigationitem {
   link?: string;
   active: boolean;
   onClick?: () => void;
+  badge?: boolean;
 }
 
 export type TDataBottomNavigation = IDataBottomNavigationitem[];
@@ -48,10 +49,13 @@ function BottomNavigation(props: IBottomNavigation) {
             [primaryColor]: item.active,
           });
           const Icon = item.icon;
-          const className = "flex flex-col items-center";
+          const className = "relative flex flex-col items-center";
           const Component: ElementType = item.link ? Link : "button";
           return (
             <Component key={index} {...(item.link ? {href: item.link} : {onClick: item.onClick})} className={className}>
+              {item.badge ? (
+                <div className="absolute w-[7px] h-[7px] rounded-full bg-primary top-[2%] right-[25%]" />
+              ) : null}
               <Icon className={icon} />
               <div className={text}>{item.title}</div>
             </Component>

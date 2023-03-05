@@ -1,10 +1,14 @@
 import {useMemo} from "react";
 import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigation";
 import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
+import {useSelector} from "react-redux";
+import {selectCartRestaurantList} from "redux/cart/cartRestaurantReducer";
 
 type TRestaurantNavigation = "cart" | "search" | "order";
 
 function useRestaurantNavigation(active?: TRestaurantNavigation) {
+  const cartList = useSelector(selectCartRestaurantList);
+
   return useMemo(() => {
     const data: TDataBottomNavigation = [
       {
@@ -18,6 +22,7 @@ function useRestaurantNavigation(active?: TRestaurantNavigation) {
         title: "سبد خرید",
         link: "/restaurant/cart",
         active: active === "cart",
+        badge: !!cartList?.length,
       },
       {
         icon: IconSearch,
@@ -33,7 +38,7 @@ function useRestaurantNavigation(active?: TRestaurantNavigation) {
       },
     ];
     return data;
-  }, [active]);
+  }, [active, cartList?.length]);
 }
 
 export default useRestaurantNavigation;

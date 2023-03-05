@@ -4,7 +4,11 @@ import {MouseEventHandler, useEffect, useState} from "react";
 import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDetail";
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch, useSelector} from "react-redux";
-import {ICartReducerCartItemExtraItem, selectCartTotalPrice, setCartItem} from "redux/cart/cartReducer";
+import {
+  ICartReducerCartItemExtraItem,
+  selectCartRestaurantTotalPrice,
+  setCartRestaurantItem,
+} from "redux/cart/cartRestaurantReducer";
 
 interface IRestaurantDetailModalBody {
   onClick: MouseEventHandler;
@@ -19,7 +23,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
   const [data, setData] = useState<IRestaurantDetailModalBodyData[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
-  const totalCartPrice = useSelector(selectCartTotalPrice);
+  const totalCartPrice = useSelector(selectCartRestaurantTotalPrice);
 
   useEffect(() => {
     if (isOpen) {
@@ -93,7 +97,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
               }
             }
             dispatch(
-              setCartItem({
+              setCartRestaurantItem({
                 id,
                 extra,
                 price,

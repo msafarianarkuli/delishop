@@ -7,7 +7,7 @@ import {
 } from "redux/addressMap/addressMapReducer";
 import {useDispatch} from "react-redux";
 import {useSession} from "next-auth/react";
-import {CartLocalStorageKey, setCartFromStorage} from "redux/cart/cartReducer";
+import {CartLocalStorageKey, setCartRestaurantFromStorage} from "redux/cart/cartRestaurantReducer";
 
 function LocalStorageData() {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function LocalStorageData() {
   useEffect(() => {
     const userAddress = localStorage.getItem(CartLocalStorageKey);
     const data = userAddress ? JSON.parse(userAddress) : null;
-    dispatch(setCartFromStorage(data));
+    dispatch(setCartRestaurantFromStorage(data));
   }, [dispatch]);
 
   return null;

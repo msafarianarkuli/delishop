@@ -9,7 +9,12 @@ import {
   useRestaurantDetailExtraAction,
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch, useSelector} from "react-redux";
-import {removeCartLastItem, selectCart, setCartItem, setCartVendorId} from "redux/cart/cartReducer";
+import {
+  removeCartRestaurantLastItem,
+  selectCartRestaurant,
+  setCartRestaurantItem,
+  setCartRestaurantVendorId,
+} from "redux/cart/cartRestaurantReducer";
 import {useRouter} from "next/router";
 
 function RestaurantDetailList() {
@@ -17,7 +22,7 @@ function RestaurantDetailList() {
   const {data} = useRestaurantDetailData();
   const dispatchModal = useRestaurantDetailExtraAction();
   const dispatch = useDispatch();
-  const {vendorId, cartItems} = useSelector(selectCart);
+  const {vendorId, cartItems} = useSelector(selectCartRestaurant);
   const router = useRouter();
 
   useEffect(() => {
@@ -68,7 +73,7 @@ function RestaurantDetailList() {
                       const id = router.query.id;
                       if (id && !Array.isArray(id)) {
                         if (vendorId !== id) {
-                          dispatch(setCartVendorId(id));
+                          dispatch(setCartRestaurantVendorId(id));
                         }
                         if (item.extras?.length) {
                           dispatchModal(
@@ -79,12 +84,12 @@ function RestaurantDetailList() {
                             })
                           );
                         } else {
-                          dispatch(setCartItem({id: product.id, price: finalPrice}));
+                          dispatch(setCartRestaurantItem({id: product.id, price: finalPrice}));
                         }
                       }
                     }}
                     onMinusClick={() => {
-                      dispatch(removeCartLastItem(product.id));
+                      dispatch(removeCartRestaurantLastItem(product.id));
                     }}
                   />
                 </Link>

@@ -33,19 +33,19 @@ const initialState: ICartReducer = {
   isLoadedFromStorage: false,
 };
 
-export const CartLocalStorageKey = "cart";
+export const CartLocalStorageKey = "cartRestaurant";
 
-const cartReducer = createSlice({
-  name: "cart",
+const cartRestaurantReducer = createSlice({
+  name: "cartRestaurant",
   initialState,
   reducers: {
-    setCartVendorId: (state, action: PayloadAction<string | null>) => {
+    setCartRestaurantVendorId: (state, action: PayloadAction<string | null>) => {
       state.vendorId = action.payload;
       state.cartItems = {};
       state.totalPrice = 0;
       state.totalOrderCount = 0;
     },
-    setCartItem: (state, action: PayloadAction<ISetCartItem>) => {
+    setCartRestaurantItem: (state, action: PayloadAction<ISetCartItem>) => {
       const cartItem = state.cartItems;
       const payload = action.payload;
       const extra = payload.extra || [];
@@ -59,7 +59,7 @@ const cartReducer = createSlice({
       state.totalOrderCount += 1;
       state.totalPrice += price + totalExtraPrice;
     },
-    removeCartLastItem: (state, action: PayloadAction<number>) => {
+    removeCartRestaurantLastItem: (state, action: PayloadAction<number>) => {
       const id = action.payload;
       const cartItems = state.cartItems;
       const item = cartItems[id];
@@ -76,7 +76,7 @@ const cartReducer = createSlice({
         state.totalPrice -= price + totalExtraPrice;
       }
     },
-    setCartFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
+    setCartRestaurantFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
       state.vendorId = action.payload?.vendorId || initialState.vendorId;
       state.cartItems = action.payload?.cartItems || initialState.cartItems;
       state.totalOrderCount = action.payload?.totalOrderCount || initialState.totalOrderCount;
@@ -86,11 +86,16 @@ const cartReducer = createSlice({
   },
 });
 
-const {reducer, actions} = cartReducer;
+const {reducer, actions} = cartRestaurantReducer;
 
-export const {setCartVendorId, setCartItem, removeCartLastItem, setCartFromStorage} = actions;
-export const selectCart = (state: RootState) => state.cart;
-export const selectCartTotalOrderCount = (state: RootState) => state.cart.totalOrderCount;
-export const selectCartTotalPrice = (state: RootState) => state.cart.totalPrice;
+export const {
+  setCartRestaurantVendorId,
+  setCartRestaurantItem,
+  removeCartRestaurantLastItem,
+  setCartRestaurantFromStorage,
+} = actions;
+export const selectCartRestaurant = (state: RootState) => state.cartRestaurant;
+export const selectCartRestaurantTotalOrderCount = (state: RootState) => state.cartRestaurant.totalOrderCount;
+export const selectCartRestaurantTotalPrice = (state: RootState) => state.cartRestaurant.totalPrice;
 
 export default reducer;

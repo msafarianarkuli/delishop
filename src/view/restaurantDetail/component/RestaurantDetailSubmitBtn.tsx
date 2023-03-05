@@ -2,10 +2,10 @@ import {IconDownload} from "assets/icons";
 import {useRouter} from "next/router";
 import {SubmitBuyBtn} from "components";
 import {useSelector} from "react-redux";
-import {selectCartTotalOrderCount, selectCartTotalPrice} from "redux/cart/cartReducer";
+import {selectCartRestaurantTotalOrderCount, selectCartRestaurantTotalPrice} from "redux/cart/cartRestaurantReducer";
 
 function RestaurantDetailSubmitBtnBody() {
-  const totalOrderCount = useSelector(selectCartTotalOrderCount);
+  const totalOrderCount = useSelector(selectCartRestaurantTotalOrderCount);
   return (
     <>
       <span>تکمیل خرید</span>(<span>{totalOrderCount}</span>)
@@ -15,7 +15,7 @@ function RestaurantDetailSubmitBtnBody() {
 
 function RestaurantDetailSubmitBtn() {
   const router = useRouter();
-  const totalPrice = useSelector(selectCartTotalPrice);
+  const totalPrice = useSelector(selectCartRestaurantTotalPrice);
   if (!totalPrice) return null;
   return (
     <SubmitBuyBtn

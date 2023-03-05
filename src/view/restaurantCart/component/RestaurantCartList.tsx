@@ -6,7 +6,6 @@ import RestaurantCartCard, {
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectCartRestaurant} from "redux/cart/cartRestaurantReducer";
-import {createLog} from "utils/utils";
 
 interface IRestaurantCartList extends Omit<IRestaurantCartCard, "onClickRemove" | "onClickOk"> {
   id: string;
@@ -21,10 +20,8 @@ function RestaurantCartList() {
     if (cart.isLoadedFromStorage) {
       const tmpCount: {[x: string]: IRestaurantCartCardDataItem} = {};
       for (const [key, value] of Object.entries(cart.cartItems)) {
-        console.log("value", value);
         value.forEach((item) => {
           const tmpKey = item.extra?.reduce((arr, current) => arr + "_" + current.id, `${key}`) || key;
-          console.log("tmpKey", tmpKey);
           let count = tmpCount[tmpKey]?.count || 0;
           tmpCount[tmpKey] = {
             count: count + 1,
@@ -34,8 +31,6 @@ function RestaurantCartList() {
           };
         });
       }
-      createLog("tmpCount", tmpCount);
-      createLog("title", cart.title);
       const tmp: IRestaurantCartList = {
         id: cart?.vendorId || "",
         title: cart.title || "",

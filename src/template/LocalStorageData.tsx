@@ -7,7 +7,10 @@ import {
 } from "redux/addressMap/addressMapReducer";
 import {useDispatch} from "react-redux";
 import {useSession} from "next-auth/react";
-import {CartRestaurantListLocalStorageKey, setCartRestaurantFromStorage} from "redux/cart/cartRestaurantReducer";
+import {
+  CartRestaurantListLocalStorageKey,
+  setCartRestaurantFromStorage,
+} from "redux/cartRestaurant/cartRestaurantReducer";
 
 function LocalStorageData() {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import {
   IRemoveCartRestaurantLastItem,
   ISetCartRestaurantItem,
   ISetCartRestaurantVendorData,
-} from "redux/cart/cartRestaurantInterface";
+} from "redux/cartRestaurant/cartRestaurantInterface";
 
 const initialCartOrder: ICartRestaurantListItem = {
   vendorId: null,

@@ -13,7 +13,7 @@ import {
   removeCartRestaurantLastItem,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
-} from "redux/cart/cartRestaurantReducer";
+} from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
 

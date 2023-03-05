@@ -4,9 +4,9 @@ import {
   removeCartRestaurantLastItem,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
-} from "redux/cart/cartRestaurantReducer";
+} from "redux/cartRestaurant/cartRestaurantReducer";
 import {AppStartListening} from "redux/store";
-import {ICartRestaurantReducer} from "redux/cart/cartRestaurantInterface";
+import {ICartRestaurantReducer} from "redux/cartRestaurant/cartRestaurantInterface";
 
 export const cartRestaurantMiddleware = createListenerMiddleware();
 const addAppListener = cartRestaurantMiddleware.startListening as AppStartListening;

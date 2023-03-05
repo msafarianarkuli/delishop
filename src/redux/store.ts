@@ -2,9 +2,9 @@ import {configureStore, TypedStartListening} from "@reduxjs/toolkit";
 import {createWrapper} from "next-redux-wrapper";
 import templateReducer from "redux/template/templateReducer";
 import addressMapReducer from "redux/addressMap/addressMapReducer";
-import cartRestaurantReducer from "redux/cart/cartRestaurantReducer";
+import cartRestaurantReducer from "redux/cartRestaurant/cartRestaurantReducer";
 import {addressMapMiddleware} from "redux/addressMap/addressMapMiddleware";
-import {cartRestaurantMiddleware} from "redux/cart/cartRestaurantMiddleware";
+import {cartRestaurantMiddleware} from "redux/cartRestaurant/cartRestaurantMiddleware";
 
 const makeStore = () =>
   configureStore({

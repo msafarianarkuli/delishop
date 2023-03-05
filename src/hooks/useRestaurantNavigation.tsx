@@ -2,7 +2,7 @@ import {useMemo} from "react";
 import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigation";
 import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
 import {useSelector} from "react-redux";
-import {selectCartRestaurantList} from "redux/cart/cartRestaurantReducer";
+import {selectCartRestaurantList} from "redux/cartRestaurant/cartRestaurantReducer";
 
 type TRestaurantNavigation = "cart" | "search" | "order";
 

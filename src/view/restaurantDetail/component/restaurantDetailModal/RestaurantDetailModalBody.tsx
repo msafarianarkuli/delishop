@@ -4,8 +4,8 @@ import {MouseEventHandler, useEffect, useState} from "react";
 import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDetail";
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch} from "react-redux";
-import {setCartRestaurantItem} from "redux/cart/cartRestaurantReducer";
-import {ICartRestaurantReducerCartItemExtraItem} from "redux/cart/cartRestaurantInterface";
+import {setCartRestaurantItem} from "redux/cartRestaurant/cartRestaurantReducer";
+import {ICartRestaurantReducerCartItemExtraItem} from "redux/cartRestaurant/cartRestaurantInterface";
 import useCartRestaurant from "hooks/useCartRestaurant";
 
 interface IRestaurantDetailModalBody {

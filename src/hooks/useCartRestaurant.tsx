@@ -1,6 +1,6 @@
 import {useMemo} from "react";
 import {useSelector} from "react-redux";
-import {selectCartRestaurantList} from "redux/cart/cartRestaurantReducer";
+import {selectCartRestaurantList} from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
 
 function useCartRestaurant() {

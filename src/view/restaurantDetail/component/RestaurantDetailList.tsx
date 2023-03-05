@@ -10,7 +10,7 @@ import {
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch} from "react-redux";
 import {
-  removeCartRestaurantLastItem,
+  removeCartRestaurantCartListLastOrder,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
@@ -104,7 +104,7 @@ function RestaurantDetailList() {
                     onMinusClick={() => {
                       const id = router.query.id;
                       if (id && !Array.isArray(id)) {
-                        dispatch(removeCartRestaurantLastItem({id: product.id, vendorId: id}));
+                        dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId: id}));
                       }
                     }}
                   />

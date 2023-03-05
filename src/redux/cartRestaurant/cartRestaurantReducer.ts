@@ -17,11 +17,6 @@ const initialCartOrder: ICartRestaurantListItem = {
 };
 
 const initialState: ICartRestaurantReducer = {
-  // vendorId: null,
-  // title: null,
-  // cartOrders: {},
-  // totalPrice: 0,
-  // totalOrderCount: 0,
   cartList: [],
   isLoadedFromStorage: false,
 };
@@ -58,7 +53,7 @@ const cartRestaurantReducer = createSlice({
         vendor.totalPrice += price + totalExtraPrice;
       }
     },
-    removeCartRestaurantLastItem: (state, action: PayloadAction<IRemoveCartRestaurantLastItem>) => {
+    removeCartRestaurantCartListLastOrder: (state, action: PayloadAction<IRemoveCartRestaurantLastItem>) => {
       const cartList = state.cartList;
       const id = action.payload.id;
       const vendor = cartList.find((item) => item.vendorId === action.payload.vendorId);
@@ -79,16 +74,21 @@ const cartRestaurantReducer = createSlice({
         }
       }
     },
+    clearCartRestaurantCartList: (state) => {
+      state.cartList = [];
+    },
+    removeCartRestaurantCartListCartOrder: (state, action: PayloadAction<string>) => {
+      const cartList = state.cartList;
+      const id = action.payload;
+      if (cartList.some((item) => item.vendorId === id)) {
+        state.cartList = cartList.filter((item) => item.vendorId !== action.payload);
+      }
+    },
     setCartRestaurantFromStorage: (
       state,
       action: PayloadAction<Omit<ICartRestaurantReducer, "isLoadedFromStorage">>
     ) => {
       state.cartList = action.payload?.cartList || [];
-      // state.vendorId = action.payload?.vendorId || initialState.vendorId;
-      // state.cartOrders = action.payload?.cartOrders || initialState.cartOrders;
-      // state.totalOrderCount = action.payload?.totalOrderCount || initialState.totalOrderCount;
-      // state.totalPrice = action.payload?.totalPrice || initialState.totalPrice;
-      // state.title = action.payload?.title || initialState.title;
       state.isLoadedFromStorage = true;
     },
   },
@@ -99,12 +99,12 @@ const {reducer, actions} = cartRestaurantReducer;
 export const {
   setCartRestaurantVendorData,
   setCartRestaurantItem,
-  removeCartRestaurantLastItem,
+  removeCartRestaurantCartListLastOrder,
   setCartRestaurantFromStorage,
+  clearCartRestaurantCartList,
+  removeCartRestaurantCartListCartOrder,
 } = actions;
 export const selectCartRestaurant = (state: RootState) => state.cartRestaurant;
 export const selectCartRestaurantList = (state: RootState) => state.cartRestaurant.cartList;
-// export const selectCartRestaurantTotalOrderCount = (state: RootState) => state.cartRestaurant.totalOrderCount;
-// export const selectCartRestaurantTotalPrice = (state: RootState) => state.cartRestaurant.totalPrice;
 
 export default reducer;

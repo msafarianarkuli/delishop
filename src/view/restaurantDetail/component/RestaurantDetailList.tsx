@@ -8,22 +8,22 @@ import {
   setRestaurantDetailExtraData,
   useRestaurantDetailExtraAction,
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {
   removeCartRestaurantLastItem,
-  selectCartRestaurant,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
 } from "redux/cart/cartRestaurantReducer";
 import {useRouter} from "next/router";
+import useCartRestaurant from "hooks/useCartRestaurant";
 
 function RestaurantDetailList() {
   const ref = useRef<HTMLDivElement>(null);
   const {data} = useRestaurantDetailData();
   const dispatchModal = useRestaurantDetailExtraAction();
   const dispatch = useDispatch();
-  const {vendorId, cartItems} = useSelector(selectCartRestaurant);
   const router = useRouter();
+  const vendor = useCartRestaurant();
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -59,7 +59,7 @@ function RestaurantDetailList() {
               const price = product?.price || 0;
               const addedPercent = item.price_class / 100;
               const finalPrice = price + price * addedPercent;
-              const count = cartItems[product.id]?.length || 0;
+              const count = vendor?.cartOrders[product.id]?.length || 0;
               return (
                 <Link key={item.id} href={`product/${item.id}`} className="block mb-5">
                   <RestaurantDetailCard
@@ -72,7 +72,7 @@ function RestaurantDetailList() {
                     onAddClick={() => {
                       const id = router.query.id;
                       if (id && !Array.isArray(id)) {
-                        if (vendorId !== id) {
+                        if (!vendor) {
                           dispatch(
                             setCartRestaurantVendorData({
                               vendorId: id,
@@ -90,12 +90,22 @@ function RestaurantDetailList() {
                             })
                           );
                         } else {
-                          dispatch(setCartRestaurantItem({id: product.id, price: finalPrice, title: item.displayname}));
+                          dispatch(
+                            setCartRestaurantItem({
+                              id: product.id,
+                              price: finalPrice,
+                              title: item.displayname,
+                              vendorId: id,
+                            })
+                          );
                         }
                       }
                     }}
                     onMinusClick={() => {
-                      dispatch(removeCartRestaurantLastItem(product.id));
+                      const id = router.query.id;
+                      if (id && !Array.isArray(id)) {
+                        dispatch(removeCartRestaurantLastItem({id: product.id, vendorId: id}));
+                      }
                     }}
                   />
                 </Link>

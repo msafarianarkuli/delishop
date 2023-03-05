@@ -3,9 +3,10 @@ import {Button} from "antd";
 import {MouseEventHandler, useEffect, useState} from "react";
 import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDetail";
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
-import {useDispatch, useSelector} from "react-redux";
-import {selectCartRestaurantTotalPrice, setCartRestaurantItem} from "redux/cart/cartRestaurantReducer";
+import {useDispatch} from "react-redux";
+import {setCartRestaurantItem} from "redux/cart/cartRestaurantReducer";
 import {ICartRestaurantReducerCartItemExtraItem} from "redux/cart/cartRestaurantInterface";
+import useCartRestaurant from "hooks/useCartRestaurant";
 
 interface IRestaurantDetailModalBody {
   onClick: MouseEventHandler;
@@ -20,13 +21,14 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
   const [data, setData] = useState<IRestaurantDetailModalBodyData[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
-  const totalCartPrice = useSelector(selectCartRestaurantTotalPrice);
+  // const totalCartPrice = useSelector(selectCartRestaurantTotalPrice);
+  const vendor = useCartRestaurant();
 
   useEffect(() => {
-    if (isOpen) {
-      setTotalPrice(totalCartPrice + price);
+    if (isOpen && vendor?.totalPrice) {
+      setTotalPrice(vendor.totalPrice + price);
     }
-  }, [isOpen, price, totalCartPrice]);
+  }, [isOpen, price, vendor?.totalPrice]);
 
   useEffect(() => {
     if (isOpen) {
@@ -84,24 +86,27 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
       <div className="px-[10px] mt-10">
         <Button
           onClick={(e) => {
-            const extra: ICartRestaurantReducerCartItemExtraItem[] = [];
-            for (const item of data) {
-              if (item.isSelected) {
-                extra.push({
-                  id: item.id,
-                  price: item.price,
-                  name: item.name,
-                });
+            if (vendor?.vendorId) {
+              const extra: ICartRestaurantReducerCartItemExtraItem[] = [];
+              for (const item of data) {
+                if (item.isSelected) {
+                  extra.push({
+                    id: item.id,
+                    price: item.price,
+                    name: item.name,
+                  });
+                }
               }
+              dispatch(
+                setCartRestaurantItem({
+                  id,
+                  extra,
+                  price,
+                  title,
+                  vendorId: vendor.vendorId,
+                })
+              );
             }
-            dispatch(
-              setCartRestaurantItem({
-                id,
-                extra,
-                price,
-                title,
-              })
-            );
             onClick(e);
           }}
           type="primary"

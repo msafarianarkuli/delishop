@@ -1,6 +1,6 @@
 import {createListenerMiddleware, isAnyOf} from "@reduxjs/toolkit";
 import {
-  CartLocalStorageKey,
+  CartRestaurantListLocalStorageKey,
   removeCartRestaurantLastItem,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
@@ -15,15 +15,11 @@ addAppListener({
   effect: (_, api) => {
     const store = api.getState();
     if (localStorage) {
-      const {vendorId, totalOrderCount, totalPrice, cartItems, title} = store.cartRestaurant;
+      const {cartList} = store.cartRestaurant;
       const data: Omit<ICartRestaurantReducer, "isLoadedFromStorage"> = {
-        vendorId,
-        cartItems,
-        totalPrice,
-        totalOrderCount,
-        title,
+        cartList,
       };
-      localStorage.setItem(CartLocalStorageKey, JSON.stringify(data));
+      localStorage.setItem(CartRestaurantListLocalStorageKey, JSON.stringify(data));
     }
   },
 });

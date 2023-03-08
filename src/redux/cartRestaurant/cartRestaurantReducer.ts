@@ -1,14 +1,14 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "redux/store";
 import {
-  ICartRestaurantListItem,
-  ICartRestaurantReducer,
-  IRemoveCartRestaurantLastItem,
-  ISetCartRestaurantItem,
-  ISetCartRestaurantVendorData,
-} from "redux/cartRestaurant/cartRestaurantInterface";
+  ICartReducerListItem,
+  ICartReducer,
+  IRemoveCartReducerLastItem,
+  ISetCartReducerItem,
+  ISetCartReducerVendorData,
+} from "types/interfaceCartReducer";
 
-const initialCartOrder: ICartRestaurantListItem = {
+const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
   title: null,
   cartOrders: {},
@@ -16,7 +16,7 @@ const initialCartOrder: ICartRestaurantListItem = {
   totalOrderCount: 0,
 };
 
-const initialState: ICartRestaurantReducer = {
+const initialState: ICartReducer = {
   cartList: [],
   isLoadedFromStorage: false,
 };
@@ -27,14 +27,14 @@ const cartRestaurantReducer = createSlice({
   name: "cartRestaurant",
   initialState,
   reducers: {
-    setCartRestaurantVendorData: (state, action: PayloadAction<ISetCartRestaurantVendorData>) => {
+    setCartRestaurantVendorData: (state, action: PayloadAction<ISetCartReducerVendorData>) => {
       state.cartList.push({
         ...initialCartOrder,
         vendorId: action.payload.vendorId,
         title: action.payload.title,
       });
     },
-    setCartRestaurantItem: (state, action: PayloadAction<ISetCartRestaurantItem>) => {
+    setCartRestaurantItem: (state, action: PayloadAction<ISetCartReducerItem>) => {
       const cartList = state.cartList;
       const vendor = cartList.find((item) => item.vendorId === action.payload.vendorId);
       if (vendor) {
@@ -53,7 +53,7 @@ const cartRestaurantReducer = createSlice({
         vendor.totalPrice += price + totalExtraPrice;
       }
     },
-    removeCartRestaurantCartListLastOrder: (state, action: PayloadAction<IRemoveCartRestaurantLastItem>) => {
+    removeCartRestaurantCartListLastOrder: (state, action: PayloadAction<IRemoveCartReducerLastItem>) => {
       const cartList = state.cartList;
       const id = action.payload.id;
       const vendor = cartList.find((item) => item.vendorId === action.payload.vendorId);
@@ -84,10 +84,7 @@ const cartRestaurantReducer = createSlice({
         state.cartList = cartList.filter((item) => item.vendorId !== action.payload);
       }
     },
-    setCartRestaurantFromStorage: (
-      state,
-      action: PayloadAction<Omit<ICartRestaurantReducer, "isLoadedFromStorage">>
-    ) => {
+    setCartRestaurantFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
       state.cartList = action.payload?.cartList || [];
       state.isLoadedFromStorage = true;
     },

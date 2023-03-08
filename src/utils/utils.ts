@@ -1,5 +1,5 @@
 import {ICartDataItem, TCartData} from "types/interfaces";
-import {TCartRestaurantListItemCartOrders} from "redux/cartRestaurant/cartRestaurantInterface";
+import {TCartReducerListItemCartOrders} from "types/interfaceCartReducer";
 
 export function createLog(message: any, ...optionalParams: any[]) {
   if (process.env.NODE_ENV === "development") {
@@ -124,7 +124,7 @@ export const createKeyForUseQuery = (keys: (string | number)[], key?: string | s
   return tmp;
 };
 
-type TMergeCartListToArray = (cartOrders: TCartRestaurantListItemCartOrders) => TCartData;
+type TMergeCartListToArray = (cartOrders: TCartReducerListItemCartOrders) => TCartData;
 export const mergeCartListToArray: TMergeCartListToArray = (cartOrders) => {
   const tmpCount: {[x: string]: ICartDataItem} = {};
   for (const [key, value] of Object.entries(cartOrders)) {

@@ -5,8 +5,8 @@ import {IGetVendorDetailMenusGroupsProductsExtras} from "types/interfaceVendorDe
 import {useRestaurantDetailExtra} from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch} from "react-redux";
 import {setCartRestaurantItem} from "redux/cartRestaurant/cartRestaurantReducer";
-import {ICartRestaurantReducerCartItemExtraItem} from "redux/cartRestaurant/cartRestaurantInterface";
 import useCartRestaurant from "hooks/useCartRestaurant";
+import {TCartReducerCartItemExtraItemExtra} from "types/interfaceCartReducer";
 
 interface IRestaurantDetailModalBody {
   onClick: MouseEventHandler;
@@ -87,7 +87,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
         <Button
           onClick={(e) => {
             if (vendor?.vendorId) {
-              const extra: ICartRestaurantReducerCartItemExtraItem[] = [];
+              const extra: TCartReducerCartItemExtraItemExtra = [];
               for (const item of data) {
                 if (item.isSelected) {
                   extra.push({

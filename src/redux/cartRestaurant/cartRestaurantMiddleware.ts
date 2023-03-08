@@ -8,7 +8,7 @@ import {
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {AppStartListening} from "redux/store";
-import {ICartRestaurantReducer} from "redux/cartRestaurant/cartRestaurantInterface";
+import {ICartReducer} from "types/interfaceCartReducer";
 
 export const cartRestaurantMiddleware = createListenerMiddleware();
 const addAppListener = cartRestaurantMiddleware.startListening as AppStartListening;
@@ -24,7 +24,7 @@ addAppListener({
     const store = api.getState();
     if (localStorage) {
       const {cartList} = store.cartRestaurant;
-      const data: Omit<ICartRestaurantReducer, "isLoadedFromStorage"> = {
+      const data: Omit<ICartReducer, "isLoadedFromStorage"> = {
         cartList,
       };
       localStorage.setItem(CartRestaurantListLocalStorageKey, JSON.stringify(data));

@@ -41,7 +41,7 @@ function RestaurantCartCard(props: IRestaurantCartCard) {
                   <span className="font-extralight mr-1">({item.count})</span>
                 </div>
                 <div className="whitespace-nowrap text-[13px]">
-                  <span>{item.price.toLocaleString("en-US")}</span>
+                  <span>{(item.count * item.price).toLocaleString("en-US")}</span>
                   <span className="mr-1">تومان</span>
                 </div>
               </div>
@@ -58,15 +58,6 @@ function RestaurantCartCard(props: IRestaurantCartCard) {
                   );
                 })}
               </div>
-              {/*{item.extra && item.extraPrice ? (*/}
-              {/*  <div className="flex items-center justify-between mt-2">*/}
-              {/*    <div className="truncate text-[13px] font-light ml-2">{item.extra}</div>*/}
-              {/*    <div className="whitespace-nowrap">*/}
-              {/*      <span>{item.extraPrice.toLocaleString("en-US")}</span>*/}
-              {/*      <span className="mr-1">تومان</span>*/}
-              {/*    </div>*/}
-              {/*  </div>*/}
-              {/*) : null}*/}
             </div>
           );
         })}

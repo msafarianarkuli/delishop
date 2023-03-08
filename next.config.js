@@ -24,6 +24,11 @@ module.exports = (phase) => {
     swcMinify: true,
     // env,
     rewrites,
+    compiler: {
+      removeConsole: {
+        exclude: ["error"],
+      },
+    },
   };
 
   return nextConfig;

@@ -1,4 +1,4 @@
-import OrderCompleteCard from "view/orederComplete/component/orderCompleteCard/OrderCompleteCard";
+import OrderCompleteCard from "view/orderComplete/component/orderCompleteCard/OrderCompleteCard";
 
 const data = [
   {

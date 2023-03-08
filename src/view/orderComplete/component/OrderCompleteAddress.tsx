@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
+import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {IconRoundedLeft} from "assets/icons";
-import OrderCompleteAddressCard from "view/orederComplete/component/orderCompleteAddressCard/OrderCompleteAddressCard";
+import OrderCompleteAddressCard from "view/orderComplete/component/orderCompleteAddressCard/OrderCompleteAddressCard";
 
 const data = [
   {

@@ -1,6 +1,6 @@
-import styles from "view/orederComplete/orderComplete.module.scss";
+import styles from "view/orderComplete/orderComplete.module.scss";
 import {Checkbox} from "components";
-import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
+import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {useEffect, useState} from "react";
 import {number2Digits} from "utils/utils";
 

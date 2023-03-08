@@ -1,7 +1,7 @@
 import {Button} from "antd";
 import {IconAdd, IconClose, IconDeleteAddress} from "assets/icons";
 import {useState} from "react";
-import styles from "view/orederComplete/component/orderCompleteCard/orderCompleteCard.module.scss";
+import styles from "view/orderComplete/component/orderCompleteCard/orderCompleteCard.module.scss";
 
 interface IExtraOrderCompleteCardItem {
   title: string;

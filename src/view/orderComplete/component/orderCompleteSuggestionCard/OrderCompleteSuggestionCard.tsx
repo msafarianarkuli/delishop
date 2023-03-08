@@ -1,5 +1,5 @@
 import {IconAdd} from "assets/icons";
-import styles from "view/orederComplete/component/orderCompleteSuggestionCard/orderCompleteSuggestion.module.scss";
+import styles from "view/orderComplete/component/orderCompleteSuggestionCard/orderCompleteSuggestion.module.scss";
 
 interface IOrderCompleteSuggestionCard {
   title: string;

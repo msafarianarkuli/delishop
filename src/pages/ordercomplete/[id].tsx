@@ -1,4 +1,4 @@
-import OrderComplete from "view/orederComplete";
+import OrderComplete from "view/orderComplete";
 
 function OrderCompletePage() {
   return (

@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Checkbox, Map} from "components";
-import styles from "view/orederComplete/component/orderCompleteAddressCard/orderCompleteAddressCard.module.scss";
+import styles from "view/orderComplete/component/orderCompleteAddressCard/orderCompleteAddressCard.module.scss";
 import {IMapPoint} from "components/map/Map";
 
 interface IOrderCompleteAddressCard {

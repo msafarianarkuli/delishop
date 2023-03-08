@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import OrderCompleteHeader from "view/orederComplete/component/OrderCompleteHeader";
-import OrderCompleteSubmitBtn from "view/orederComplete/component/OrderCompleteSubmitBtn";
-import OrderCompletePartOne from "view/orederComplete/component/OrderCompletePartOne";
-import OrderCompletePartTwo from "view/orederComplete/component/OrderCompletePartTwo";
+import OrderCompleteHeader from "view/orderComplete/component/OrderCompleteHeader";
+import OrderCompleteSubmitBtn from "view/orderComplete/component/OrderCompleteSubmitBtn";
+import OrderCompletePartOne from "view/orderComplete/component/OrderCompletePartOne";
+import OrderCompletePartTwo from "view/orderComplete/component/OrderCompletePartTwo";
 import {useRouter} from "next/router";
 
 function OrderComplete() {

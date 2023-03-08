@@ -1,4 +1,4 @@
-import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
+import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {CustomTextArea} from "components";
 import {useState} from "react";
 

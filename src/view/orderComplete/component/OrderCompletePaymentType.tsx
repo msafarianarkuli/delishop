@@ -1,6 +1,6 @@
-import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
+import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {IconBank, IconCash, IconWallet} from "assets/icons";
-import styles from "view/orederComplete/orderComplete.module.scss";
+import styles from "view/orderComplete/orderComplete.module.scss";
 import classNames from "classnames";
 import {useState} from "react";
 

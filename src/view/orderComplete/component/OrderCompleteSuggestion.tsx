@@ -1,7 +1,7 @@
 import React from "react";
-import OrderCompleteSuggestionCard from "view/orederComplete/component/orderCompleteSuggestionCard/OrderCompleteSuggestionCard";
+import OrderCompleteSuggestionCard from "view/orderComplete/component/orderCompleteSuggestionCard/OrderCompleteSuggestionCard";
 import img from "assets/images/suggestion.png";
-import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
+import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 
 const data = Array.from(new Array(5), (_, i) => ({
   id: i + 1,

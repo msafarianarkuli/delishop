@@ -18,3 +18,19 @@ export interface IDataContextProvider<T> {
   isFetching: boolean;
   error: any;
 }
+
+export interface ICartDataItem {
+  count: number;
+  title: string;
+  price: number;
+  extra?: TCartDataItemExtra;
+}
+
+interface ICartDataItemExtraItem {
+  name: string;
+  price: number;
+}
+
+export type TCartDataItemExtra = ICartDataItemExtraItem[];
+
+export type TCartData = ICartDataItem[];

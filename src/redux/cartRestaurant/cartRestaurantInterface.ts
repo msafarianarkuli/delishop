@@ -1,13 +1,6 @@
 export interface ICartRestaurantReducer {
-  // vendorId: string | null;
-  // title: string | null;
-  // totalPrice: number;
-  // totalOrderCount: number;
   cartList: TCartRestaurantList;
   isLoadedFromStorage: boolean;
-  // cartOrders: {
-  //   [x: number]: ICartRestaurantReducerCartItem[];
-  // };
 }
 
 export type TCartRestaurantList = ICartRestaurantListItem[];
@@ -17,10 +10,12 @@ export interface ICartRestaurantListItem {
   title: string | null;
   totalPrice: number;
   totalOrderCount: number;
-  cartOrders: {
-    [x: number]: ICartRestaurantReducerCartItem[];
-  };
+  cartOrders: TCartRestaurantListItemCartOrders;
 }
+
+export type TCartRestaurantListItemCartOrders = {
+  [x: number]: ICartRestaurantReducerCartItem[];
+};
 
 interface ICartRestaurantReducerCartItem {
   extra?: ICartRestaurantReducerCartItemExtraItem[];

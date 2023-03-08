@@ -2,17 +2,11 @@ import {Button} from "antd";
 import {IconAdd, IconClose, IconDeleteAddress} from "assets/icons";
 import {useState} from "react";
 import styles from "view/orderComplete/component/orderCompleteCard/orderCompleteCard.module.scss";
-
-interface IExtraOrderCompleteCardItem {
-  title: string;
-  price: number;
-}
-
-export type TExtraOrderCompleteCard = IExtraOrderCompleteCardItem[];
+import {TCartDataItemExtra} from "types/interfaces";
 
 interface IOrderCompleteCard {
   title: string;
-  extra?: TExtraOrderCompleteCard;
+  extra?: TCartDataItemExtra;
   price: number;
   count: number;
   onAddItem: () => void;
@@ -29,7 +23,7 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
         {extra?.map((item, index) => {
           return (
             <div key={index} className="flex items-center p-1 bg-[#DFDFDF] rounded-full text-[13px] ml-1 mb-1">
-              <div>{item.title}</div>
+              <div>{item.name}</div>
               <span>:</span>
               <div className="mx-1">
                 <span>{item.price.toLocaleString("en-US")}</span>
@@ -52,7 +46,6 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
           <button
             className="flex items-center justify-center w-[30px] h-[30px] bg-primary rounded-full"
             onClick={() => {
-              console.log("counter", counter);
               if (counter === 0) onAddItem();
               setCounter((prevState) => prevState + 1);
             }}

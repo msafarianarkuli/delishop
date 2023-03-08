@@ -1,24 +1,11 @@
 import styles from "view/restaurantCart/component/restaurantCartCard/restaurantCartCard.module.scss";
 import {Button} from "antd";
 import {MouseEventHandler} from "react";
-
-export interface IRestaurantCartCardDataItem {
-  count: number;
-  title: string;
-  price: number;
-  extra?: IDataRestaurantCartCardItemExtra[];
-}
-
-interface IDataRestaurantCartCardItemExtra {
-  name: string;
-  price: number;
-}
-
-export type TRestaurantCartCardData = IRestaurantCartCardDataItem[];
+import {TCartData} from "types/interfaces";
 
 export interface IRestaurantCartCard {
   title: string;
-  data: TRestaurantCartCardData;
+  data: TCartData;
   onClickOk: MouseEventHandler;
   onClickRemove: MouseEventHandler;
 }

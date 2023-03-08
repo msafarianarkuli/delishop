@@ -1,22 +1,33 @@
 import {BottomSheet} from "components";
-import {DrawerProps} from "antd";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
+import {
+  setRestaurantOrderPreviousReceiptClose,
+  useRestaurantOrderPreviousReceipt,
+  useRestaurantOrderPreviousReceiptAction,
+} from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousReceiptProvider";
 
-interface IRestaurantOrderPreviousReceiptOrdersItem {
-  title: string;
-  price: number;
-}
+// interface IRestaurantOrderPreviousReceiptOrdersItem {
+//   title: string;
+//   price: number;
+// }
 
-type TRestaurantOrderPreviousReceiptOrders = IRestaurantOrderPreviousReceiptOrdersItem[];
+// type TRestaurantOrderPreviousReceiptOrders = IRestaurantOrderPreviousReceiptOrdersItem[];
 
-interface IRestaurantOrderPreviousReceipt {
-  orders: TRestaurantOrderPreviousReceiptOrders;
-  open: boolean;
-  onClose?: DrawerProps["onClose"];
-}
+// interface IRestaurantOrderPreviousReceipt {
+//   orders: TRestaurantOrderPreviousReceiptOrders;
+//   open: boolean;
+//   onClose?: DrawerProps["onClose"];
+// }
 
-function RestaurantOrderPreviousReceipt(props: IRestaurantOrderPreviousReceipt) {
-  const {orders, open, onClose} = props;
+const order = Array.from(new Array(5), () => ({
+  title: "مرغ سوخاری پنج تکه اسپایسی",
+  price: 235000,
+}));
+
+function RestaurantOrderPreviousReceipt() {
+  // const {orders, open, onClose} = props;
+  const {open} = useRestaurantOrderPreviousReceipt();
+  const dispatch = useRestaurantOrderPreviousReceiptAction();
 
   useEffect(() => {
     if (!open) {
@@ -27,10 +38,14 @@ function RestaurantOrderPreviousReceipt(props: IRestaurantOrderPreviousReceipt) 
     }
   }, [open]);
 
+  const onClose = useCallback(() => {
+    dispatch(setRestaurantOrderPreviousReceiptClose());
+  }, [dispatch]);
+
   return (
     <BottomSheet open={open} onClose={onClose} height={300} title="فاکتور">
       <div>
-        {orders.map((item, index) => {
+        {order.map((item, index) => {
           return (
             <div key={index} className="flex items-center justify-between mb-5 first:mt-5 text-[15px] font-medium">
               <div>{item.title}</div>

@@ -14,7 +14,7 @@ export interface IGetOrdersListResOrdersItems {
   orderstatus: string;
   vendor: {
     id: number;
-    name: number;
+    name: string;
     logo?: string;
   };
 }

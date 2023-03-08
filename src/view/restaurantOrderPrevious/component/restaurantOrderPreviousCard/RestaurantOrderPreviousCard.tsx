@@ -20,9 +20,8 @@ interface IRestaurantOrderPreviousCard {
   id: string;
   receiptNumber: number;
   date: string;
-  image: string;
+  image?: string;
   title: string;
-  address: string;
   deliveryTitle: string;
   status: string;
   orders: TRestaurantOrderPreviousCardOrders;
@@ -38,7 +37,6 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     orders,
     onClickReceipt,
     receiptNumber,
-    address,
     image,
     status,
     title,
@@ -65,7 +63,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
           <div className="flex flex-col flex-1 mr-3">
             <div className="text-[17px] font-medium">
               <span className="ml-1">{title}</span>
-              <span className="text-textColorLight">({address})</span>
+              {/*<span className="text-textColorLight">({address})</span>*/}
             </div>
             <div className="flex flex-1 items-center justify-between mt-[17px]">
               <div className="text-[15px] font-medium text-textColorLight">ارسال به: {deliveryTitle}</div>

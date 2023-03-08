@@ -12,10 +12,9 @@ dayjs.extend(jalaliday);
 
 interface IRestaurantOrderActiveCard {
   title: string;
-  address: string;
   receiptNumber: number;
   coin: number;
-  image: string;
+  image?: string;
   deliveryTitle: string;
   date: string;
   deliveryTime: string;
@@ -23,7 +22,7 @@ interface IRestaurantOrderActiveCard {
 }
 
 function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
-  const {title, image, address, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit} = props;
+  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit} = props;
   return (
     <div className={styles.restaurant_order_active_card_container}>
       <div className="flex h-[60px] items-center justify-between bg-textColor px-[19px] text-white">
@@ -45,7 +44,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
           <div className="flex flex-col flex-1 mr-3">
             <div className="text-[17px] font-medium">
               <span className="ml-1">{title}</span>
-              <span className="text-textColorLight">({address})</span>
+              {/*<span className="text-textColorLight">({address})</span>*/}
             </div>
             <div className="flex flex-1 items-center justify-between mt-[17px]">
               <div className="text-[15px] font-medium text-textColorLight">ارسال به: {deliveryTitle}</div>

@@ -1,5 +1,13 @@
+const {PHASE_DEVELOPMENT_SERVER} = require("next/constants");
+
 module.exports = (phase) => {
   const DOMAIN = process.env.DOMAIN_API;
+  const isDev = phase === PHASE_DEVELOPMENT_SERVER;
+
+  let removeConsole = {
+    exclude: ["error"],
+  };
+  if (isDev) removeConsole = false;
 
   async function rewrites() {
     return [
@@ -25,9 +33,7 @@ module.exports = (phase) => {
     // env,
     rewrites,
     compiler: {
-      removeConsole: {
-        exclude: ["error"],
-      },
+      removeConsole,
     },
   };
 

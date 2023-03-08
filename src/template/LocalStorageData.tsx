@@ -24,12 +24,13 @@ function LocalStorageData() {
 
   useEffect(() => {
     const userAddress = localStorage.getItem(userAddressLocalStorageKey);
-    const data = userAddress ? JSON.parse(userAddress) : null;
+    let data = null;
     if (status === "authenticated") {
-      dispatch(setUserAddressFromStorage(data));
+      data = userAddress ? JSON.parse(userAddress) : null;
     } else if (status === "unauthenticated") {
       localStorage.removeItem(userAddressLocalStorageKey);
     }
+    dispatch(setUserAddressFromStorage(data));
   }, [dispatch, status]);
 
   useEffect(() => {

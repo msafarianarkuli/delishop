@@ -13,7 +13,7 @@ export interface IGetVendorCommentsRes {
   totalCount: number;
 }
 
-type TGetVendorComments = ({isServer, id}: IGetVendorCommentsProps) => Promise<IGetVendorCommentsRes>;
+type TGetVendorComments = (props: IGetVendorCommentsProps) => Promise<IGetVendorCommentsRes>;
 const getVendorComments: TGetVendorComments = async ({isServer, id, params}) => {
   let url = API.GET_VENDOR_COMMENTS;
   if (isServer) {

@@ -10,7 +10,6 @@ import {IDataContextProvider} from "types/interfaces";
 
 interface IRestaurantDataProvider {
   children: JSX.Element;
-  initialData?: IGetRestaurantsRes;
 }
 
 const initialState: IDataContextProvider<IGetRestaurantsRes> = {

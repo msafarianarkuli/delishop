@@ -33,7 +33,7 @@ export interface IGetVendorsDetailVendor {
     id: number;
     name: string;
     displayname: string;
-    logo?: string | null;
+    logo?: string;
   }[];
 }
 
@@ -55,7 +55,7 @@ export interface IGetVendorDetailMenusGroups {
   id: number;
   name: string;
   displayname: string;
-  logo?: string | null;
+  logo?: string;
   mothergroup_fid: number;
   products: IGetVendorDetailMenusGroupsProducts[];
 }
@@ -77,7 +77,7 @@ export interface IGetVendorDetailMenusGroupsProductsProductKinds {
   id: number;
   quality: number;
   price: number;
-  photo_igu?: string | null;
+  photo_igu?: string;
   description: string;
 }
 

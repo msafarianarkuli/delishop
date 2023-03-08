@@ -12,7 +12,7 @@ export interface IGetRestaurantsRes {
   total: number;
 }
 
-type TGetRestaurants = ({isServer, params}: IGetRestaurantsProps) => Promise<IGetRestaurantsRes>;
+type TGetRestaurants = (props: IGetRestaurantsProps) => Promise<IGetRestaurantsRes>;
 const getRestaurants: TGetRestaurants = async ({isServer, params}) => {
   let url = API.GET_VENDORS_LIST;
   if (isServer) {

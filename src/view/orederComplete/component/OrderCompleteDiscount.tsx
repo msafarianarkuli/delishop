@@ -1,11 +1,11 @@
 import React from "react";
-import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
+import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
 import {CustomInput} from "components";
 
-function RestaurantCompleteDiscount() {
+function OrderCompleteDiscount() {
   return (
     <div className="mt-7">
-      <RestaurantCompleteTitle title="کد تخفیف" />
+      <OrderCompleteTitle title="کد تخفیف" />
       <div className="px-screenSpace">
         <CustomInput
           autoComplete="off"
@@ -23,4 +23,4 @@ function RestaurantCompleteDiscount() {
   );
 }
 
-export default RestaurantCompleteDiscount;
+export default OrderCompleteDiscount;

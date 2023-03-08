@@ -1,6 +1,6 @@
-import styles from "view/restaurantComplete/restaurantComplete.module.scss";
+import styles from "view/orederComplete/orderComplete.module.scss";
 import {Checkbox} from "components";
-import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
+import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
 import {useEffect, useState} from "react";
 import {number2Digits} from "utils/utils";
 
@@ -17,7 +17,7 @@ const tmpTime: IDeliverTime[] = Array.from(new Array(15), (_, i) => {
   };
 });
 
-function RestaurantCompleteDeliveryTime() {
+function OrderCompleteDeliveryTime() {
   const [deliveryTime, setDeliveryTime] = useState<IDeliverTime | null>(null);
   const [time, setTime] = useState<IDeliverTime[]>([]);
 
@@ -33,7 +33,7 @@ function RestaurantCompleteDeliveryTime() {
 
   return (
     <div className="mt-7">
-      <RestaurantCompleteTitle title="زمان تحویل" />
+      <OrderCompleteTitle title="زمان تحویل" />
       <div className="px-screenSpace">
         <div className={styles.restaurant_complete_delivery_time_container}>
           {time.map((item, index) => {
@@ -64,4 +64,4 @@ function RestaurantCompleteDeliveryTime() {
   );
 }
 
-export default RestaurantCompleteDeliveryTime;
+export default OrderCompleteDeliveryTime;

@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {Checkbox, Map} from "components";
-import styles from "view/restaurantComplete/component/restaurantCompleteAddressCard/restaurantCompleteAddressCard.module.scss";
+import styles from "view/orederComplete/component/orderCompleteAddressCard/orderCompleteAddressCard.module.scss";
 import {IMapPoint} from "components/map/Map";
 
-interface IRestaurantCompleteAddressCard {
+interface IOrderCompleteAddressCard {
   id: string;
   value: boolean;
   onChange: () => void;
@@ -15,7 +15,7 @@ interface IRestaurantCompleteAddressCard {
 const initialHeight = 60;
 const mapHeight = 170;
 
-function RestaurantCompleteAddressCard(props: IRestaurantCompleteAddressCard) {
+function OrderCompleteAddressCard(props: IOrderCompleteAddressCard) {
   const {id, value, onChange, point, address, title} = props;
   const [height, setHeight] = useState(initialHeight);
 
@@ -56,4 +56,4 @@ function RestaurantCompleteAddressCard(props: IRestaurantCompleteAddressCard) {
   );
 }
 
-export default RestaurantCompleteAddressCard;
+export default OrderCompleteAddressCard;

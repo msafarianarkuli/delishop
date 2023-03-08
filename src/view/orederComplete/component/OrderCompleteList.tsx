@@ -1,4 +1,4 @@
-import RestaurantCompleteCard from "view/restaurantComplete/component/restaurantCompleteCard/RestaurantCompleteCard";
+import OrderCompleteCard from "view/orederComplete/component/orderCompleteCard/OrderCompleteCard";
 
 const data = [
   {
@@ -31,12 +31,12 @@ const data = [
   },
 ];
 
-function RestaurantCompleteList() {
+function OrderCompleteList() {
   return (
     <div className="mt-headerNormal px-screenSpace">
       {data.map((item, index) => {
         return (
-          <RestaurantCompleteCard
+          <OrderCompleteCard
             key={index}
             title={item.title}
             price={item.price}
@@ -50,4 +50,4 @@ function RestaurantCompleteList() {
   );
 }
 
-export default RestaurantCompleteList;
+export default OrderCompleteList;

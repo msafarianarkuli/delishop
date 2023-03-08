@@ -3,7 +3,7 @@ import jalaliday from "jalaliday";
 
 dayjs.extend(jalaliday);
 
-function RestaurantCompleteReceipt() {
+function OrderCompleteReceipt() {
   return (
     <div className="mt-7 mx-screenSpace bg-[#F2F3F6] py-3 px-2">
       <div className="flex items-center justify-between border-b border-borderColor pb-3">
@@ -44,4 +44,4 @@ function RestaurantCompleteReceipt() {
   );
 }
 
-export default RestaurantCompleteReceipt;
+export default OrderCompleteReceipt;

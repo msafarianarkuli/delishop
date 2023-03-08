@@ -2,12 +2,12 @@ import {SubmitBuyBtn} from "components";
 import {IconRoundedRight} from "assets/icons";
 import {MouseEventHandler} from "react";
 
-interface IRestaurantCompleteSubmitBtn {
+interface IOrderCompleteSubmitBtn {
   onClick: MouseEventHandler;
   step: number;
 }
 
-function RestaurantCompleteSubmitBtn({onClick, step}: IRestaurantCompleteSubmitBtn) {
+function OrderCompleteSubmitBtn({onClick, step}: IOrderCompleteSubmitBtn) {
   return (
     <SubmitBuyBtn
       onClick={onClick}
@@ -24,4 +24,4 @@ function RestaurantCompleteSubmitBtn({onClick, step}: IRestaurantCompleteSubmitB
   );
 }
 
-export default RestaurantCompleteSubmitBtn;
+export default OrderCompleteSubmitBtn;

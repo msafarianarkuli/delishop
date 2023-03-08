@@ -1,12 +1,12 @@
-import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
+import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
 import {CustomTextArea} from "components";
 import {useState} from "react";
 
-function RestaurantCompleteDescription() {
+function OrderCompleteDescription() {
   const [text, setText] = useState<string>("");
   return (
     <div className="mt-3">
-      <RestaurantCompleteTitle title="توضیحات" />
+      <OrderCompleteTitle title="توضیحات" />
       <div className="px-screenSpace">
         <CustomTextArea
           id="description"
@@ -24,4 +24,4 @@ function RestaurantCompleteDescription() {
   );
 }
 
-export default RestaurantCompleteDescription;
+export default OrderCompleteDescription;

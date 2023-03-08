@@ -1,13 +1,13 @@
 import {IconAdd} from "assets/icons";
-import styles from "view/restaurantComplete/component/restaurantCompleteSuggestionCard/restaurantCompleteSuggestion.module.scss";
+import styles from "view/orederComplete/component/orderCompleteSuggestionCard/orderCompleteSuggestion.module.scss";
 
-interface IRestaurantCompleteSuggestionCard {
+interface IOrderCompleteSuggestionCard {
   title: string;
   image: string;
   price: number;
 }
 
-function RestaurantCompleteSuggestionCard(props: IRestaurantCompleteSuggestionCard) {
+function OrderCompleteSuggestionCard(props: IOrderCompleteSuggestionCard) {
   const {image, title, price} = props;
   return (
     <div className={styles.restaurant_complete_suggestion_card}>
@@ -28,4 +28,4 @@ function RestaurantCompleteSuggestionCard(props: IRestaurantCompleteSuggestionCa
   );
 }
 
-export default RestaurantCompleteSuggestionCard;
+export default OrderCompleteSuggestionCard;

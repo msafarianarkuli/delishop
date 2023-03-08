@@ -1,6 +1,6 @@
-import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
+import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
 import {IconBank, IconCash, IconWallet} from "assets/icons";
-import styles from "view/restaurantComplete/restaurantComplete.module.scss";
+import styles from "view/orederComplete/orderComplete.module.scss";
 import classNames from "classnames";
 import {useState} from "react";
 
@@ -22,11 +22,11 @@ const data = [
   },
 ];
 
-function RestaurantCompletePaymentType() {
+function OrderCompletePaymentType() {
   const [payment, setPayment] = useState(1);
   return (
     <div className="mt-7">
-      <RestaurantCompleteTitle title="انتخاب نحوه پرداخت" />
+      <OrderCompleteTitle title="انتخاب نحوه پرداخت" />
       <div className="px-screenSpace">
         <div className="relative pb-[21.5%]">
           <div className="absolute flex items-center justify-between w-full h-full">
@@ -50,4 +50,4 @@ function RestaurantCompletePaymentType() {
   );
 }
 
-export default RestaurantCompletePaymentType;
+export default OrderCompletePaymentType;

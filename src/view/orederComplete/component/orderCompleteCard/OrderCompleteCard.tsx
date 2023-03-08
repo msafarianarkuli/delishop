@@ -1,24 +1,24 @@
 import {Button} from "antd";
 import {IconAdd, IconClose, IconDeleteAddress} from "assets/icons";
 import {useState} from "react";
-import styles from "view/restaurantComplete/component/restaurantCompleteCard/restaurantCompleteCard.module.scss";
+import styles from "view/orederComplete/component/orderCompleteCard/orderCompleteCard.module.scss";
 
-interface IExtraRestaurantCompleteCardItem {
+interface IExtraOrderCompleteCardItem {
   title: string;
   price: number;
 }
 
-export type TExtraRestaurantCompleteCard = IExtraRestaurantCompleteCardItem[];
+export type TExtraOrderCompleteCard = IExtraOrderCompleteCardItem[];
 
-interface IRestaurantCompleteCard {
+interface IOrderCompleteCard {
   title: string;
-  extra?: TExtraRestaurantCompleteCard;
+  extra?: TExtraOrderCompleteCard;
   price: number;
   count: number;
   onAddItem: () => void;
 }
 
-function RestaurantCompleteCard(props: IRestaurantCompleteCard) {
+function OrderCompleteCard(props: IOrderCompleteCard) {
   const {count, extra, price, title, onAddItem} = props;
   const [counter, setCounter] = useState(count || 0);
 
@@ -78,4 +78,4 @@ function RestaurantCompleteCard(props: IRestaurantCompleteCard) {
   );
 }
 
-export default RestaurantCompleteCard;
+export default OrderCompleteCard;

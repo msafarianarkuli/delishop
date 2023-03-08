@@ -10,7 +10,7 @@ function RestaurantDetailSubmitBtn() {
   if (!vendor?.totalPrice) return null;
   return (
     <SubmitBuyBtn
-      onClick={() => router.push("/restaurant/complete")}
+      onClick={() => router.push(`/ordercomplete/${router.query.id}`)}
       right={<IconDownload className="w-5 h-5" />}
       body={
         <>

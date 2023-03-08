@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 
-function RestaurantCompleteTitle({title, left}: {title: string; left?: ReactNode}) {
+function OrderCompleteTitle({title, left}: {title: string; left?: ReactNode}) {
   return (
     <div className="flex items-center justify-between px-screenSpace mb-5">
       <div className="flex items-center">
@@ -12,4 +12,4 @@ function RestaurantCompleteTitle({title, left}: {title: string; left?: ReactNode
   );
 }
 
-export default RestaurantCompleteTitle;
+export default OrderCompleteTitle;

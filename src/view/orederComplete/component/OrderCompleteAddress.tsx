@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import RestaurantCompleteTitle from "view/restaurantComplete/component/RestaurantCompleteTitle";
+import OrderCompleteTitle from "view/orederComplete/component/OrderCompleteTitle";
 import {IconRoundedLeft} from "assets/icons";
-import RestaurantCompleteAddressCard from "view/restaurantComplete/component/restaurantCompleteAddressCard/RestaurantCompleteAddressCard";
+import OrderCompleteAddressCard from "view/orederComplete/component/orderCompleteAddressCard/OrderCompleteAddressCard";
 
 const data = [
   {
@@ -18,11 +18,11 @@ const data = [
   },
 ];
 
-function RestaurantCompleteAddress() {
+function OrderCompleteAddress() {
   const [address, setAddress] = useState(1);
   return (
     <div className="mt-headerNormal">
-      <RestaurantCompleteTitle
+      <OrderCompleteTitle
         title="روش تحویل سفارش"
         left={
           <div className="flex items-center text-primary font-medium">
@@ -34,7 +34,7 @@ function RestaurantCompleteAddress() {
       <div className="px-screenSpace">
         {data.map((item, index) => {
           return (
-            <RestaurantCompleteAddressCard
+            <OrderCompleteAddressCard
               key={index}
               id={item.id.toString()}
               title={item.title}
@@ -52,4 +52,4 @@ function RestaurantCompleteAddress() {
   );
 }
 
-export default RestaurantCompleteAddress;
+export default OrderCompleteAddress;

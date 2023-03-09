@@ -5,7 +5,7 @@ import RestaurantCartCard, {
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {removeCartRestaurantCartListCartOrder, selectCartRestaurant} from "redux/cartRestaurant/cartRestaurantReducer";
-import {mergeCartListToArray} from "utils/utils";
+import {mergeCartListToArray} from "utils/cartReducerUtils";
 
 interface IRestaurantCartList extends Omit<IRestaurantCartCard, "onClickRemove" | "onClickOk"> {
   id: string;

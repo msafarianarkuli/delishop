@@ -1,12 +1,15 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "redux/store";
 import {
-  ICartReducerListItem,
   ICartReducer,
+  ICartReducerListItem,
+  IRemoveCartReducerCartListOrder,
+  IRemoveCartReducerCartListOrderExtra,
   IRemoveCartReducerLastItem,
   ISetCartReducerItem,
   ISetCartReducerVendorData,
 } from "types/interfaceCartReducer";
+import {findOrderIndex} from "utils/cartReducerUtils";
 
 const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
@@ -74,6 +77,40 @@ const cartRestaurantReducer = createSlice({
         }
       }
     },
+    removeCartRestaurantCartListOrder: (state, action: PayloadAction<IRemoveCartReducerCartListOrder>) => {
+      const cartList = state.cartList;
+      const vendor = cartList.find((item) => item.vendorId === action.payload.vendorId);
+      const productId = action.payload.productId;
+      const order = action.payload.order;
+      const index = findOrderIndex({order, productId, cartOrders: vendor?.cartOrders});
+      if (index !== -1 && vendor?.cartOrders) {
+        const orders = vendor.cartOrders[productId];
+        const totalExtraPrice = orders[index].extra?.reduce((arr, current) => arr + current.price, 0) || 0;
+        const price = orders[index].price;
+        orders.splice(index, 1);
+        vendor.totalOrderCount -= 1;
+        vendor.totalPrice -= price + totalExtraPrice;
+      }
+    },
+    removeCartRestaurantCartListOrderExtra: (state, action: PayloadAction<IRemoveCartReducerCartListOrderExtra>) => {
+      const cartList = state.cartList;
+      const vendor = cartList.find((item) => item.vendorId === action.payload.vendorId);
+      const productId = action.payload.productId;
+      const extraId = action.payload.extraId;
+      const order = action.payload.order;
+      const index = findOrderIndex({order, productId, cartOrders: vendor?.cartOrders});
+      if (index !== -1 && vendor?.cartOrders) {
+        const orders = vendor.cartOrders[productId];
+        const tempOrder = orders[index];
+        if (tempOrder.extra?.length) {
+          const extraItem = tempOrder.extra.find((el) => el.id === extraId);
+          if (extraItem) {
+            vendor.totalPrice -= extraItem.price;
+          }
+          tempOrder.extra = tempOrder.extra.filter((el) => el.id !== extraId);
+        }
+      }
+    },
     clearCartRestaurantCartList: (state) => {
       state.cartList = [];
     },
@@ -100,6 +137,8 @@ export const {
   setCartRestaurantFromStorage,
   clearCartRestaurantCartList,
   removeCartRestaurantCartListCartOrder,
+  removeCartRestaurantCartListOrder,
+  removeCartRestaurantCartListOrderExtra,
 } = actions;
 export const selectCartRestaurant = (state: RootState) => state.cartRestaurant;
 export const selectCartRestaurantList = (state: RootState) => state.cartRestaurant.cartList;

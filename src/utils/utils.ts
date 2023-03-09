@@ -1,6 +1,3 @@
-import {ICartDataItem, TCartData} from "types/interfaces";
-import {TCartReducerListItemCartOrders} from "types/interfaceCartReducer";
-
 export function createLog(message: any, ...optionalParams: any[]) {
   if (process.env.NODE_ENV === "development") {
     console.log(message, ...optionalParams);
@@ -122,24 +119,6 @@ export const createKeyForUseQuery = (keys: (string | number)[], key?: string | s
     }
   }
   return tmp;
-};
-
-type TMergeCartListToArray = (cartOrders: TCartReducerListItemCartOrders) => TCartData;
-export const mergeCartListToArray: TMergeCartListToArray = (cartOrders) => {
-  const tmpCount: {[x: string]: ICartDataItem} = {};
-  for (const [key, value] of Object.entries(cartOrders)) {
-    value.forEach((item) => {
-      const tmpKey = item.extra?.reduce((arr, current) => arr + "_" + current.id, `${key}`) || key;
-      let count = tmpCount[tmpKey]?.count || 0;
-      tmpCount[tmpKey] = {
-        count: count + 1,
-        title: item.title,
-        price: item.price,
-        extra: item.extra?.map((item) => ({name: item.name, price: item.price})),
-      };
-    });
-  }
-  return Object.values(tmpCount);
 };
 
 export const iranPhoneNumberRegex = /(^(09|۰۹))(\d{9}$|[۰۱۲۳۴۵۶۷۸۹]{9}$)/;

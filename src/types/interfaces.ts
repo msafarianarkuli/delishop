@@ -20,6 +20,7 @@ export interface IDataContextProvider<T> {
 }
 
 export interface ICartDataItem {
+  id: string;
   count: number;
   title: string;
   price: number;
@@ -27,6 +28,7 @@ export interface ICartDataItem {
 }
 
 interface ICartDataItemExtraItem {
+  id: number;
   name: string;
   price: number;
 }

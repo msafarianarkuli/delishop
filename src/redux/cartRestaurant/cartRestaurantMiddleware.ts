@@ -4,6 +4,8 @@ import {
   clearCartRestaurantCartList,
   removeCartRestaurantCartListCartOrder,
   removeCartRestaurantCartListLastOrder,
+  removeCartRestaurantCartListOrder,
+  removeCartRestaurantCartListOrderExtra,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
@@ -18,7 +20,9 @@ addAppListener({
     setCartRestaurantItem,
     removeCartRestaurantCartListLastOrder,
     clearCartRestaurantCartList,
-    removeCartRestaurantCartListCartOrder
+    removeCartRestaurantCartListCartOrder,
+    removeCartRestaurantCartListOrder,
+    removeCartRestaurantCartListOrderExtra
   ),
   effect: (_, api) => {
     const store = api.getState();

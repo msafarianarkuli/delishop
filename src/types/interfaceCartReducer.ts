@@ -17,7 +17,7 @@ export type TCartReducerListItemCartOrders = {
   [x: number]: ICartReducerCartItem[];
 };
 
-interface ICartReducerCartItem {
+export interface ICartReducerCartItem {
   extra?: TCartReducerCartItemExtraItemExtra;
   price: number;
   title: string;
@@ -44,4 +44,17 @@ export interface IRemoveCartReducerLastItem {
 export interface ISetCartReducerVendorData {
   vendorId: string | null;
   title: string | null;
+}
+
+export interface IRemoveCartReducerCartListOrder {
+  order: ICartReducerCartItem;
+  vendorId: string | null;
+  productId: number;
+}
+
+export interface IRemoveCartReducerCartListOrderExtra {
+  order: ICartReducerCartItem;
+  extraId: number;
+  vendorId: string | null;
+  productId: number;
 }

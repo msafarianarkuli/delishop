@@ -1,20 +1,32 @@
 import {Button} from "antd";
-import {IconAdd, IconClose, IconDeleteAddress} from "assets/icons";
-import {useState} from "react";
-import styles from "view/orderComplete/component/orderCompleteCard/orderCompleteCard.module.scss";
+import {IconClose, IconDeleteAddress} from "assets/icons";
+import {useMemo} from "react";
 import {TCartDataItemExtra} from "types/interfaces";
+import {Counter} from "components";
 
 interface IOrderCompleteCard {
   title: string;
   extra?: TCartDataItemExtra;
   price: number;
   count: number;
-  onAddItem: () => void;
+  onAddClick: () => void;
+  onMinusClick: () => void;
+  onClickExtra: (id: number) => void;
 }
 
 function OrderCompleteCard(props: IOrderCompleteCard) {
-  const {count, extra, price, title, onAddItem} = props;
-  const [counter, setCounter] = useState(count || 0);
+  const {count, extra, price, title, onAddClick, onMinusClick, onClickExtra} = props;
+
+  const extraPrice = useMemo(() => {
+    if (extra?.length) {
+      return extra.reduce((arr, current) => arr + current.price, 0);
+    }
+    return 0;
+  }, [extra]);
+
+  const totalPrice = useMemo(() => {
+    return count * price + extraPrice;
+  }, [count, extraPrice, price]);
 
   return (
     <div className="border border-borderColor rounded-[8px] p-3 mb-3">
@@ -30,6 +42,7 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
                 <span className="mr-1">تومان</span>
               </div>
               <Button
+                onClick={() => onClickExtra(item.id)}
                 className="flex items-center justify-center w-5 h-5 border-0 p-0 shadow-none rounded-full bg-[#575F6B]"
                 icon={<IconClose className="w-2 h-2 text-white" />}
               />
@@ -39,33 +52,15 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
       </div>
       <div className="flex items-center justify-between">
         <div>
-          <span>{price.toLocaleString("en-US")}</span>
+          <span>{totalPrice.toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </div>
-        <div className="flex flex-nowrap items-center">
-          <button
-            className="flex items-center justify-center w-[30px] h-[30px] bg-primary rounded-full"
-            onClick={() => {
-              if (counter === 0) onAddItem();
-              setCounter((prevState) => prevState + 1);
-            }}
-          >
-            <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />
-          </button>
-          {counter ? (
-            <>
-              <div className="text-center w-[30px]">{counter}</div>
-              <button
-                className={styles.restaurant_complete_card_delete}
-                onClick={() => {
-                  if (counter > 0) setCounter((prevState) => prevState - 1);
-                }}
-              >
-                <IconDeleteAddress className="w-[17px] h-[17px]" />
-              </button>
-            </>
-          ) : null}
-        </div>
+        <Counter
+          count={count}
+          minusIcon={<IconDeleteAddress className="w-[17px] h-[17px]" />}
+          onAddClick={onAddClick}
+          onMinusClick={onMinusClick}
+        />
       </div>
     </div>
   );

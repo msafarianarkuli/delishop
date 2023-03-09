@@ -5,6 +5,7 @@ import getVendorComments from "api/getVendorComments";
 import getVendorsTags from "api/getVendorsTags";
 import getVendorDetail from "api/getVendorDetail";
 import getUserAddresses from "api/getUserAddresses";
+import getOrdersList from "api/getOrdersList";
 
 export {
   sendCode,
@@ -14,4 +15,5 @@ export {
   getVendorsTags,
   getVendorDetail,
   getUserAddresses,
+  getOrdersList,
 };

@@ -23,7 +23,7 @@ export interface IGetAddressFromMapRes {
   village?: string;
 }
 
-export default function getAddressFromMap(params: IParams) {
+export default async function getAddressFromMap(params: IParams) {
   return axiosService<IGetAddressFromMapRes>({
     url: API.GET_ADDRESS,
     method: "get",

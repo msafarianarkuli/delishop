@@ -15,6 +15,9 @@ export const API = {
   GET_VENDORS_TAGS: "/api/vendors/tags",
   GET_VENDOR_COMMENTS: "/api/vendors/{id}/comment",
 
+  //supermarket
+  GET_SUPERMARKET_MENU: "/api/market/{id}/menu",
+
   //user
   GET_USER_ADDRESSES: "/api/users/addresses",
   CREATE_USER_ADDRESS: "/api/users/addresses",

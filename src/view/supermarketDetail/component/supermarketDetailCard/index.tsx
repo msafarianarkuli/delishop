@@ -2,7 +2,7 @@ import styles from "view/supermarketDetail/component/supermarketDetailCard/super
 
 interface ISuperMarketDetailCard {
   title: string;
-  image: string;
+  image?: string;
 }
 
 function SuperMarketDetailCard(props: ISuperMarketDetailCard) {

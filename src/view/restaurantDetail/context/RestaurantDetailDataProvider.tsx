@@ -19,10 +19,11 @@ const staleTime = 10 * 60 * 1000;
 
 function RestaurantDetailDataProvider({children}: {children: JSX.Element}) {
   const router = useRouter();
+
   const result = useQuery<IGetVendorDetailData, {status: number}>(
     [QUERY_KEY_RESTAURANT_DETAIL, router.query.id],
     () => getVendorDetail({id: router.query.id as string}),
-    {staleTime}
+    {staleTime, enabled: router.isReady}
   );
 
   return <RestaurantDetailDataContext.Provider value={result}>{children}</RestaurantDetailDataContext.Provider>;

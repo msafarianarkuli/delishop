@@ -1,14 +1,14 @@
-import {createContext, useContext, useMemo} from "react";
-import {useQuery} from "react-query";
-import {getVendors} from "api";
-import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
+import React, {createContext, useContext, useMemo} from "react";
+import {IDataContextProvider} from "types/interfaces";
 import {IGetVendorsRes} from "api/getVendors";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
-import {IDataContextProvider} from "types/interfaces";
+import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
+import {useQuery} from "react-query";
+import {getVendors} from "api";
 
-interface IRestaurantDataProvider {
+interface ISuperMarketDataProvider {
   children: JSX.Element;
 }
 
@@ -19,23 +19,21 @@ const initialState: IDataContextProvider<IGetVendorsRes> = {
   isLoading: false,
 };
 
-const RestaurantDataContext = createContext<IDataContextProvider<IGetVendorsRes>>(initialState);
+const SuperMarketDataContext = createContext<IDataContextProvider<IGetVendorsRes>>(initialState);
 
-export const QUERY_KEY_RESTAURANT = "restaurant";
+export const QUERY_KEY_SUPERMARKET = "supermarket";
 
-export const restaurantSortQuery = "sort";
-export const restaurantTagQuery = "tag[]";
+export const supermarketSortQuery = "sort";
 
 const staleTime = 10 * 60 * 1000;
 
-function RestaurantDataProvider(props: IRestaurantDataProvider) {
-  const {children} = props;
+function SuperMarketDataProvider({children}: ISuperMarketDataProvider) {
   const router = useRouter();
   const {isStorageLoaded, location, userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
 
   const params = useMemo(() => {
     let tmpParams: {[x: string]: any} = {
-      "category[]": 1,
+      "category[]": 2,
     };
     if (router.isReady) {
       tmpParams = {
@@ -52,11 +50,8 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
           tmpParams.log = location.lng;
         }
       }
-      if (router.query.hasOwnProperty(restaurantSortQuery)) {
-        tmpParams[restaurantSortQuery] = router.query[restaurantSortQuery];
-      }
-      if (router.query.hasOwnProperty(restaurantTagQuery)) {
-        tmpParams[restaurantTagQuery] = router.query[restaurantTagQuery];
+      if (router.query.hasOwnProperty(supermarketSortQuery)) {
+        tmpParams[supermarketSortQuery] = router.query[supermarketSortQuery];
       }
     }
     return tmpParams;
@@ -72,16 +67,12 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
   ]);
 
   const keys = useMemo(() => {
-    let tmpKeys: (string | number)[] = [QUERY_KEY_RESTAURANT];
+    let tmpKeys: (string | number)[] = [QUERY_KEY_SUPERMARKET];
     const page = router.query?.page;
     tmpKeys = createKeyForUseQuery(tmpKeys, page);
-    if (router.query.hasOwnProperty(restaurantSortQuery)) {
-      const sort = router.query[restaurantSortQuery];
+    if (router.query.hasOwnProperty(supermarketSortQuery)) {
+      const sort = router.query[supermarketSortQuery];
       tmpKeys = createKeyForUseQuery(tmpKeys, sort);
-    }
-    if (router.query.hasOwnProperty(restaurantTagQuery)) {
-      const tag = router.query[restaurantTagQuery];
-      tmpKeys = createKeyForUseQuery(tmpKeys, tag);
     }
     return tmpKeys;
   }, [router.query]);
@@ -90,14 +81,13 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
     () => isStorageLoaded && isUserAddressStorageLoaded && router.isReady,
     [isStorageLoaded, isUserAddressStorageLoaded, router.isReady]
   );
-
   const result = useQuery(keys, () => getVendors({params}), {staleTime, enabled: useQueryEnabled});
 
-  return <RestaurantDataContext.Provider value={result}>{children}</RestaurantDataContext.Provider>;
+  return <SuperMarketDataContext.Provider value={result}>{children}</SuperMarketDataContext.Provider>;
 }
 
-export default RestaurantDataProvider;
+export default SuperMarketDataProvider;
 
-export function useRestaurantData() {
-  return useContext(RestaurantDataContext);
+export function useSupermarketData() {
+  return useContext(SuperMarketDataContext);
 }

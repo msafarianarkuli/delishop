@@ -1,11 +1,48 @@
-import {useRef, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {Button} from "antd";
 import {IconSort} from "assets/icons";
 import SupermarketSortBottomSheet from "view/supermarket/component/SupermarketSortBottomSheet";
+import SupermarketAround from "view/supermarket/component/SupermarketAround";
+import usePathnameQuery from "hooks/usePathnameQuery";
+import {useRouter} from "next/router";
+import {supermarketSortQuery} from "view/supermarket/context/SuperMarketDataProvider";
+import {restaurantSortQuery} from "view/restaurant/context/RestaurantDataProvider";
 
+const data = [
+  {
+    title: "بالاترین سکه",
+    value: "point",
+  },
+  {
+    title: "نزدیک ترین",
+    value: "closest",
+  },
+  {
+    title: "جدید ترین",
+    value: "new",
+  },
+];
+const initialValue = {
+  open: false,
+  title: "",
+  value: "",
+};
 function SupermarketSort() {
   const ref = useRef<HTMLDivElement>(null);
-  const [sort, setSort] = useState({open: false, title: ""});
+  const router = useRouter();
+  const [sort, setSort] = useState(initialValue);
+  const {querySearch, pathname} = usePathnameQuery();
+  const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
+
+  useEffect(() => {
+    if (router.isReady && query.get(supermarketSortQuery)) {
+      const value = query.get(supermarketSortQuery);
+      const item = data.find((item) => item.value === value);
+      if (item) {
+        setSort({open: false, title: item.title, value: item.value});
+      }
+    }
+  }, [query, router.isReady]);
 
   // useEffect(() => {
   //   const div = ref.current! as HTMLDivElement;
@@ -33,7 +70,7 @@ function SupermarketSort() {
       ref={ref}
       className="flex items-center justify-between h-[32px] overflow-hidden transition-height max-width-screen"
     >
-      <div className="font-medium text-[15px] text-iconColor">17 سوپرمارکت اطراف شما</div>
+      <SupermarketAround />
       <Button
         onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}
@@ -44,8 +81,18 @@ function SupermarketSort() {
       <SupermarketSortBottomSheet
         open={sort.open}
         onClose={() => setSort((prevState) => ({...prevState, open: false}))}
-        onClick={(value) => {
-          setSort({open: false, title: value.title});
+        data={data}
+        onClick={(item) => {
+          const querySort = query.get(restaurantSortQuery);
+          if (querySort && !Array.isArray(querySort) && item.value === querySort) {
+            query.delete(restaurantSortQuery);
+            setSort(initialValue);
+          } else {
+            query.set(restaurantSortQuery, item.value);
+          }
+          const finalQuery = query.toString() ? "?" + query.toString() : "";
+          const url = pathname + finalQuery;
+          router.push(url);
         }}
       />
     </div>

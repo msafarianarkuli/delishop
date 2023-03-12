@@ -5,21 +5,20 @@ import IconDelivery from "assets/icons/IconDelivery";
 interface ISuperMarketCard {
   image: string;
   title: string;
-  address: string;
-  rate: number;
-  price: number;
+  rate: string;
+  deliveryPrice: number;
   coin: number;
 }
 
 function SuperMarketCard(props: ISuperMarketCard) {
-  const {rate, address, price, title, coin, image} = props;
+  const {rate, deliveryPrice, title, coin, image} = props;
   return (
     <div className={styles.supermarket_card_container}>
       <div className="flex">
-        <img src={image} className="w-[144px] h-[80px] rounded-lb-[10px]" />
+        <img src={image} className="w-[144px] h-[80px] rounded-bl-[10px]" />
         <div className="text-[15px] font-medium mx-2 mt-1">
           <span>{title}</span>
-          <span className="text-iconColor mr-1">({address})</span>
+          {/*<span className="text-iconColor mr-1">({address})</span>*/}
         </div>
       </div>
       <div className="flex items-center justify-between font-medium py-2 px-3">
@@ -32,7 +31,7 @@ function SuperMarketCard(props: ISuperMarketCard) {
         <div className="flex items-center">
           <div className="inner_box flex items-center text-[11px]">
             <IconDelivery className="w-3 h-auto" />
-            <span className="mx-1">{price.toLocaleString("en-US")}</span>
+            <span className="mx-1">{deliveryPrice.toLocaleString("en-US")}</span>
             <span>تومان</span>
           </div>
           <div className="inner_box flex items-center mr-2">

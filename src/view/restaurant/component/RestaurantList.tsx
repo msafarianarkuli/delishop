@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantCard";
 import {useRestaurantData} from "view/restaurant/context/RestaurantDataProvider";
-import {IGetRestaurantsRes} from "api/getRestaurants";
+import {IGetVendorsRes} from "api/getVendors";
 
 function RestaurantList() {
   const {data, isLoading} = useRestaurantData();
@@ -15,7 +15,7 @@ function RestaurantList() {
   );
 }
 
-function RestaurantListShow({data}: {data?: IGetRestaurantsRes}) {
+function RestaurantListShow({data}: {data?: IGetVendorsRes}) {
   return (
     <>
       {data?.vendors?.map((item) => {

@@ -2,24 +2,23 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {IGetVendorsListRes, TGetVendorsListResVendors} from "types/interfaceVendorsList";
 
-interface IGetRestaurantsProps {
+interface IGetVendorsProps {
   params?: object;
   isServer?: boolean;
 }
 
-export interface IGetRestaurantsRes {
+export interface IGetVendorsRes {
   vendors: TGetVendorsListResVendors;
   total: number;
 }
 
-type TGetRestaurants = (props: IGetRestaurantsProps) => Promise<IGetRestaurantsRes>;
-const getRestaurants: TGetRestaurants = async ({isServer, params}) => {
+type TGetRestaurants = (props: IGetVendorsProps) => Promise<IGetVendorsRes>;
+const getVendors: TGetRestaurants = async ({isServer, params}) => {
   let url = API.GET_VENDORS_LIST;
   if (isServer) {
     url = API.DOMAIN + API.GET_VENDORS_LIST;
   }
   const tmpParams = {
-    "category[]": 1,
     skip: 0,
     take: 19,
     ...params,
@@ -30,4 +29,4 @@ const getRestaurants: TGetRestaurants = async ({isServer, params}) => {
   }));
 };
 
-export default getRestaurants;
+export default getVendors;

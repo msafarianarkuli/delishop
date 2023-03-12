@@ -1,11 +1,10 @@
 import React, {createContext, useContext, useMemo} from "react";
 import {IDataContextProvider} from "types/interfaces";
-import {IGetOrdersRes} from "api/getOrdersList";
+import getOrdersList, {IGetOrdersRes} from "api/getOrdersList";
 import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
 import {useRouter} from "next/router";
 import {useSession} from "next-auth/react";
 import {useQuery} from "react-query";
-import {getOrdersList} from "api";
 
 interface IRestaurantOrderActiveDataProvider {
   children: JSX.Element;

@@ -15,7 +15,7 @@ import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {createLog} from "utils/utils";
 import {useQueryClient} from "react-query";
-import {useAddressData, USER_ADDRESSES_KEY} from "view/address/context/AddressDataProvider";
+import {useAddressData, QUERY_KEY_USER_ADDRESSES} from "view/address/context/AddressDataProvider";
 
 interface AddressDeleteModalBody {
   loading: boolean;
@@ -72,7 +72,7 @@ function AddressDeleteModal() {
       axiosService({url, method: "delete", token: userData?.user.token})
         .then((res) => {
           createLog("AddressDeleteModal err", res);
-          queryClient.invalidateQueries(USER_ADDRESSES_KEY);
+          queryClient.invalidateQueries(QUERY_KEY_USER_ADDRESSES);
           if (id === userAddress?.id) {
             const tmp = addressList?.filter((item) => item.id !== id);
             if (tmp?.length) {

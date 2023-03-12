@@ -1,8 +1,7 @@
 import {createContext, useContext, useMemo} from "react";
 import {useQuery} from "react-query";
-import {getVendors} from "api";
 import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
-import {IGetVendorsRes} from "api/getVendors";
+import getVendors, {IGetVendorsRes} from "api/getVendors";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";

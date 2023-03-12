@@ -8,7 +8,7 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {useQueryClient} from "react-query";
-import {USER_ADDRESSES_KEY} from "view/address/context/AddressDataProvider";
+import {QUERY_KEY_USER_ADDRESSES} from "view/address/context/AddressDataProvider";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
@@ -73,7 +73,7 @@ function AddressCreateForm({defaultValues, isEdit}: {defaultValues?: IAddressCre
         token: data?.user.token,
       });
       createLog("AddressCreateForm res", res);
-      await queryClient.invalidateQueries(USER_ADDRESSES_KEY);
+      await queryClient.invalidateQueries(QUERY_KEY_USER_ADDRESSES);
       dispatch(setAddressMap({location: null, locationData: null}));
       await router.push(`/address${querySearch}`);
     } catch (e) {

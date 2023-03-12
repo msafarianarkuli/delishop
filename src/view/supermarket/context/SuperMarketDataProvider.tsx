@@ -1,12 +1,11 @@
 import React, {createContext, useContext, useMemo} from "react";
 import {IDataContextProvider} from "types/interfaces";
-import {IGetVendorsRes} from "api/getVendors";
+import getVendors, {IGetVendorsRes} from "api/getVendors";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
 import {useQuery} from "react-query";
-import {getVendors} from "api";
 
 interface ISuperMarketDataProvider {
   children: JSX.Element;

@@ -9,7 +9,7 @@ function SupermarketDetailHeader() {
         classNameContainer="border-b border-borderColor"
         right={<AppHeaderBackBtn onClick={() => router.back()} />}
         body={<AppHeaderLocation supermarket />}
-        left={<AppHeaderCoin coin={1996} />}
+        left={<AppHeaderCoin />}
       />
     </div>
   );

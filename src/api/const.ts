@@ -24,6 +24,9 @@ export const API = {
   CREATE_USER_ADDRESS: "/api/users/addresses",
   UPDATE_USER_ADDRESS: "/api/users/addresses/{id}",
   DELETE_USER_ADDRESS: "/api/users/addresses/{id}",
+  GET_USER_COIN: "/api/users/points",
+  GET_USER_WALLET: "/api/users/transactions/balance",
+  USER_WALLET_CHARGE: "/api/finance/transaction/charge",
 
   //orders
   GET_ORDERS_LIST: "/api/users/orders",

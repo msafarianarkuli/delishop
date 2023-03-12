@@ -11,9 +11,9 @@ import {
 import {useMap} from "react-leaflet";
 import useAddressMap from "view/addressMap/context/useAddressMap";
 import useMapPin from "hooks/useMapPin";
-import {getAddressFromMap} from "api";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
+import getAddressFromMap from "api/getAddressFromMap";
 
 function AddressMapLocation() {
   const [location, setLocation] = useState<IMapPoint[]>([]);

@@ -5,9 +5,9 @@ import {createLog, iranPhoneNumberRegex} from "utils/utils";
 import {Button, InputRef} from "antd";
 import useAuthFocus from "view/auth/hooks/useAuthFocus";
 import useAuthBlur from "view/auth/hooks/useAuthBlur";
-import {sendCode} from "api";
 import useAuthAction from "view/auth/hooks/useAuthAction";
 import {authSetCode} from "view/auth/context/AuthProvider";
+import sendCode from "api/sendCode";
 
 interface ILoginPhoneNumber {
   phone: string;

@@ -2,8 +2,8 @@ import {createContext, useContext} from "react";
 import {IDataContextProvider} from "types/interfaces";
 import {TGetUserAddressesListAddresses} from "types/interfaceUserAddress";
 import {useQuery} from "react-query";
-import {getUserAddresses} from "api";
 import {useSession} from "next-auth/react";
+import getUserAddresses from "api/getUserAddresses";
 
 const initialState: IDataContextProvider<TGetUserAddressesListAddresses> = {
   data: undefined,
@@ -14,14 +14,14 @@ const initialState: IDataContextProvider<TGetUserAddressesListAddresses> = {
 
 const AddressDataContext = createContext<IDataContextProvider<TGetUserAddressesListAddresses>>(initialState);
 
-export const USER_ADDRESSES_KEY = "userAddresses";
+export const QUERY_KEY_USER_ADDRESSES = "userAddresses";
 const staleTime = 10 * 60 * 1000;
 
 function AddressDataProvider({children}: {children: JSX.Element}) {
   const {status, data} = useSession();
 
   const result = useQuery<TGetUserAddressesListAddresses>(
-    [USER_ADDRESSES_KEY],
+    [QUERY_KEY_USER_ADDRESSES],
     () => getUserAddresses(data?.user.token || ""),
     {
       staleTime,

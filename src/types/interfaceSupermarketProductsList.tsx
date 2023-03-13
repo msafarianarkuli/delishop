@@ -3,17 +3,23 @@ export interface ISupermarketProductsListRes {
 }
 
 export interface ISupermarketProductsListData {
-  products: ISupermarketProductsListDataProducts;
-  totalCount: number;
+  groups: TSupermarketProductsListDataGroups;
 }
 
-interface ISupermarketProductsListDataProducts {
-  products: ISupermarketProductsListDataProductsProducts;
+export type TSupermarketProductsListDataGroups = ISupermarketProductsListDataGroupsItem[];
+
+export interface ISupermarketProductsListDataGroupsItem {
+  id: number;
+  name: string;
+  displayname: string;
+  logo?: string;
+  sub_groups: null;
+  products: TSupermarketProductsListDataGroupsItemProducts;
 }
 
-export type ISupermarketProductsListDataProductsProducts = ISupermarketProductsListDataProductsProductsItem[];
+export type TSupermarketProductsListDataGroupsItemProducts = ISupermarketProductsListDataGroupsItemProductsItem[];
 
-export interface ISupermarketProductsListDataProductsProductsItem {
+export interface ISupermarketProductsListDataGroupsItemProductsItem {
   id: number;
   name: string;
   displayname: string;
@@ -22,13 +28,14 @@ export interface ISupermarketProductsListDataProductsProductsItem {
   description_te: string;
   priceClass: string;
   brand: string;
-  productKind: ISupermarketProductsListDataProductsProductsItemProductKind;
+  point: number;
+  productKind: ISupermarketProductsListDataGroupsItemProductsItemProductKind;
 }
 
-export type ISupermarketProductsListDataProductsProductsItemProductKind =
-  ISupermarketProductsListDataProductsProductsItemProductKindItem[];
+export type ISupermarketProductsListDataGroupsItemProductsItemProductKind =
+  ISupermarketProductsListDataGroupsItemProductsItemProductKindItem[];
 
-interface ISupermarketProductsListDataProductsProductsItemProductKindItem {
+export interface ISupermarketProductsListDataGroupsItemProductsItemProductKindItem {
   id: number;
   quality: number;
   price: number;

@@ -5,7 +5,7 @@ import styles from "view/supermarketCategory/component/supermarketCategoryCard/s
 import {IconCoin} from "assets/icons";
 
 interface ISupermarketCategoryCard {
-  image: string;
+  image?: string;
   coin: number;
   title: string;
   description: string;
@@ -37,7 +37,7 @@ function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
         }}
       />
       <div className="flex justify-center items-center h-[70px] w-full">
-        <img src={image} alt={title} className="w-full h-auto" />
+        <img src={image} alt={title} className="w-full h-auto max-h-[85%] rounded-[10px]" />
       </div>
       <div className="flex items-center justify-end">
         <div className="flex items-center p-1 bg-primarySupermarket/10 rounded-[5px]">

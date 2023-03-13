@@ -1,35 +1,22 @@
 import {API} from "api/const";
 import {axiosService} from "utils/axiosService";
-import {
-  ISupermarketProductsListDataProductsProducts,
-  ISupermarketProductsListRes,
-} from "types/interfaceSupermarketProductsList";
+import {ISupermarketProductsListRes, TSupermarketProductsListDataGroups} from "types/interfaceSupermarketProductsList";
 
 interface IGetSupermarketProductsProps {
   params?: object;
   isServer?: boolean;
+  vendorId: string;
+  categoryId: string;
 }
 
-export interface IGetSupermarketProductsRes {
-  products: ISupermarketProductsListDataProductsProducts;
-  total: number;
-}
-
-type TGetSupermarketProducts = (props: IGetSupermarketProductsProps) => Promise<IGetSupermarketProductsRes>;
-const getSupermarketProducts: TGetSupermarketProducts = async ({isServer, params}) => {
-  let url = API.GET_VENDORS_LIST;
+type TGetSupermarketProducts = (props: IGetSupermarketProductsProps) => Promise<TSupermarketProductsListDataGroups>;
+const getSupermarketProducts: TGetSupermarketProducts = async ({isServer, categoryId, vendorId, params}) => {
+  let url = API.GET_SUPERMARKET_PRODUCTS;
   if (isServer) {
-    url = API.DOMAIN + API.GET_VENDORS_LIST;
+    url = API.DOMAIN + API.GET_SUPERMARKET_PRODUCTS;
   }
-  const tmpParams = {
-    skip: 0,
-    take: 19,
-    ...params,
-  };
-  return axiosService<ISupermarketProductsListRes>({url, method: "get", params: tmpParams}).then((res) => ({
-    products: res.data.data.products.products,
-    total: res.data.data.totalCount,
-  }));
+  url = url.replace("{id}", vendorId).replace("{category}", categoryId);
+  return axiosService<ISupermarketProductsListRes>({url, method: "get", params}).then((res) => res.data.data.groups);
 };
 
 export default getSupermarketProducts;

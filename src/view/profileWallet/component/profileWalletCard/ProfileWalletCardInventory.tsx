@@ -1,7 +1,7 @@
-import {useProfileWalletData} from "view/profileWallet/context/ProfileWalletDataProvider";
+import {useUserWallet} from "template/context/UserWalletProvider";
 
 function ProfileWalletCardInventory() {
-  const {data} = useProfileWalletData();
+  const {data} = useUserWallet();
   return (
     <>
       <div>موجودی کیف پول شما</div>

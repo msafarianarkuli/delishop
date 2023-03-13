@@ -5,7 +5,7 @@ import {useQuery} from "react-query";
 import getUserCoin from "api/getUserCoint";
 
 interface IUserCoinProvider {
-  children: JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 
 const initialState: IDataContextProvider<number> = {
@@ -17,7 +17,7 @@ const initialState: IDataContextProvider<number> = {
 
 const UserCoinContext = createContext<IDataContextProvider<number>>(initialState);
 
-export const QUERY_KEY_USER_COIN = "restaurantDetail";
+export const QUERY_KEY_USER_COIN = "userCoin";
 const staleTime = 60 * 60 * 1000;
 
 function UserCoinProvider({children}: IUserCoinProvider) {

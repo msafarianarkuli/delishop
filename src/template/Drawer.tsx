@@ -1,16 +1,5 @@
 import {CustomDrawer} from "components";
-import {
-  IconDrawerFavorite,
-  IconDrawerGame,
-  IconMessageSolid,
-  IconOrderSolid,
-  IconRoundedLeft,
-  IconRoundedRight,
-  IconShareSolid,
-  IconSupportSolid,
-  IconTagSolid,
-  IconWalletSolid,
-} from "assets/icons";
+import {IconRoundedLeft, IconRoundedRight} from "assets/icons";
 import Link from "next/link";
 import styles from "template/template.module.scss";
 import {useDispatch, useSelector} from "react-redux";
@@ -18,53 +7,12 @@ import {selectIsDrawerOpen, setIsDrawerOpen} from "redux/template/templateReduce
 import {AppDispatch} from "redux/store";
 import {useCallback} from "react";
 import {Button} from "antd";
-
-const data = [
-  {
-    title: "کیف پول (0 تومان)",
-    icon: IconWalletSolid,
-    link: "/",
-  },
-  {
-    title: "لیست سفارشات",
-    icon: IconOrderSolid,
-    link: "/",
-  },
-  {
-    title: "پیام ها (0)",
-    icon: IconMessageSolid,
-    link: "/",
-  },
-  {
-    title: "علاقه مندی ها",
-    icon: IconDrawerFavorite,
-    link: "/",
-  },
-  {
-    title: "آگهی ها",
-    icon: IconTagSolid,
-    link: "/",
-  },
-  {
-    title: "بازی ها",
-    icon: IconDrawerGame,
-    link: "/",
-  },
-  {
-    title: "پشتیبانی",
-    icon: IconSupportSolid,
-    link: "/",
-  },
-  {
-    title: "معرفی به دوستان",
-    icon: IconShareSolid,
-    link: "/",
-  },
-];
+import useDrawerRoutes from "template/hooks/useDrawerRoutes";
 
 function Drawer() {
   const isDrawerOpen = useSelector(selectIsDrawerOpen);
   const dispatch = useDispatch<AppDispatch>();
+  const data = useDrawerRoutes();
 
   const onClose = useCallback(() => {
     dispatch(setIsDrawerOpen(false));

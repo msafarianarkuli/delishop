@@ -5,6 +5,10 @@ import {useRouter} from "next/router";
 import {useQuery} from "react-query";
 import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
 
+interface ISupermarketCategoryListDataProvider {
+  children: JSX.Element;
+}
+
 const initialState: IDataContextProvider<IGetSupermarketDetailData> = {
   data: undefined,
   error: null,
@@ -12,11 +16,11 @@ const initialState: IDataContextProvider<IGetSupermarketDetailData> = {
   isLoading: false,
 };
 
-const SupermarketDetailDataContext = createContext<IDataContextProvider<IGetSupermarketDetailData>>(initialState);
+const SupermarketCategoryListContext = createContext<IDataContextProvider<IGetSupermarketDetailData>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 
-function SupermarketDetailDataProvider({children}: {children: JSX.Element}) {
+function SupermarketCategoryListDataProvider({children}: ISupermarketCategoryListDataProvider) {
   const router = useRouter();
 
   const result = useQuery<IGetSupermarketDetailData, {status: number}>(
@@ -25,11 +29,11 @@ function SupermarketDetailDataProvider({children}: {children: JSX.Element}) {
     {staleTime, enabled: router.isReady}
   );
 
-  return <SupermarketDetailDataContext.Provider value={result}>{children}</SupermarketDetailDataContext.Provider>;
+  return <SupermarketCategoryListContext.Provider value={result}>{children}</SupermarketCategoryListContext.Provider>;
 }
 
-export default SupermarketDetailDataProvider;
+export default SupermarketCategoryListDataProvider;
 
-export function useSupermarketDetailData() {
-  return useContext(SupermarketDetailDataContext);
+export function useSupermarketCategoryListData() {
+  return useContext(SupermarketCategoryListContext);
 }

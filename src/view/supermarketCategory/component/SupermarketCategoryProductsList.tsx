@@ -1,15 +1,13 @@
 import {Fragment} from "react";
-import SupermarketCategorySubCategory from "view/supermarketCategory/component/SupermarketCategorySubCategory";
 import SupermarketCategoryItemHeader from "view/supermarketCategory/component/SupermarketCategoryItemHeader";
 import SupermarketCategoryCard from "view/supermarketCategory/component/supermarketCategoryCard";
 import Link from "next/link";
 import {useSupermarketCategoryData} from "view/supermarketCategory/context/SupermarketCategoryDataProvider";
 
-function SupermarketCategoryList() {
+function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
   return (
-    <div className="mt-headerNormal">
-      <SupermarketCategorySubCategory />
+    <>
       {data?.map((value, index) => {
         if (!value.products.length) return null;
         return (
@@ -34,8 +32,8 @@ function SupermarketCategoryList() {
           </Fragment>
         );
       })}
-    </div>
+    </>
   );
 }
 
-export default SupermarketCategoryList;
+export default SupermarketCategoryProductsList;

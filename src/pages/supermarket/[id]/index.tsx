@@ -1,11 +1,9 @@
 import SupermarketDetail from "view/supermarketDetail";
-import SupermarketDetailDataProvider, {
-  QUERY_KEY_SUPERMARKET_DETAIL,
-} from "view/supermarketDetail/context/SupermarketDetailDataProvider";
+import SupermarketDetailDataProvider from "view/supermarketDetail/context/SupermarketDetailDataProvider";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {dehydrate, QueryClient} from "react-query";
 import {IGetVendorDetailData} from "types/interfaceVendorDetail";
-import getSupermarketDetail from "api/getSupermarketDetail";
+import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
 
 function SupermarketDetailPage() {
   return (

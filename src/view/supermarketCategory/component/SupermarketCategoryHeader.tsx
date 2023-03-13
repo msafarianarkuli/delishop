@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useMemo} from "react";
 import {AppHeader, AppHeaderBackBtn} from "components";
 import {useRouter} from "next/router";
 import {IconFilter} from "assets/icons";
@@ -6,56 +6,44 @@ import classNames from "classnames";
 import Link from "next/link";
 import useSupermarketCategoryFilterAction from "view/supermarketCategory/component/context/useSupermarketCategoryFilterAction";
 import {setSupermarketCategoryFilterOpen} from "view/supermarketCategory/component/context/SupermarketCategoryFilterProvider";
-
-const data = [
-  {
-    id: 1,
-    title: "دستمال و شوینده",
-  },
-  {
-    id: 2,
-    title: "لبنیات",
-  },
-  {
-    id: 3,
-    title: "خواربار و نان",
-  },
-  {
-    id: 4,
-    title: "آرایشی و بهداشتی",
-  },
-  {
-    id: 5,
-    title: "میوه و سبزیجات",
-  },
-  {
-    id: 6,
-    title: "نوشیدنی ها",
-  },
-];
+import {useSupermarketCategoryListData} from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
 
 function SupermarketCategoryHeaderBody() {
   const router = useRouter();
+  const {data} = useSupermarketCategoryListData();
+
+  const id = useMemo(() => {
+    const tmpId = router.query.category;
+    if (tmpId && !Array.isArray(tmpId)) {
+      return tmpId;
+    }
+    return "";
+  }, [router.query.category]);
 
   useEffect(() => {
-    const id = router.query?.id as string;
     if (id) {
       const div = document.getElementById(`category_${id}`) as HTMLDivElement;
-      div.scrollIntoView();
+      div?.scrollIntoView();
     }
-  }, [router.query?.id]);
+  }, [id]);
 
+  if (!data?.menus.groups.length) return <div>موردی یافت نشد</div>;
   return (
     <div className="w-full flex items-center overflow-auto h-headerNormal">
-      {data.map((item, index) => {
-        const id = router.query?.id as string;
+      {data?.menus.groups.map((item, index) => {
         const container = classNames({
           "block font-medium text-[15px] text-iconColor ml-4 last:mr-0 whitespace-nowrap": true,
           "text-white bg-primarySupermarket px-3 py-1 rounded-full": +id === item.id,
         });
         return (
-          <Link key={index} href={`/supermarket/category/${item.id}`} id={`category_${item.id}`} className={container}>
-            {item.title}
+          <Link
+            key={index}
+            href={`/supermarket/${data?.vendor.id}/${item.id}`}
+            id={`category_${item.id}`}
+            className={container}
+            prefetch={false}
+          >
+            {item.displayname}
           </Link>
         );
       })}

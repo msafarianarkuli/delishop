@@ -6,6 +6,7 @@ interface IGetSupermarketDetailProps {
   id: string;
   isServer?: boolean;
 }
+export const QUERY_KEY_SUPERMARKET_DETAIL = "supermarketDetail";
 
 type TGetSupermarketDetail = (props: IGetSupermarketDetailProps) => Promise<IGetSupermarketDetailData>;
 const getSupermarketDetail: TGetSupermarketDetail = async ({isServer, id}) => {

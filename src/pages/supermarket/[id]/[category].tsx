@@ -6,11 +6,15 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import {dehydrate, QueryClient} from "react-query";
 import {IGetVendorDetailData} from "types/interfaceVendorDetail";
 import getSupermarketProducts from "api/getSupermarketProducts";
+import SupermarketCategoryListDataProvider from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
+import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
 
 function SupermarketCategoryPage() {
   return (
     <SupermarketCategoryDataProvider>
-      <SupermarketCategory />
+      <SupermarketCategoryListDataProvider>
+        <SupermarketCategory />
+      </SupermarketCategoryListDataProvider>
     </SupermarketCategoryDataProvider>
   );
 }
@@ -26,9 +30,14 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     categoryId = params.category;
   }
   const queryKey = [QUERY_KEY_SUPERMARKET_PRODUCTS_LIST, vendorId, categoryId];
+  const categoryQueryKey = [QUERY_KEY_SUPERMARKET_DETAIL, vendorId];
   await queryClient.prefetchQuery({
     queryKey,
     queryFn: () => getSupermarketProducts({isServer: true, vendorId, categoryId}),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: categoryQueryKey,
+    queryFn: () => getSupermarketDetail({isServer: true, id: vendorId}),
   });
   const queryState = queryClient.getQueryState<IGetVendorDetailData, {status: number}>(queryKey);
   const status = queryState?.error?.status;

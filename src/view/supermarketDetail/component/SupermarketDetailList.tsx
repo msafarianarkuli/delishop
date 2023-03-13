@@ -15,6 +15,7 @@ function SupermarketDetailList() {
               key={index}
               href={`/supermarket/${data?.vendor.id}/${item.id}`}
               className="block w-1/2 mobile:w-1/3 px-1 min-[580px]:mb-16 mb-12"
+              prefetch={false}
             >
               <SuperMarketDetailCard title={item.displayname} image={item.logo} />
             </Link>

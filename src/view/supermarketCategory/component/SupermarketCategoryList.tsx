@@ -19,7 +19,7 @@ function SupermarketCategoryList() {
               {value.products?.map((item, index) => {
                 const product = item.productKind[0];
                 return (
-                  <Link key={index} href={`/supermarket/product/${item.id}`}>
+                  <Link key={index} href={`/supermarket/product/${item.id}`} prefetch={false}>
                     <SupermarketCategoryCard
                       title={item.displayname}
                       image={product.photo_igu}

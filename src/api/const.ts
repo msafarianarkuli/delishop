@@ -18,6 +18,7 @@ export const API = {
   //supermarket
   GET_SUPERMARKET_MENU: "/api/market/{id}/menu",
   GET_SUPERMARKET_PRODUCTS: "/api/market/{id}/group-sub/{category}/products",
+  GET_SUPERMARKET_GROUP_PRODUCTS: "/api/market/{id}/group/{category}/products",
 
   //user
   GET_USER_ADDRESSES: "/api/users/addresses",

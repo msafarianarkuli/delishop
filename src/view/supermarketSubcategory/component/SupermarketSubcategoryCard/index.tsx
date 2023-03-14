@@ -1,9 +1,10 @@
-import Counter from "components/counter/Counter";
+import React from "react";
 import classNames from "classnames";
-import styles from "view/supermarketCategory/component/supermarketCategoryCard/supermarketCategoryCard.module.scss";
+import Counter from "components/counter/Counter";
 import {IconCoin} from "assets/icons";
+import styles from "view/supermarketSubcategory/component/SupermarketSubcategoryCard/supermarketSubcategoryCard.module.scss";
 
-interface ISupermarketCategoryCard {
+interface ISupermarketSubcategoryCard {
   image?: string;
   coin: number;
   title: string;
@@ -14,15 +15,15 @@ interface ISupermarketCategoryCard {
   onMinusClick: () => void;
 }
 
-function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
+function SupermarketSubcategoryCard(props: ISupermarketSubcategoryCard) {
   const {image, description, price, title, coin, count, onMinusClick, onAddClick} = props;
   const counterClassNames = classNames({
-    "flex-row-reverse w-[100px] h-[34px]": true,
-    [styles.supermarket_category_card_counter]: count,
+    "flex-row-reverse w-[100px] h-[34px] mx-auto": true,
+    [styles.supermarket_subcategory_card_counter]: count,
   });
 
   return (
-    <div className={styles.supermarket_category_card_container}>
+    <div className={styles.supermarket_subcategory_card_container}>
       <Counter
         count={count}
         className={counterClassNames}
@@ -51,4 +52,4 @@ function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
   );
 }
 
-export default SupermarketCategoryCard;
+export default SupermarketSubcategoryCard;

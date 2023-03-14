@@ -35,6 +35,7 @@ function RestaurantCartList() {
     }
   }, [isLoadedFromStorage, cartList]);
 
+  if (!data.length) return <div>سبد خرید خالی می باشد</div>;
   return (
     <div>
       {data?.map((item, index) => {

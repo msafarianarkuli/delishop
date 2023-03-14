@@ -6,6 +6,8 @@ import {IconLogoutDark} from "assets/icons";
 import useProfileAction from "view/profile/context/useProfileAction";
 import {CustomSelectReactHook, DatePickerReactHook} from "components";
 import {DayValue} from "@hassanmojab/react-modern-calendar-datepicker";
+import {useSession} from "next-auth/react";
+import {useEffect} from "react";
 
 interface IProfileForm {
   name: string;
@@ -15,7 +17,7 @@ interface IProfileForm {
   anniversary: DayValue;
 }
 
-const gender = [
+const genders = [
   {
     value: "man",
     label: "مرد",
@@ -29,7 +31,19 @@ const gender = [
 function ProfileForm() {
   const setModal = useProfileAction();
   const methods = useForm<IProfileForm>();
-  const {handleSubmit, control} = methods;
+  const {handleSubmit, control, setValue} = methods;
+  const {data} = useSession();
+
+  useEffect(() => {
+    setValue("name", data?.user.name || "");
+    setValue("email", "");
+    // setValue("birthday", data?.user.birthday || "");
+    // setValue("anniversary", data?.user.anniversary_date || "");
+    const gender = genders.find((item) => item.label === data?.user.gender);
+    if (gender) {
+      setValue("gender", gender.value);
+    }
+  }, [data?.user.gender, data?.user.name, setValue]);
 
   function onSubmit(payload: IProfileForm) {
     createLog("payload", payload);
@@ -68,7 +82,7 @@ function ProfileForm() {
             id="gender"
             label="جنسیت"
             control={control}
-            options={gender}
+            options={genders}
             placeholder="زن"
             classNameContainer="mb-7"
             className="select-form"

@@ -25,7 +25,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
   const vendor = useCartRestaurant();
 
   useEffect(() => {
-    if (isOpen && vendor?.totalPrice) {
+    if (isOpen && vendor?.totalPrice != null) {
       setTotalPrice(vendor.totalPrice + price);
     }
   }, [isOpen, price, vendor?.totalPrice]);

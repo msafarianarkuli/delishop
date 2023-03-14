@@ -9,13 +9,23 @@ import getSupermarketProducts from "api/getSupermarketProducts";
 import SupermarketCategoryListDataProvider from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
 import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
 import SupermarketCategorySubcategoryFilterProvider from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
+import SupermarketCategoryIdProvider from "view/supermarketCategory/context/SupermarketCategoryIdProvider";
 
-function SupermarketCategoryPage() {
+interface ISupermarketCategoryPage {
+  categoryId: string;
+  vendorId: string;
+}
+
+function SupermarketCategoryPage(props: ISupermarketCategoryPage) {
+  const {categoryId, vendorId} = props;
+
   return (
     <SupermarketCategoryDataProvider>
       <SupermarketCategoryListDataProvider>
         <SupermarketCategorySubcategoryFilterProvider>
-          <SupermarketCategory />
+          <SupermarketCategoryIdProvider categoryId={categoryId} vendorId={vendorId}>
+            <SupermarketCategory />
+          </SupermarketCategoryIdProvider>
         </SupermarketCategorySubcategoryFilterProvider>
       </SupermarketCategoryListDataProvider>
     </SupermarketCategoryDataProvider>
@@ -52,6 +62,8 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      categoryId,
+      vendorId,
     },
     revalidate: 60,
   };

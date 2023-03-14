@@ -3,7 +3,6 @@ import SupermarketCategoryItemHeader from "view/supermarketCategory/component/Su
 import SupermarketCategoryCard from "view/supermarketCategory/component/supermarketCategoryCard";
 import Link from "next/link";
 import {useSupermarketCategoryData} from "view/supermarketCategory/context/SupermarketCategoryDataProvider";
-import {useRouter} from "next/router";
 import {
   removeCartSupermarketLastOrder,
   selectCartSupermarketCart,
@@ -12,21 +11,14 @@ import {
 } from "redux/cartSupermraket/cartSupermarketReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {useSupermarketCategorySubcategoryFilter} from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
+import {useSupermarketCategoryId} from "view/supermarketCategory/context/SupermarketCategoryIdProvider";
 
 function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
-  const router = useRouter();
   const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
   const filterId = useSupermarketCategorySubcategoryFilter();
-
-  const vendorId = useMemo(() => {
-    let id = router.query.id;
-    if (id && !Array.isArray(id)) {
-      return id;
-    }
-    return "";
-  }, [router.query.id]);
+  const {categoryId, vendorId} = useSupermarketCategoryId();
 
   const finalData = useMemo(() => {
     if (filterId) {
@@ -41,7 +33,10 @@ function SupermarketCategoryProductsList() {
         if (!value.products.length) return null;
         return (
           <Fragment key={index}>
-            <SupermarketCategoryItemHeader title={value.displayname} />
+            <SupermarketCategoryItemHeader
+              href={`/supermarket/${vendorId}/${categoryId}/${value.id}/`}
+              title={value.displayname}
+            />
             <div className="flex overflow-auto py-5 pr-screenSpace">
               {value.products?.map((item, index) => {
                 const product = item.productKind[0];

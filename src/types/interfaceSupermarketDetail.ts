@@ -19,15 +19,17 @@ export interface IGetSupermarketDetailMenusGroups {
   name: string;
   displayname: string;
   logo?: string;
-  sub_groups: IGetSupermarketDetailMenusGroupsSubgroups[] | null;
+  sub_groups: TGetSupermarketDetailMenusGroupsSubgroups;
 }
 
-export interface IGetSupermarketDetailMenusGroupsSubgroups {
+export type TGetSupermarketDetailMenusGroupsSubgroups = IGetSupermarketDetailMenusGroupsSubgroupsItems[] | null;
+
+export interface IGetSupermarketDetailMenusGroupsSubgroupsItems {
   id: number;
   name: string;
   displayname: string;
   logo_igu?: string;
   mothergroup_fid: number;
   market: number;
-  sub_groups: IGetSupermarketDetailMenusGroupsSubgroups[] | null;
+  sub_groups: TGetSupermarketDetailMenusGroupsSubgroups;
 }

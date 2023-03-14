@@ -7,7 +7,7 @@ interface ISupermarketCategoryItemHeader {
 function SupermarketCategoryItemHeader(props: ISupermarketCategoryItemHeader) {
   const {title} = props;
   return (
-    <div className="flex items-center justify-between mt-5 px-screenSpace">
+    <div className="flex items-center justify-between pt-5 px-screenSpace">
       <div className="flex items-center">
         <div className="w-[7px] h-[7px] bg-primarySupermarket rounded-full" />
         <span className="text-[17px] font-bold mr-1">{title}</span>

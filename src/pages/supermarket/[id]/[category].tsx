@@ -8,12 +8,15 @@ import {IGetVendorDetailData} from "types/interfaceVendorDetail";
 import getSupermarketProducts from "api/getSupermarketProducts";
 import SupermarketCategoryListDataProvider from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
 import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
+import SupermarketCategorySubcategoryFilterProvider from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
 
 function SupermarketCategoryPage() {
   return (
     <SupermarketCategoryDataProvider>
       <SupermarketCategoryListDataProvider>
-        <SupermarketCategory />
+        <SupermarketCategorySubcategoryFilterProvider>
+          <SupermarketCategory />
+        </SupermarketCategorySubcategoryFilterProvider>
       </SupermarketCategoryListDataProvider>
     </SupermarketCategoryDataProvider>
   );

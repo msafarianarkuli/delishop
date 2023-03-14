@@ -11,12 +11,14 @@ import {
   setCartSupermarketVendorData,
 } from "redux/cartSupermraket/cartSupermarketReducer";
 import {useDispatch, useSelector} from "react-redux";
+import {useSupermarketCategorySubcategoryFilter} from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
 
 function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
   const router = useRouter();
   const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
+  const filterId = useSupermarketCategorySubcategoryFilter();
 
   const vendorId = useMemo(() => {
     let id = router.query.id;
@@ -26,9 +28,16 @@ function SupermarketCategoryProductsList() {
     return "";
   }, [router.query.id]);
 
+  const finalData = useMemo(() => {
+    if (filterId) {
+      return data?.filter((item) => item.id === filterId);
+    }
+    return data;
+  }, [data, filterId]);
+
   return (
     <>
-      {data?.map((value, index) => {
+      {finalData?.map((value, index) => {
         if (!value.products.length) return null;
         return (
           <Fragment key={index}>

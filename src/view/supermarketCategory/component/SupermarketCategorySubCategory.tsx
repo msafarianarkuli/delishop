@@ -2,12 +2,30 @@ import classNames from "classnames";
 import {useSupermarketCategoryListData} from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
 import {useMemo} from "react";
 import {useRouter} from "next/router";
-import {IGetSupermarketDetailMenusGroups} from "types/interfaceSupermarketDetail";
+import {
+  IGetSupermarketDetailMenusGroupsSubgroupsItems,
+  TGetSupermarketDetailMenusGroupsSubgroups,
+} from "types/interfaceSupermarketDetail";
+import {
+  useSupermarketCategorySubcategoryFilter,
+  useSupermarketCategorySubcategoryFilterAction,
+} from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
 
-type TDate = IGetSupermarketDetailMenusGroups | null | undefined;
+type TDate = TGetSupermarketDetailMenusGroupsSubgroups | null | undefined;
+
+const allItem: IGetSupermarketDetailMenusGroupsSubgroupsItems = {
+  displayname: "همه",
+  id: 0,
+  sub_groups: null,
+  market: 0,
+  name: "",
+  mothergroup_fid: 0,
+};
 
 function SupermarketCategorySubCategory() {
   const {data: categoryList} = useSupermarketCategoryListData();
+  const filterId = useSupermarketCategorySubcategoryFilter();
+  const setFilterId = useSupermarketCategorySubcategoryFilterAction();
   const router = useRouter();
 
   const categoryId = useMemo(() => {
@@ -20,27 +38,25 @@ function SupermarketCategorySubCategory() {
 
   const data: TDate = useMemo(() => {
     if (categoryId) {
-      return categoryList?.menus.groups.find((item) => item.id === categoryId);
+      const tmp = categoryList?.menus.groups.find((item) => item.id === categoryId);
+      if (tmp?.sub_groups?.length) {
+        return [allItem, ...tmp.sub_groups];
+      }
     }
     return null;
   }, [categoryId, categoryList?.menus.groups]);
 
-  const allFilter = classNames({
-    "border rounded-full font-medium text-[15px] py-1 px-3 ml-3 whitespace-nowrap": true,
-    "border-primarySupermarket bg-primarySupermarket/10 text-primarySupermarket": true,
-  });
-
+  if (!data?.length) return null;
   return (
     <div className="flex items-center h-headerNormal border-b border-borderColor overflow-auto pr-screenSpace">
-      <div className={allFilter}>همه</div>
-      {data?.sub_groups?.map((item, index) => {
+      {data?.map((item, index) => {
         const container = classNames({
-          "border rounded-full font-medium text-[15px] py-1 px-3 ml-3 whitespace-nowrap": true,
-          "border-iconColor text-iconColor": true,
-          // "border-primarySupermarket bg-primarySupermarket/10 text-primarySupermarket": index === 0,
+          "border rounded-full font-medium text-[15px] py-1 px-3 ml-3 whitespace-nowrap cursor-pointer": true,
+          "border-iconColor text-iconColor": item.id !== filterId,
+          "border-primarySupermarket bg-primarySupermarket/10 text-primarySupermarket": item.id === filterId,
         });
         return (
-          <div key={index} className={container}>
+          <div onClick={() => setFilterId(item.id)} key={index} className={container}>
             {item.displayname}
           </div>
         );

@@ -1,7 +1,12 @@
 import React from "react";
+import SupermarketCart from "view/supermarketCart";
 
 function SupermarketCartPage() {
-  return <div>SupermarketCartPage</div>;
+  return (
+    <>
+      <SupermarketCart />
+    </>
+  );
 }
 
 export default SupermarketCartPage;

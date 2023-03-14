@@ -11,6 +11,7 @@ interface IDataBottomNavigationitem {
   active: boolean;
   onClick?: () => void;
   badge?: boolean;
+  badgeNumber?: number;
 }
 
 export type TDataBottomNavigation = IDataBottomNavigationitem[];
@@ -29,6 +30,13 @@ function BottomNavigation(props: IBottomNavigation) {
     return color;
   }, [primary]);
 
+  const primaryBgColor = useMemo(() => {
+    let color = "";
+    if (primary === "restaurant") color = "bg-primary";
+    if (primary === "supermarket") color = "bg-primarySupermarket";
+    return color;
+  }, [primary]);
+
   const container = classNames({
     "h-bottomNavigation max-width-screen": true,
     [styles.bottom_navigation_container]: true,
@@ -42,7 +50,7 @@ function BottomNavigation(props: IBottomNavigation) {
         {data.map((item, index) => {
           const icon = classNames({
             "w-7 h-7": true,
-            "text-primary": item.active,
+            [primaryColor]: item.active,
           });
           const text = classNames({
             "font-medium text-[13px] mt-1": true,
@@ -51,10 +59,20 @@ function BottomNavigation(props: IBottomNavigation) {
           const Icon = item.icon;
           const className = "relative flex flex-col items-center";
           const Component: ElementType = item.link ? Link : "button";
+          const badgeClassName = classNames({
+            "absolute flex items-center justify-center rounded-full": true,
+            [primaryBgColor]: item.badge,
+            "w-[7px] h-[7px] top-[2%] right-[25%]": !item.badgeNumber,
+            "w-[20px] h-[20px] -top-[12%] right-[12%]": item.badgeNumber,
+          });
           return (
             <Component key={index} {...(item.link ? {href: item.link} : {onClick: item.onClick})} className={className}>
               {item.badge ? (
-                <div className="absolute w-[7px] h-[7px] rounded-full bg-primary top-[2%] right-[25%]" />
+                <div className={badgeClassName}>
+                  {item.badgeNumber ? (
+                    <span className="text-[12px] font-medium text-white">{item.badgeNumber}</span>
+                  ) : null}
+                </div>
               ) : null}
               <Icon className={icon} />
               <div className={text}>{item.title}</div>

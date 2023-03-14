@@ -1,5 +1,4 @@
 import Counter from "components/counter/Counter";
-import {useState} from "react";
 import classNames from "classnames";
 import styles from "view/supermarketCategory/component/supermarketCategoryCard/supermarketCategoryCard.module.scss";
 import {IconCoin} from "assets/icons";
@@ -10,31 +9,29 @@ interface ISupermarketCategoryCard {
   title: string;
   description: string;
   price: number;
-  initialCount?: number;
+  count?: number;
+  onAddClick: () => void;
+  onMinusClick: () => void;
 }
 
 function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
-  const {image, description, price, title, coin, initialCount} = props;
-  const [count, setCount] = useState(initialCount || 0);
+  const {image, description, price, title, coin, count, onMinusClick, onAddClick} = props;
+  // const [count, setCount] = useState(initialCount || 0);
   const counterClassNames = classNames({
     "flex-row-reverse w-[100px] h-[34px]": true,
     [styles.supermarket_category_card_counter]: count,
   });
+
   return (
     <div className={styles.supermarket_category_card_container}>
       <Counter
         count={count}
-        // className={styles.supermarket_category_card_counter}
         className={counterClassNames}
         primaryType="supermarket"
         showMinusOnlyPositiveNumber
         showNumberOnlyPositiveNumber
-        onAddClick={() => {
-          setCount((prevState) => prevState + 1);
-        }}
-        onMinusClick={() => {
-          if (count > 0) setCount((prevState) => prevState - 1);
-        }}
+        onAddClick={onAddClick}
+        onMinusClick={onMinusClick}
       />
       <div className="flex justify-center items-center h-[70px] w-full">
         <img src={image} alt={title} className="w-full h-auto max-h-[85%] rounded-[10px]" />

@@ -13,6 +13,7 @@ export const mergeCartListToArray: TMergeCartListToArray = (cartOrders) => {
         count: count + 1,
         title: item.title,
         price: item.price,
+        image: item.image,
         extra: item.extra?.map((value) => ({name: value.name, price: value.price, id: value.id})),
       };
     });

@@ -10,6 +10,7 @@ import {
   ISetCartReducerVendorData,
 } from "types/interfaceCartReducer";
 import {findOrderIndex} from "utils/cartReducerUtils";
+import {HYDRATE} from "next-redux-wrapper";
 
 const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
@@ -124,6 +125,14 @@ const cartRestaurantReducer = createSlice({
     setCartRestaurantFromStorage: (state, action: PayloadAction<Omit<ICartReducer, "isLoadedFromStorage">>) => {
       state.cartList = action.payload?.cartList || [];
       state.isLoadedFromStorage = true;
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.cartRestaurant,
+      };
     },
   },
 });

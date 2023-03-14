@@ -1,11 +1,31 @@
-import {Fragment} from "react";
+import {Fragment, useMemo} from "react";
 import SupermarketCategoryItemHeader from "view/supermarketCategory/component/SupermarketCategoryItemHeader";
 import SupermarketCategoryCard from "view/supermarketCategory/component/supermarketCategoryCard";
 import Link from "next/link";
 import {useSupermarketCategoryData} from "view/supermarketCategory/context/SupermarketCategoryDataProvider";
+import {useRouter} from "next/router";
+import {
+  removeCartSupermarketLastOrder,
+  selectCartSupermarketCart,
+  setCartSupermarketItem,
+  setCartSupermarketVendorData,
+} from "redux/cartSupermraket/cartSupermarketReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
+  const router = useRouter();
+  const cart = useSelector(selectCartSupermarketCart);
+  const dispatch = useDispatch();
+
+  const vendorId = useMemo(() => {
+    let id = router.query.id;
+    if (id && !Array.isArray(id)) {
+      return id;
+    }
+    return "";
+  }, [router.query.id]);
+
   return (
     <>
       {data?.map((value, index) => {
@@ -16,14 +36,41 @@ function SupermarketCategoryProductsList() {
             <div className="flex overflow-auto py-5 pr-screenSpace">
               {value.products?.map((item, index) => {
                 const product = item.productKind[0];
+                const addedPercent = item.priceClass / 100;
+                const finalPrice = product.price + product.price * addedPercent;
+                const count = cart.cartOrders[product.id]?.length || 0;
                 return (
                   <Link key={index} href={`/supermarket/product/${item.id}`} prefetch={false}>
                     <SupermarketCategoryCard
                       title={item.displayname}
                       image={product.photo_igu}
-                      price={product.price}
+                      price={finalPrice}
                       coin={item.point}
                       description={item.description_te}
+                      count={count}
+                      onAddClick={() => {
+                        if (vendorId) {
+                          if (vendorId !== cart.vendorId) {
+                            dispatch(
+                              setCartSupermarketVendorData({
+                                title: "",
+                                vendorId,
+                              })
+                            );
+                          }
+                          dispatch(
+                            setCartSupermarketItem({
+                              title: item.displayname,
+                              price: finalPrice,
+                              id: product.id,
+                              image: product.photo_igu,
+                            })
+                          );
+                        }
+                      }}
+                      onMinusClick={() => {
+                        dispatch(removeCartSupermarketLastOrder(product.id));
+                      }}
                     />
                   </Link>
                 );

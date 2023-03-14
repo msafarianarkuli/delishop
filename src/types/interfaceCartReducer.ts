@@ -21,6 +21,7 @@ export interface ICartReducerCartItem {
   extra?: TCartReducerCartItemExtraItemExtra;
   price: number;
   title: string;
+  image?: string;
 }
 
 export type TCartReducerCartItemExtraItemExtra = ICartReducerCartItemExtraItem[];

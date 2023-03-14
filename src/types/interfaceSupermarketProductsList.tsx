@@ -26,9 +26,9 @@ export interface ISupermarketProductsListDataGroupsItemProductsItem {
   group_fid: number;
   unit_fid: number;
   description_te: string;
-  priceClass: string;
-  brand: string;
+  priceClass: number;
   point: number;
+  brand: string;
   productKind: ISupermarketProductsListDataGroupsItemProductsItemProductKind;
 }
 

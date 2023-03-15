@@ -50,6 +50,12 @@
   }
 }
 
+.input-form-supermarket {
+  &:where(.css-dev-only-do-not-override-we0jvz).ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: $primarySupermarket !important;
+  }
+}
+
 .select-form {
   width: 100%;
   margin-top: 10px;

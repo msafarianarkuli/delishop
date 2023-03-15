@@ -3,6 +3,7 @@ import {IconBank, IconCash, IconWallet} from "assets/icons";
 import styles from "view/orderComplete/orderComplete.module.scss";
 import classNames from "classnames";
 import {useState} from "react";
+import useTypeColor from "hooks/useTypeColor";
 
 const data = [
   {
@@ -24,16 +25,22 @@ const data = [
 
 function OrderCompletePaymentType() {
   const [payment, setPayment] = useState(1);
+  const type = useTypeColor();
+  const selectedClassName = classNames({
+    "text-primary border border-primary": type === "default",
+    "text-primarySupermarket border border-primarySupermarket": type === "supermarket",
+  });
+
   return (
     <div className="mt-7">
-      <OrderCompleteTitle title="انتخاب نحوه پرداخت" />
+      <OrderCompleteTitle type={type} title="انتخاب نحوه پرداخت" />
       <div className="px-screenSpace">
         <div className="relative pb-[21.5%]">
           <div className="absolute flex items-center justify-between w-full h-full">
             {data.map((item, index) => {
               const container = classNames({
                 [styles.restaurant_complete_payment_type_card]: true,
-                "text-primary border border-primary": payment === item.id,
+                [selectedClassName]: payment === item.id,
               });
               const Icon = item.icon;
               return (

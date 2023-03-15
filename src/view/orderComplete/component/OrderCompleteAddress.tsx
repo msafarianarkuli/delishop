@@ -10,9 +10,11 @@ import {
   useOrderComplete,
   useOrderCompleteAction,
 } from "view/orderComplete/context/OrderCompleteProvider";
+import {useRouter} from "next/router";
 
 function OrderCompleteTitleLeft() {
   const type = useTypeColor();
+  const router = useRouter();
 
   const linkClassName = classNames({
     "flex items-center font-medium": true,
@@ -20,7 +22,7 @@ function OrderCompleteTitleLeft() {
     "text-primarySupermarket": type === "supermarket",
   });
   return (
-    <Link href="/" className={linkClassName}>
+    <Link href={`/address?callbackUrl=${router.asPath}`} className={linkClassName}>
       <div>تغییر آدرس</div>
       <IconRoundedLeft className="w-5 h-5" />
     </Link>

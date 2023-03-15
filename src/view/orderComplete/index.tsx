@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo} from "react";
 import OrderCompleteHeader from "view/orderComplete/component/OrderCompleteHeader";
 import OrderCompleteSubmitBtn from "view/orderComplete/component/OrderCompleteSubmitBtn";
 import OrderCompletePartOne from "view/orderComplete/component/OrderCompletePartOne";
@@ -6,12 +6,18 @@ import OrderCompletePartTwo from "view/orderComplete/component/OrderCompletePart
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import useCartSupermarket from "hooks/useCartSupermarket";
+import {
+  setOrderCompleteStep,
+  useOrderComplete,
+  useOrderCompleteAction,
+} from "view/orderComplete/context/OrderCompleteProvider";
 
 function OrderComplete() {
   const router = useRouter();
-  const [state, setState] = useState<number>(1);
   const vendor = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const {step} = useOrderComplete();
+  const dispatch = useOrderCompleteAction();
 
   const cartOrders = useMemo(() => {
     if (vendor?.cartOrders) return vendor.cartOrders;
@@ -20,26 +26,26 @@ function OrderComplete() {
 
   useEffect(() => {
     window.scrollTo({top: 0});
-  }, [state]);
+  }, [step]);
 
   return (
     <>
       <OrderCompleteHeader
         onClick={() => {
-          if (state === 1) {
+          if (step === 1) {
             router.back();
           } else {
-            setState(1);
+            dispatch(setOrderCompleteStep(1));
           }
         }}
       />
       {cartOrders ? (
         <>
-          <div className="mb-[100px]">{state === 1 ? <OrderCompletePartOne /> : <OrderCompletePartTwo />}</div>
+          <div className="mb-[100px]">{step === 1 ? <OrderCompletePartOne /> : <OrderCompletePartTwo />}</div>
           <OrderCompleteSubmitBtn
-            step={state}
+            step={step}
             onClick={() => {
-              setState(2);
+              dispatch(setOrderCompleteStep(2));
             }}
           />
         </>

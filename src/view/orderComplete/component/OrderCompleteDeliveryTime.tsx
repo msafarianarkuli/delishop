@@ -1,16 +1,17 @@
 import styles from "view/orderComplete/orderComplete.module.scss";
 import {Checkbox} from "components";
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {number2Digits} from "utils/utils";
 import useTypeColor from "hooks/useTypeColor";
+import {
+  IOrderCompleteDeliverTime,
+  setOrderCompleteDeliveryTime,
+  useOrderComplete,
+  useOrderCompleteAction,
+} from "view/orderComplete/context/OrderCompleteProvider";
 
-interface IDeliverTime {
-  from: number;
-  to: number;
-}
-
-const tmpTime: IDeliverTime[] = Array.from(new Array(15), (_, i) => {
+const tmpTime: IOrderCompleteDeliverTime[] = Array.from(new Array(15), (_, i) => {
   const tmp = 8 + i;
   return {
     from: tmp,
@@ -20,17 +21,51 @@ const tmpTime: IDeliverTime[] = Array.from(new Array(15), (_, i) => {
 
 function OrderCompleteDeliveryTime() {
   const type = useTypeColor();
-  const [deliveryTime, setDeliveryTime] = useState<IDeliverTime | null>(null);
-  const [time, setTime] = useState<IDeliverTime[]>([]);
+  const [time, setTime] = useState<IOrderCompleteDeliverTime[]>([]);
+  const {deliveryTime} = useOrderComplete();
+  const dispatch = useOrderCompleteAction();
 
   useEffect(() => {
     const todayHour = new Date().getHours();
-    const index = todayHour === 0 ? -1 : tmpTime.findIndex((item) => item.from > todayHour);
+    const todayMin = new Date().getMinutes();
+    let index = -1;
+    if (todayHour !== 0) {
+      index = tmpTime.findIndex((item) => {
+        if (todayMin > 30) {
+          return item.from > todayHour;
+        } else {
+          return item.from >= todayHour;
+        }
+      });
+    }
     if (index !== -1) {
-      setTime(tmpTime.slice(index));
+      let tmp = tmpTime.slice(index);
+      if (tmp.length) {
+        tmp = [{isTemp: true, ...tmp[0]}, ...tmp];
+      }
+      setTime(tmp);
     } else {
       setTime([]);
     }
+  }, []);
+
+  useEffect(() => {
+    if (time.length && !deliveryTime) {
+      dispatch(setOrderCompleteDeliveryTime(time[0]));
+    }
+  }, [deliveryTime, dispatch, time]);
+
+  const label = useCallback((from: number, to: number, index: number) => {
+    if (!index) {
+      return <span>تحویل فوری</span>;
+    }
+    return (
+      <>
+        <span>{number2Digits(from) + ":00"}</span>
+        <span className="mx-1">تا</span>
+        <span>{number2Digits(to) + ":00"}</span>
+      </>
+    );
   }, []);
 
   return (
@@ -46,16 +81,14 @@ function OrderCompleteDeliveryTime() {
                 type="radio"
                 classNameContainer="mb-5 last:mb-0"
                 classNameLabel="mr-2"
-                label={
-                  <>
-                    <span>{number2Digits(item.from) + ":00"}</span>
-                    <span className="mx-1">تا</span>
-                    <span>{number2Digits(item.to) + ":00"}</span>
-                  </>
+                label={label(item.from, item.to, index)}
+                value={
+                  index === 0
+                    ? !!deliveryTime?.isTemp && deliveryTime?.from === item.from
+                    : !deliveryTime?.isTemp && deliveryTime?.from === item.from
                 }
-                value={deliveryTime?.from === item.from}
                 onChange={() => {
-                  setDeliveryTime(item);
+                  dispatch(setOrderCompleteDeliveryTime(item));
                 }}
               />
             );

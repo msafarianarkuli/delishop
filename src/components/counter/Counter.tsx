@@ -2,6 +2,7 @@ import {IconAdd, IconMinus} from "assets/icons";
 import {ReactNode} from "react";
 import classNames from "classnames";
 import styles from "components/counter/counter.module.scss";
+import {TUseTypeColor} from "hooks/useTypeColor";
 
 interface ICounter {
   count?: number;
@@ -12,7 +13,7 @@ interface ICounter {
   showMinusOnlyPositiveNumber?: boolean;
   showNumberOnlyPositiveNumber?: boolean;
   className?: string;
-  primaryType?: "default" | "supermarket";
+  primaryType?: TUseTypeColor;
 }
 
 function Counter(props: ICounter) {
@@ -27,8 +28,6 @@ function Counter(props: ICounter) {
     className = "",
     primaryType = "default",
   } = props;
-
-  // const [counter, setCounter] = useState(initialValue || 0);
 
   function showNumber() {
     if (showNumberOnlyPositiveNumber && count <= 0) return null;
@@ -72,7 +71,6 @@ function Counter(props: ICounter) {
           e.preventDefault();
           e.stopPropagation();
           onAddClick?.(count + 1);
-          // setCounter((prevState) => prevState + 1);
         }}
       >
         {addIcon ? addIcon : <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />}

@@ -1,14 +1,23 @@
 import {IconAdd} from "assets/icons";
 import styles from "view/orderComplete/component/orderCompleteSuggestionCard/orderCompleteSuggestion.module.scss";
+import classNames from "classnames";
+import {TUseTypeColor} from "hooks/useTypeColor";
 
 interface IOrderCompleteSuggestionCard {
   title: string;
   image: string;
   price: number;
+  type: TUseTypeColor;
 }
 
 function OrderCompleteSuggestionCard(props: IOrderCompleteSuggestionCard) {
-  const {image, title, price} = props;
+  const {image, title, price, type = "default"} = props;
+
+  const btnClassNames = classNames({
+    "flex items-center justify-center w-[30px] h-[30px] rounded-full": true,
+    "bg-primary": type === "default",
+    "bg-primarySupermarket": type === "supermarket",
+  });
   return (
     <div className={styles.restaurant_complete_suggestion_card}>
       <img src={image} alt={title} className="h-full w-[80px] object-center object-cover rounded-[10px]" />
@@ -20,7 +29,7 @@ function OrderCompleteSuggestionCard(props: IOrderCompleteSuggestionCard) {
         </div>
       </div>
       <div className="flex items-center pl-3">
-        <button className="flex items-center justify-center w-[30px] h-[30px] bg-primary rounded-full">
+        <button className={btnClassNames}>
           <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />
         </button>
       </div>

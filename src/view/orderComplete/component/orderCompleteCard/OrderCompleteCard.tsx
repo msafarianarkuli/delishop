@@ -3,6 +3,7 @@ import {IconClose, IconDeleteAddress} from "assets/icons";
 import {useMemo} from "react";
 import {TCartDataItemExtra} from "types/interfaces";
 import {Counter} from "components";
+import {TUseTypeColor} from "hooks/useTypeColor";
 
 interface IOrderCompleteCard {
   title: string;
@@ -12,10 +13,11 @@ interface IOrderCompleteCard {
   onAddClick: () => void;
   onMinusClick: () => void;
   onClickExtra: (id: number) => void;
+  primaryType?: TUseTypeColor;
 }
 
 function OrderCompleteCard(props: IOrderCompleteCard) {
-  const {count, extra, price, title, onAddClick, onMinusClick, onClickExtra} = props;
+  const {count, extra, price, title, onAddClick, onMinusClick, onClickExtra, primaryType} = props;
 
   const extraPrice = useMemo(() => {
     if (extra?.length) {
@@ -56,6 +58,7 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
           <span className="mr-1">تومان</span>
         </div>
         <Counter
+          primaryType={primaryType}
           count={count}
           minusIcon={<IconDeleteAddress className="w-[17px] h-[17px]" />}
           onAddClick={onAddClick}

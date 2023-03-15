@@ -1,21 +1,17 @@
-import {useEffect, useState} from "react";
+import {useMemo} from "react";
 import usePathnameQuery from "hooks/usePathnameQuery";
 
 export type TUseTypeColor = "default" | "supermarket" | null;
 
 function useTypeColor() {
   const {querySearch} = usePathnameQuery();
-  const [type, setType] = useState<TUseTypeColor>(null);
 
-  useEffect(() => {
+  return useMemo(() => {
     if (querySearch?.search("supermarket") !== -1) {
-      setType("supermarket");
-    } else {
-      setType("default");
+      return "supermarket";
     }
+    return "default";
   }, [querySearch]);
-
-  return type;
 }
 
 export default useTypeColor;

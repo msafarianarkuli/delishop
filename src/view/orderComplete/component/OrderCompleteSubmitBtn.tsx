@@ -2,6 +2,8 @@ import {SubmitBuyBtn} from "components";
 import {IconRoundedRight} from "assets/icons";
 import {MouseEventHandler} from "react";
 import useCartRestaurant from "hooks/useCartRestaurant";
+import useCartSupermarket from "hooks/useCartSupermarket";
+import useTypeColor from "hooks/useTypeColor";
 
 interface IOrderCompleteSubmitBtn {
   onClick: MouseEventHandler;
@@ -9,9 +11,13 @@ interface IOrderCompleteSubmitBtn {
 }
 
 function OrderCompleteSubmitBtn({onClick, step}: IOrderCompleteSubmitBtn) {
-  const vendor = useCartRestaurant();
+  const restaurant = useCartRestaurant();
+  const supermarket = useCartSupermarket();
+  const type = useTypeColor();
+
   return (
     <SubmitBuyBtn
+      type={type}
       onClick={onClick}
       right={<IconRoundedRight className="w-5 h-5" />}
       body={
@@ -19,7 +25,7 @@ function OrderCompleteSubmitBtn({onClick, step}: IOrderCompleteSubmitBtn) {
           {step === 1 ? (
             <>
               <span>ادامه</span>
-              <span>({vendor?.totalOrderCount})</span>
+              <span>({restaurant?.totalOrderCount || supermarket?.totalOrderCount})</span>
             </>
           ) : (
             "پرداخت نهایی"
@@ -28,8 +34,7 @@ function OrderCompleteSubmitBtn({onClick, step}: IOrderCompleteSubmitBtn) {
       }
       left={
         <>
-          {" "}
-          <span>{(vendor?.totalPrice || 0).toLocaleString("en-US")}</span>
+          <span>{(restaurant?.totalPrice || supermarket?.totalPrice || 0).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

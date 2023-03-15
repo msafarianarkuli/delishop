@@ -10,19 +10,40 @@ import {
   setCartRestaurantItem,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
+import useCartSupermarket from "hooks/useCartSupermarket";
+import {
+  removeCartSupermarketLastOrder,
+  selectCartSupermarket,
+  setCartSupermarketItem,
+} from "redux/cartSupermraket/cartSupermarketReducer";
+import useTypeColor from "hooks/useTypeColor";
 
 function OrderCompleteList() {
   const router = useRouter();
-  const vendor = useCartRestaurant();
-  const cart = useSelector(selectCartRestaurant);
+  const restaurant = useCartRestaurant();
+  const supermarket = useCartSupermarket();
+  const cartRestaurant = useSelector(selectCartRestaurant);
+  const cartSupermarket = useSelector(selectCartSupermarket);
   const dispatch = useDispatch();
+  const type = useTypeColor();
 
   const data = useMemo(() => {
-    if (cart.isLoadedFromStorage) {
-      return mergeCartListToArray(vendor?.cartOrders || {});
+    if (cartRestaurant.isLoadedFromStorage && cartSupermarket.isLoadedFromStorage) {
+      let cartOrders = {};
+      if (restaurant?.cartOrders) {
+        cartOrders = restaurant.cartOrders;
+      } else if (supermarket?.cartOrders) {
+        cartOrders = supermarket?.cartOrders;
+      }
+      return mergeCartListToArray(cartOrders);
     }
     return [];
-  }, [cart.isLoadedFromStorage, vendor?.cartOrders]);
+  }, [
+    cartRestaurant.isLoadedFromStorage,
+    cartSupermarket.isLoadedFromStorage,
+    supermarket?.cartOrders,
+    restaurant?.cartOrders,
+  ]);
 
   return (
     <div className="mt-headerNormal px-screenSpace">
@@ -30,6 +51,7 @@ function OrderCompleteList() {
         return (
           <OrderCompleteCard
             key={index}
+            primaryType={type}
             title={item.title}
             price={item.price}
             count={item.count}
@@ -37,40 +59,57 @@ function OrderCompleteList() {
             onAddClick={() => {
               const id = router.query.id;
               if (id && !Array.isArray(id)) {
-                dispatch(
-                  setCartRestaurantItem({
-                    vendorId: id,
-                    extra: item.extra,
-                    price: item.price,
-                    title: item.title,
-                    id: +item.id,
-                  })
-                );
+                if (restaurant?.cartOrders) {
+                  dispatch(
+                    setCartRestaurantItem({
+                      vendorId: id,
+                      extra: item.extra,
+                      price: item.price,
+                      title: item.title,
+                      id: +item.id,
+                    })
+                  );
+                } else if (supermarket?.cartOrders) {
+                  dispatch(
+                    setCartSupermarketItem({
+                      title: item.title,
+                      price: item.price,
+                      id: +item.id,
+                      image: item.image,
+                    })
+                  );
+                }
               }
             }}
             onMinusClick={() => {
               const id = router.query.id;
               if (id && !Array.isArray(id)) {
-                dispatch(
-                  removeCartRestaurantCartListOrder({
-                    order: item,
-                    productId: +item.id,
-                    vendorId: id,
-                  })
-                );
+                if (restaurant?.cartOrders) {
+                  dispatch(
+                    removeCartRestaurantCartListOrder({
+                      order: item,
+                      productId: +item.id,
+                      vendorId: id,
+                    })
+                  );
+                } else if (supermarket?.cartOrders) {
+                  dispatch(removeCartSupermarketLastOrder(+item.id));
+                }
               }
             }}
             onClickExtra={(extraId) => {
               const id = router.query.id;
               if (id && !Array.isArray(id)) {
-                dispatch(
-                  removeCartRestaurantCartListOrderExtra({
-                    extraId,
-                    order: item,
-                    productId: +item.id,
-                    vendorId: id,
-                  })
-                );
+                if (restaurant?.cartOrders) {
+                  dispatch(
+                    removeCartRestaurantCartListOrderExtra({
+                      extraId,
+                      order: item,
+                      productId: +item.id,
+                      vendorId: id,
+                    })
+                  );
+                }
               }
             }}
           />

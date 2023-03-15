@@ -3,6 +3,7 @@ import {Checkbox} from "components";
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {useEffect, useState} from "react";
 import {number2Digits} from "utils/utils";
+import useTypeColor from "hooks/useTypeColor";
 
 interface IDeliverTime {
   from: number;
@@ -18,6 +19,7 @@ const tmpTime: IDeliverTime[] = Array.from(new Array(15), (_, i) => {
 });
 
 function OrderCompleteDeliveryTime() {
+  const type = useTypeColor();
   const [deliveryTime, setDeliveryTime] = useState<IDeliverTime | null>(null);
   const [time, setTime] = useState<IDeliverTime[]>([]);
 
@@ -33,7 +35,7 @@ function OrderCompleteDeliveryTime() {
 
   return (
     <div className="mt-7">
-      <OrderCompleteTitle title="زمان تحویل" />
+      <OrderCompleteTitle type={type} title="زمان تحویل" />
       <div className="px-screenSpace">
         <div className={styles.restaurant_complete_delivery_time_container}>
           {time.map((item, index) => {

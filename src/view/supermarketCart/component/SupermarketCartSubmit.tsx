@@ -19,7 +19,7 @@ function SupermarketCartSubmit() {
   return (
     <SubmitBuyBtn
       type="supermarket"
-      onClick={() => router.push(`/ordercomplete/${cart.vendorId}`)}
+      onClick={() => router.push(`/ordercomplete/${cart.vendorId}?supermarket=1`)}
       right={<IconDownload className="w-5 h-5" />}
       body={
         <>

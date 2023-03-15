@@ -1,12 +1,14 @@
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {CustomTextArea} from "components";
 import {useState} from "react";
+import useTypeColor from "hooks/useTypeColor";
 
 function OrderCompleteDescription() {
+  const type = useTypeColor();
   const [text, setText] = useState<string>("");
   return (
     <div className="mt-3">
-      <OrderCompleteTitle title="توضیحات" />
+      <OrderCompleteTitle type={type} title="توضیحات" />
       <div className="px-screenSpace">
         <CustomTextArea
           id="description"

@@ -1,20 +1,21 @@
 import {Button} from "antd";
 import {MouseEventHandler, ReactNode} from "react";
 import classNames from "classnames";
+import {TUseTypeColor} from "hooks/useTypeColor";
 
 interface ISubmitBuyBtn {
   onClick?: MouseEventHandler;
   right?: ReactNode;
   body?: ReactNode;
   left?: ReactNode;
-  type?: "supermarket" | "restaurant";
+  type?: TUseTypeColor;
 }
 
 function SubmitBuyBtn(props: ISubmitBuyBtn) {
-  const {onClick, right, left, body, type = "restaurant"} = props;
+  const {onClick, right, left, body, type = "default"} = props;
   const btnClassName = classNames({
     "flex w-full items-center rounded-[5px]": true,
-    "submit-btn": type === "restaurant",
+    "submit-btn": type === "default",
     "submit-btn-supermarket": type === "supermarket",
   });
   return (

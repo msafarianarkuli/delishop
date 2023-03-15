@@ -3,21 +3,14 @@ import OrderCompleteHeader from "view/orderComplete/component/OrderCompleteHeade
 import OrderCompleteSubmitBtn from "view/orderComplete/component/OrderCompleteSubmitBtn";
 import OrderCompletePartOne from "view/orderComplete/component/OrderCompletePartOne";
 import OrderCompletePartTwo from "view/orderComplete/component/OrderCompletePartTwo";
-import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import useCartSupermarket from "hooks/useCartSupermarket";
-import {
-  setOrderCompleteStep,
-  useOrderComplete,
-  useOrderCompleteAction,
-} from "view/orderComplete/context/OrderCompleteProvider";
+import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
 
 function OrderComplete() {
-  const router = useRouter();
   const vendor = useCartRestaurant();
   const supermarket = useCartSupermarket();
   const {step} = useOrderComplete();
-  const dispatch = useOrderCompleteAction();
 
   const cartOrders = useMemo(() => {
     if (vendor?.cartOrders) return vendor.cartOrders;
@@ -30,24 +23,11 @@ function OrderComplete() {
 
   return (
     <>
-      <OrderCompleteHeader
-        onClick={() => {
-          if (step === 1) {
-            router.back();
-          } else {
-            dispatch(setOrderCompleteStep(1));
-          }
-        }}
-      />
+      <OrderCompleteHeader />
       {cartOrders ? (
         <>
           <div className="mb-[100px]">{step === 1 ? <OrderCompletePartOne /> : <OrderCompletePartTwo />}</div>
-          <OrderCompleteSubmitBtn
-            step={step}
-            onClick={() => {
-              dispatch(setOrderCompleteStep(2));
-            }}
-          />
+          <OrderCompleteSubmitBtn />
         </>
       ) : (
         <div className="mt-headerNormal px-screenSpace">موردی یافت نشد</div>

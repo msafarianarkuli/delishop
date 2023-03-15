@@ -12,6 +12,7 @@ function SupermarketDetailSummary() {
         image={data?.vendor?.logo}
         rate={data?.vendor?.rate || ""}
         deliveryPrice={6500}
+        href={`/supermarket/info/${data?.vendor.id}`}
       />
     </>
   );

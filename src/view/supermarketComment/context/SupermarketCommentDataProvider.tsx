@@ -2,8 +2,8 @@ import React, {createContext, useContext, useMemo} from "react";
 import {IDataContextProvider} from "types/interfaces";
 import getVendorComments, {IGetVendorCommentsRes, QUERY_KEY_VENDORS_COMMENTS} from "api/getVendorComments";
 import {useRouter} from "next/router";
-import {useQuery} from "react-query";
 import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
+import {useQuery} from "react-query";
 
 const initialState: IDataContextProvider<IGetVendorCommentsRes> = {
   data: undefined,
@@ -12,11 +12,11 @@ const initialState: IDataContextProvider<IGetVendorCommentsRes> = {
   isLoading: false,
 };
 
-const RestaurantCommentDataContext = createContext<IDataContextProvider<IGetVendorCommentsRes>>(initialState);
+const SupermarketCommentDataContext = createContext<IDataContextProvider<IGetVendorCommentsRes>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 
-function RestaurantCommentDataProvider({children}: {children: JSX.Element}) {
+function SupermarketCommentDataProvider({children}: {children: JSX.Element}) {
   const router = useRouter();
 
   const params = useMemo(() => {
@@ -43,11 +43,11 @@ function RestaurantCommentDataProvider({children}: {children: JSX.Element}) {
     {staleTime, enabled: router.isReady}
   );
 
-  return <RestaurantCommentDataContext.Provider value={result}>{children}</RestaurantCommentDataContext.Provider>;
+  return <SupermarketCommentDataContext.Provider value={result}>{children}</SupermarketCommentDataContext.Provider>;
 }
 
-export default RestaurantCommentDataProvider;
+export default SupermarketCommentDataProvider;
 
-export function useRestaurantCommentData() {
-  return useContext(RestaurantCommentDataContext);
+export function useSupermarketCommentData() {
+  return useContext(SupermarketCommentDataContext);
 }

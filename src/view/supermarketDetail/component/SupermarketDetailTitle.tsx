@@ -1,5 +1,6 @@
 import {IconCoin, IconRoundedLeft, IconStarFill} from "assets/icons";
 import IconDelivery from "assets/icons/IconDelivery";
+import Link from "next/link";
 
 interface ISupermarketDetailTitle {
   image?: string;
@@ -7,10 +8,11 @@ interface ISupermarketDetailTitle {
   deliveryPrice: number;
   rate: string;
   coin: number;
+  href: string;
 }
 
 function SupermarketDetailTitle(props: ISupermarketDetailTitle) {
-  const {title, rate, image, deliveryPrice, coin} = props;
+  const {title, rate, image, deliveryPrice, coin, href} = props;
   return (
     <div className="flex pt-3">
       <img
@@ -24,10 +26,10 @@ function SupermarketDetailTitle(props: ISupermarketDetailTitle) {
             <span>{title}</span>
             {/*<span className="text-iconColor mr-1">({address})</span>*/}
           </div>
-          <div className="flex items-center text-primarySupermarket whitespace-nowrap">
+          <Link href={href} className="flex items-center text-primarySupermarket whitespace-nowrap">
             <span className="text-[11px]">اطلاعات و نظرات</span>
             <IconRoundedLeft className="w-4 h-4" />
-          </div>
+          </Link>
         </div>
         <div className="flex flex-wrap items-center justify-between font-medium">
           <div className="flex w-full min-[390px]:w-auto min-[390px]:my-0 mt-1 mb-2 items-center text-[11px]">

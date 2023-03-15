@@ -29,12 +29,16 @@ export interface IGetVendorsDetailVendor {
   point: number;
   delivery_at_place: number;
   created_at: string;
-  tags: {
-    id: number;
-    name: string;
-    displayname: string;
-    logo?: string;
-  }[];
+  tags: TGetVendorsDetailVendorTags;
+}
+
+export type TGetVendorsDetailVendorTags = IGetVendorsDetailVendorTagsItems[];
+
+export interface IGetVendorsDetailVendorTagsItems {
+  id: number;
+  name: string;
+  displayname: string;
+  logo?: string;
 }
 
 export interface IGetVendorsDetailVendorOpenHours {

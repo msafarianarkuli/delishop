@@ -1,11 +1,9 @@
-import {IconStar} from "assets/icons";
+import React from "react";
 import {TGetVendorCommentsCommentsItemOrderDetailsProducts} from "types/interfaceVendorComments";
 import dayjs from "dayjs";
-import jalaliday from "jalaliday";
+import {IconStar} from "assets/icons";
 
-dayjs.extend(jalaliday);
-
-interface IRestaurantCommentItem {
+interface ICommentPageListItem {
   name?: string | null;
   comment: string;
   date: string;
@@ -15,7 +13,7 @@ interface IRestaurantCommentItem {
   adminAnswer?: string | null;
 }
 
-function RestaurantCommentItem(props: IRestaurantCommentItem) {
+function CommentPageListItem(props: ICommentPageListItem) {
   const {tag, vendorAnswer, adminAnswer, star, date, name, comment} = props;
   return (
     <>
@@ -37,20 +35,22 @@ function RestaurantCommentItem(props: IRestaurantCommentItem) {
           );
         })}
       </div>
-      {vendorAnswer ? (
-        <div className="border border-borderColor py-2 px-3 text-[13px] rounded">
-          <div className="text-primary">پاسخ مدیر رستوران</div>
-          <div>{vendorAnswer}</div>
-        </div>
-      ) : null}
-      {adminAnswer ? (
-        <div className="border border-borderColor py-2 px-3 text-[13px] rounded">
-          <div className="text-primary">پاسخ ادمین</div>
-          <div>{adminAnswer}</div>
-        </div>
-      ) : null}
+      <div>
+        {vendorAnswer ? (
+          <div className="border border-borderColor py-2 px-3 text-[13px] rounded mb-4 last:mb-0">
+            <div className="text-primary">پاسخ مدیر رستوران</div>
+            <div>{vendorAnswer}</div>
+          </div>
+        ) : null}
+        {adminAnswer ? (
+          <div className="border border-borderColor py-2 px-3 text-[13px] rounded">
+            <div className="text-primary">پاسخ ادمین</div>
+            <div>{adminAnswer}</div>
+          </div>
+        ) : null}
+      </div>
     </>
   );
 }
 
-export default RestaurantCommentItem;
+export default CommentPageListItem;

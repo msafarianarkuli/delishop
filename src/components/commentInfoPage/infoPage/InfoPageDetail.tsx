@@ -1,34 +1,42 @@
-import {useRestaurantInfoData} from "view/restaurantInfo/context/RestaurantInfoDataProvider";
 import {useMemo} from "react";
+import {TGetVendorsDetailVendorTags} from "types/interfaceVendorDetail";
 
-function RestaurantInfoDetail() {
-  const {data} = useRestaurantInfoData();
+export interface IInfoPageDetail {
+  tags: TGetVendorsDetailVendorTags;
+  maxSendTime: string;
+  name: string;
+  minCart: number;
+  logo?: string;
+}
+
+function InfoPageDetail(props: IInfoPageDetail) {
+  const {tags, maxSendTime, name, minCart, logo} = props;
+
   const productType = useMemo(() => {
     let result = "";
-    const tags = data?.vendor?.tags || [];
     tags.forEach((item, index) => {
       if (index > 0) result += ",";
       result += item.displayname;
     });
     return result;
-  }, [data?.vendor?.tags]);
+  }, [tags]);
+
   const timeDelivery = useMemo(() => {
-    const time = data?.vendor?.max_sendtime || "";
     let result = "";
-    if (time) {
-      if (time.search("-") !== -1) {
-        result = time.replace("-", " تا ");
+    if (maxSendTime) {
+      if (maxSendTime.search("-") !== -1) {
+        result = maxSendTime.replace("-", " تا ");
       } else {
-        result = "تا " + time;
+        result = "تا " + maxSendTime;
       }
     }
     return result;
-  }, [data?.vendor?.max_sendtime]);
+  }, [maxSendTime]);
 
   return (
     <div className="flex py-4 px-screenSpace border-b border-borderColor">
       <div className="flex flex-col flex-1">
-        <div className="font-medium">{data?.vendor?.name}</div>
+        <div className="font-medium">{name}</div>
         <div className="flex items-center font-light text-[13px] mt-2">
           <div>
             <div>نوع محصولات:</div>
@@ -38,7 +46,7 @@ function RestaurantInfoDetail() {
           </div>
           <div className="mr-5">
             <div>{productType}</div>
-            <div>{(data?.vendor?.min_cart || 0).toLocaleString("en-US")} تومان</div>
+            <div>{(minCart || 0).toLocaleString("en-US")} تومان</div>
             <div>
               <span>{timeDelivery}</span>
               <span className="mr-1">دقیقه</span>
@@ -47,13 +55,9 @@ function RestaurantInfoDetail() {
           </div>
         </div>
       </div>
-      <img
-        src={data?.vendor?.logo}
-        alt={data?.vendor?.name || ""}
-        className="w-[50px] h-[50px] object-center object-cover mt-2"
-      />
+      <img src={logo} alt={name} className="w-[50px] h-[50px] object-center object-cover mt-2" />
     </div>
   );
 }
 
-export default RestaurantInfoDetail;
+export default InfoPageDetail;

@@ -1,18 +1,10 @@
-import RestaurantCommentRate from "view/restaurantComment/component/RestaurantCommentRate";
-import {RestaurantInfoAppHeader} from "components";
-import RestaurantCommentList from "view/restaurantComment/component/RestaurantCommentList";
+import CommentPage from "components/commentInfoPage/commentPage";
+import {useRestaurantCommentData} from "view/restaurantComment/context/RestaurantCommentDataProvider";
 
 function RestaurantComment() {
-  return (
-    <>
-      <RestaurantInfoAppHeader active="comment" />
-      <div className="mt-headerNormal px-screenSpace">
-        <RestaurantCommentRate />
-        <div className="my-5 text-[18px] font-medium">نظرات کاربران</div>
-        <RestaurantCommentList />
-      </div>
-    </>
-  );
+  const {data} = useRestaurantCommentData();
+
+  return <CommentPage baseUrl="/restaurant" data={data?.comments || []} />;
 }
 
 export default RestaurantComment;

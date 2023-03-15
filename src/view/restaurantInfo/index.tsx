@@ -1,33 +1,29 @@
-import RestaurantInfoMap from "view/restaurantInfo/component/RestaurantInfoMap";
-import RestaurantInfoAddress from "view/restaurantInfo/component/RestaurantInfoAddress";
-import RestaurantInfoDetail from "view/restaurantInfo/component/RestaurantInfoDetail";
-import RestaurantInfoCoin from "view/restaurantInfo/component/RestaurantInfoCoin";
-import {RestaurantInfoAppHeader} from "components";
 import {useRestaurantInfoData} from "view/restaurantInfo/context/RestaurantInfoDataProvider";
 import {useMemo} from "react";
+import InfoPage from "components/commentInfoPage/infoPage";
 
 function RestaurantInfo() {
-  const {error} = useRestaurantInfoData();
-  const notFound = useMemo(() => {
+  const {error, data} = useRestaurantInfoData();
+  const notfound = useMemo(() => {
     return error?.status === 404;
   }, [error?.status]);
 
   return (
-    <>
-      <RestaurantInfoAppHeader active="info" />
-      <div className="mt-headerNormal">
-        {notFound ? (
-          <div>not found</div>
-        ) : (
-          <>
-            <RestaurantInfoMap />
-            <RestaurantInfoAddress />
-            <RestaurantInfoDetail />
-            <RestaurantInfoCoin />
-          </>
-        )}
-      </div>
-    </>
+    <InfoPage
+      notfound={notfound}
+      baseUrl="/restaurant"
+      point={data?.vendor.point || 0}
+      name={data?.vendor.name || ""}
+      tags={data?.vendor.tags || []}
+      maxSendTime={data?.vendor.max_sendtime || ""}
+      minCart={data?.vendor.min_cart || 0}
+      openHours={data?.vendor.open_hours}
+      address={data?.vendor.address || ""}
+      lng={data?.vendor.long || 0}
+      lat={data?.vendor.lat || 0}
+      open={data?.vendor.open || 0}
+      logo={data?.vendor.logo}
+    />
   );
 }
 

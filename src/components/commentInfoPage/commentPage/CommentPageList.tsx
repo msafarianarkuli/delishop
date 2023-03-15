@@ -1,16 +1,18 @@
 import React from "react";
-import RestaurantCommentItem from "view/restaurantComment/component/RestaurantCommentItem";
-import {useRestaurantCommentData} from "view/restaurantComment/context/RestaurantCommentDataProvider";
+import {TGetVendorCommentsComments} from "types/interfaceVendorComments";
+import CommentPageListItem from "components/commentInfoPage/commentPage/CommentPageListItem";
 
-function RestaurantCommentList() {
-  const {data} = useRestaurantCommentData();
+interface ICommentPageList {
+  data: TGetVendorCommentsComments;
+}
 
+function CommentPageList({data}: ICommentPageList) {
   return (
     <>
-      {data?.comments.map((item) => {
+      {data?.map((item) => {
         return (
           <div key={item.id.toString()} className="mb-5">
-            <RestaurantCommentItem
+            <CommentPageListItem
               name={item.name}
               comment={item.comment}
               date={item.updated_at}
@@ -26,4 +28,4 @@ function RestaurantCommentList() {
   );
 }
 
-export default RestaurantCommentList;
+export default CommentPageList;

@@ -1,13 +1,13 @@
 import React from "react";
 import {IconStar} from "assets/icons";
 
-interface IRestaurantCommentRateItem {
+interface ICommentPageRateItem {
   percent: number;
   star: number;
   color: string;
 }
 
-function RestaurantCommentRateItem(props: IRestaurantCommentRateItem) {
+function CommentPageRateItem(props: ICommentPageRateItem) {
   const {percent, star, color} = props;
   return (
     <div className="flex items-center text-[13px] mb-1">
@@ -23,16 +23,16 @@ function RestaurantCommentRateItem(props: IRestaurantCommentRateItem) {
   );
 }
 
-function RestaurantCommentRate() {
+function CommentPageRate() {
   return (
     <div className="pt-5">
-      <RestaurantCommentRateItem percent={29} star={5} color="#005E38" />
-      <RestaurantCommentRateItem percent={34} star={4} color="#71E100" />
-      <RestaurantCommentRateItem percent={18} star={3} color="#FCD81D" />
-      <RestaurantCommentRateItem percent={15} star={2} color="#FF6B00" />
-      <RestaurantCommentRateItem percent={9} star={1} color="#D90202" />
+      <CommentPageRateItem percent={29} star={5} color="#005E38" />
+      <CommentPageRateItem percent={34} star={4} color="#71E100" />
+      <CommentPageRateItem percent={18} star={3} color="#FCD81D" />
+      <CommentPageRateItem percent={15} star={2} color="#FF6B00" />
+      <CommentPageRateItem percent={9} star={1} color="#D90202" />
     </div>
   );
 }
 
-export default RestaurantCommentRate;
+export default CommentPageRate;

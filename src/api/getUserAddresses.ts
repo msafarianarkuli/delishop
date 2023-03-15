@@ -2,6 +2,8 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {IGetUserAddressesListRes, TGetUserAddressesListAddresses} from "types/interfaceUserAddress";
 
+export const QUERY_KEY_USER_ADDRESSES = "userAddresses";
+
 type TGetVendorsTags = (token: string) => Promise<TGetUserAddressesListAddresses>;
 
 const getUserAddresses: TGetVendorsTags = async (token) => {

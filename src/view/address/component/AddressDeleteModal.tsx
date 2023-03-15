@@ -15,7 +15,8 @@ import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {createLog} from "utils/utils";
 import {useQueryClient} from "react-query";
-import {useAddressData, QUERY_KEY_USER_ADDRESSES} from "view/address/context/AddressDataProvider";
+import {useAddressData} from "view/address/context/AddressDataProvider";
+import {QUERY_KEY_USER_ADDRESSES} from "api/getUserAddresses";
 
 interface AddressDeleteModalBody {
   loading: boolean;

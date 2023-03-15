@@ -1,10 +1,13 @@
 import OrderComplete from "view/orderComplete";
 import OrderCompleteProvider from "view/orderComplete/context/OrderCompleteProvider";
+import OrderCompleteAddressProvider from "view/orderComplete/context/OrderCompleteAddressProvider";
 
 function OrderCompletePage() {
   return (
     <OrderCompleteProvider>
-      <OrderComplete />
+      <OrderCompleteAddressProvider>
+        <OrderComplete />
+      </OrderCompleteAddressProvider>
     </OrderCompleteProvider>
   );
 }

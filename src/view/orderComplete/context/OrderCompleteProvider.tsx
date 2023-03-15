@@ -1,8 +1,10 @@
 import React, {createContext, Dispatch, useContext, useReducer} from "react";
+import {IGetUserAddressesListAddressesItem} from "types/interfaceUserAddress";
 
 const SET_DESCRIPTION = "description";
 const SET_DELIVERY_TIME = "deliveryTIme";
 const SET_STEP = "step";
+const SET_DELIVERY_ADDRESS = "deliveryAddress";
 
 export interface IOrderCompleteDeliverTime {
   isTemp?: boolean;
@@ -13,6 +15,7 @@ export interface IOrderCompleteDeliverTime {
 interface IOrderComplete {
   description?: string;
   deliveryTime?: IOrderCompleteDeliverTime;
+  deliveryAddress?: IGetUserAddressesListAddressesItem;
   step: number;
 }
 
@@ -45,6 +48,11 @@ function reducer(state: IOrderComplete, action: IAction) {
         ...state,
         step: action.payload,
       };
+    case SET_DELIVERY_ADDRESS:
+      return {
+        ...state,
+        deliveryAddress: action.payload,
+      };
     default:
       return state;
   }
@@ -68,6 +76,10 @@ export const setOrderCompleteDeliveryTime = (payload: IOrderCompleteDeliverTime)
   payload,
 });
 export const setOrderCompleteStep = (payload: number) => ({type: SET_STEP, payload});
+export const setOrderCompleteDeliveryAddress = (payload: IGetUserAddressesListAddressesItem) => ({
+  type: SET_DELIVERY_ADDRESS,
+  payload,
+});
 
 export function useOrderComplete() {
   return useContext(OrderCompleteContext);

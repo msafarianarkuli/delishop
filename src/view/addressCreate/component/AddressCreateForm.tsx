@@ -8,12 +8,12 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {useQueryClient} from "react-query";
-import {QUERY_KEY_USER_ADDRESSES} from "view/address/context/AddressDataProvider";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {setAddressMap} from "redux/addressMap/addressMapReducer";
 import {Method} from "axios";
+import {QUERY_KEY_USER_ADDRESSES} from "api/getUserAddresses";
 
 export interface IAddressCreateForm {
   location: IMapPoint;

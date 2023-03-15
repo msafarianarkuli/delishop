@@ -1,48 +1,52 @@
-import React, {useState} from "react";
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {IconRoundedLeft} from "assets/icons";
 import OrderCompleteAddressCard from "view/orderComplete/component/orderCompleteAddressCard/OrderCompleteAddressCard";
+import useTypeColor from "hooks/useTypeColor";
+import classNames from "classnames";
+import Link from "next/link";
+import {useOrderCompleteAddress} from "view/orderComplete/context/OrderCompleteAddressProvider";
+import {
+  setOrderCompleteDeliveryAddress,
+  useOrderComplete,
+  useOrderCompleteAction,
+} from "view/orderComplete/context/OrderCompleteProvider";
 
-const data = [
-  {
-    id: 1,
-    title: "دفتر",
-    address: "بلوار کشاورز، نبش 16 آذر واحد 209",
-    point: {title: "لوکیشن من", lat: 35.704431, lng: 51.392746},
-  },
-  {
-    id: 2,
-    title: "دریافت حضوری",
-    address: "رستوران آریایی",
-    point: {title: "لوکیشن من", lat: 35.712123, lng: 51.407212},
-  },
-];
+function OrderCompleteTitleLeft() {
+  const type = useTypeColor();
+
+  const linkClassName = classNames({
+    "flex items-center font-medium": true,
+    "text-primary": type === "default",
+    "text-primarySupermarket": type === "supermarket",
+  });
+  return (
+    <Link href="/" className={linkClassName}>
+      <div>تغییر آدرس</div>
+      <IconRoundedLeft className="w-5 h-5" />
+    </Link>
+  );
+}
 
 function OrderCompleteAddress() {
-  const [address, setAddress] = useState(1);
+  const {data} = useOrderCompleteAddress();
+  const type = useTypeColor();
+  const {deliveryAddress} = useOrderComplete();
+  const dispatch = useOrderCompleteAction();
   return (
     <div className="mt-headerNormal">
-      <OrderCompleteTitle
-        title="روش تحویل سفارش"
-        left={
-          <div className="flex items-center text-primary font-medium">
-            <div>تغییر آدرس</div>
-            <IconRoundedLeft className="w-5 h-5" />
-          </div>
-        }
-      />
+      <OrderCompleteTitle type={type} title="روش تحویل سفارش" left={<OrderCompleteTitleLeft />} />
       <div className="px-screenSpace">
-        {data.map((item, index) => {
+        {data?.map((item, index) => {
           return (
             <OrderCompleteAddressCard
               key={index}
               id={item.id.toString()}
               title={item.title}
               address={item.address}
-              point={item.point}
-              value={item.id === address}
+              point={{lat: item.latitude, lng: item.longitude}}
+              value={deliveryAddress?.id === item.id}
               onChange={() => {
-                setAddress(item.id);
+                dispatch(setOrderCompleteDeliveryAddress(item));
               }}
             />
           );

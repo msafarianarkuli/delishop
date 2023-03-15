@@ -2,15 +2,20 @@ import React, {Fragment, useMemo} from "react";
 import dayjs from "dayjs";
 import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
 import {IconClockSolid, IconLocation} from "assets/icons";
+import classNames from "classnames";
 
-export interface IInfoPageAddress {
+export interface IInfoPageAddressBase {
   open: number;
   openHours?: IGetVendorsDetailVendorOpenHours;
   address: string;
 }
 
+interface IInfoPageAddress extends IInfoPageAddressBase {
+  color: string;
+}
+
 function InfoPageAddress(props: IInfoPageAddress) {
-  const {openHours, open, address} = props;
+  const {openHours, open, address, color} = props;
 
   const openTitle = useMemo(() => (open ? "باز" : "بسته"), [open]);
   const hours = useMemo(() => {
@@ -32,6 +37,11 @@ function InfoPageAddress(props: IInfoPageAddress) {
     return result;
   }, [openHours]);
 
+  const openClassName = classNames({
+    "ml-1": true,
+    [color]: color,
+  });
+
   return (
     <div className="px-screenSpace border-b border-borderColor text-[13px] text-textColor py-7">
       <div className="flex items-center">
@@ -40,7 +50,7 @@ function InfoPageAddress(props: IInfoPageAddress) {
       </div>
       <div className="flex items-center mt-7">
         <IconClockSolid className="w-5 h-5 ml-2" />
-        <span className="text-primary ml-1">{openTitle}، </span>
+        <span className={openClassName}>{openTitle}، </span>
         {hours.length ? <span>امروز از</span> : null}
         {hours.map((item, index) => {
           return (

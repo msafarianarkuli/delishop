@@ -11,6 +11,7 @@ function SupermarketInfo() {
   return (
     <>
       <InfoPage
+        type="supermarket"
         notfound={notfound}
         baseUrl="/supermarket"
         point={data?.vendor.point || 0}

@@ -2,11 +2,15 @@ import React from "react";
 import {TGetVendorCommentsComments} from "types/interfaceVendorComments";
 import CommentPageListItem from "components/commentInfoPage/commentPage/CommentPageListItem";
 
-interface ICommentPageList {
+export interface ICommentPageListBase {
   data: TGetVendorCommentsComments;
 }
 
-function CommentPageList({data}: ICommentPageList) {
+interface ICommentPageList extends ICommentPageListBase {
+  color: string;
+}
+
+function CommentPageList({data, color}: ICommentPageList) {
   return (
     <>
       {data?.map((item) => {
@@ -20,6 +24,7 @@ function CommentPageList({data}: ICommentPageList) {
               tag={item.order_details.products}
               adminAnswer={item.admin_reply}
               vendorAnswer={item.vendor_reply}
+              color={color}
             />
           </div>
         );

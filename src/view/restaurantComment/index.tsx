@@ -4,7 +4,7 @@ import {useRestaurantCommentData} from "view/restaurantComment/context/Restauran
 function RestaurantComment() {
   const {data} = useRestaurantCommentData();
 
-  return <CommentPage baseUrl="/restaurant" data={data?.comments || []} />;
+  return <CommentPage type="restaurant" baseUrl="/restaurant" data={data?.comments || []} />;
 }
 
 export default RestaurantComment;

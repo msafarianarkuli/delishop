@@ -1,7 +1,9 @@
 import React from "react";
 import {TGetVendorCommentsCommentsItemOrderDetailsProducts} from "types/interfaceVendorComments";
 import dayjs from "dayjs";
+import jalaliday from "jalaliday";
 import {IconStar} from "assets/icons";
+import classNames from "classnames";
 
 interface ICommentPageListItem {
   name?: string | null;
@@ -11,17 +13,26 @@ interface ICommentPageListItem {
   tag: TGetVendorCommentsCommentsItemOrderDetailsProducts;
   vendorAnswer?: string | null;
   adminAnswer?: string | null;
+  color: string;
 }
 
+dayjs.extend(jalaliday);
+
 function CommentPageListItem(props: ICommentPageListItem) {
-  const {tag, vendorAnswer, adminAnswer, star, date, name, comment} = props;
+  const {tag, vendorAnswer, adminAnswer, star, date, name, comment, color} = props;
+
+  const iconClassName = classNames({
+    "w-3 h-3 ml-1": true,
+    [color]: color,
+  });
+
   return (
     <>
       <div className="text-[17px] mb-1">{name || "ناشناس"}</div>
       <div className="flex items-center justify-between text-[13px] font-light">
         <div>{dayjs(date).calendar("jalali").locale("fa").format("DD MMMM YYYY")}</div>
         <div className="flex items-center">
-          <IconStar className="w-3 h-3 text-primary ml-1" />
+          <IconStar className={iconClassName} />
           <span className="h-[15px]">{star}</span>
         </div>
       </div>
@@ -38,13 +49,13 @@ function CommentPageListItem(props: ICommentPageListItem) {
       <div>
         {vendorAnswer ? (
           <div className="border border-borderColor py-2 px-3 text-[13px] rounded mb-4 last:mb-0">
-            <div className="text-primary">پاسخ مدیر رستوران</div>
+            <div className={color}>پاسخ مدیر رستوران</div>
             <div>{vendorAnswer}</div>
           </div>
         ) : null}
         {adminAnswer ? (
           <div className="border border-borderColor py-2 px-3 text-[13px] rounded">
-            <div className="text-primary">پاسخ ادمین</div>
+            <div className={color}>پاسخ ادمین</div>
             <div>{adminAnswer}</div>
           </div>
         ) : null}

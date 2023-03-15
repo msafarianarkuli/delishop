@@ -10,6 +10,7 @@ function RestaurantInfo() {
 
   return (
     <InfoPage
+      type="restaurant"
       notfound={notfound}
       baseUrl="/restaurant"
       point={data?.vendor.point || 0}

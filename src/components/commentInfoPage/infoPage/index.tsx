@@ -1,17 +1,32 @@
-import React from "react";
+import React, {useMemo} from "react";
 import CommentInfoPageHeader from "components/commentInfoPage/commentInfoPageHeader";
 import InfoPageMap, {IInfoPageMap} from "components/commentInfoPage/infoPage/InfoPageMap";
-import InfoPageAddress, {IInfoPageAddress} from "components/commentInfoPage/infoPage/InfoPageAddress";
+import InfoPageAddress, {IInfoPageAddressBase} from "components/commentInfoPage/infoPage/InfoPageAddress";
 import InfoPageDetail, {IInfoPageDetail} from "components/commentInfoPage/infoPage/InfoPageDetail";
-import InfoPageCoin, {IInfoPageCoin} from "components/commentInfoPage/infoPage/InfoPageCoin";
+import InfoPageCoin, {IInfoPageCoinBase} from "components/commentInfoPage/infoPage/InfoPageCoin";
+import {ICommentInfoPageType} from "components/commentInfoPage/intefaceCommentInfoPage";
 
-interface IInfoPage extends IInfoPageMap, IInfoPageAddress, IInfoPageDetail, IInfoPageCoin {
+interface IInfoPage
+  extends IInfoPageMap,
+    IInfoPageAddressBase,
+    IInfoPageDetail,
+    IInfoPageCoinBase,
+    ICommentInfoPageType {
   baseUrl: string;
   notfound: boolean;
 }
 
 function InfoPage(props: IInfoPage) {
-  const {baseUrl, notfound, lng, lat, open, openHours, address, maxSendTime, minCart, tags, name, logo, point} = props;
+  const {baseUrl, notfound, lng, lat, open, openHours, address, maxSendTime, minCart, tags, name, logo, point, type} =
+    props;
+
+  const primaryColor = useMemo(() => {
+    let color = "";
+    if (type === "restaurant") color = "text-primary";
+    if (type === "supermarket") color = "text-primarySupermarket";
+    return color;
+  }, [type]);
+
   return (
     <>
       <CommentInfoPageHeader baseUrl={baseUrl} active="info" />
@@ -20,10 +35,10 @@ function InfoPage(props: IInfoPage) {
           <div>موردی یافت نشد</div>
         ) : (
           <>
-            <InfoPageMap lat={lat} lng={lng} />
-            <InfoPageAddress open={open} address={address} openHours={openHours} />
+            <InfoPageMap type={type} lat={lat} lng={lng} />
+            <InfoPageAddress color={primaryColor} open={open} address={address} openHours={openHours} />
             <InfoPageDetail maxSendTime={maxSendTime} minCart={minCart} tags={tags} name={name} logo={logo} />
-            <InfoPageCoin name={name} point={point} />
+            <InfoPageCoin color={primaryColor} name={name} point={point} />
           </>
         )}
       </div>

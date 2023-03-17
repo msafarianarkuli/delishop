@@ -62,7 +62,8 @@ function Drawer() {
                 <Icon className="w-5 h-auto ml-2" />
                 <div>{item.title}</div>
               </div>
-              <div>
+              <div className="flex items-center">
+                {item.left}
                 <IconRoundedLeft className="w-5 h-5" />
               </div>
             </Link>

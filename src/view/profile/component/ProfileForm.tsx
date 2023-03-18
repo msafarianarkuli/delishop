@@ -28,7 +28,7 @@ interface IBody {
   name: string;
   birthday?: string;
   gender?: string;
-  anniversary?: string;
+  anniversary_date?: string;
 }
 
 const genders = [
@@ -102,7 +102,7 @@ function ProfileForm() {
       body.birthday = birthday;
     }
     if (anniversary) {
-      body.anniversary = anniversary;
+      body.anniversary_date = anniversary;
     }
     console.log("body", body);
     try {

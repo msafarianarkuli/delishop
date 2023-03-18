@@ -41,7 +41,7 @@ function useDrawerRoutes(): TData {
   return useMemo(() => {
     return [
       {
-        title: `کیف پول (${data} تومان)`,
+        title: data != null ? `کیف پول (${data} تومان)` : "کیف پول",
         icon: IconWalletSolid,
         link: "/profile/wallet",
         left: Coin,

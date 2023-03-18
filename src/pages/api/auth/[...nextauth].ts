@@ -82,8 +82,20 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
       // console.log("jwt token", token);
       // console.log("jwt user", user);
       const name = req.query?.name;
+      const birthday = req.query?.birthday;
+      const gender = req.query?.gender;
+      const anniversary_date = req.query?.anniversary;
       if (name && !Array.isArray(name)) {
         token.name = decodeURI(name);
+      }
+      if (birthday && !Array.isArray(birthday)) {
+        token.birthay = decodeURI(birthday);
+      }
+      if (gender && !Array.isArray(gender)) {
+        token.gender = decodeURI(gender);
+      }
+      if (anniversary_date && !Array.isArray(anniversary_date)) {
+        token.anniversary_date = decodeURI(anniversary_date);
       }
       return {...token, ...user};
     },

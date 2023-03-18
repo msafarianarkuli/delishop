@@ -37,3 +37,18 @@ interface ICartDataItemExtraItem {
 export type TCartDataItemExtra = ICartDataItemExtraItem[];
 
 export type TCartData = ICartDataItem[];
+
+export interface IUpdateProfileRes {
+  age_level: string | null;
+  anniversary_date: string | null;
+  birthday: string | null;
+  created_at: string;
+  email: string | null;
+  email_verified_at: string | null;
+  gender: number | null;
+  id: number;
+  invite_token: string;
+  name: string;
+  phone: string;
+  updated_at: string;
+}

@@ -9,8 +9,8 @@ import {useRouter} from "next/router";
 import {restaurantTagQuery} from "view/restaurant/context/RestaurantDataProvider";
 
 // export const restaurantTagQuery = "tag[]";
-// const defaultTags = ["کباب", "ایرانی", "دارای سکه"];
-const defaultTags = ["فست فود"];
+const defaultTags = ["کباب", "ایرانی", "دارای سکه"];
+// const defaultTags = ["فست فود"];
 
 function RestaurantFilter() {
   const router = useRouter();
@@ -70,9 +70,9 @@ function RestaurantFilter() {
 
   return (
     <>
-      <div className="flex items-center px-screenSpace max-width-screen">
+      <div className="flex items-center px-screenSpace max-width-screen py-5">
         <RestaurantCategory count={allTagValues.length} onClick={() => setBottomSheet(true)} />
-        <div className="flex flex-1 flex-nowrap overflow-auto py-5 px-2">
+        <div className="flex flex-1 flex-nowrap overflow-auto px-2">
           {constTags.map((item) => {
             return (
               <RestaurantFilterBtn

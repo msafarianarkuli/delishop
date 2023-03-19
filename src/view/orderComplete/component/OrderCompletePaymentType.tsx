@@ -2,29 +2,34 @@ import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle"
 import {IconBank, IconCash, IconWallet} from "assets/icons";
 import styles from "view/orderComplete/orderComplete.module.scss";
 import classNames from "classnames";
-import {useState} from "react";
 import useTypeColor from "hooks/useTypeColor";
+import {
+  setOrderCompletePaymentType,
+  useOrderComplete,
+  useOrderCompleteAction,
+} from "view/orderComplete/context/OrderCompleteProvider";
 
 const data = [
   {
-    id: 1,
+    id: 60,
     title: "کیف پول",
     icon: IconWallet,
   },
   {
-    id: 2,
+    id: 34,
     title: "درگاه بانکی",
     icon: IconBank,
   },
   {
-    id: 3,
+    id: 35,
     title: "نقدی",
     icon: IconCash,
   },
 ];
 
 function OrderCompletePaymentType() {
-  const [payment, setPayment] = useState(1);
+  const {paymentType} = useOrderComplete();
+  const dispatch = useOrderCompleteAction();
   const type = useTypeColor();
   const selectedClassName = classNames({
     "text-primary border border-primary": type === "default",
@@ -40,11 +45,15 @@ function OrderCompletePaymentType() {
             {data.map((item, index) => {
               const container = classNames({
                 [styles.restaurant_complete_payment_type_card]: true,
-                [selectedClassName]: payment === item.id,
+                [selectedClassName]: paymentType === item.id,
               });
               const Icon = item.icon;
               return (
-                <button onClick={() => setPayment(item.id)} key={index} className={container}>
+                <button
+                  onClick={() => dispatch(setOrderCompletePaymentType(item.id))}
+                  key={index}
+                  className={container}
+                >
                   <Icon className="w-auto h-6" />
                   <div className="mt-2">{item.title}</div>
                 </button>

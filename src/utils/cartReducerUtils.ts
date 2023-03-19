@@ -1,5 +1,6 @@
 import {ICartReducerCartItem, TCartReducerListItemCartOrders} from "types/interfaceCartReducer";
 import {ICartDataItem, TCartData} from "types/interfaces";
+import {IAddOrderBodyProductKinds} from "api/addOrder";
 
 type TMergeCartListToArray = (cartOrders: TCartReducerListItemCartOrders) => TCartData;
 export const mergeCartListToArray: TMergeCartListToArray = (cartOrders) => {
@@ -20,6 +21,25 @@ export const mergeCartListToArray: TMergeCartListToArray = (cartOrders) => {
     });
   }
   return Object.values(tmpCount);
+};
+
+type TCreateAddOrderProductKind = (cartOrders: TCartReducerListItemCartOrders) => IAddOrderBodyProductKinds;
+export const createAddOrderProductKind: TCreateAddOrderProductKind = (cartOrders) => {
+  const tmpCount: IAddOrderBodyProductKinds = {};
+  for (const [key, value] of Object.entries(cartOrders)) {
+    value.forEach((item) => {
+      const tmpKey = item.extra?.reduce((arr, current) => arr + "-" + current.id, `${key}`) || key;
+      let count = tmpCount[tmpKey]?.count || 0;
+      const extra = item.extra?.map((value) => value.id) || [];
+      tmpCount[tmpKey] = {
+        count: count + 1,
+      };
+      if (extra.length) {
+        tmpCount[tmpKey].extra = extra;
+      }
+    });
+  }
+  return tmpCount;
 };
 
 type TFindOrderIndex = (props: {

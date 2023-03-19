@@ -5,6 +5,8 @@ const SET_DESCRIPTION = "description";
 const SET_DELIVERY_TIME = "deliveryTIme";
 const SET_STEP = "step";
 const SET_DELIVERY_ADDRESS = "deliveryAddress";
+const SET_PAYMENT_TYPE = "paymentType";
+const SET_ERROR = "error";
 
 export interface IOrderCompleteDeliverTime {
   isTemp?: boolean;
@@ -16,7 +18,9 @@ interface IOrderComplete {
   description?: string;
   deliveryTime?: IOrderCompleteDeliverTime;
   deliveryAddress?: IGetUserAddressesListAddressesItem;
+  paymentType: number;
   step: number;
+  error?: string;
 }
 
 interface IAction {
@@ -26,6 +30,7 @@ interface IAction {
 
 const initialState: IOrderComplete = {
   step: 1,
+  paymentType: 34,
 };
 
 const OrderCompleteContext = createContext<IOrderComplete>(initialState);
@@ -47,11 +52,23 @@ function reducer(state: IOrderComplete, action: IAction) {
       return {
         ...state,
         step: action.payload,
+        error: "",
       };
     case SET_DELIVERY_ADDRESS:
       return {
         ...state,
         deliveryAddress: action.payload,
+        error: "",
+      };
+    case SET_PAYMENT_TYPE:
+      return {
+        ...state,
+        paymentType: action.payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
@@ -78,6 +95,16 @@ export const setOrderCompleteDeliveryTime = (payload: IOrderCompleteDeliverTime)
 export const setOrderCompleteStep = (payload: number) => ({type: SET_STEP, payload});
 export const setOrderCompleteDeliveryAddress = (payload: IGetUserAddressesListAddressesItem) => ({
   type: SET_DELIVERY_ADDRESS,
+  payload,
+});
+
+export const setOrderCompletePaymentType = (payload: number) => ({
+  type: SET_PAYMENT_TYPE,
+  payload,
+});
+
+export const setOrderCompleteError = (payload: string) => ({
+  type: SET_ERROR,
   payload,
 });
 

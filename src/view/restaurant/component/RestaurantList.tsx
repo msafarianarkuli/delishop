@@ -10,6 +10,7 @@ function RestaurantList() {
   return (
     <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
       {isLoading ? <div>loading ...</div> : null}
+      {!isLoading && !data?.vendors?.length ? <div>موردی یافت نشد</div> : null}
       <RestaurantListShow data={data} />
     </div>
   );

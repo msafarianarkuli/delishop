@@ -10,6 +10,7 @@ export interface ICartReducerListItem {
   title: string | null;
   totalPrice: number;
   totalOrderCount: number;
+  totalPoint: number;
   cartOrders: TCartReducerListItemCartOrders;
 }
 
@@ -22,6 +23,7 @@ export interface ICartReducerCartItem {
   price: number;
   title: string;
   image?: string;
+  point: number;
 }
 
 export type TCartReducerCartItemExtraItemExtra = ICartReducerCartItemExtraItem[];
@@ -45,6 +47,7 @@ export interface IRemoveCartReducerLastItem {
 export interface ISetCartReducerVendorData {
   vendorId: string | null;
   title: string | null;
+  point: number | null;
 }
 
 export interface IRemoveCartReducerCartListOrder {

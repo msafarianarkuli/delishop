@@ -24,6 +24,7 @@ export interface ICartDataItem {
   count: number;
   title: string;
   price: number;
+  point: number;
   image?: string;
   extra?: TCartDataItemExtra;
 }

@@ -19,6 +19,7 @@ const initialCartOrder: ICartReducerListItem = {
   cartOrders: {},
   totalPrice: 0,
   totalOrderCount: 0,
+  totalPoint: 0,
 };
 
 const initialState: ICartSupermarketReducer = {
@@ -33,8 +34,10 @@ const cartSupermarketReducer = createSlice({
   initialState,
   reducers: {
     setCartSupermarketVendorData: (state, action: PayloadAction<ISetCartReducerVendorData>) => {
-      state.cart.vendorId = action.payload.vendorId;
-      state.cart.title = action.payload.title;
+      const payload = action.payload;
+      state.cart.vendorId = payload.vendorId;
+      state.cart.title = payload.title;
+      state.cart.totalPoint = payload.point || 0;
       state.cart.cartOrders = {};
     },
     setCartSupermarketItem: (state, action: PayloadAction<Omit<ISetCartReducerItem, "vendorId">>) => {
@@ -45,12 +48,14 @@ const cartSupermarketReducer = createSlice({
       const price = payload.price;
       const title = payload.title;
       const image = payload.image;
+      const point = payload.point || 0;
       if (cartOrders[payload.id]) {
-        cartOrders[payload.id].push({price, title, image});
+        cartOrders[payload.id].push({price, title, image, point});
       } else {
-        cartOrders[payload.id] = [{price, title, image}];
+        cartOrders[payload.id] = [{price, title, image, point}];
       }
       state.cart.totalOrderCount += 1;
+      state.cart.totalPoint += point;
       // state.cart.totalPrice += price + totalExtraPrice;
       state.cart.totalPrice += price;
       // }
@@ -63,12 +68,14 @@ const cartSupermarketReducer = createSlice({
         const lastItem = item[cartOrders[id].length - 1];
         // const totalExtraPrice = lastItem.extra?.reduce((arr, current) => arr + current.price, 0) || 0;
         const price = lastItem.price;
+        const point = lastItem.point;
         item.pop();
         if (item?.length === 0) {
           delete cartOrders[id];
         }
         state.cart.cartOrders = cartOrders;
         state.cart.totalOrderCount -= 1;
+        state.cart.totalPoint -= point;
         // state.cart.totalPrice -= price + totalExtraPrice;
         state.cart.totalPrice -= price;
       }
@@ -83,8 +90,10 @@ const cartSupermarketReducer = createSlice({
         const index = orders.length - 1;
         // const totalExtraPrice = orders[index].extra?.reduce((arr, current) => arr + current.price, 0) || 0;
         const price = orders[index].price;
+        const point = orders[index].point;
         orders.pop();
         state.cart.totalOrderCount -= 1;
+        state.cart.totalPoint -= point;
         // state.cart.totalPrice -= price + totalExtraPrice;
         state.cart.totalPrice -= price;
       }

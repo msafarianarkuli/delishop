@@ -12,9 +12,11 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {useSupermarketCategorySubcategoryFilter} from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
 import {useSupermarketCategoryId} from "view/supermarketCategory/context/SupermarketCategoryIdProvider";
+import {useSupermarketCategoryListData} from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
 
 function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
+  const {data: supermarketData} = useSupermarketCategoryListData();
   const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
   const filterId = useSupermarketCategorySubcategoryFilter();
@@ -57,8 +59,9 @@ function SupermarketCategoryProductsList() {
                           if (vendorId !== cart.vendorId) {
                             dispatch(
                               setCartSupermarketVendorData({
-                                title: "",
+                                title: supermarketData?.vendor.name || "",
                                 vendorId,
+                                point: supermarketData?.vendor.point || 0,
                               })
                             );
                           }
@@ -68,6 +71,7 @@ function SupermarketCategoryProductsList() {
                               price: finalPrice,
                               id: product.id,
                               image: product.photo_igu,
+                              point: item.point || 0,
                             })
                           );
                         }

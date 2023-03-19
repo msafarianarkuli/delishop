@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
 import SupermarketSubcategoryCard from "view/supermarketSubcategory/component/SupermarketSubcategoryCard";
 import Link from "next/link";
-import {useSupermarketSubcategoryData} from "view/supermarketSubcategory/context/supermarketSubcategoryDataProvider";
+import {useSupermarketSubcategoryData} from "view/supermarketSubcategory/context/SupermarketSubcategoryDataProvider";
 import {useDispatch, useSelector} from "react-redux";
 import {
   removeCartSupermarketLastOrder,
@@ -10,9 +10,11 @@ import {
   setCartSupermarketVendorData,
 } from "redux/cartSupermraket/cartSupermarketReducer";
 import {useRouter} from "next/router";
+import {useSupermarketSubcategoryCategoryList} from "view/supermarketSubcategory/context/SupermarketSubcategoryCategoryListDataProvider";
 
 function SupermarketSubcategoryList() {
   const {data} = useSupermarketSubcategoryData();
+  const {data: supermarket} = useSupermarketSubcategoryCategoryList();
   const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -51,8 +53,9 @@ function SupermarketSubcategoryList() {
                   if (vendorId !== cart.vendorId) {
                     dispatch(
                       setCartSupermarketVendorData({
-                        title: "",
+                        title: supermarket?.vendor.name || "",
                         vendorId,
+                        point: supermarket?.vendor.point || 0,
                       })
                     );
                   }
@@ -62,6 +65,7 @@ function SupermarketSubcategoryList() {
                       price: finalPrice,
                       id: product.id,
                       image: product.photo_igu,
+                      point: item.point || 0,
                     })
                   );
                 }

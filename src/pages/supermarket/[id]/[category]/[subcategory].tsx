@@ -1,16 +1,20 @@
 import SupermarketSubcategory from "view/supermarketSubcategory";
 import SupermarketSubcategoryDataProvider, {
   QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS,
-} from "view/supermarketSubcategory/context/supermarketSubcategoryDataProvider";
+} from "view/supermarketSubcategory/context/SupermarketSubcategoryDataProvider";
 import {GetServerSideProps} from "next";
 import {dehydrate, QueryClient} from "react-query";
 import {createPaginationParams} from "utils/utils";
 import getSupermarketGroupProducts, {IGetSupermarketGroupProductsRes} from "api/getSupermarketGroupProducts";
+import getSupermarketDetail, {QUERY_KEY_SUPERMARKET_DETAIL} from "api/getSupermarketDetail";
+import SupermarketSubcategoryCategoryListDataProvider from "view/supermarketSubcategory/context/SupermarketSubcategoryCategoryListDataProvider";
 
 function SupermarketSubcategoryPage() {
   return (
     <SupermarketSubcategoryDataProvider>
-      <SupermarketSubcategory />
+      <SupermarketSubcategoryCategoryListDataProvider>
+        <SupermarketSubcategory />
+      </SupermarketSubcategoryCategoryListDataProvider>
     </SupermarketSubcategoryDataProvider>
   );
 }
@@ -31,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({params, query}) =>
     subcategoryId = params.subcategory;
   }
   const queryKey = [QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS, vendorId, categoryId, subcategoryId, "1"];
+  const categoryQueryKey = [QUERY_KEY_SUPERMARKET_DETAIL, vendorId];
   const tmpQuery = {...query};
   delete tmpQuery?.id;
   delete tmpQuery?.category;
@@ -43,6 +48,10 @@ export const getServerSideProps: GetServerSideProps = async ({params, query}) =>
     queryKey,
     queryFn: () =>
       getSupermarketGroupProducts({isServer: true, params: queryParams, vendorId, categoryId: subcategoryId}),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: categoryQueryKey,
+    queryFn: () => getSupermarketDetail({isServer: true, id: vendorId}),
   });
   const queryState = queryClient.getQueryState<IGetSupermarketGroupProductsRes, {status: number}>(queryKey);
   const status = queryState?.error?.status;

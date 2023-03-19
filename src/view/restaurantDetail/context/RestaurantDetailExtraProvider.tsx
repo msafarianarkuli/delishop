@@ -7,6 +7,7 @@ interface IRestaurantDetailExtra {
   id: number;
   price: number;
   title: string;
+  point: number;
 }
 
 interface IAction {
@@ -20,6 +21,7 @@ const initialState: IRestaurantDetailExtra = {
   id: 0,
   price: 0,
   title: "",
+  point: 0,
 };
 
 export const SET_DATA = "data";
@@ -37,6 +39,7 @@ function reducer(state: IRestaurantDetailExtra, action: IAction): IRestaurantDet
         id: action.payload.id,
         price: action.payload.price,
         title: action.payload.title,
+        point: action.payload.point || 0,
       };
     case CLOSE:
       return {
@@ -45,6 +48,7 @@ function reducer(state: IRestaurantDetailExtra, action: IAction): IRestaurantDet
         id: 0,
         price: 0,
         title: "",
+        point: 0,
       };
     default:
       return state;
@@ -65,6 +69,7 @@ export const setRestaurantDetailExtraData = (payload: {
   id: number;
   price: number;
   title: string;
+  point: number;
 }) => ({
   type: SET_DATA,
   payload,

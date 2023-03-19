@@ -17,7 +17,7 @@ interface IRestaurantDetailModalBodyData extends IGetVendorDetailMenusGroupsProd
 }
 
 function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
-  const {data: extraData, isOpen, id, price, title} = useRestaurantDetailExtra();
+  const {data: extraData, isOpen, id, price, title, point} = useRestaurantDetailExtra();
   const [data, setData] = useState<IRestaurantDetailModalBodyData[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
@@ -103,6 +103,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
                   extra,
                   price,
                   title,
+                  point,
                   vendorId: vendor.vendorId,
                 })
               );

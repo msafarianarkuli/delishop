@@ -67,6 +67,7 @@ function OrderCompleteList() {
                       price: item.price,
                       title: item.title,
                       id: +item.id,
+                      point: item.point,
                     })
                   );
                 } else if (supermarket?.cartOrders) {
@@ -76,6 +77,7 @@ function OrderCompleteList() {
                       price: item.price,
                       id: +item.id,
                       image: item.image,
+                      point: item.point,
                     })
                   );
                 }

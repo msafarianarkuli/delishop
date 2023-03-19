@@ -18,6 +18,7 @@ const initialCartOrder: ICartReducerListItem = {
   cartOrders: {},
   totalPrice: 0,
   totalOrderCount: 0,
+  totalPoint: 0,
 };
 
 const initialState: ICartReducer = {
@@ -36,6 +37,7 @@ const cartRestaurantReducer = createSlice({
         ...initialCartOrder,
         vendorId: action.payload.vendorId,
         title: action.payload.title,
+        totalPoint: action.payload.point || 0,
       });
     },
     setCartRestaurantItem: (state, action: PayloadAction<ISetCartReducerItem>) => {
@@ -48,12 +50,14 @@ const cartRestaurantReducer = createSlice({
         const totalExtraPrice = extra?.reduce((arr, current) => arr + current.price, 0);
         const price = payload.price;
         const title = payload.title;
+        const point = payload.point || 0;
         if (cartItem[payload.id]) {
-          cartItem[payload.id].push({extra, price, title});
+          cartItem[payload.id].push({extra, price, title, point});
         } else {
-          cartItem[payload.id] = [{extra, price, title}];
+          cartItem[payload.id] = [{extra, price, title, point}];
         }
         vendor.totalOrderCount += 1;
+        vendor.totalPoint += point;
         vendor.totalPrice += price + totalExtraPrice;
       }
     },
@@ -68,12 +72,14 @@ const cartRestaurantReducer = createSlice({
           const lastItem = item[cartOrders[id].length - 1];
           const totalExtraPrice = lastItem.extra?.reduce((arr, current) => arr + current.price, 0) || 0;
           const price = lastItem.price;
+          const point = lastItem.point;
           item.pop();
           if (item?.length === 0) {
             delete cartOrders[id];
           }
           vendor.cartOrders = cartOrders;
           vendor.totalOrderCount -= 1;
+          vendor.totalPoint -= point;
           vendor.totalPrice -= price + totalExtraPrice;
         }
       }
@@ -88,8 +94,10 @@ const cartRestaurantReducer = createSlice({
         const orders = vendor.cartOrders[productId];
         const totalExtraPrice = orders[index].extra?.reduce((arr, current) => arr + current.price, 0) || 0;
         const price = orders[index].price;
+        const point = orders[index].point;
         orders.splice(index, 1);
         vendor.totalOrderCount -= 1;
+        vendor.totalPoint -= point;
         vendor.totalPrice -= price + totalExtraPrice;
       }
     },

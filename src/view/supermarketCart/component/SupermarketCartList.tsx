@@ -42,6 +42,7 @@ function SupermarketCartList() {
                   price: item.price,
                   id: +item.id,
                   image: item.image,
+                  point: item.point,
                 })
               );
             }}

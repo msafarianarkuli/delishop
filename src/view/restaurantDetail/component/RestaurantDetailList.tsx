@@ -77,6 +77,7 @@ function RestaurantDetailList() {
                             setCartRestaurantVendorData({
                               vendorId: id,
                               title: data?.vendor?.name,
+                              point: data?.vendor.point,
                             })
                           );
                         }
@@ -87,6 +88,7 @@ function RestaurantDetailList() {
                               id: product.id,
                               price: finalPrice,
                               title: item.displayname,
+                              point: item.point,
                             })
                           );
                         } else {
@@ -96,6 +98,7 @@ function RestaurantDetailList() {
                               price: finalPrice,
                               title: item.displayname,
                               vendorId: id,
+                              point: item.point,
                             })
                           );
                         }

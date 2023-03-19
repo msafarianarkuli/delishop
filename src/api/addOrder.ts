@@ -1,6 +1,7 @@
-import {IAddOrderData, IAddOrderRes} from "types/interfaceAddOrder";
+import {IAddOrderRes} from "types/interfaceAddOrder";
 import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
+import {AxiosPromise} from "axios";
 
 interface IBody extends IAddOrderBody {
   ordertype_enum: number;
@@ -20,7 +21,7 @@ export interface IAddOrderBodyProductKinds {
   [x: string]: {count: number; extra?: number[]};
 }
 
-type TAddOrder = (props: {body: IAddOrderBody; token: string}) => Promise<IAddOrderData>;
+type TAddOrder = (props: {body: IAddOrderBody; token: string}) => AxiosPromise<IAddOrderRes>;
 const addOrder: TAddOrder = async ({body, token}) => {
   const tmpBody: IBody = {
     ...body,
@@ -28,7 +29,7 @@ const addOrder: TAddOrder = async ({body, token}) => {
     delivery_type: 1,
   };
   const url = API.ADD_ORDER;
-  return axiosService<IAddOrderRes>({url, method: "post", token, body: tmpBody}).then((res) => res.data.Data);
+  return axiosService<IAddOrderRes>({url, method: "post", token, body: tmpBody});
 };
 
 export default addOrder;

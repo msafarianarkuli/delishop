@@ -67,7 +67,12 @@ function OrderCompleteSubmitBtn() {
       loading={isLoading}
       onClick={() => {
         if (status === "authenticated") {
+          const sendtime = deliveryTime?.isTemp ? 100 : deliveryTime?.from;
           if (step === 1) {
+            if (!sendtime) {
+              dispatch(setOrderCompleteError("زمان تحویل رو مشخص کنید"));
+              return true;
+            }
             dispatch(setOrderCompleteStep(2));
           } else if (step === 2) {
             let vendor_id = 0;
@@ -77,7 +82,7 @@ function OrderCompleteSubmitBtn() {
             }
             const location_place_fid = deliveryAddress?.id;
             const paymenttype = paymentType;
-            const sendtime = deliveryTime?.isTemp ? 100 : deliveryTime?.from;
+            // const sendtime = deliveryTime?.isTemp ? 100 : deliveryTime?.from;
             const token = data?.user.token;
             const productkinds = createAddOrderProductKind(vendor?.cartOrders || supermarket?.cartOrders || {});
             const addOrderCondition =
@@ -99,7 +104,7 @@ function OrderCompleteSubmitBtn() {
               addOrder({body, token})
                 .then((res) => {
                   console.log("res", res);
-                  if (res.payurl) {
+                  if (res.data.Data?.payurl) {
                   }
                 })
                 .catch((err) => {

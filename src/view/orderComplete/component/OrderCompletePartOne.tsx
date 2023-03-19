@@ -1,6 +1,7 @@
 import OrderCompleteList from "view/orderComplete/component/OrderCompleteList";
 import OrderCompleteDescription from "view/orderComplete/component/OrderCompleteDescription";
 import OrderCompleteDeliveryTime from "view/orderComplete/component/OrderCompleteDeliveryTime";
+import OrderCompleteError from "view/orderComplete/component/OrderCompleteError";
 
 function OrderCompletePartOne() {
   return (
@@ -9,6 +10,7 @@ function OrderCompletePartOne() {
       {/*<OrderCompleteSuggestion />*/}
       <OrderCompleteDescription />
       <OrderCompleteDeliveryTime />
+      <OrderCompleteError />
     </>
   );
 }

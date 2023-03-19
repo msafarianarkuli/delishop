@@ -1,5 +1,6 @@
 export interface IAddOrderRes {
   Data: IAddOrderData;
+  message?: string;
 }
 
 export interface IAddOrderData {

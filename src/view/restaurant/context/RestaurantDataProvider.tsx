@@ -45,10 +45,10 @@ function RestaurantDataProvider(props: IRestaurantDataProvider) {
       if (isUserAddressStorageLoaded && isStorageLoaded) {
         if (userAddress?.latitude && userAddress.longitude) {
           tmpParams.lat = userAddress.latitude;
-          tmpParams.log = userAddress.longitude;
+          tmpParams.lon = userAddress.longitude;
         } else if (location?.lat && location?.lng) {
           tmpParams.lat = location.lat;
-          tmpParams.log = location.lng;
+          tmpParams.lon = location.lng;
         }
       }
       if (router.query.hasOwnProperty(restaurantSortQuery)) {

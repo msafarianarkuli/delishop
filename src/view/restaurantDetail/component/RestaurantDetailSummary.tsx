@@ -16,7 +16,7 @@ function RestaurantDetailSummary() {
       </div>
       <div className="flex items-center justify-center py-5 border-b border-borderColor px-screenSpace">
         <RestaurantDetailTime maxSendTime={data?.vendor.max_sendtime || ""} />
-        <RestaurantDetailDelivery />
+        <RestaurantDetailDelivery lat={data?.vendor.lat || 0} long={data?.vendor.long || 0} />
         <RestaurantDetailMoreInfo />
       </div>
     </>

@@ -1,14 +1,48 @@
-import React from "react";
+import React, {useMemo} from "react";
 import IconDelivery from "assets/icons/IconDelivery";
 import RestaurantDetailSummaryItem from "view/restaurantDetail/component/RestaurantDetailSummaryItem";
+import {getDistanceFromLatLong} from "utils/utils";
+import {useSelector} from "react-redux";
+import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 
-function RestaurantDetailDelivery() {
+interface IRestaurantDetailDelivery {
+  lat: number;
+  long: number;
+}
+
+function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
+  const {lat, long} = props;
+  const {userAddress, location, isStorageLoaded, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
+  const deliveryPrice = 1000;
+
+  const distance = useMemo(() => {
+    if (isStorageLoaded && isUserAddressStorageLoaded) {
+      return getDistanceFromLatLong({
+        location1: {lat, long},
+        location2: {
+          lat: userAddress?.latitude || location?.lat || 0,
+          long: userAddress?.longitude || location?.lat || 0,
+        },
+        unit: "kilometers",
+      });
+    }
+    return 0;
+  }, [
+    isStorageLoaded,
+    isUserAddressStorageLoaded,
+    lat,
+    location?.lat,
+    long,
+    userAddress?.latitude,
+    userAddress?.longitude,
+  ]);
+
   return (
     <RestaurantDetailSummaryItem
       classNameContainer="px-5 mx-5 after:content-[' '] after:absolute after:bg-textColor after:left-0 after:h-[25px] after:w-[1px] before:content-[' '] before:absolute before:bg-textColor before:right-0 before:h-[25px] before:w-[1px]"
       top={
         <>
-          <span>{(7000).toLocaleString("en-US")}</span>
+          <span>{Math.round(deliveryPrice * distance).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

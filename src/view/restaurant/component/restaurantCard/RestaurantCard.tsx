@@ -5,7 +5,6 @@ import {useMemo} from "react";
 interface IRestaurantCard {
   image: string;
   title: string;
-  address: string;
   description: string;
   star: number;
   time: string;
@@ -15,7 +14,7 @@ interface IRestaurantCard {
 const maxStar = 5;
 
 function RestaurantCard(props: IRestaurantCard) {
-  const {time, star, coin, address, title, image, description} = props;
+  const {time, star, coin, title, image, description} = props;
 
   const starFill = useMemo(() => Array.from(new Array(star < maxStar ? Math.round(star) : 0), (_, i) => i + 1), [star]);
   const starEmpty = useMemo(
@@ -32,7 +31,7 @@ function RestaurantCard(props: IRestaurantCard) {
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="font-bold">{title}</span>
-            <span className="text-[12px] font-light text-textColorLight mr-2">{address}</span>
+            {/*<span className="text-[12px] font-light text-textColorLight mr-2">{address}</span>*/}
           </div>
           <div className="flex items-center flex-row-reverse">
             {starFill.map((item) => (

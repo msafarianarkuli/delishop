@@ -3,8 +3,11 @@ import RestaurantDetailDescription from "view/restaurantDetail/component/Restaur
 import RestaurantDetailTime from "view/restaurantDetail/component/RestaurantDetailTime";
 import RestaurantDetailDelivery from "view/restaurantDetail/component/RestaurantDetailDelivery";
 import RestaurantDetailMoreInfo from "view/restaurantDetail/component/RestaurantDetailMoreInfo";
+import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 
 function RestaurantDetailSummary() {
+  const {data} = useRestaurantDetailData();
+
   return (
     <>
       <div id="restaurantDetailSummaryTitleDesc" className="pt-6 pb-5 border-b border-borderColor px-screenSpace">
@@ -12,7 +15,7 @@ function RestaurantDetailSummary() {
         <RestaurantDetailDescription />
       </div>
       <div className="flex items-center justify-center py-5 border-b border-borderColor px-screenSpace">
-        <RestaurantDetailTime />
+        <RestaurantDetailTime maxSendTime={data?.vendor.max_sendtime || ""} />
         <RestaurantDetailDelivery />
         <RestaurantDetailMoreInfo />
       </div>

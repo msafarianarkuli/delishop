@@ -18,6 +18,7 @@ export interface IGetVendorsListResItem {
   category: string;
   point: number;
   delivery_at_place: number;
+  about: string;
   tags: {
     name: string;
     displayname: string;

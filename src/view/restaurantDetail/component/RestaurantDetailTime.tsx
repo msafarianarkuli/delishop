@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {IconClockSolid} from "assets/icons";
 import RestaurantDetailSummaryItem from "view/restaurantDetail/component/RestaurantDetailSummaryItem";
 
-function RestaurantDetailTime() {
+function RestaurantDetailTime({maxSendTime}: {maxSendTime: string}) {
+  const timeDelivery = useMemo(() => {
+    let result = "";
+    if (maxSendTime) {
+      if (maxSendTime.search("-") !== -1) {
+        result = maxSendTime.replace("-", " تا ");
+      } else {
+        result = "تا " + maxSendTime;
+      }
+    }
+    return result;
+  }, [maxSendTime]);
+
   return (
     <RestaurantDetailSummaryItem
-      top="تا 40 دقیقه"
+      top={`${timeDelivery} دقیقه`}
       bottom={
         <>
           <IconClockSolid className="w-4 h-4" />

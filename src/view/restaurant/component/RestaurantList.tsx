@@ -25,8 +25,7 @@ function RestaurantListShow({data}: {data?: IGetVendorsRes}) {
             <RestaurantCard
               image={item.logo}
               title={item.name}
-              address={""}
-              description={""}
+              description={item.about}
               star={+item.rate}
               coin={item.point}
               time={item.max_sendtime}

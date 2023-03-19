@@ -5,6 +5,8 @@ import classNames from "classnames";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import useCartSupermarket from "hooks/useCartSupermarket";
 import {useMemo} from "react";
+import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
+import {getDistanceFromLatLong} from "utils/utils";
 
 dayjs.extend(jalaliday);
 
@@ -12,6 +14,7 @@ function OrderCompleteReceipt() {
   const type = useTypeColor();
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const {deliveryAddress} = useOrderComplete();
   const colorTitle = classNames({
     "text-primary": type === "default",
     "text-primarySupermarket": type === "supermarket",
@@ -35,9 +38,31 @@ function OrderCompleteReceipt() {
     return 0;
   }, [restaurant, supermarket]);
 
-  const deliveryPrice = useMemo(() => {
+  const distance = useMemo(() => {
+    if (deliveryAddress?.latitude && deliveryAddress?.longitude) {
+      const location1 = {
+        lat: restaurant?.latitude || supermarket?.latitude || 0,
+        long: restaurant?.longitude || supermarket?.longitude || 0,
+      };
+      const location2 = {
+        lat: deliveryAddress.latitude,
+        long: deliveryAddress.longitude,
+      };
+      return getDistanceFromLatLong({location1, location2, unit: "kilometers"});
+    }
     return 0;
-  }, []);
+  }, [
+    deliveryAddress?.latitude,
+    deliveryAddress?.longitude,
+    restaurant?.latitude,
+    restaurant?.longitude,
+    supermarket?.latitude,
+    supermarket?.longitude,
+  ]);
+
+  const deliveryPrice = useMemo(() => {
+    return Math.round(1000 * distance);
+  }, [distance]);
 
   const totalPrice = useMemo(() => {
     return price + deliveryPrice;

@@ -82,6 +82,10 @@ function OrderCompleteSubmitBtn() {
             const productkinds = createAddOrderProductKind(vendor?.cartOrders || supermarket?.cartOrders || {});
             const addOrderCondition =
               vendor_id && Object.keys(productkinds)?.length && location_place_fid && paymenttype && sendtime && token;
+            if (!location_place_fid) {
+              dispatch(setOrderCompleteError("آدرس مقصد رو مشخص کنید"));
+              return true;
+            }
             if (addOrderCondition) {
               setIsLoading(true);
               const body: IAddOrderBody = {

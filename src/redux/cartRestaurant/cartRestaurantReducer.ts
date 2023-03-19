@@ -15,6 +15,8 @@ import {HYDRATE} from "next-redux-wrapper";
 const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
   title: null,
+  latitude: 0,
+  longitude: 0,
   cartOrders: {},
   totalPrice: 0,
   totalOrderCount: 0,
@@ -37,6 +39,8 @@ const cartRestaurantReducer = createSlice({
         ...initialCartOrder,
         vendorId: action.payload.vendorId,
         title: action.payload.title,
+        latitude: action.payload.latitude || 0,
+        longitude: action.payload.longitude || 0,
         totalPoint: action.payload.point || 0,
       });
     },

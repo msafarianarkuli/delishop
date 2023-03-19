@@ -17,11 +17,13 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
 
   const distance = useMemo(() => {
     if (isStorageLoaded && isUserAddressStorageLoaded) {
+      const finalLat = userAddress?.latitude || location?.lat || 0;
+      const finalLong = userAddress?.longitude || location?.lng || 0;
       return getDistanceFromLatLong({
         location1: {lat, long},
         location2: {
-          lat: userAddress?.latitude || location?.lat || 0,
-          long: userAddress?.longitude || location?.lat || 0,
+          lat: finalLat,
+          long: finalLong,
         },
         unit: "kilometers",
       });
@@ -32,6 +34,7 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
     isUserAddressStorageLoaded,
     lat,
     location?.lat,
+    location?.lng,
     long,
     userAddress?.latitude,
     userAddress?.longitude,

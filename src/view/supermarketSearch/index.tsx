@@ -1,6 +1,6 @@
 import SearchPage from "components/searchPage";
 
-function RestaurantSearch() {
+function SupermarketSearch() {
   return (
     <>
       <SearchPage />
@@ -8,4 +8,4 @@ function RestaurantSearch() {
   );
 }
 
-export default RestaurantSearch;
+export default SupermarketSearch;

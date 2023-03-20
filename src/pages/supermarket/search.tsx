@@ -1,7 +1,11 @@
-import React from "react";
+import SupermarketSearch from "view/supermarketSearch";
 
 function SupermarketSearchPage() {
-  return <div>SupermarketSearchPage</div>;
+  return (
+    <>
+      <SupermarketSearch />
+    </>
+  );
 }
 
 export default SupermarketSearchPage;

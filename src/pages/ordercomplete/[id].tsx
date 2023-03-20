@@ -1,12 +1,15 @@
 import OrderComplete from "view/orderComplete";
 import OrderCompleteProvider from "view/orderComplete/context/OrderCompleteProvider";
 import OrderCompleteAddressProvider from "view/orderComplete/context/OrderCompleteAddressProvider";
+import LogisticPriceProvider from "context/LogisticPriceProvider";
 
 function OrderCompletePage() {
   return (
     <OrderCompleteProvider>
       <OrderCompleteAddressProvider>
-        <OrderComplete />
+        <LogisticPriceProvider>
+          <OrderComplete />
+        </LogisticPriceProvider>
       </OrderCompleteAddressProvider>
     </OrderCompleteProvider>
   );

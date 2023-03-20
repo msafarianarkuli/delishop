@@ -6,11 +6,15 @@ import RestaurantDetailDataProvider, {
 } from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 import getVendorDetail from "api/getVendorDetail";
 import {IGetVendorDetailData} from "types/interfaceVendorDetail";
+import LogisticPriceProvider from "context/LogisticPriceProvider";
+import getLogisticCurrentPrice, {QUERY_KEY_LOGISTIC_CURRENT_PRICE} from "api/getLogisticCurrentPrice";
 
 function RestaurantDetailPage() {
   return (
     <RestaurantDetailDataProvider>
-      <RestaurantDetail />
+      <LogisticPriceProvider>
+        <RestaurantDetail />
+      </LogisticPriceProvider>
     </RestaurantDetailDataProvider>
   );
 }
@@ -21,6 +25,10 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   await queryClient.prefetchQuery({
     queryKey,
     queryFn: () => getVendorDetail({isServer: true, id: params?.id as string}),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEY_LOGISTIC_CURRENT_PRICE],
+    queryFn: () => getLogisticCurrentPrice(true),
   });
   const queryState = queryClient.getQueryState<IGetVendorDetailData, {status: number}>(queryKey);
   const status = queryState?.error?.status;

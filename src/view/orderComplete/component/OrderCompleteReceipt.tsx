@@ -7,6 +7,7 @@ import useCartSupermarket from "hooks/useCartSupermarket";
 import {useMemo} from "react";
 import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
 import {getDistanceFromLatLong} from "utils/utils";
+import {useLogisticPrice} from "context/LogisticPriceProvider";
 
 dayjs.extend(jalaliday);
 
@@ -15,6 +16,7 @@ function OrderCompleteReceipt() {
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
   const {deliveryAddress} = useOrderComplete();
+  const {data: deliveryBasicPrice} = useLogisticPrice();
   const colorTitle = classNames({
     "text-primary": type === "default",
     "text-primarySupermarket": type === "supermarket",
@@ -61,8 +63,8 @@ function OrderCompleteReceipt() {
   ]);
 
   const deliveryPrice = useMemo(() => {
-    return Math.round(1000 * distance);
-  }, [distance]);
+    return Math.round((deliveryBasicPrice || 0) * distance);
+  }, [deliveryBasicPrice, distance]);
 
   const totalPrice = useMemo(() => {
     return price + deliveryPrice;

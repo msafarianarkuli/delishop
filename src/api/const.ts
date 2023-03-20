@@ -34,4 +34,7 @@ export const API = {
   //orders
   GET_ORDERS_LIST: "/api/users/orders",
   ADD_ORDER: "/api/ecommerce/order",
+
+  //logistic
+  GET_LOGISTIC_CURRENT_PRICE: "/api/logistic/current",
 };

@@ -4,6 +4,7 @@ import RestaurantDetailSummaryItem from "view/restaurantDetail/component/Restaur
 import {getDistanceFromLatLong} from "utils/utils";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
+import {useLogisticPrice} from "context/LogisticPriceProvider";
 
 interface IRestaurantDetailDelivery {
   lat: number;
@@ -13,7 +14,7 @@ interface IRestaurantDetailDelivery {
 function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
   const {lat, long} = props;
   const {userAddress, location, isStorageLoaded, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
-  const deliveryPrice = 1000;
+  const {data: deliveryBasicPrice} = useLogisticPrice();
 
   const distance = useMemo(() => {
     if (isStorageLoaded && isUserAddressStorageLoaded) {
@@ -45,7 +46,7 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
       classNameContainer="px-5 mx-5 after:content-[' '] after:absolute after:bg-textColor after:left-0 after:h-[25px] after:w-[1px] before:content-[' '] before:absolute before:bg-textColor before:right-0 before:h-[25px] before:w-[1px]"
       top={
         <>
-          <span>{Math.round(deliveryPrice * distance).toLocaleString("en-US")}</span>
+          <span>{Math.round((deliveryBasicPrice || 0) * distance).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

@@ -10,7 +10,7 @@ interface IBody extends IAddOrderBody {
 
 export interface IAddOrderBody {
   location_place_fid: number;
-  sendtime: number;
+  sendtime: string;
   paymenttype: number;
   productkinds: IAddOrderBodyProductKinds;
   vendor_id: number;

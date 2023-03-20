@@ -10,8 +10,8 @@ const SET_ERROR = "error";
 
 export interface IOrderCompleteDeliverTime {
   isTemp?: boolean;
-  from: number;
-  to: number;
+  from: string;
+  to: string;
 }
 
 interface IOrderComplete {
@@ -88,7 +88,7 @@ function OrderCompleteProvider({children}: {children: JSX.Element}) {
 export default OrderCompleteProvider;
 
 export const setOrderCompleteDescription = (payload: string) => ({type: SET_DESCRIPTION, payload});
-export const setOrderCompleteDeliveryTime = (payload: IOrderCompleteDeliverTime) => ({
+export const setOrderCompleteDeliveryTime = (payload?: IOrderCompleteDeliverTime) => ({
   type: SET_DELIVERY_TIME,
   payload,
 });

@@ -64,6 +64,7 @@ function SupermarketCategoryProductsList() {
                                 point: supermarketData?.vendor.point || 0,
                                 latitude: supermarketData?.vendor.lat,
                                 longitude: supermarketData?.vendor.long,
+                                openHours: supermarketData?.vendor.open_hours,
                               })
                             );
                           }

@@ -1,3 +1,5 @@
+import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
+
 export interface ICartReducer {
   cartList: TCartReducerList;
   isLoadedFromStorage: boolean;
@@ -10,6 +12,7 @@ export interface ICartReducerListItem {
   latitude: number;
   longitude: number;
   title: string | null;
+  openHours: IGetVendorsDetailVendorOpenHours | null;
   totalPrice: number;
   totalOrderCount: number;
   totalPoint: number;
@@ -52,6 +55,7 @@ export interface ISetCartReducerVendorData {
   point: number | null;
   latitude?: number;
   longitude?: number;
+  openHours?: IGetVendorsDetailVendorOpenHours;
 }
 
 export interface IRemoveCartReducerCartListOrder {

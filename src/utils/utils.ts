@@ -52,7 +52,7 @@ export function removeFirstZero(str: string) {
   return number;
 }
 
-export function number2Digits(num: number) {
+export function number2Digits(num: number): string {
   if (num < 10) return `0${num}`;
   return num.toString();
 }
@@ -125,6 +125,7 @@ interface ILocation {
   lat: number;
   long: number;
 }
+
 type TUnit = "miles" | "kilometers" | "nauticalMiles";
 type TGetDistanceFromLatLong = (props: {location1: ILocation; location2: ILocation; unit: TUnit}) => number;
 export const getDistanceFromLatLong: TGetDistanceFromLatLong = ({location1, location2, unit}) => {

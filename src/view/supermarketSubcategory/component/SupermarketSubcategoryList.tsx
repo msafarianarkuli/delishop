@@ -58,6 +58,7 @@ function SupermarketSubcategoryList() {
                         point: supermarket?.vendor.point || 0,
                         latitude: supermarket?.vendor.lat,
                         longitude: supermarket?.vendor.long,
+                        openHours: supermarket?.vendor.open_hours,
                       })
                     );
                   }

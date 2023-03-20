@@ -80,6 +80,7 @@ function RestaurantDetailList() {
                               point: data?.vendor.point,
                               latitude: data?.vendor.lat,
                               longitude: data?.vendor.long,
+                              openHours: data?.vendor.open_hours,
                             })
                           );
                         }

@@ -67,7 +67,7 @@ function OrderCompleteSubmitBtn() {
       loading={isLoading}
       onClick={() => {
         if (status === "authenticated") {
-          const sendtime = deliveryTime?.isTemp ? 100 : deliveryTime?.from;
+          const sendtime = deliveryTime?.isTemp ? "100" : deliveryTime?.from;
           if (step === 1) {
             if (!sendtime) {
               dispatch(setOrderCompleteError("زمان تحویل رو مشخص کنید"));

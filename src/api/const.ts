@@ -37,4 +37,6 @@ export const API = {
 
   //logistic
   GET_LOGISTIC_CURRENT_PRICE: "/api/logistic/current",
+
+  GET_SUGGESTION_SEARCH: "/api/suggest-search",
 };

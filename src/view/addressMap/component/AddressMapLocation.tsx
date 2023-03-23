@@ -88,7 +88,7 @@ function CurrentLocation() {
 
   useEffect(() => {
     if (currentLocation?.lat && currentLocation.lng) {
-      map.flyTo({lat: currentLocation.lat, lng: currentLocation.lat}, map.getZoom());
+      map.flyTo({lat: currentLocation.lat, lng: currentLocation.lng}, map.getZoom());
     }
   }, [map, currentLocation]);
 

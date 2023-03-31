@@ -7,6 +7,7 @@ export const API = {
 
   //get neshan address
   GET_ADDRESS: "https://api.neshan.org/v5/reverse",
+  GET_SEARCH_ADDRESS: "https://api.neshan.org/v1/search",
 
   //vendors
   GET_VENDORS_CATEGORY: "/api/vendors/categories",

@@ -6,6 +6,7 @@ import styles from "view/addressMap/addressMap.module.scss";
 import {useRouter} from "next/router";
 import classNames from "classnames";
 import {TUseTypeColor} from "hooks/useTypeColor";
+import usePathnameQuery from "hooks/usePathnameQuery";
 
 interface IAddressMapAddress {
   type: TUseTypeColor;
@@ -14,6 +15,7 @@ interface IAddressMapAddress {
 function AddressMapAddress({type}: IAddressMapAddress) {
   const router = useRouter();
   const {address, addressLoading} = useAddressMap();
+  const {querySearch} = usePathnameQuery();
 
   const showAddress = useMemo(() => {
     const spinClassName = classNames({
@@ -35,7 +37,7 @@ function AddressMapAddress({type}: IAddressMapAddress) {
       <div className="w-[calc(100%-48px)] truncate px-2">{showAddress}</div>
       <Button
         className="border-0 p-0 rounded shadow-none pointer-events-auto"
-        onClick={() => router.push("/address/map/search")}
+        onClick={() => router.push("/address/map/search" + querySearch)}
       >
         <IconSearch className="w-[24px] h-auto text-iconColor" />
       </Button>

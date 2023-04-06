@@ -15,7 +15,7 @@ function SuperMarketCard(props: ISuperMarketCard) {
   return (
     <div className={styles.supermarket_card_container}>
       <div className="flex">
-        <img src={image} className="w-[144px] h-[80px] rounded-bl-[10px]" />
+        <img src={image} alt={title} className="w-[144px] h-[80px] rounded-bl-[10px] object-center object-contain" />
         <div className="text-[15px] font-medium mx-2 mt-1">
           <span>{title}</span>
           {/*<span className="text-iconColor mr-1">({address})</span>*/}

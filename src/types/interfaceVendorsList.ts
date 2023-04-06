@@ -24,6 +24,8 @@ export interface IGetVendorsListResItem {
   in_area: boolean;
   address: string;
   about: string;
+  lat: number;
+  long: number;
   tags: {
     name: string;
     displayname: string;

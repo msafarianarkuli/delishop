@@ -18,10 +18,15 @@ function AppHeaderLocation(props: IAppHeaderLocation) {
   const {pathname} = usePathnameQuery();
 
   const title = useMemo(() => userAddress?.title || "", [userAddress?.title]);
-  const address = useMemo(
-    () => userAddress?.address || locationData?.formatted_address || "انتخاب آدرس",
-    [locationData?.formatted_address, userAddress?.address]
-  );
+  const address = useMemo(() => {
+    let text = userAddress?.address || locationData?.formatted_address || "انتخاب آدرس";
+    if (text.startsWith("تهران")) {
+      const tmp = text.split("،");
+      tmp.shift();
+      text = tmp.join("،");
+    }
+    return text;
+  }, [locationData?.formatted_address, userAddress?.address]);
 
   const url = useMemo(() => {
     let url = "/address/map";

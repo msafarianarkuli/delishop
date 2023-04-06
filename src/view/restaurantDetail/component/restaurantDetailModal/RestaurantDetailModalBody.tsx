@@ -77,7 +77,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
               }}
             />
             <div>
-              <span>{item.price.toLocaleString("en-US")}</span>
+              <span>{Math.round(item.price / 10).toLocaleString("en-US")}</span>
               <span className="mr-1">تومان</span>
             </div>
           </div>
@@ -113,7 +113,7 @@ function RestaurantDetailModalBody({onClick}: IRestaurantDetailModalBody) {
           type="primary"
           className="submit-btn modal-submit-btn w-full text-[15px]"
         >
-          <span className="ml-1">افزودن</span>(<span>{totalPrice.toLocaleString("en-US")}</span>
+          <span className="ml-1">افزودن</span>(<span>{Math.round(totalPrice / 10).toLocaleString("en-US")}</span>
           <span>تومان</span>)
         </Button>
       </div>

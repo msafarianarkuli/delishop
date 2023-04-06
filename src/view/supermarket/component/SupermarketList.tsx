@@ -21,13 +21,7 @@ function SupermarketShowList({data}: {data?: IGetVendorsRes}) {
       {data?.vendors.map((item, index) => {
         return (
           <Link key={index} href={`/supermarket/${item.id}`}>
-            <SuperMarketCard
-              title={item.name}
-              deliveryPrice={60000}
-              coin={item.point}
-              rate={item.rate}
-              image={item.logo}
-            />
+            <SuperMarketCard title={item.name} deliveryPrice={0} coin={item.point} rate={item.rate} image={item.logo} />
           </Link>
         );
       })}

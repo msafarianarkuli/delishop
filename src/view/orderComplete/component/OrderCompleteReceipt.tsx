@@ -6,8 +6,7 @@ import useCartRestaurant from "hooks/useCartRestaurant";
 import useCartSupermarket from "hooks/useCartSupermarket";
 import {useMemo} from "react";
 import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
-import {getDistanceFromLatLong} from "utils/utils";
-import {useLogisticPrice} from "context/LogisticPriceProvider";
+import useDeliveryPrice from "hooks/useDeliveryPrice";
 
 dayjs.extend(jalaliday);
 
@@ -16,10 +15,16 @@ function OrderCompleteReceipt() {
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
   const {deliveryAddress} = useOrderComplete();
-  const {data: deliveryBasicPrice} = useLogisticPrice();
-  const colorTitle = classNames({
-    "text-primary": type === "default",
-    "text-primarySupermarket": type === "supermarket",
+
+  const {deliveryToman} = useDeliveryPrice({
+    location1: {
+      lat: restaurant?.latitude || supermarket?.latitude || 0,
+      long: restaurant?.longitude || supermarket?.longitude || 0,
+    },
+    location2: {
+      lat: deliveryAddress?.latitude || 0,
+      long: deliveryAddress?.longitude || 0,
+    },
   });
 
   const count = useMemo(() => {
@@ -29,9 +34,10 @@ function OrderCompleteReceipt() {
   }, [restaurant, supermarket]);
 
   const price = useMemo(() => {
-    if (restaurant) return restaurant.totalPrice;
-    if (supermarket) return supermarket.totalPrice;
-    return 0;
+    let tmpPrice = 0;
+    if (restaurant) tmpPrice = restaurant.totalPrice;
+    if (supermarket) tmpPrice = supermarket.totalPrice;
+    return Math.round(tmpPrice / 10);
   }, [restaurant, supermarket]);
 
   const coin = useMemo(() => {
@@ -40,35 +46,14 @@ function OrderCompleteReceipt() {
     return 0;
   }, [restaurant, supermarket]);
 
-  const distance = useMemo(() => {
-    if (deliveryAddress?.latitude && deliveryAddress?.longitude) {
-      const location1 = {
-        lat: restaurant?.latitude || supermarket?.latitude || 0,
-        long: restaurant?.longitude || supermarket?.longitude || 0,
-      };
-      const location2 = {
-        lat: deliveryAddress.latitude,
-        long: deliveryAddress.longitude,
-      };
-      return getDistanceFromLatLong({location1, location2, unit: "kilometers"});
-    }
-    return 0;
-  }, [
-    deliveryAddress?.latitude,
-    deliveryAddress?.longitude,
-    restaurant?.latitude,
-    restaurant?.longitude,
-    supermarket?.latitude,
-    supermarket?.longitude,
-  ]);
-
-  const deliveryPrice = useMemo(() => {
-    return Math.round((deliveryBasicPrice || 0) * distance);
-  }, [deliveryBasicPrice, distance]);
-
   const totalPrice = useMemo(() => {
-    return price + deliveryPrice;
-  }, [deliveryPrice, price]);
+    return price + deliveryToman;
+  }, [deliveryToman, price]);
+
+  const colorTitle = classNames({
+    "text-primary": type === "default",
+    "text-primarySupermarket": type === "supermarket",
+  });
 
   return (
     <div className="mt-7 mx-screenSpace bg-[#F2F3F6] py-3 px-2">
@@ -89,7 +74,7 @@ function OrderCompleteReceipt() {
         <div className="flex items-center justify-between mb-3">
           <div>هزینه ارسال</div>
           <div>
-            <span>{deliveryPrice.toLocaleString("en-US")}</span>
+            <span>{deliveryToman.toLocaleString("en-US")}</span>
             <span className="mr-1">تومان</span>
           </div>
         </div>

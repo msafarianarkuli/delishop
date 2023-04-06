@@ -33,7 +33,15 @@ function OrderCompleteAddressCard(props: IOrderCompleteAddressCard) {
     <div className={styles.restaurant_complete_address_card} style={{height}}>
       {height > initialHeight ? (
         <div className="w-full overflow-hidden" style={{height: mapHeight}}>
-          <Map zoomControl={false} className="w-full h-full z-0" zoom={17} pinIcons={pin} points={[[point]]} />
+          <Map
+            zoomControl={false}
+            dragging={false}
+            scrollWheelZoom={false}
+            className="w-full h-full z-0"
+            zoom={17}
+            pinIcons={pin}
+            points={[[point]]}
+          />
         </div>
       ) : null}
       <div className="flex items-center" style={{height: initialHeight}}>

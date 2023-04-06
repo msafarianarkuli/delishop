@@ -10,6 +10,7 @@ import {
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch} from "react-redux";
 import {
+  removeCartRestaurantCartListCartOrder,
   removeCartRestaurantCartListLastOrder,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
@@ -46,6 +47,12 @@ function RestaurantDetailList() {
     };
   }, []);
 
+  useEffect(() => {
+    if (vendor?.vendorId && vendor.cartOrders && !Object.keys(vendor.cartOrders).length) {
+      dispatch(removeCartRestaurantCartListCartOrder(vendor.vendorId));
+    }
+  }, [dispatch, vendor?.cartOrders, vendor?.vendorId]);
+
   return (
     <div ref={ref} className="mb-[100px] px-screenSpace">
       {data?.menus.groups.map((item) => {
@@ -67,7 +74,7 @@ function RestaurantDetailList() {
                     title={item.displayname}
                     description={product?.description}
                     coin={item?.point}
-                    price={finalPrice}
+                    price={Math.round(finalPrice / 10)}
                     count={count}
                     onAddClick={() => {
                       const id = router.query.id;

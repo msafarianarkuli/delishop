@@ -53,7 +53,7 @@ function OrderCompleteList() {
             key={index}
             primaryType={type}
             title={item.title}
-            price={item.price}
+            price={Math.round(item.price / 10)}
             count={item.count}
             extra={item.extra}
             onAddClick={() => {

@@ -12,8 +12,9 @@ import {
 import {signIn, useSession} from "next-auth/react";
 import addOrder, {IAddOrderBody} from "api/addOrder";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {createAddOrderProductKind} from "utils/cartReducerUtils";
+import useDeliveryPrice from "hooks/useDeliveryPrice";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -43,9 +44,27 @@ function OrderCompleteSubmitBtnBody() {
 function OrderCompleteSubmitBtnLeft() {
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const {deliveryAddress} = useOrderComplete();
+
+  const {deliveryToman} = useDeliveryPrice({
+    location1: {
+      lat: restaurant?.latitude || supermarket?.latitude || 0,
+      long: restaurant?.longitude || supermarket?.longitude || 0,
+    },
+    location2: {
+      lat: deliveryAddress?.latitude || 0,
+      long: deliveryAddress?.longitude || 0,
+    },
+  });
+
+  const price = useMemo(() => {
+    const totalPrice = restaurant?.totalPrice || supermarket?.totalPrice || 0;
+    return Math.round(totalPrice / 10);
+  }, [restaurant?.totalPrice, supermarket?.totalPrice]);
+
   return (
     <>
-      <span>{(restaurant?.totalPrice || supermarket?.totalPrice || 0).toLocaleString("en-US")}</span>
+      <span>{(price + deliveryToman).toLocaleString("en-US")}</span>
       <span className="mr-1">تومان</span>
     </>
   );
@@ -104,7 +123,9 @@ function OrderCompleteSubmitBtn() {
               addOrder({body, token})
                 .then((res) => {
                   console.log("res", res);
-                  if (res.data.Data?.payurl) {
+                  if (res.data.message) {
+                    dispatch(setOrderCompleteError(res.data.message));
+                  } else if (res.data.Data?.payurl) {
                   }
                 })
                 .catch((err) => {

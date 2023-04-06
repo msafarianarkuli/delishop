@@ -20,7 +20,7 @@ function RestaurantDetailSubmitBtn() {
       left={
         <>
           {" "}
-          <span>{vendor.totalPrice.toLocaleString("en-US")}</span>
+          <span>{Math.round(vendor.totalPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

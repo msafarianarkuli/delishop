@@ -41,12 +41,17 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
     userAddress?.longitude,
   ]);
 
+  const delivery = useMemo(() => {
+    const price = (deliveryBasicPrice || 0) * distance;
+    return Math.round(price / 10);
+  }, [deliveryBasicPrice, distance]);
+
   return (
     <RestaurantDetailSummaryItem
       classNameContainer="px-5 mx-5 after:content-[' '] after:absolute after:bg-textColor after:left-0 after:h-[25px] after:w-[1px] before:content-[' '] before:absolute before:bg-textColor before:right-0 before:h-[25px] before:w-[1px]"
       top={
         <>
-          <span>{Math.round((deliveryBasicPrice || 0) * distance).toLocaleString("en-US")}</span>
+          <span>{delivery.toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

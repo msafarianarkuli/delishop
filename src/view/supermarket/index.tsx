@@ -4,16 +4,13 @@ import SupermarketSort from "view/supermarket/component/SupermarketSort";
 import SupermarketList from "view/supermarket/component/SupermarketList";
 import useSupermarketNavigation from "hooks/useSupermarketNavigation";
 import {BottomNavigation} from "components";
-import {useSelector} from "react-redux";
-import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import useRedirectToMap from "hooks/useRedirectToMap";
 
 function SuperMarket() {
   const data = useSupermarketNavigation();
-  const {location, userAddress} = useSelector(selectAddressMap);
-  useRedirectToMap();
+  const {hidePage} = useRedirectToMap();
 
-  if (!location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude) return null;
+  if (hidePage) return null;
   return (
     <>
       <SupermarketHeader />

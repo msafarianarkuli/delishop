@@ -7,19 +7,20 @@ import {getDistanceFromLatLong} from "utils/utils";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {useLogisticPrice} from "context/LogisticPriceProvider";
+import {InfiniteData} from "react-query";
 
 function SupermarketList() {
   const {data, isLoading} = useSupermarketData();
   return (
     <div className="mt-5">
       {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.vendors?.length ? <div>موردی یافت نشد</div> : null}
+      {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
       <SupermarketShowList data={data} />
     </div>
   );
 }
 
-function SupermarketShowList({data}: {data?: IGetVendorsRes}) {
+function SupermarketShowList({data}: {data?: InfiniteData<IGetVendorsRes>}) {
   const {userAddress, location} = useSelector(selectAddressMap);
   const {data: deliveryBasicPrice} = useLogisticPrice();
   const location1 = useMemo(
@@ -32,24 +33,26 @@ function SupermarketShowList({data}: {data?: IGetVendorsRes}) {
 
   return (
     <>
-      {data?.vendors.map((item, index) => {
-        const location2 = {
-          lat: item.lat,
-          long: item.long,
-        };
-        const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
-        const price = (deliveryBasicPrice || 0) * distance;
-        return (
-          <Link key={index} href={`/supermarket/${item.id}`}>
-            <SuperMarketCard
-              title={item.name}
-              deliveryPrice={Math.round(price / 10)}
-              coin={item.point}
-              rate={item.rate}
-              image={item.logo}
-            />
-          </Link>
-        );
+      {data?.pages?.map((value) => {
+        return value.vendors.map((item, index) => {
+          const location2 = {
+            lat: item.lat,
+            long: item.long,
+          };
+          const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
+          const price = (deliveryBasicPrice || 0) * distance;
+          return (
+            <Link key={index} href={`/supermarket/${item.id}`}>
+              <SuperMarketCard
+                title={item.name}
+                deliveryPrice={Math.round(price / 10)}
+                coin={item.point}
+                rate={item.rate}
+                image={item.logo}
+              />
+            </Link>
+          );
+        });
       })}
     </>
   );

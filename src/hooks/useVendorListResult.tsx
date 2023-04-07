@@ -2,8 +2,8 @@ import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {useMemo} from "react";
-import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
-import {useQuery} from "react-query";
+import {createKeyForUseQuery, hasNextPage} from "utils/utils";
+import {useInfiniteQuery} from "react-query";
 import getVendors from "api/getVendors";
 
 interface IUseVendorListResult {
@@ -18,6 +18,8 @@ function useVendorListResult(props: IUseVendorListResult) {
   const router = useRouter();
   const {isStorageLoaded, location, userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
 
+  // const pageNumber = useMemo(() => queryPageNumber(router.query.page), [router.query.page]);
+
   const params = useMemo(() => {
     let tmpParams: {[x: string]: any} = {
       "category[]": categoryId,
@@ -27,7 +29,10 @@ function useVendorListResult(props: IUseVendorListResult) {
         ...tmpParams,
         ...router.query,
       };
-      tmpParams = createPaginationParams(tmpParams);
+      if (tmpParams.hasOwnProperty("page")) {
+        delete tmpParams.page;
+      }
+      // tmpParams = createPaginationParams(tmpParams);
       if (isUserAddressStorageLoaded && isStorageLoaded) {
         if (userAddress?.latitude && userAddress.longitude) {
           tmpParams.lat = userAddress.latitude;
@@ -59,8 +64,8 @@ function useVendorListResult(props: IUseVendorListResult) {
 
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [queryKey];
-    const page = router.query?.page;
-    tmpKeys = createKeyForUseQuery(tmpKeys, page);
+    // const page = router.query?.page;
+    // tmpKeys = createKeyForUseQuery(tmpKeys, page);
     if (isUserAddressStorageLoaded && isStorageLoaded) {
       if (userAddress?.latitude && userAddress.longitude) {
         tmpKeys = createKeyForUseQuery(tmpKeys, userAddress.latitude.toString());
@@ -94,7 +99,19 @@ function useVendorListResult(props: IUseVendorListResult) {
     [isStorageLoaded, isUserAddressStorageLoaded, router.isReady]
   );
 
-  return useQuery(keys, () => getVendors({params}), {staleTime, enabled: useQueryEnabled});
+  // return useQuery(keys, () => getVendors({params}), {staleTime, enabled: useQueryEnabled});
+  return useInfiniteQuery(keys, ({pageParam}) => getVendors({params, pageParam}), {
+    staleTime,
+    enabled: useQueryEnabled,
+    getNextPageParam: (lastPage, allPages) => {
+      const total = lastPage.total;
+      const page = allPages.length;
+      if (hasNextPage({page, total})) {
+        return page + 1;
+      }
+      return undefined;
+    },
+  });
 }
 
 export default useVendorListResult;

@@ -13,17 +13,19 @@ function useRedirectToMap() {
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
 
   useEffect(() => {
-    const noLocation = !location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude;
-    if (isStorageLoaded && isUserAddressStorageLoaded && noLocation) {
-      let url = "";
-      query.set("callbackUrl", encodeURI(pathname));
-      if (status === "authenticated") {
-        url = `/address`;
-      } else {
-        url = `/address/map`;
+    if (isStorageLoaded && isUserAddressStorageLoaded && status !== "loading") {
+      const noLocation = !location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude;
+      if (noLocation) {
+        let url = "";
+        query.set("callbackUrl", encodeURI(pathname));
+        if (status === "authenticated") {
+          url = `/address`;
+        } else {
+          url = `/address/map`;
+        }
+        url += query.toString() ? `?${query.toString()}` : "";
+        router.replace(url);
       }
-      url += query.toString() ? `?${query.toString()}` : "";
-      router.replace(url);
     }
   }, [
     isStorageLoaded,
@@ -37,7 +39,12 @@ function useRedirectToMap() {
     userAddress?.longitude,
   ]);
 
-  return null;
+  const hidePage = useMemo(
+    () => !location?.lat && !location?.lng && !userAddress?.latitude && !userAddress?.longitude && status !== "loading",
+    [location?.lat, location?.lng, status, userAddress?.latitude, userAddress?.longitude]
+  );
+
+  return {hidePage};
 }
 
 export default useRedirectToMap;

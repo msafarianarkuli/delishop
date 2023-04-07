@@ -1,20 +1,16 @@
-import React, {createContext, useContext} from "react";
-import {IDataContextProvider} from "types/interfaces";
+import {createContext, useContext} from "react";
 import {IGetVendorsRes} from "api/getVendors";
 import useVendorListResult from "hooks/useVendorListResult";
+import {UseInfiniteQueryResult} from "react-query";
 
 interface ISuperMarketDataProvider {
   children: JSX.Element;
 }
 
-const initialState: IDataContextProvider<IGetVendorsRes> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseInfiniteQueryResult<IGetVendorsRes> = {};
 
-const SuperMarketDataContext = createContext<IDataContextProvider<IGetVendorsRes>>(initialState);
+const SuperMarketDataContext = createContext<UseInfiniteQueryResult<IGetVendorsRes>>(initialState);
 
 export const QUERY_KEY_SUPERMARKET = "supermarket";
 

@@ -26,7 +26,7 @@ function ProfileAwardReceivedCard(props: IAwardReceivedCard) {
       <div className={styles.profile_award_received_card_ticket}>
         <IconAward className="w-10 h-auto text-primary" />
         <div className="absolute right-[-1px] top-[8px] bottom-0 w-[1px]">
-          <img src={line.src} className="w-full h-full object-center object-cover" />
+          <img src={line.src} alt={title} className="w-full h-full object-center object-cover" />
         </div>
       </div>
     </div>

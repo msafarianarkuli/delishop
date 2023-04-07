@@ -23,18 +23,22 @@ function LocalStorageData() {
   useEffect(() => {
     const addressMap = localStorage.getItem(addressMapLocalStorageKey);
     const data = addressMap ? JSON.parse(addressMap) : {};
-    dispatch(setAddressMapFromStorage(data));
-  }, [dispatch]);
+    if (status !== "loading") {
+      dispatch(setAddressMapFromStorage(data));
+    }
+  }, [dispatch, status]);
 
   useEffect(() => {
     const userAddress = localStorage.getItem(userAddressLocalStorageKey);
     let data = null;
-    if (status === "authenticated") {
-      data = userAddress ? JSON.parse(userAddress) : null;
-    } else if (status === "unauthenticated") {
-      localStorage.removeItem(userAddressLocalStorageKey);
+    if (status !== "loading") {
+      if (status === "authenticated") {
+        data = userAddress ? JSON.parse(userAddress) : null;
+      } else {
+        localStorage.removeItem(userAddressLocalStorageKey);
+      }
+      dispatch(setUserAddressFromStorage(data));
     }
-    dispatch(setUserAddressFromStorage(data));
   }, [dispatch, status]);
 
   useEffect(() => {

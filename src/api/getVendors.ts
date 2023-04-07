@@ -1,8 +1,11 @@
 import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {IGetVendorsListRes, TGetVendorsListResVendors} from "types/interfaceVendorsList";
+import {paginationCalc} from "utils/utils";
 
 interface IGetVendorsProps {
+  pageParam?: number;
+  count?: number;
   params?: object;
   isServer?: boolean;
 }
@@ -13,14 +16,16 @@ export interface IGetVendorsRes {
 }
 
 type TGetRestaurants = (props: IGetVendorsProps) => Promise<IGetVendorsRes>;
-const getVendors: TGetRestaurants = async ({isServer, params}) => {
+const getVendors: TGetRestaurants = async (props) => {
+  const {isServer, params, pageParam = 1, count = 20} = props;
   let url = API.GET_VENDORS_LIST;
   if (isServer) {
     url = API.DOMAIN + API.GET_VENDORS_LIST;
   }
+  const {take, skip} = paginationCalc({page: pageParam, count});
   const tmpParams = {
-    skip: 0,
-    take: 19,
+    skip,
+    take,
     ...params,
   };
   return axiosService<IGetVendorsListRes>({url, method: "get", params: tmpParams}).then((res) => ({

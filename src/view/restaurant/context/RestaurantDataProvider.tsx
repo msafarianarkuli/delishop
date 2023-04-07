@@ -1,20 +1,16 @@
 import {createContext, useContext} from "react";
 import {IGetVendorsRes} from "api/getVendors";
-import {IDataContextProvider} from "types/interfaces";
 import useVendorListResult from "hooks/useVendorListResult";
+import {UseInfiniteQueryResult} from "react-query";
 
 interface IRestaurantDataProvider {
   children: JSX.Element;
 }
 
-const initialState: IDataContextProvider<IGetVendorsRes> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseInfiniteQueryResult<IGetVendorsRes> = {};
 
-const RestaurantDataContext = createContext<IDataContextProvider<IGetVendorsRes>>(initialState);
+const RestaurantDataContext = createContext<UseInfiniteQueryResult<IGetVendorsRes>>(initialState);
 
 export const QUERY_KEY_RESTAURANT = "restaurant";
 

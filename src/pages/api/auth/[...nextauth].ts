@@ -12,6 +12,7 @@ interface ILoginRes {
     id: number;
     name: string | null;
     phone: string;
+    email: string;
     role: [
       {
         id: number;
@@ -59,6 +60,7 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
             anniversary_date: user.anniversary_date,
             token: auth.token,
             expires_at: auth.expires_at,
+            email: user.email,
           };
           return {
             id: user.id.toString(),
@@ -85,11 +87,15 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
       const birthday = req.query?.birthday;
       const gender = req.query?.gender;
       const anniversary_date = req.query?.anniversary;
+      const email = req.query?.email;
       if (name && !Array.isArray(name)) {
         token.name = decodeURI(name);
       }
+      if (email && !Array.isArray(email)) {
+        token.email = decodeURI(email);
+      }
       if (birthday && !Array.isArray(birthday)) {
-        token.birthay = decodeURI(birthday);
+        token.birthday = decodeURI(birthday);
       }
       if (gender && !Array.isArray(gender)) {
         token.gender = decodeURI(gender);
@@ -113,6 +119,7 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
         age_level: token.age_level,
         gender: token.gender,
         anniversary_date: token.anniversary_date,
+        email: token.email,
       };
       const month = 30 * 24 * 3600 * 1000;
       const expires = new Date().getTime() + month;

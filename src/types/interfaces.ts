@@ -10,6 +10,7 @@ export interface IUser {
   age_level?: string | null;
   gender?: string | null;
   anniversary_date?: string | null;
+  email?: string | null;
 }
 
 export interface IDataContextProvider<T> {

@@ -1,5 +1,5 @@
 import {FormProvider, useForm} from "react-hook-form";
-import {createLog, number2Digits} from "utils/utils";
+import {createLog, emailRegex, number2Digits} from "utils/utils";
 import ProfileInput from "view/profile/component/ProfileInput";
 import {Button} from "antd";
 import {IconLogoutDark} from "assets/icons";
@@ -19,7 +19,7 @@ dayjs.extend(jalaliday);
 interface IProfileForm {
   name: string;
   birthday?: DayValue;
-  // email?: string;
+  email?: string;
   gender?: string;
   anniversary?: DayValue;
 }
@@ -29,6 +29,7 @@ interface IBody {
   birthday?: string;
   gender?: string;
   anniversary_date?: string;
+  email?: string;
 }
 
 const genders = [
@@ -56,6 +57,7 @@ function ProfileForm() {
 
   useEffect(() => {
     setValue("name", data?.user.name || "");
+    setValue("email", data?.user.email || "");
     if (data?.user.birthday) {
       const day = dayjs(data.user.birthday).calendar("jalali");
       const birthday = {year: day.year(), month: day.month() + 1, day: day.date()};
@@ -66,11 +68,19 @@ function ProfileForm() {
       const anniversary = {year: day.year(), month: day.month() + 1, day: day.date()};
       setValue("anniversary", anniversary);
     }
-    const gender = genders.find((item) => item.label === data?.user.gender);
-    if (gender) {
-      setValue("gender", gender.value);
+    // const gender = genders.find((item) => item.label === data?.user.gender);
+    // console.log("data?.user.gender", gender);
+    if (data?.user.gender != null) {
+      setValue("gender", data?.user.gender.toString());
     }
-  }, [data?.user.anniversary_date, data?.user.birthday, data?.user.gender, data?.user.name, setValue]);
+  }, [
+    data?.user.anniversary_date,
+    data?.user.birthday,
+    data?.user.email,
+    data?.user.gender,
+    data?.user.name,
+    setValue,
+  ]);
 
   async function onSubmit(payload: IProfileForm) {
     createLog("payload", payload);
@@ -95,6 +105,9 @@ function ProfileForm() {
     const body: IBody = {
       name: payload.name,
     };
+    if (payload.email) {
+      body.email = payload.email;
+    }
     if (payload.gender) {
       body.gender = payload.gender;
     }
@@ -110,26 +123,37 @@ function ProfileForm() {
         url: API.UPDATE_USER_PROFILE,
         method: "PUT",
         token: data?.user.token || "",
+        body,
       });
       console.log("res", res);
       const resData = res.data;
-      if (resData.name) {
+      if (resData.name && data?.user) {
+        const {name, birthday, gender, anniversary_date, email} = resData;
+        data.user.name = name;
         const resetData: IProfileForm = {
-          name: resData.name,
+          name,
         };
         let updateUrl = API.UPDATE_USER_SESSION + `?name=${encodeURI(resData.name)}`;
-        if (resData.gender) {
-          updateUrl += `&gender=${encodeURI(resData.gender.toString())}`;
-          resetData.gender = resData.gender.toString();
+        if (email) {
+          updateUrl += `&email=${encodeURI(email)}`;
+          data.user.email = email;
+          resetData.email = email;
         }
-        if (resData.birthday) {
-          updateUrl += `&birthday=${encodeURI(resData.birthday)}`;
-          const day = dayjs(resData.birthday).calendar("jalali");
+        if (gender != null) {
+          updateUrl += `&gender=${encodeURI(gender.toString())}`;
+          resetData.gender = gender.toString();
+          data.user.gender = gender.toString();
+        }
+        if (birthday) {
+          updateUrl += `&birthday=${encodeURI(birthday)}`;
+          data.user.birthday = birthday;
+          const day = dayjs(birthday).calendar("jalali");
           resetData.birthday = {year: day.year(), month: day.month() + 1, day: day.date()};
         }
-        if (resData.anniversary_date) {
-          updateUrl += `&anniversary=${encodeURI(resData.anniversary_date)}`;
-          const day = dayjs(resData.anniversary_date).calendar("jalali");
+        if (anniversary_date) {
+          updateUrl += `&anniversary=${encodeURI(anniversary_date)}`;
+          data.user.anniversary_date = anniversary_date;
+          const day = dayjs(anniversary_date).calendar("jalali");
           resetData.anniversary = {year: day.year(), month: day.month() + 1, day: day.date()};
         }
         const resUpdateSession = await axiosService({url: updateUrl, method: "get"});
@@ -159,14 +183,19 @@ function ProfileForm() {
             control={control}
             inputProps={{label: "تاریخ تولد", placeholder: "1370/5/8", disabled: !!data?.user.birthday}}
           />
-          {/*<ProfileInput*/}
-          {/*  id="email"*/}
-          {/*  label="آدرس الکترونیک"*/}
-          {/*  classNameContainer="mb-7"*/}
-          {/*  placeholder="m.s.karimi.ubuntu@gmail.com"*/}
-          {/*  className="dir-ltr"*/}
-          {/*/>*/}
-          {/*<ProfileInput id="gender" label="جنسیت" classNameContainer="mb-7" placeholder="مرد" />*/}
+          <ProfileInput
+            id="email"
+            label="آدرس الکترونیک"
+            classNameContainer="mb-7"
+            placeholder="m.s.karimi.ubuntu@gmail.com"
+            className="dir-ltr"
+            rules={{
+              validate: (value) => {
+                if (value && !emailRegex.test(value)) return "ایمیل را به صورت صحیح وارد کنید";
+                return true;
+              },
+            }}
+          />
           <CustomSelectReactHook
             id="gender"
             label="جنسیت"
@@ -175,7 +204,7 @@ function ProfileForm() {
             placeholder="زن"
             classNameContainer="mb-7"
             className="select-form"
-            disabled={!!data?.user.gender}
+            disabled={data?.user.gender != null}
           />
           <DatePickerReactHook
             id="anniversary"

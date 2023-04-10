@@ -30,7 +30,7 @@ function OrderCompleteTitleLeft() {
 }
 
 function OrderCompleteAddress() {
-  const {data} = useOrderCompleteAddress();
+  const {data, isLoading} = useOrderCompleteAddress();
   const type = useTypeColor();
   const {deliveryAddress} = useOrderComplete();
   const dispatch = useOrderCompleteAction();
@@ -39,6 +39,7 @@ function OrderCompleteAddress() {
     <div className="mt-headerNormal">
       <OrderCompleteTitle type={type} title="روش تحویل سفارش" left={<OrderCompleteTitleLeft />} />
       <div className="px-screenSpace">
+        {isLoading ? <div>درحال دریافت اطلاعات</div> : null}
         {data?.map((item, index) => {
           return (
             <OrderCompleteAddressCard

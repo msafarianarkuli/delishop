@@ -42,7 +42,7 @@ function SupermarketShowList({data}: {data?: InfiniteData<IGetVendorsRes>}) {
           const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
           const price = (deliveryBasicPrice || 0) * distance;
           return (
-            <Link key={index} href={`/supermarket/${item.id}`}>
+            <Link key={index} href={`/supermarket/${item.id}`} prefetch={false}>
               <SuperMarketCard
                 title={item.name}
                 deliveryPrice={Math.round(price / 10)}

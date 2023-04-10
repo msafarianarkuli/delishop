@@ -10,11 +10,14 @@ import {
   useOrderCompleteAction,
 } from "view/orderComplete/context/OrderCompleteProvider";
 import {signIn, useSession} from "next-auth/react";
-import addOrder, {IAddOrderBody} from "api/addOrder";
+import addOrder from "api/addOrder";
 import {useRouter} from "next/router";
 import {useMemo, useState} from "react";
 import {createAddOrderProductKind} from "utils/cartReducerUtils";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
+import {removeCartRestaurantCartListCartOrder} from "redux/cartRestaurant/cartRestaurantReducer";
+import {clearCartSupermarket} from "redux/cartSupermraket/cartSupermarketReducer";
+import {useDispatch} from "react-redux";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -73,6 +76,7 @@ function OrderCompleteSubmitBtnLeft() {
 function OrderCompleteSubmitBtn() {
   const type = useTypeColor();
   const dispatch = useOrderCompleteAction();
+  const dispatchRedux = useDispatch();
   const router = useRouter();
   const {step, paymentType, deliveryAddress, deliveryTime, description} = useOrderComplete();
   const {status, data} = useSession();
@@ -112,26 +116,54 @@ function OrderCompleteSubmitBtn() {
             }
             if (addOrderCondition) {
               setIsLoading(true);
-              const body: IAddOrderBody = {
-                location_place_fid,
-                paymenttype,
-                productkinds,
-                sendtime,
-                vendor_id,
-                description: description || "",
-              };
+              dispatch(setOrderCompleteError(""));
+              console.log("productkinds", productkinds);
+              const body = new FormData();
+              body.append("location_place_fid", location_place_fid.toString());
+              body.append("paymenttype", paymenttype.toString());
+              body.append("productkinds", JSON.stringify(productkinds));
+              body.append("sendtime", sendtime.toString());
+              body.append("vendor_id", vendor_id.toString());
+              if (description) {
+                body.append("description", description);
+              }
+              // const body: IAddOrderBody = {
+              //   location_place_fid,
+              //   paymenttype,
+              //   productkinds,
+              //   sendtime,
+              //   vendor_id,
+              //   description: description || "",
+              // };
               addOrder({body, token})
                 .then((res) => {
                   console.log("res", res);
                   if (res.data.message) {
                     dispatch(setOrderCompleteError(res.data.message));
-                  } else if (res.data.Data?.payurl) {
+                  } else if (res.data.Data) {
+                    if (res.data.Data?.payurl) {
+                      const url = res.data.Data.payurl;
+                      window.open(url, "_blank");
+                    } else {
+                      const id = router.query.id;
+                      if (id && !Array.isArray(id)) {
+                        if (vendor?.cartOrders) {
+                          dispatchRedux(removeCartRestaurantCartListCartOrder(id));
+                          router.replace("/restaurant/order/active");
+                        } else if (supermarket?.cartOrders) {
+                          dispatchRedux(clearCartSupermarket());
+                          router.replace("/supermarket");
+                        }
+                      }
+                    }
                   }
                 })
                 .catch((err) => {
                   console.log("err", err);
                   if (err?.data?.message) {
                     dispatch(setOrderCompleteError(err?.data?.message));
+                  } else {
+                    dispatch(setOrderCompleteError("مشکلی پیش آمده است دوباره تلاش کنید"));
                   }
                 })
                 .finally(() => setIsLoading(false));

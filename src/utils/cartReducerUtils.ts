@@ -28,7 +28,7 @@ export const createAddOrderProductKind: TCreateAddOrderProductKind = (cartOrders
   const tmpCount: IAddOrderBodyProductKinds = {};
   for (const [key, value] of Object.entries(cartOrders)) {
     value.forEach((item) => {
-      const tmpKey = item.extra?.reduce((arr, current) => arr + "-" + current.id, `${key}`) || key;
+      const tmpKey = item.extra?.reduce((arr, current) => arr + "-" + current.id, `${key}`) || key.toString();
       let count = tmpCount[tmpKey]?.count || 0;
       const extra = item.extra?.map((value) => value.id) || [];
       tmpCount[tmpKey] = {

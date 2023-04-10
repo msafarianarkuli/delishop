@@ -85,8 +85,8 @@ export const separatePathnameAndQuerySearch = (url: string) => {
 
 type TPaginationCalc = ({page, count}: {page?: number; count?: number}) => {skip: number; take: number};
 export const paginationCalc: TPaginationCalc = ({page = 1, count = 20}) => {
+  const take = count;
   const skip = (page - 1) * count;
-  const take = page * count - 1;
   return {
     skip,
     take,
@@ -94,7 +94,7 @@ export const paginationCalc: TPaginationCalc = ({page = 1, count = 20}) => {
 };
 
 type THasNextPage = ({page, total, count}: {page: number; total: number; count?: number}) => boolean;
-export const hasNextPage: THasNextPage = ({page = 1, total, count = 20}) => page * count > total;
+export const hasNextPage: THasNextPage = ({page = 1, total, count = 20}) => page * count < total;
 
 export const createPaginationParams = (query: {[x: string]: any}) => {
   let params: {[x: string]: any} = {...query};

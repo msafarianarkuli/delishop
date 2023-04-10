@@ -12,9 +12,28 @@ export interface IGetOrdersListResOrdersItems {
   topayprice: number;
   paymenttype: string;
   orderstatus: string;
-  vendor: {
-    id: number;
-    name: string;
-    logo?: string;
-  };
+  vendor: IGetOrdersListResOrdersItemsVendor;
+  productKinds: TGetOrdersListResOrdersItemsProductKinds;
+}
+
+export type TGetOrdersListResOrdersItemsProductKinds = IGetOrdersListResOrdersItemsProductKindsItems[];
+
+interface IGetOrdersListResOrdersItemsVendor {
+  id: number;
+  name: string;
+  logo?: string;
+}
+
+interface IGetOrdersListResOrdersItemsProductKindsItems {
+  count_num: number;
+  extra: boolean;
+  id: number;
+  price_prc: number;
+  product: IGetOrdersListResOrdersItemsProductKindsItemsProduct;
+  quality: number;
+}
+
+interface IGetOrdersListResOrdersItemsProductKindsItemsProduct {
+  displayname: string;
+  name: string;
 }

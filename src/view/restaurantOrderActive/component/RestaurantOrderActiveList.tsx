@@ -2,6 +2,7 @@ import React from "react";
 import RestaurantOrderActiveCard from "view/restaurantOrderActive/component/restaurantOrderActiveCard/RestaurantOrderActiveCard";
 import {useRouter} from "next/router";
 import {useRestaurantOrderActiveData} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
+import {IGetOrdersListResOrders} from "types/interfaceOdrdersList";
 
 // const arr = Array.from(new Array(10), () => ({
 //   title: "رستوران آریایی",
@@ -15,12 +16,22 @@ import {useRestaurantOrderActiveData} from "view/restaurantOrderActive/context/R
 // }));
 
 function RestaurantOrderActiveList() {
-  const router = useRouter();
-  const {data} = useRestaurantOrderActiveData();
-  if (!data?.orders.length) return <div>موردی یافت نشد</div>;
+  const {data, isLoading} = useRestaurantOrderActiveData();
   return (
     <div>
-      {data?.orders.map((item, index) => {
+      {isLoading ? <div>loading ...</div> : null}
+      {!isLoading && data && !data.orders.length ? <div>موردی یافت نشد</div> : null}
+      <RestaurantOrderActiveListShow data={data?.orders} />
+    </div>
+  );
+}
+
+function RestaurantOrderActiveListShow({data}: {data?: IGetOrdersListResOrders}) {
+  const router = useRouter();
+
+  return (
+    <>
+      {data?.map((item, index) => {
         return (
           <RestaurantOrderActiveCard
             key={index}
@@ -29,15 +40,16 @@ function RestaurantOrderActiveList() {
             deliveryTitle="دفتر"
             date={new Date().toISOString()}
             coin={15}
-            receiptNumber={321}
+            receiptNumber={item.id}
             deliveryTime={"15:00"}
+            totalPrice={Math.round(item.topayprice / 10)}
             onClickSubmit={() => {
               router.push(`/restaurant/order/${index + 1}`);
             }}
           />
         );
       })}
-    </div>
+    </>
   );
 }
 

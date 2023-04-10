@@ -19,10 +19,11 @@ interface IRestaurantOrderActiveCard {
   date: string;
   deliveryTime: string;
   onClickSubmit: MouseEventHandler;
+  totalPrice: number;
 }
 
 function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
-  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit} = props;
+  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit, totalPrice} = props;
   return (
     <div className={styles.restaurant_order_active_card_container}>
       <div className="flex h-[60px] items-center justify-between bg-textColor px-[19px] text-white">
@@ -77,7 +78,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
         </div>
         <div className="text-[15px] mt-5">
           <span>مجموع:</span>
-          <span className="mx-1 font-bold">{(710000).toLocaleString("en-US")}</span>
+          <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
           <span className="text-[13px] text-textColorLight">تومان</span>
         </div>
         <Button

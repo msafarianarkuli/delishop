@@ -6,15 +6,10 @@ import jalaliday from "jalaliday";
 import styles from "view/restaurantOrderPrevious/component/restaurantOrderPreviousCard/restaurantOrderPreviousCard.module.scss";
 import {number2Digits} from "utils/utils";
 import Link from "next/link";
+import img1 from "assets/images/res-order-barger.png";
+import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
 
 dayjs.extend(jalaliday);
-
-interface IRestaurantOrderPreviousCardOrdersItem {
-  image: string;
-  price: number;
-}
-
-type TRestaurantOrderPreviousCardOrders = IRestaurantOrderPreviousCardOrdersItem[];
 
 interface IRestaurantOrderPreviousCard {
   id: string;
@@ -24,11 +19,12 @@ interface IRestaurantOrderPreviousCard {
   title: string;
   deliveryTitle: string;
   status: string;
-  orders: TRestaurantOrderPreviousCardOrders;
+  orders: TGetOrdersListResOrdersItemsProductKinds;
   onClickReOrder: MouseEventHandler;
   onClickReceipt: MouseEventHandler;
   coin: number;
   hasRate: boolean;
+  totalPrice: number;
 }
 
 function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
@@ -45,6 +41,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     date,
     hasRate,
     id,
+    totalPrice,
   } = props;
   return (
     <div className={styles.restaurant_order_previous_card_container}>
@@ -75,13 +72,20 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
           {orders.map((item, index) => {
             return (
               <div key={index} className="ml-3">
-                <img
-                  src={item.image}
-                  alt={`${title}_${index + 1}`}
-                  className={styles.restaurant_order_previous_card_order_list_image}
-                />
+                <div className="relative">
+                  <img
+                    src={img1.src}
+                    alt={item.product.displayname}
+                    className={styles.restaurant_order_previous_card_order_list_image}
+                  />
+                  {item.count_num > 1 ? (
+                    <div className="absolute flex items-center justify-center top-0 left-0 w-5 h-5 rounded-full bg-iconColor">
+                      <div className="font-medium text-[11px] text-white h-3">{item.count_num}</div>
+                    </div>
+                  ) : null}
+                </div>
                 <div className="text-[11px] font-medium text-textColorLight text-center mt-1">
-                  {item.price.toLocaleString("en-US")}
+                  {Math.round(item.price_prc / 10).toLocaleString("en-US")}
                 </div>
               </div>
             );
@@ -90,7 +94,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
         <div className="flex items-center justify-between">
           <div className="text-[15px]">
             <span>مجموع:</span>
-            <span className="mx-1 font-bold">{(710000).toLocaleString("en-US")}</span>
+            <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
             <span className="text-[13px] text-textColorLight">تومان</span>
           </div>
           <div className="flex items-center text-[17px]">

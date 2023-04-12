@@ -135,9 +135,6 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
     signOut: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
-  },
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

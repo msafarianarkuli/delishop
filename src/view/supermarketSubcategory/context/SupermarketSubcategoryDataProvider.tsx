@@ -33,6 +33,9 @@ function SupermarketSubcategoryDataProvider({children}: ISupermarketSubcategoryD
         ...tmpParams,
         ...router.query,
       };
+      delete tmpParams.id;
+      delete tmpParams.category;
+      delete tmpParams.subcategory;
       tmpParams = createPaginationParams(tmpParams);
     }
     return tmpParams;

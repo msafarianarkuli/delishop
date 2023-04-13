@@ -37,10 +37,9 @@ interface IVerifyCodeRes {
 type TVerifyCode = (props: IVerifyCode) => Promise<IVerifyCodeRes>;
 
 const verifyCode: TVerifyCode = ({isServer, body}) => {
-  let url = API.VERIFY_CODE;
+  const url = isServer ? API.DOMAIN + API.VERIFY_CODE : API.VERIFY_CODE;
   if (isServer) {
-    url = API.DOMAIN + API.VERIFY_CODE;
-    return fetchService({
+    return fetchService<IVerifyCodeRes>({
       url,
       method: "post",
       body: JSON.stringify(body),

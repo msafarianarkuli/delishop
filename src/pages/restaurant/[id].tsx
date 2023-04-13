@@ -8,23 +8,32 @@ import getVendorDetail from "api/getVendorDetail";
 import {IGetVendorDetailData} from "types/interfaceVendorDetail";
 import LogisticPriceProvider from "context/LogisticPriceProvider";
 import getLogisticCurrentPrice, {QUERY_KEY_LOGISTIC_CURRENT_PRICE} from "api/getLogisticCurrentPrice";
+import RestaurantDetailIdProvider from "view/restaurantDetail/context/RestaurantDetailIdProvider";
 
-function RestaurantDetailPage() {
+interface IRestaurantDetailPage {
+  vendorId: string;
+}
+
+function RestaurantDetailPage(props: IRestaurantDetailPage) {
+  const {vendorId} = props;
   return (
     <RestaurantDetailDataProvider>
-      <LogisticPriceProvider>
-        <RestaurantDetail />
-      </LogisticPriceProvider>
+      <RestaurantDetailIdProvider vendorId={vendorId}>
+        <LogisticPriceProvider>
+          <RestaurantDetail />
+        </LogisticPriceProvider>
+      </RestaurantDetailIdProvider>
     </RestaurantDetailDataProvider>
   );
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const queryClient = new QueryClient();
-  const queryKey = [QUERY_KEY_RESTAURANT_DETAIL, params?.id];
+  const vendorId = params?.id;
+  const queryKey = [QUERY_KEY_RESTAURANT_DETAIL, vendorId];
   await queryClient.prefetchQuery({
     queryKey,
-    queryFn: () => getVendorDetail({isServer: true, id: params?.id as string}),
+    queryFn: () => getVendorDetail({isServer: true, id: vendorId as string}),
   });
   await queryClient.prefetchQuery({
     queryKey: [QUERY_KEY_LOGISTIC_CURRENT_PRICE],
@@ -40,6 +49,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      vendorId,
     },
     revalidate: 60,
   };

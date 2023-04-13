@@ -5,12 +5,25 @@ interface IFetchService {
   method: Method;
   headers?: HeadersInit;
   body?: BodyInit | null;
+  params?: {[x: string]: any};
 }
 
-const fetchService = async (props: IFetchService) => {
-  const {url, method, headers, body} = props;
+async function fetchService<Response = any>(props: IFetchService) {
+  const {url, method, headers, body, params} = props;
+  let query = "";
+  if (params && Object.keys(params)) {
+    const tmp: string[] = [];
+    for (const [key, value] of Object.entries(params)) {
+      tmp.push(`${key}=${value}`);
+    }
+    const tmpQuery = tmp.join("&");
+    if (tmpQuery) {
+      query = "?" + tmpQuery;
+    }
+  }
+  const tmpUrl = url + query;
   try {
-    const res = await fetch(url, {
+    const res = await fetch(tmpUrl, {
       method,
       body,
       headers: {
@@ -19,14 +32,19 @@ const fetchService = async (props: IFetchService) => {
         ...headers,
       },
     });
+    const data = await res.json();
     if (res.status >= 200 && res.status < 300) {
-      return Promise.resolve(await res.json());
+      const tmpData: Response = data;
+      return Promise.resolve(tmpData);
     } else {
-      return Promise.reject(await res.json());
+      return Promise.reject({
+        data,
+        status: res.status,
+      });
     }
   } catch (e) {
     return Promise.reject(e);
   }
-};
+}
 
 export default fetchService;

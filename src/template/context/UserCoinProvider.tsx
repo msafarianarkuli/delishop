@@ -2,7 +2,7 @@ import React, {createContext, useContext} from "react";
 import {IDataContextProvider} from "types/interfaces";
 import {useSession} from "next-auth/react";
 import {useQuery} from "react-query";
-import getUserCoin from "api/getUserCoint";
+import getUserCoin from "api/getUserCoin";
 
 interface IUserCoinProvider {
   children: JSX.Element | JSX.Element[];

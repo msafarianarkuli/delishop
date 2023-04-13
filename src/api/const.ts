@@ -2,6 +2,7 @@ export const API = {
   DOMAIN: process.env.DOMAIN_API,
   // auth
   SEND_CODE: "/api/users/send-code",
+  VERIFY_CODE: "/api/users/verify-code",
   REGISTER_ADDED_NAME: "/api/users/new-phone",
   UPDATE_USER_SESSION: "/api/auth/session",
 

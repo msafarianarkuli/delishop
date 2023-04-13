@@ -2,34 +2,10 @@ import NextAuth, {NextAuthOptions, Session} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {JWT} from "next-auth/jwt";
 import {IUser} from "types/interfaces";
-import axios, {AxiosError} from "axios";
 import {NextApiRequest, NextApiResponse} from "next";
+import verifyCode from "api/verifyCode";
 
 type sessionToken = JWT & IUser;
-
-interface ILoginRes {
-  user: {
-    id: number;
-    name: string | null;
-    phone: string;
-    email: string;
-    role: [
-      {
-        id: number;
-        name: string;
-      }
-    ];
-    birthday: string | null;
-    invite_token: string | null;
-    age_level: string | null;
-    gender: string | null;
-    anniversary_date: string | null;
-  };
-  auth: {
-    token: string;
-    expires_at: string;
-  };
-}
 
 export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
   // Configure one or more authentication providers
@@ -41,14 +17,16 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
       async authorize(credentials) {
         const {phone, code} = credentials as {phone: string; code: string};
         console.log("credentials", phone, code);
-        const url = process.env.DOMAIN_API + "/api/users/verify-code";
         const body = {
           code,
           phone,
         };
         try {
-          const res = await axios.post<ILoginRes>(url, body);
-          const {auth, user} = res.data;
+          const res = await verifyCode({
+            isServer: true,
+            body,
+          });
+          const {auth, user} = res;
           const data: IUser = {
             useId: user.id,
             name: user.name,
@@ -66,13 +44,15 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
             id: user.id.toString(),
             ...data,
           };
-        } catch (e: unknown) {
-          let message = "";
-          if (e instanceof AxiosError && e.response) {
-            const data = e.response.data;
-            message = data?.message;
-            console.log("message", message);
-          }
+          // } catch (e: unknown) {
+        } catch (e: any) {
+          console.log("error", e);
+          let message = e?.message || "";
+          // if (e instanceof AxiosError && e.response) {
+          //   const data = e.response.data;
+          //   message = data?.message;
+          //   console.log("message", message);
+          // }
           throw new Error(message);
           // return null;
         }

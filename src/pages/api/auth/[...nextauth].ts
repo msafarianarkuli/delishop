@@ -47,7 +47,7 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
           // } catch (e: unknown) {
         } catch (e: any) {
           console.log("error", e);
-          let message = e?.message || "";
+          let message = e?.data?.message || "";
           // if (e instanceof AxiosError && e.response) {
           //   const data = e.response.data;
           //   message = data?.message;

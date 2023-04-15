@@ -1,10 +1,14 @@
 import {API} from "api/const";
 import {axiosService} from "utils/axiosService";
 import {IGetOrdersListRes, IGetOrdersListResOrders} from "types/interfaceOdrdersList";
+import {paginationCalc} from "utils/utils";
 
 interface IGetOrdersListProps {
-  params?: object;
   token: string;
+  params?: object;
+  pageParam?: number;
+  count?: number;
+  query?: string;
 }
 
 export interface IGetOrdersRes {
@@ -13,11 +17,16 @@ export interface IGetOrdersRes {
 }
 
 type TGetOrdersList = (props: IGetOrdersListProps) => Promise<IGetOrdersRes>;
-const getOrdersList: TGetOrdersList = async ({params, token}) => {
-  const url = API.GET_ORDERS_LIST;
+const getOrdersList: TGetOrdersList = async (props) => {
+  const {params, token, pageParam, count = 20, query} = props;
+  let url = API.GET_ORDERS_LIST;
+  if (query) {
+    url += query;
+  }
+  const {take, skip} = paginationCalc({page: pageParam, count});
   const tmpParams = {
-    skip: 0,
-    take: 19,
+    skip,
+    take,
     ...params,
   };
   return axiosService<IGetOrdersListRes>({url, method: "get", params: tmpParams, token}).then((res) => ({

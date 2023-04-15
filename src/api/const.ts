@@ -44,4 +44,5 @@ export const API = {
 
   //ads
   GET_BANNERS: "/api/banner/list",
+  GET_ADS: "/api/advertisement/list",
 };

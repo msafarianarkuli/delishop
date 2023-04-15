@@ -1,29 +1,10 @@
 import React from "react";
 import {CustomSwiper} from "components";
 import {Autoplay, Pagination} from "swiper";
-import img from "assets/images/banner2.png";
-import {TDataCustomSwiper} from "components/customSwiper/CustomSwiper";
-
-const data: TDataCustomSwiper = [
-  {
-    title: 1,
-    image: img.src,
-  },
-  {
-    title: 2,
-    image: img.src,
-  },
-  {
-    title: 3,
-    image: img.src,
-  },
-  {
-    title: 4,
-    image: img.src,
-  },
-];
+import {useHomeAdsData} from "view/home/context/HomeAdsDataProvider";
 
 function HomeAdsSwiper2() {
+  const {data} = useHomeAdsData();
   return (
     <div className="mb-5 mt-10">
       <CustomSwiper
@@ -40,13 +21,13 @@ function HomeAdsSwiper2() {
           disableOnInteraction: false,
           stopOnLastSlide: false,
         }}
-        data={data}
+        data={data || []}
         renderItem={(item) => {
           return (
             <div className="relative pb-[34%]">
-              <div className="absolute w-full h-full">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover object-center" />
-              </div>
+              <a href={item.link} className="absolute block w-full h-full" rel="noopener noreferrer nofollow">
+                <img src={item.main_img} alt={item.title} className="w-full h-full object-cover object-center" />
+              </a>
             </div>
           );
         }}

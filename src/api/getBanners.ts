@@ -1,9 +1,9 @@
-import {IGetBannerDataBanners, IGetBannerRes} from "types/interfaceBanner";
+import {TGetBannerDataBanners, IGetBannerRes} from "types/interfaceBanner";
 import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import fetchService from "utils/fetchService";
 
-type TGetBanners = (isServer?: boolean) => Promise<IGetBannerDataBanners>;
+type TGetBanners = (isServer?: boolean) => Promise<TGetBannerDataBanners>;
 
 export const QUERY_KEY_HOME_BANNERS = "homeBanners";
 

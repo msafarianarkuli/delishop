@@ -1,12 +1,12 @@
 import React, {createContext, useContext} from "react";
-import {IGetBannerDataBanners} from "types/interfaceBanner";
+import {TGetBannerDataBanners} from "types/interfaceBanner";
 import {useQuery, UseQueryResult} from "react-query";
 import getBanners, {QUERY_KEY_HOME_BANNERS} from "api/getBanners";
 
 // @ts-ignore
-const initialState: UseQueryResult<IGetBannerDataBanners> = {};
+const initialState: UseQueryResult<TGetBannerDataBanners> = {};
 
-const HomeBannersContext = createContext<UseQueryResult<IGetBannerDataBanners>>(initialState);
+const HomeBannersContext = createContext<UseQueryResult<TGetBannerDataBanners>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 

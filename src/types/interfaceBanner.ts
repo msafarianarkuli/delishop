@@ -3,11 +3,11 @@ export interface IGetBannerRes {
 }
 
 interface IGetBannerData {
-  banners: IGetBannerDataBanners;
+  banners: TGetBannerDataBanners;
   totalCount: number;
 }
 
-export type IGetBannerDataBanners = IGetBannerDataBannersItems[];
+export type TGetBannerDataBanners = IGetBannerDataBannersItems[];
 
 interface IGetBannerDataBannersItems {
   id: number;

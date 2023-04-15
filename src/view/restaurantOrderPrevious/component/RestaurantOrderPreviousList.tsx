@@ -25,18 +25,18 @@ function RestaurantOrderPreviousListShow() {
   return (
     <>
       {data?.pages.map((value) => {
-        return value.orders.map((item, index) => {
+        return value.orders.map((item) => {
           return (
             <RestaurantOrderPreviousCard
-              key={index}
+              key={item.id}
               id={item.id.toString()}
               title={item.vendor.name}
               receiptNumber={item.id}
               image={item.vendor.logo}
-              deliveryTitle={"دفتر"}
+              deliveryTitle={item.address.title || ""}
               coin={15}
               status={item.orderstatus}
-              date={new Date().toISOString()}
+              date={item.created_at}
               orders={item.productKinds}
               hasRate
               totalPrice={Math.round(item.topayprice / 10)}

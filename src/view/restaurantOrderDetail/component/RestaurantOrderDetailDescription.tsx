@@ -1,5 +1,5 @@
 interface IRestaurantOrderDetailDescription {
-  text: string;
+  text?: string;
 }
 
 function RestaurantOrderDetailDescription({text}: IRestaurantOrderDetailDescription) {

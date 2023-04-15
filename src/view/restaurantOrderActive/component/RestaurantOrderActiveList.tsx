@@ -20,20 +20,20 @@ function RestaurantOrderActiveListShow() {
   return (
     <>
       {data?.pages.map((value) => {
-        return value.orders.map((item, index) => {
+        return value.orders.map((item) => {
           return (
             <RestaurantOrderActiveCard
-              key={index}
+              key={item.id}
               title={item.vendor.name}
               image={item.vendor.logo}
-              deliveryTitle="دفتر"
-              date={new Date().toISOString()}
+              deliveryTitle={item.address.title || ""}
+              date={item.created_at}
               coin={15}
               receiptNumber={item.id}
               deliveryTime={"15:00"}
               totalPrice={Math.round(item.topayprice / 10)}
               onClickSubmit={() => {
-                router.push(`/restaurant/order/${index + 1}`);
+                router.push(`/restaurant/order/${item.id}`);
               }}
             />
           );

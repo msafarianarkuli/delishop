@@ -12,8 +12,10 @@ export interface IGetOrdersListResOrdersItems {
   topayprice: number;
   paymenttype: string;
   orderstatus: string;
-  vendor: IGetOrdersListResOrdersItemsVendor;
   productKinds: TGetOrdersListResOrdersItemsProductKinds;
+  vendor: IGetOrdersListResOrdersItemsVendor;
+  address: IGetOrdersListResOrdersItemsAddress;
+  created_at: string;
 }
 
 export type TGetOrdersListResOrdersItemsProductKinds = IGetOrdersListResOrdersItemsProductKindsItems[];
@@ -25,15 +27,21 @@ interface IGetOrdersListResOrdersItemsVendor {
 }
 
 interface IGetOrdersListResOrdersItemsProductKindsItems {
-  count_num: number;
-  extra: boolean;
   id: number;
+  count_num: number;
   price_prc: number;
-  product: IGetOrdersListResOrdersItemsProductKindsItemsProduct;
   quality: number;
+  product: IGetOrdersListResOrdersItemsProductKindsItemsProduct;
+  extra: boolean;
 }
 
 interface IGetOrdersListResOrdersItemsProductKindsItemsProduct {
   displayname: string;
   name: string;
+}
+
+interface IGetOrdersListResOrdersItemsAddress {
+  address: string;
+  title?: string;
+  is_visible: number;
 }

@@ -6,6 +6,7 @@ import Link from "next/link";
 import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 import {
   setRestaurantDetailExtraData,
+  useRestaurantDetailExtra,
   useRestaurantDetailExtraAction,
 } from "view/restaurantDetail/context/RestaurantDetailExtraProvider";
 import {useDispatch} from "react-redux";
@@ -25,6 +26,7 @@ function RestaurantDetailList() {
   const dispatch = useDispatch();
   const router = useRouter();
   const vendor = useCartRestaurant();
+  const {isOpen} = useRestaurantDetailExtra();
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -48,10 +50,10 @@ function RestaurantDetailList() {
   }, []);
 
   useEffect(() => {
-    if (vendor?.vendorId && vendor.cartOrders && !Object.keys(vendor.cartOrders).length) {
+    if (vendor?.vendorId && vendor.cartOrders && !Object.keys(vendor.cartOrders).length && !isOpen) {
       dispatch(removeCartRestaurantCartListCartOrder(vendor.vendorId));
     }
-  }, [dispatch, vendor?.cartOrders, vendor?.vendorId]);
+  }, [dispatch, isOpen, vendor?.cartOrders, vendor?.vendorId]);
 
   return (
     <div ref={ref} className="mb-[100px] px-screenSpace">

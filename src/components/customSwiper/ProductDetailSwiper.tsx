@@ -30,10 +30,7 @@ function ProductDetailSwiper({data}: {data: TDataCustomSwiper}) {
         data={data}
         renderItem={(item) => {
           return (
-            <div
-              className="relative bg-red-500 rounded-full"
-              style={{paddingBottom: slidesPreView === 1 ? "65.9%" : "100%"}}
-            >
+            <div className="relative rounded-full" style={{paddingBottom: slidesPreView === 1 ? "65.9%" : "100%"}}>
               <div className="absolute w-full h-full">
                 <img
                   src={item.image}

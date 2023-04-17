@@ -11,19 +11,23 @@ import {
   useOrderCompleteAction,
 } from "view/orderComplete/context/OrderCompleteProvider";
 import {useRouter} from "next/router";
+import {useMemo} from "react";
 
 function OrderCompleteTitleLeft() {
   const type = useTypeColor();
   const router = useRouter();
+  const {data} = useOrderCompleteAddress();
 
   const linkClassName = classNames({
     "flex items-center font-medium": true,
     "text-primary": type === "default",
     "text-primarySupermarket": type === "supermarket",
   });
+
+  const title = useMemo(() => (data?.length ? "تغییر آدرس" : "تکمیل آدرس"), [data?.length]);
   return (
     <Link href={`/address?callbackUrl=${router.asPath}`} className={linkClassName}>
-      <div>تغییر آدرس</div>
+      <div>{title}</div>
       <IconRoundedLeft className="w-5 h-5" />
     </Link>
   );

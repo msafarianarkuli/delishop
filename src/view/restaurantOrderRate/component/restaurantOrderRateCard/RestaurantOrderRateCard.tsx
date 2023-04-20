@@ -13,7 +13,10 @@ interface IRestaurantOrderRateCard {
 function RestaurantOrderRateCard(props: IRestaurantOrderRateCard) {
   const {title, id, rules} = props;
   const {control} = useFormContext();
-  const {field} = useController({
+  const {
+    field,
+    fieldState: {error},
+  } = useController({
     name: id,
     control,
     rules,
@@ -40,6 +43,7 @@ function RestaurantOrderRateCard(props: IRestaurantOrderRateCard) {
           field.onChange(value);
         }}
       />
+      {error?.message ? <div className="text-[13px] text-error font-normal mt-2">{error.message}</div> : null}
     </div>
   );
 }

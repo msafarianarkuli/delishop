@@ -1,13 +1,12 @@
+import {useEffect, useMemo} from "react";
 import SuperMarketCard from "view/supermarket/component/supermarketCard";
 import Link from "next/link";
 import {useSupermarketData} from "view/supermarket/context/SuperMarketDataProvider";
-import {IGetVendorsRes} from "api/getVendors";
-import React, {useMemo} from "react";
 import {getDistanceFromLatLong} from "utils/utils";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {useLogisticPrice} from "context/LogisticPriceProvider";
-import {InfiniteData} from "react-query";
+import {useInView} from "react-intersection-observer";
 
 function SupermarketList() {
   const {data, isLoading} = useSupermarketData();
@@ -15,14 +14,23 @@ function SupermarketList() {
     <div className="mt-5">
       {isLoading ? <div>loading ...</div> : null}
       {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
-      <SupermarketShowList data={data} />
+      <SupermarketShowList />
     </div>
   );
 }
 
-function SupermarketShowList({data}: {data?: InfiniteData<IGetVendorsRes>}) {
+function SupermarketShowList() {
+  const {data, fetchNextPage} = useSupermarketData();
   const {userAddress, location} = useSelector(selectAddressMap);
+  const {ref, inView} = useInView();
   const {data: deliveryBasicPrice} = useLogisticPrice();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
   const location1 = useMemo(
     () => ({
       lat: userAddress?.latitude || location?.lat || 0,
@@ -33,8 +41,10 @@ function SupermarketShowList({data}: {data?: InfiniteData<IGetVendorsRes>}) {
 
   return (
     <>
-      {data?.pages?.map((value) => {
-        return value.vendors.map((item, index) => {
+      {data?.pages?.map((value, index, array) => {
+        return value.vendors.map((item, idx, arr) => {
+          const condition = array.length - 1 === index && arr.length - 1 === idx;
+          const tmpRef = condition ? ref : null;
           const location2 = {
             lat: item.lat,
             long: item.long,
@@ -42,7 +52,7 @@ function SupermarketShowList({data}: {data?: InfiniteData<IGetVendorsRes>}) {
           const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
           const price = (deliveryBasicPrice || 0) * distance;
           return (
-            <Link key={index} href={`/supermarket/${item.id}`} prefetch={false}>
+            <Link ref={tmpRef} key={idx} href={`/supermarket/${item.id}`} prefetch={false}>
               <SuperMarketCard
                 title={item.name}
                 deliveryPrice={Math.round(price / 10)}

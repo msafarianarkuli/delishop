@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Link from "next/link";
 import RestaurantCard from "view/restaurant/component/restaurantCard/RestaurantCard";
 import {useRestaurantData} from "view/restaurant/context/RestaurantDataProvider";
-import {IGetVendorsRes} from "api/getVendors";
-import {InfiniteData} from "react-query";
+import {useInView} from "react-intersection-observer";
 
 function RestaurantList() {
   const {data, isLoading} = useRestaurantData();
@@ -12,18 +11,29 @@ function RestaurantList() {
     <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
       {isLoading ? <div>loading ...</div> : null}
       {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
-      <RestaurantListShow data={data} />
+      <RestaurantListShow />
     </div>
   );
 }
 
-function RestaurantListShow({data}: {data?: InfiniteData<IGetVendorsRes>}) {
+function RestaurantListShow() {
+  const {data, fetchNextPage} = useRestaurantData();
+  const {ref, inView} = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
   return (
     <>
-      {data?.pages?.map((value) => {
-        return value.vendors.map((item) => {
+      {data?.pages?.map((value, index, array) => {
+        return value.vendors.map((item, idx, arr) => {
+          const condition = array.length - 1 === index && arr.length - 1 === idx;
+          const tmpRef = condition ? ref : null;
           return (
-            <Link key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
+            <Link ref={tmpRef} key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
               <RestaurantCard
                 image={item.banner}
                 title={item.name}

@@ -52,17 +52,19 @@ function OrderCompleteDeliveryTime() {
             }
           });
           const diff = +HEnd - +HStart;
-          const tmp = Array.from(new Array(diff), (_, i) => {
-            const tmp = +HStart + i;
-            const MEndTime = diff - 1 > i ? MStart : MEnd;
-            const next = tmp + 1;
-            return {
-              isTemp: false,
-              from: number2Digits(tmp) + ":" + number2Digits(+MStart),
-              to: number2Digits(next) + ":" + number2Digits(+MEndTime),
-            };
-          });
-          result = result.concat(tmp);
+          if (!isNaN(diff)) {
+            const tmp = Array.from(new Array(diff), (_, i) => {
+              const tmp = +HStart + i;
+              const MEndTime = diff - 1 > i ? MStart : MEnd;
+              const next = tmp + 1;
+              return {
+                isTemp: false,
+                from: number2Digits(tmp) + ":" + number2Digits(+MStart),
+                to: number2Digits(next) + ":" + number2Digits(+MEndTime),
+              };
+            });
+            result = result.concat(tmp);
+          }
         });
       }
     }

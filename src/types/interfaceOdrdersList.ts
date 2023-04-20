@@ -10,12 +10,13 @@ export type IGetOrdersListResOrders = IGetOrdersListResOrdersItems[];
 export interface IGetOrdersListResOrdersItems {
   id: number;
   topayprice: number;
-  paymenttype: string;
-  orderstatus: string;
+  paymenttype: number;
+  orderstatus: number;
   productKinds: TGetOrdersListResOrdersItemsProductKinds;
   vendor: IGetOrdersListResOrdersItemsVendor;
   address: IGetOrdersListResOrdersItemsAddress;
   created_at: string;
+  sendtime: string | number;
 }
 
 export type TGetOrdersListResOrdersItemsProductKinds = IGetOrdersListResOrdersItemsProductKindsItems[];

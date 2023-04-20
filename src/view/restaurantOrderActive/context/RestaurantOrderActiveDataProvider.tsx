@@ -21,7 +21,7 @@ function RestaurantOrderActiveDataProvider({children}: IRestaurantOrderActiveDat
     queryKey: QUERY_KEY_ORDERS_ACTIVE,
     categoryId: 1,
     staleTime,
-    statusId: [],
+    statusId: [1, 2, 3, 4, 5],
   });
 
   return <RestaurantOrderActiveData.Provider value={result}>{children}</RestaurantOrderActiveData.Provider>;

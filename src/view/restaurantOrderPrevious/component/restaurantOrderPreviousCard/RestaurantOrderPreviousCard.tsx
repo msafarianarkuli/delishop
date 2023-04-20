@@ -18,7 +18,7 @@ interface IRestaurantOrderPreviousCard {
   image?: string;
   title: string;
   deliveryTitle: string;
-  status: string;
+  orderStatus: number;
   orders: TGetOrdersListResOrdersItemsProductKinds;
   onClickReOrder: MouseEventHandler;
   onClickReceipt: MouseEventHandler;
@@ -34,7 +34,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     onClickReceipt,
     receiptNumber,
     image,
-    status,
+    orderStatus,
     title,
     deliveryTitle,
     coin,
@@ -64,7 +64,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
             </div>
             <div className="flex flex-1 items-center justify-between mt-[17px]">
               <div className="text-[15px] font-medium text-textColorLight">ارسال به: {deliveryTitle}</div>
-              <div className="inner_box text-[13px] font-semibold text-primary">{status}</div>
+              <div className="inner_box text-[13px] font-semibold text-primary">{orderStatus}</div>
             </div>
           </div>
         </div>

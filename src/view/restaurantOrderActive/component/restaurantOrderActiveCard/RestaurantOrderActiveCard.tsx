@@ -6,7 +6,7 @@ import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
 import styles from "view/restaurantOrderActive/component/restaurantOrderActiveCard/restaurantOrderActiveCard.module.scss";
 import {Button} from "antd";
-import {MouseEventHandler} from "react";
+import {MouseEventHandler, useMemo} from "react";
 
 dayjs.extend(jalaliday);
 
@@ -18,12 +18,34 @@ interface IRestaurantOrderActiveCard {
   deliveryTitle: string;
   date: string;
   deliveryTime: string;
+  orderStatus: number;
   onClickSubmit: MouseEventHandler;
   totalPrice: number;
 }
 
 function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
-  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit, totalPrice} = props;
+  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit, totalPrice, orderStatus} =
+    props;
+
+  const statusImage = useMemo(() => {
+    if (orderStatus === 3) {
+      return (
+        <img src={accept.src} alt="accept" className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]" />
+      );
+    } else if (orderStatus === 5) {
+      return <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />;
+    }
+  }, [orderStatus]);
+
+  const statusProcess = useMemo(() => {
+    if (orderStatus === 3) {
+      return "50%";
+    } else if (orderStatus === 5) {
+      return "100%";
+    }
+    return "0";
+  }, [orderStatus]);
+
   return (
     <div className={styles.restaurant_order_active_card_container}>
       <div className="flex h-[60px] items-center justify-between bg-textColor px-[19px] text-white">
@@ -60,13 +82,8 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
         </div>
         <div className="mt-12 mb-10 mx-7">
           <div className="relative w-full h-[2px] bg-[#D9D9D9] rounded-full">
-            <div className="absolute right-0 top-0 h-full w-1/2 bg-primary rounded-full" />
-            <img
-              src={accept.src}
-              alt="accept"
-              className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]"
-            />
-            <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />
+            <div className="absolute right-0 top-0 h-full bg-primary rounded-full" style={{width: statusProcess}} />
+            {statusImage}
           </div>
         </div>
         <div className="flex items-center justify-between">

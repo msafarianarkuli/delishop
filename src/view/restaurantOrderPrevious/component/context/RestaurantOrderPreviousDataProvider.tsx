@@ -21,7 +21,7 @@ function RestaurantOrderPreviousDataProvider({children}: IRestaurantOrderPreviou
     queryKey: QUERY_KEY_ORDERS_PREVIOUS,
     categoryId: 1,
     staleTime,
-    statusId: [],
+    statusId: [6, 7, 8],
   });
 
   return <RestaurantOrderPreviousData.Provider value={result}>{children}</RestaurantOrderPreviousData.Provider>;

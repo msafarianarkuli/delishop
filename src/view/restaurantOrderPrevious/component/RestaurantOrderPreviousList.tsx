@@ -12,8 +12,8 @@ function RestaurantOrderPreviousList() {
 
   return (
     <div>
-      {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.pages[0]?.orders.length ? <div>موردی یافت نشد</div> : null}
+      {isLoading ? <div className="px-screenSpace">loading ...</div> : null}
+      {!isLoading && !data?.pages[0]?.orders.length ? <div className="px-screenSpace">موردی یافت نشد</div> : null}
       <RestaurantOrderPreviousListShow />
     </div>
   );
@@ -46,7 +46,7 @@ function RestaurantOrderPreviousListShow() {
                 image={item.vendor.logo}
                 deliveryTitle={item.address.title || ""}
                 coin={15}
-                status={item.orderstatus}
+                orderStatus={item.orderstatus}
                 date={item.created_at}
                 orders={item.productKinds}
                 hasRate

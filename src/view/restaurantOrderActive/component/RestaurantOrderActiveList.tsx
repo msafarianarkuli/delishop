@@ -8,8 +8,8 @@ function RestaurantOrderActiveList() {
   const {data, isLoading} = useRestaurantOrderActiveData();
   return (
     <div>
-      {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.pages[0]?.orders.length ? <div>موردی یافت نشد</div> : null}
+      {isLoading ? <div className="px-screenSpace">loading ...</div> : null}
+      {!isLoading && !data?.pages[0]?.orders.length ? <div className="px-screenSpace">موردی یافت نشد</div> : null}
       <RestaurantOrderActiveListShow />
     </div>
   );
@@ -38,10 +38,11 @@ function RestaurantOrderActiveListShow() {
                 title={item.vendor.name}
                 image={item.vendor.logo}
                 deliveryTitle={item.address.title || ""}
+                orderStatus={item.orderstatus}
                 date={item.created_at}
                 coin={15}
                 receiptNumber={item.id}
-                deliveryTime={"15:00"}
+                deliveryTime={item.sendtime.toString() === "100" ? "فوری" : item.sendtime.toString()}
                 totalPrice={Math.round(item.topayprice / 10)}
                 onClickSubmit={() => {
                   router.push(`/restaurant/order/${item.id}`);

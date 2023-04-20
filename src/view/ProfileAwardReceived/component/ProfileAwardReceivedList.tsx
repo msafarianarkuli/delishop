@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-// import ProfileAwardReceivedCard from "view/ProfileAwardReceived/component/ProfileAwardReceivedCard";
+import ProfileAwardReceivedCard from "view/ProfileAwardReceived/component/ProfileAwardReceivedCard";
 import {useProfileAwardReceivedData} from "view/ProfileAwardReceived/context/ProfileAwardReceivedDataProvider";
 import {useInView} from "react-intersection-observer";
 
@@ -28,19 +28,19 @@ function ProfileAwardReceivedListShow() {
   return (
     <>
       {data?.pages.map((value, index, array) => {
-        return value.discounts.map((_item, idx, arr) => {
+        return value.discounts.map((item, idx, arr) => {
           const condition = array.length - 1 === index && arr.length - 1 === idx;
           const tmpRef = condition ? ref : null;
-          return <div key={idx} ref={tmpRef}></div>;
-          // const point = item.point_type;
-          // return (
-          //   <ProfileAwardReceivedCard
-          //     key={item.id}
-          //     title={point.displayname}
-          //     discount={item.id.toString()}
-          //     description={point.discription}
-          //   />
-          // );
+          return (
+            <div key={idx} ref={tmpRef}>
+              <ProfileAwardReceivedCard
+                key={item.id}
+                title={item.title}
+                discount={item.code}
+                description={item.description}
+              />
+            </div>
+          );
         });
       })}
     </>

@@ -1,11 +1,9 @@
 import React, {useMemo, useState} from "react";
 import {Button} from "antd";
 import {useProfileWalletChargeWallet} from "view/profileWallet/context/ProfileWalletChargeWalletProvider";
-import {axiosService} from "utils/axiosService";
-import {API} from "api/const";
 import {useSession} from "next-auth/react";
-import {IUserChargeWalletRes} from "types/interfaceUserChargeWallet";
 import {onlyNumberValue} from "utils/utils";
+import getUserChargeWallet from "api/getUserChargeWallet";
 
 function ProfileWalletCardSubmit() {
   const {data} = useSession();
@@ -23,10 +21,9 @@ function ProfileWalletCardSubmit() {
         const token = data?.user.token;
         if (token) {
           setLoading(true);
-          const url = API.USER_WALLET_CHARGE + "/" + number;
-          axiosService<IUserChargeWalletRes>({url, method: "get", token})
+          getUserChargeWallet({price: `${number * 10}`, token})
             .then((res) => {
-              const url = res.data?.Data?.payurl;
+              const url = res.Data.payurl;
               if (url) {
                 window.open(url, "_blank");
               }

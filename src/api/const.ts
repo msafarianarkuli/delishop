@@ -29,7 +29,7 @@ export const API = {
   DELETE_USER_ADDRESS: "/api/users/addresses/{id}",
   GET_USER_COIN: "/api/users/points",
   GET_USER_WALLET: "/api/users/transactions/balance",
-  USER_WALLET_CHARGE: "/api/finance/transaction/charge",
+  USER_WALLET_CHARGE: "/api/finance/transaction/charge/{price}",
   GET_USER_COIN_HISTORY: "/api/users/points/history",
   UPDATE_USER_PROFILE: "/api/users/profile",
   GET_USER_DISCOUNT: "/api/users/discount-codes",

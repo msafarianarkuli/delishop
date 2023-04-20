@@ -9,7 +9,7 @@ function ProfileAwardReceivedList() {
   return (
     <div className="px-screenSpace mt-[132px]">
       {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
+      {!isLoading && !data?.pages[0]?.discounts.length ? <div>موردی یافت نشد</div> : null}
       <ProfileAwardReceivedListShow />
     </div>
   );

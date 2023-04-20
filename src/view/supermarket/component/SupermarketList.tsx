@@ -13,7 +13,7 @@ function SupermarketList() {
   return (
     <div className="mt-5">
       {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
+      {!isLoading && !data?.pages[0]?.vendors.length ? <div>موردی یافت نشد</div> : null}
       <SupermarketShowList />
     </div>
   );

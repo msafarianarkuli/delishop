@@ -13,7 +13,7 @@ function RestaurantOrderPreviousList() {
   return (
     <div>
       {isLoading ? <div>loading ...</div> : null}
-      {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
+      {!isLoading && !data?.pages[0]?.orders.length ? <div>موردی یافت نشد</div> : null}
       <RestaurantOrderPreviousListShow />
     </div>
   );

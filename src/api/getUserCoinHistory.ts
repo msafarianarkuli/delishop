@@ -1,19 +1,24 @@
 import {API} from "api/const";
 import {axiosService} from "utils/axiosService";
 import {IUserCoinHistoryData, IUserCoinHistoryRes} from "types/interfaceUserCoinHistory";
+import {paginationCalc} from "utils/utils";
 
 interface IGetUserCoinHistory {
   params?: object;
+  pageParam?: number;
+  count?: number;
   token: string;
 }
 
 export const userAwardReceivedCouponQuery = "coupon";
 
 type TGetUserCoinHistory = ({token, params}: IGetUserCoinHistory) => Promise<IUserCoinHistoryData>;
-const getUserCoinHistory: TGetUserCoinHistory = async ({token, params}) => {
+const getUserCoinHistory: TGetUserCoinHistory = async (props) => {
+  const {token, params, pageParam = 1, count = 20} = props;
+  const {take, skip} = paginationCalc({page: pageParam, count});
   const tmpParams = {
-    skip: 0,
-    take: 19,
+    skip,
+    take,
     ...params,
   };
   let url = API.GET_USER_COIN_HISTORY;

@@ -32,6 +32,7 @@ export const API = {
   USER_WALLET_CHARGE: "/api/finance/transaction/charge",
   GET_USER_COIN_HISTORY: "/api/users/points/history",
   UPDATE_USER_PROFILE: "/api/users/profile",
+  GET_USER_DISCOUNT: "/api/users/discount-codes",
 
   //orders
   GET_ORDERS_LIST: "/api/users/orders",

@@ -1,24 +1,19 @@
-import React, {createContext, useContext, useMemo} from "react";
-import {IDataContextProvider} from "types/interfaces";
-import {IUserCoinHistoryData} from "types/interfaceUserCoinHistory";
+import {createContext, useContext, useMemo} from "react";
 import {useRouter} from "next/router";
-import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
-import {useQuery} from "react-query";
+import {hasNextPage} from "utils/utils";
+import {useInfiniteQuery, UseInfiniteQueryResult} from "react-query";
 import {useSession} from "next-auth/react";
-import getUserCoinHistory, {userAwardReceivedCouponQuery} from "api/getUserCoinHistory";
+import getUserDiscount from "api/getUserDiscount";
+import {IUserDiscountData} from "types/interfaceUserDiscount";
 
 interface IProfileAwardReceivedDataProvider {
   children: JSX.Element;
 }
 
-const initialState: IDataContextProvider<IUserCoinHistoryData> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseInfiniteQueryResult<IUserDiscountData> = {};
 
-const ProfileAwardReceivedDataContext = createContext<IDataContextProvider<IUserCoinHistoryData>>(initialState);
+const ProfileAwardReceivedDataContext = createContext<UseInfiniteQueryResult<IUserDiscountData>>(initialState);
 
 export const QUERY_KEY_USER_AWARD_RECEIVED = "userAwardReceived";
 
@@ -28,33 +23,24 @@ function ProfileAwardReceivedDataProvider({children}: IProfileAwardReceivedDataP
   const router = useRouter();
   const {status, data} = useSession();
 
-  const params = useMemo(() => {
-    let tmpParams: {[x: string]: any} = {
-      [userAwardReceivedCouponQuery]: 1,
-    };
-    if (router.isReady) {
-      tmpParams = {
-        ...tmpParams,
-        ...router.query,
-      };
-      tmpParams = createPaginationParams(tmpParams);
-    }
-    return tmpParams;
-  }, [router.isReady, router.query]);
-
-  const keys = useMemo(() => {
-    let tmpKeys: (string | number)[] = [QUERY_KEY_USER_AWARD_RECEIVED];
-    const page = router.query?.page;
-    tmpKeys = createKeyForUseQuery(tmpKeys, page);
-    return tmpKeys;
-  }, [router.query]);
-
   const useQueryEnabled = useMemo(() => status === "authenticated" && router.isReady, [router.isReady, status]);
 
-  const result = useQuery(keys, () => getUserCoinHistory({params, token: data?.user.token || ""}), {
-    staleTime,
-    enabled: useQueryEnabled,
-  });
+  const result = useInfiniteQuery(
+    QUERY_KEY_USER_AWARD_RECEIVED,
+    ({pageParam}) => getUserDiscount({token: data?.user.token || "", pageParam}),
+    {
+      staleTime,
+      enabled: useQueryEnabled,
+      getNextPageParam: (lastPage, allPages) => {
+        const total = lastPage.totalCount;
+        const page = allPages.length;
+        if (hasNextPage({page, total})) {
+          return page + 1;
+        }
+        return undefined;
+      },
+    }
+  );
 
   return <ProfileAwardReceivedDataContext.Provider value={result}>{children}</ProfileAwardReceivedDataContext.Provider>;
 }

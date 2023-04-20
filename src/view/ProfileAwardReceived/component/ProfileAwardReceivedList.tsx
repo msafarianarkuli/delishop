@@ -1,25 +1,49 @@
-import React from "react";
-import ProfileAwardReceivedCard from "view/ProfileAwardReceived/component/ProfileAwardReceivedCard";
+import {useEffect} from "react";
+// import ProfileAwardReceivedCard from "view/ProfileAwardReceived/component/ProfileAwardReceivedCard";
 import {useProfileAwardReceivedData} from "view/ProfileAwardReceived/context/ProfileAwardReceivedDataProvider";
+import {useInView} from "react-intersection-observer";
 
 function ProfileAwardReceivedList() {
-  const {data} = useProfileAwardReceivedData();
+  const {data, isLoading} = useProfileAwardReceivedData();
 
-  if (!data?.points_history.length) return <div className="px-screenSpace mt-[132px]">جایزه ای یافت نشد</div>;
   return (
     <div className="px-screenSpace mt-[132px]">
-      {data?.points_history.map((item) => {
-        const point = item.point_type;
-        return (
-          <ProfileAwardReceivedCard
-            key={item.id}
-            title={point.displayname}
-            discount={item.id.toString()}
-            description={point.discription}
-          />
-        );
-      })}
+      {isLoading ? <div>loading ...</div> : null}
+      {!isLoading && !data?.pages?.length ? <div>موردی یافت نشد</div> : null}
+      <ProfileAwardReceivedListShow />
     </div>
+  );
+}
+
+function ProfileAwardReceivedListShow() {
+  const {data, fetchNextPage} = useProfileAwardReceivedData();
+  const {ref, inView} = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  return (
+    <>
+      {data?.pages.map((value, index, array) => {
+        return value.discounts.map((_item, idx, arr) => {
+          const condition = array.length - 1 === index && arr.length - 1 === idx;
+          const tmpRef = condition ? ref : null;
+          return <div key={idx} ref={tmpRef}></div>;
+          // const point = item.point_type;
+          // return (
+          //   <ProfileAwardReceivedCard
+          //     key={item.id}
+          //     title={point.displayname}
+          //     discount={item.id.toString()}
+          //     description={point.discription}
+          //   />
+          // );
+        });
+      })}
+    </>
   );
 }
 

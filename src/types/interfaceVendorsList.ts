@@ -10,7 +10,8 @@ export type TGetVendorsListResVendors = IGetVendorsListResItem[];
 export interface IGetVendorsListResItem {
   id: number;
   name: string;
-  logo: string;
+  logo?: string;
+  banner?: string;
   status: string;
   open: number;
   max_sendtime: string;

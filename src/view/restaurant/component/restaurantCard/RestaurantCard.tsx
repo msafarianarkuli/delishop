@@ -3,7 +3,7 @@ import styles from "view/restaurant/component/restaurantCard/restaurantCard.modu
 import {useMemo} from "react";
 
 interface IRestaurantCard {
-  image: string;
+  image?: string;
   title: string;
   description: string;
   star: number;

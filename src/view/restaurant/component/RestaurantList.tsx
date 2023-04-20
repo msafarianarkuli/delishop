@@ -25,7 +25,7 @@ function RestaurantListShow({data}: {data?: InfiniteData<IGetVendorsRes>}) {
           return (
             <Link key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
               <RestaurantCard
-                image={item.logo}
+                image={item.banner}
                 title={item.name}
                 description={item.about}
                 star={+item.rate}

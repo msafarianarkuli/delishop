@@ -3,7 +3,7 @@ import {IconCoin, IconStarFill} from "assets/icons";
 import IconDelivery from "assets/icons/IconDelivery";
 
 interface ISuperMarketCard {
-  image: string;
+  image?: string;
   title: string;
   rate: string;
   deliveryPrice: number;

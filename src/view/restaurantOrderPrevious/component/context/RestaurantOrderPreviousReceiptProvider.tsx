@@ -1,10 +1,18 @@
 import React, {createContext, Dispatch, ReactNode, useContext, useReducer} from "react";
+import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
 
 const SET_DATA = "setData";
 const CLOSE = "close";
 
 interface IRestaurantOrderPreviousReceiptProvider {
   open: boolean;
+  data: TGetOrdersListResOrdersItemsProductKinds;
+  totalPrice: number;
+}
+
+interface ISetRestaurantOrderPreviousReceiptData {
+  data: TGetOrdersListResOrdersItemsProductKinds;
+  totalPrice: number;
 }
 
 interface IAction {
@@ -14,6 +22,8 @@ interface IAction {
 
 const initialState: IRestaurantOrderPreviousReceiptProvider = {
   open: false,
+  data: [],
+  totalPrice: 0,
 };
 
 const RestaurantOrderPreviousReceiptContext = createContext<IRestaurantOrderPreviousReceiptProvider>(initialState);
@@ -24,9 +34,12 @@ function reducer(state: IRestaurantOrderPreviousReceiptProvider, action: IAction
     case SET_DATA:
       return {
         open: true,
+        data: action.payload.data,
+        totalPrice: action.payload.totalPrice,
       };
     case CLOSE:
       return {
+        ...state,
         open: false,
       };
     default:
@@ -47,7 +60,10 @@ function RestaurantOrderPreviousReceiptProvider({children}: {children: ReactNode
 
 export default RestaurantOrderPreviousReceiptProvider;
 
-export const setRestaurantOrderPreviousReceiptData = () => ({type: SET_DATA});
+export const setRestaurantOrderPreviousReceiptData = (payload: ISetRestaurantOrderPreviousReceiptData) => ({
+  type: SET_DATA,
+  payload,
+});
 export const setRestaurantOrderPreviousReceiptClose = () => ({type: CLOSE});
 
 export function useRestaurantOrderPreviousReceipt() {

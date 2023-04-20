@@ -28,7 +28,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
     props;
 
   const statusImage = useMemo(() => {
-    if (orderStatus === 3) {
+    if (orderStatus === 3 || orderStatus === 4) {
       return (
         <img src={accept.src} alt="accept" className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]" />
       );
@@ -38,7 +38,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
   }, [orderStatus]);
 
   const statusProcess = useMemo(() => {
-    if (orderStatus === 3) {
+    if (orderStatus === 3 || orderStatus === 4) {
       return "50%";
     } else if (orderStatus === 5) {
       return "100%";

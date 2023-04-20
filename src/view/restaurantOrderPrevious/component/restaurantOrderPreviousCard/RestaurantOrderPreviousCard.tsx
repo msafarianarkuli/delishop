@@ -1,4 +1,4 @@
-import {MouseEventHandler} from "react";
+import {MouseEventHandler, useMemo} from "react";
 import {IconCoin, IconRoundedLeft} from "assets/icons";
 import {Button} from "antd";
 import dayjs from "dayjs";
@@ -8,6 +8,8 @@ import {number2Digits} from "utils/utils";
 import Link from "next/link";
 import img1 from "assets/images/res-order-barger.png";
 import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
+import {OrderStatus} from "utils/Const";
+import classNames from "classnames";
 
 dayjs.extend(jalaliday);
 
@@ -23,7 +25,6 @@ interface IRestaurantOrderPreviousCard {
   onClickReOrder: MouseEventHandler;
   onClickReceipt: MouseEventHandler;
   coin: number;
-  hasRate: boolean;
   totalPrice: number;
 }
 
@@ -39,10 +40,21 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     deliveryTitle,
     coin,
     date,
-    hasRate,
     id,
     totalPrice,
   } = props;
+
+  const status = useMemo(() => {
+    const tmpStatus = OrderStatus.find((item) => item.id === orderStatus);
+    return tmpStatus?.title || "";
+  }, [orderStatus]);
+
+  const statusClassName = classNames({
+    "inner_box text-[13px] font-semibold": true,
+    "text-primary": orderStatus === 6,
+    "text-textColorLight": orderStatus !== 6,
+  });
+
   return (
     <div className={styles.restaurant_order_previous_card_container}>
       <div className="flex flex-wrap items-center justify-between px-[29px] pb-[19px] border-b border-borderColor">
@@ -64,7 +76,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
             </div>
             <div className="flex flex-1 items-center justify-between mt-[17px]">
               <div className="text-[15px] font-medium text-textColorLight">ارسال به: {deliveryTitle}</div>
-              <div className="inner_box text-[13px] font-semibold text-primary">{orderStatus}</div>
+              <div className={statusClassName}>{status}</div>
             </div>
           </div>
         </div>
@@ -104,7 +116,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
           </div>
         </div>
       </div>
-      {hasRate ? (
+      {orderStatus === 6 ? (
         <Link
           href={`/restaurant/order/rate/${id}`}
           className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor"

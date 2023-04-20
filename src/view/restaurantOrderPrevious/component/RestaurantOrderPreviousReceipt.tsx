@@ -1,33 +1,16 @@
 import {BottomSheet} from "components";
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   setRestaurantOrderPreviousReceiptClose,
   useRestaurantOrderPreviousReceipt,
   useRestaurantOrderPreviousReceiptAction,
 } from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousReceiptProvider";
 
-// interface IRestaurantOrderPreviousReceiptOrdersItem {
-//   title: string;
-//   price: number;
-// }
-
-// type TRestaurantOrderPreviousReceiptOrders = IRestaurantOrderPreviousReceiptOrdersItem[];
-
-// interface IRestaurantOrderPreviousReceipt {
-//   orders: TRestaurantOrderPreviousReceiptOrders;
-//   open: boolean;
-//   onClose?: DrawerProps["onClose"];
-// }
-
-const order = Array.from(new Array(5), () => ({
-  title: "مرغ سوخاری پنج تکه اسپایسی",
-  price: 235000,
-}));
-
 function RestaurantOrderPreviousReceipt() {
-  // const {orders, open, onClose} = props;
-  const {open} = useRestaurantOrderPreviousReceipt();
+  const {open, data} = useRestaurantOrderPreviousReceipt();
   const dispatch = useRestaurantOrderPreviousReceiptAction();
+  const [height, setHeight] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) {
@@ -42,15 +25,57 @@ function RestaurantOrderPreviousReceipt() {
     dispatch(setRestaurantOrderPreviousReceiptClose());
   }, [dispatch]);
 
+  useEffect(() => {
+    const div = ref.current as HTMLDivElement;
+    if (div.scrollHeight) {
+      const tmpHeight = div.scrollHeight + 90;
+      setHeight(Math.min(tmpHeight, 400));
+    }
+  }, [data]);
+
   return (
-    <BottomSheet open={open} onClose={onClose} height={300} title="فاکتور">
+    <>
+      <div ref={ref} className="fixed -right-[100%]">
+        <RestaurantOrderPreviousReceiptItems />
+      </div>
+      <BottomSheet open={open} onClose={onClose} height={height} title="فاکتور">
+        <RestaurantOrderPreviousReceiptItems />
+      </BottomSheet>
+    </>
+  );
+}
+
+function RestaurantOrderPreviousReceiptItems() {
+  const {data, totalPrice} = useRestaurantOrderPreviousReceipt();
+
+  const totalOrder = useMemo(() => {
+    if (data.length) {
+      return data.reduce((arr, current) => {
+        return arr + current.price_prc * current.count_num;
+      }, 0);
+    }
+    return 0;
+  }, [data]);
+
+  const deliveryPrice = useMemo(() => {
+    if (totalOrder && totalPrice) {
+      return totalPrice - totalOrder;
+    }
+    return 0;
+  }, [totalOrder, totalPrice]);
+
+  return (
+    <>
       <div>
-        {order.map((item, index) => {
+        {data?.map((item, index) => {
           return (
             <div key={index} className="flex items-center justify-between mb-5 first:mt-5 text-[15px] font-medium">
-              <div>{item.title}</div>
               <div>
-                <span>{item.price.toLocaleString("en-US")}</span>
+                <span>{item.product.displayname}</span>
+                {item.count_num > 1 ? <span className="mr-1">({item.count_num})</span> : null}
+              </div>
+              <div>
+                <span>{Math.round((item.price_prc * item.count_num) / 10).toLocaleString("en-US")}</span>
                 <span className="mr-1 text-[13px]">تومان</span>
               </div>
             </div>
@@ -60,25 +85,25 @@ function RestaurantOrderPreviousReceipt() {
       <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
         <div className="text-primary">مجموع سفارش</div>
         <div>
-          <span>310,000</span>
+          <span>{Math.round(totalOrder / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
         </div>
       </div>
       <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
         <div>هزینه ارسال</div>
         <div>
-          <span>7,500</span>
+          <span>{Math.round(deliveryPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
         </div>
       </div>
       <div className="flex items-center justify-between pt-5 text-[15px] font-medium border-t border-borderColor">
         <div className="text-primary">جمع کل</div>
         <div>
-          <span>710,000</span>
+          <span>{Math.round(totalPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
         </div>
       </div>
-    </BottomSheet>
+    </>
   );
 }
 

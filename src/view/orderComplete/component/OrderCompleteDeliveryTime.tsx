@@ -10,23 +10,18 @@ import {
   useOrderComplete,
   useOrderCompleteAction,
 } from "view/orderComplete/context/OrderCompleteProvider";
-import useCartRestaurant from "hooks/useCartRestaurant";
-import useCartSupermarket from "hooks/useCartSupermarket";
 import dayjs from "dayjs";
 import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
+import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 
 function OrderCompleteDeliveryTime() {
   const type = useTypeColor();
   const [time, setTime] = useState<IOrderCompleteDeliverTime[]>([]);
   const {deliveryTime} = useOrderComplete();
   const dispatch = useOrderCompleteAction();
-  const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
+  const {data, isLoading} = useOrderCompleteVendorDetailData();
 
-  const openHours = useMemo(
-    () => restaurant?.openHours || supermarket?.openHours || null,
-    [restaurant?.openHours, supermarket?.openHours]
-  );
+  const openHours = useMemo(() => data?.open_hours || null, [data?.open_hours]);
 
   const hours = useMemo(() => {
     let result: IOrderCompleteDeliverTime[] = [];
@@ -52,7 +47,7 @@ function OrderCompleteDeliveryTime() {
             }
           });
           const diff = +HEnd - +HStart;
-          if (!isNaN(diff)) {
+          if (!isNaN(diff) && diff > 0) {
             const tmp = Array.from(new Array(diff), (_, i) => {
               const tmp = +HStart + i;
               const MEndTime = diff - 1 > i ? MStart : MEnd;
@@ -113,6 +108,7 @@ function OrderCompleteDeliveryTime() {
       <OrderCompleteTitle type={type} title="زمان تحویل" />
       <div className="px-screenSpace">
         <div className={styles.restaurant_complete_delivery_time_container}>
+          {isLoading ? <div>در حال دریافت اطلاعات ...</div> : null}
           {time.map((item, index) => {
             return (
               <Checkbox

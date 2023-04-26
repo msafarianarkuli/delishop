@@ -12,6 +12,7 @@ import {
 } from "view/orderComplete/context/OrderCompleteProvider";
 import {useRouter} from "next/router";
 import {useMemo} from "react";
+import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 
 function OrderCompleteTitleLeft() {
   const type = useTypeColor();
@@ -35,6 +36,7 @@ function OrderCompleteTitleLeft() {
 
 function OrderCompleteAddress() {
   const {data, isLoading} = useOrderCompleteAddress();
+  const {data: vendorData, isLoading: vendorDataLoading} = useOrderCompleteVendorDetailData();
   const type = useTypeColor();
   const {deliveryAddress} = useOrderComplete();
   const dispatch = useOrderCompleteAction();
@@ -59,6 +61,29 @@ function OrderCompleteAddress() {
             />
           );
         })}
+        {!vendorDataLoading && vendorData?.delivery_at_place ? (
+          <OrderCompleteAddressCard
+            id={"0"}
+            title="حضوری"
+            address=""
+            point={{lat: vendorData.lat, lng: vendorData.long}}
+            value={deliveryAddress?.id === 0}
+            onChange={() => {
+              dispatch(
+                setOrderCompleteDeliveryAddress({
+                  id: 0,
+                  address: "",
+                  title: "حضوری",
+                  latitude: vendorData.lat,
+                  longitude: vendorData.long,
+                  tel: "",
+                  description: "",
+                  ownername: "",
+                })
+              );
+            }}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import {AxiosPromise} from "axios";
 //   productkinds: IAddOrderBodyProductKinds;
 //   vendor_id: number;
 //   description: string;
+//   discountcode: string;
 // }
 
 export interface IAddOrderBodyProductKinds {

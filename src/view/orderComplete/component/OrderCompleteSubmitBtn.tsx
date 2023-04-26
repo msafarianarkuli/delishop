@@ -78,7 +78,7 @@ function OrderCompleteSubmitBtn() {
   const dispatch = useOrderCompleteAction();
   const dispatchRedux = useDispatch();
   const router = useRouter();
-  const {step, paymentType, deliveryAddress, deliveryTime, description} = useOrderComplete();
+  const {step, paymentType, deliveryAddress, deliveryTime, description, discountCode} = useOrderComplete();
   const {status, data} = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const vendor = useCartRestaurant();
@@ -126,6 +126,9 @@ function OrderCompleteSubmitBtn() {
               body.append("vendor_id", vendor_id.toString());
               if (description) {
                 body.append("description", description);
+              }
+              if (discountCode) {
+                body.append("discountcode", JSON.stringify([discountCode]));
               }
               // const body: IAddOrderBody = {
               //   location_place_fid,

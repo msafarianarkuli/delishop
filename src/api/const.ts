@@ -39,6 +39,7 @@ export const API = {
   ADD_ORDER: "/api/ecommerce/order",
   GET_ORDER_DETAIL: "/api/users/orders/{id}",
   ADD_POLL: "/api/users/order/{id}/comment",
+  GET_ORDER_DISCOUNT_CALC: "/api/discount/calculate",
 
   //logistic
   GET_LOGISTIC_CURRENT_PRICE: "/api/logistic/current",

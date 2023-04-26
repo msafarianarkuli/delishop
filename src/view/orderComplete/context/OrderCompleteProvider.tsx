@@ -7,6 +7,7 @@ const SET_STEP = "step";
 const SET_DELIVERY_ADDRESS = "deliveryAddress";
 const SET_PAYMENT_TYPE = "paymentType";
 const SET_ERROR = "error";
+const SET_DISCOUNT = "discount";
 
 export interface IOrderCompleteDeliverTime {
   isTemp?: boolean;
@@ -21,6 +22,8 @@ interface IOrderComplete {
   paymentType: number;
   step: number;
   error?: string;
+  discountPrice?: number;
+  discountCode?: string;
 }
 
 interface IAction {
@@ -70,6 +73,12 @@ function reducer(state: IOrderComplete, action: IAction) {
         ...state,
         error: action.payload,
       };
+    case SET_DISCOUNT:
+      return {
+        ...state,
+        discountPrice: action.payload.discountPrice,
+        discountCode: action.payload.discountCode,
+      };
     default:
       return state;
   }
@@ -105,6 +114,11 @@ export const setOrderCompletePaymentType = (payload: number) => ({
 
 export const setOrderCompleteError = (payload: string) => ({
   type: SET_ERROR,
+  payload,
+});
+
+export const setOrderCompleteDiscountPrice = (payload: {discountPrice: number; discountCode: string}) => ({
+  type: SET_DISCOUNT,
   payload,
 });
 

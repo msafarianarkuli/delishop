@@ -14,7 +14,7 @@ function OrderCompleteReceipt() {
   const type = useTypeColor();
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
-  const {deliveryAddress} = useOrderComplete();
+  const {deliveryAddress, discountPrice} = useOrderComplete();
 
   const {deliveryToman} = useDeliveryPrice({
     location1: {
@@ -46,9 +46,13 @@ function OrderCompleteReceipt() {
     return 0;
   }, [restaurant, supermarket]);
 
+  const discount = useMemo(() => {
+    return Math.round((discountPrice || 0) / 10);
+  }, [discountPrice]);
+
   const totalPrice = useMemo(() => {
-    return price + deliveryToman;
-  }, [deliveryToman, price]);
+    return price + deliveryToman - discount;
+  }, [deliveryToman, discount, price]);
 
   const colorTitle = classNames({
     "text-primary": type === "default",
@@ -75,6 +79,13 @@ function OrderCompleteReceipt() {
           <div>هزینه ارسال</div>
           <div>
             <span>{deliveryToman.toLocaleString("en-US")}</span>
+            <span className="mr-1">تومان</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between mb-3">
+          <div>میزان تخفیف</div>
+          <div>
+            <span>{discount.toLocaleString("en-US")}</span>
             <span className="mr-1">تومان</span>
           </div>
         </div>

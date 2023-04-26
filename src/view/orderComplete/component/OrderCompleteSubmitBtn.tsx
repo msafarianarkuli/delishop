@@ -109,8 +109,13 @@ function OrderCompleteSubmitBtn() {
             const token = data?.user.token;
             const productkinds = createAddOrderProductKind(vendor?.cartOrders || supermarket?.cartOrders || {});
             const addOrderCondition =
-              vendor_id && Object.keys(productkinds)?.length && location_place_fid && paymenttype && sendtime && token;
-            if (!location_place_fid) {
+              vendor_id &&
+              Object.keys(productkinds)?.length &&
+              location_place_fid != null &&
+              paymenttype &&
+              sendtime &&
+              token;
+            if (location_place_fid == null) {
               dispatch(setOrderCompleteError("آدرس مقصد رو مشخص کنید"));
               return true;
             }
@@ -119,7 +124,14 @@ function OrderCompleteSubmitBtn() {
               dispatch(setOrderCompleteError(""));
               console.log("productkinds", productkinds);
               const body = new FormData();
-              body.append("location_place_fid", location_place_fid.toString());
+              if (location_place_fid) {
+                body.append("location_place_fid", location_place_fid.toString());
+                // tahvil ba payk
+                body.append("delivery_type", "1");
+              } else {
+                // tahvil hozuri
+                body.append("delivery_type", "2");
+              }
               body.append("paymenttype", paymenttype.toString());
               body.append("productkinds", JSON.stringify(productkinds));
               body.append("sendtime", sendtime.toString());

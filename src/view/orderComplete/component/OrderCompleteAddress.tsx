@@ -65,14 +65,14 @@ function OrderCompleteAddress() {
           <OrderCompleteAddressCard
             id={"0"}
             title="حضوری"
-            address=""
+            address={vendorData.address}
             point={{lat: vendorData.lat, lng: vendorData.long}}
             value={deliveryAddress?.id === 0}
             onChange={() => {
               dispatch(
                 setOrderCompleteDeliveryAddress({
                   id: 0,
-                  address: "",
+                  address: vendorData.address,
                   title: "حضوری",
                   latitude: vendorData.lat,
                   longitude: vendorData.long,

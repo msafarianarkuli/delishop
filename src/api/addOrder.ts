@@ -25,7 +25,7 @@ export interface IAddOrderBodyProductKinds {
 type TAddOrder = (props: {body: FormData; token: string}) => AxiosPromise<IAddOrderRes>;
 const addOrder: TAddOrder = async ({body, token}) => {
   body.append("ordertype_enum", "1");
-  body.append("delivery_type", "1");
+  // body.append("delivery_type", "1");
   // const tmpBody: IBody = {
   //   ...body,
   //   ordertype_enum: 1,

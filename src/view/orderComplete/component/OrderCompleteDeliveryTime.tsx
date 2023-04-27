@@ -20,10 +20,12 @@ function OrderCompleteDeliveryTime() {
   const {deliveryTime} = useOrderComplete();
   const dispatch = useOrderCompleteAction();
   const {data, isLoading} = useOrderCompleteVendorDetailData();
+  const [error, setError] = useState("");
 
   const openHours = useMemo(() => data?.open_hours || null, [data?.open_hours]);
 
   const hours = useMemo(() => {
+    setError("");
     let result: IOrderCompleteDeliverTime[] = [];
     const day = dayjs().format("dd").toLowerCase() as keyof IGetVendorsDetailVendorOpenHours;
     if (openHours) {
@@ -61,6 +63,8 @@ function OrderCompleteDeliveryTime() {
             result = result.concat(tmp);
           }
         });
+      } else {
+        setError("امروز تعطیل می باشد");
       }
     }
     return result;
@@ -109,6 +113,7 @@ function OrderCompleteDeliveryTime() {
       <div className="px-screenSpace">
         <div className={styles.restaurant_complete_delivery_time_container}>
           {isLoading ? <div>در حال دریافت اطلاعات ...</div> : null}
+          {error ? <div>{error}</div> : null}
           {time.map((item, index) => {
             return (
               <Checkbox

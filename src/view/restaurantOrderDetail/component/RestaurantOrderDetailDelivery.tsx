@@ -2,13 +2,15 @@ import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
 import {Button} from "antd";
 import {IconSupport} from "assets/icons";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 interface IRestaurantOrderDetailDelivery {
   deliveryTime: string;
+  orderStatus: number;
 }
 
-function RestaurantOrderDetailDelivery({deliveryTime}: IRestaurantOrderDetailDelivery) {
+function RestaurantOrderDetailDelivery(props: IRestaurantOrderDetailDelivery) {
+  const {deliveryTime, orderStatus} = props;
   const [step, setStep] = useState(1);
 
   useEffect(() => {
@@ -23,6 +25,26 @@ function RestaurantOrderDetailDelivery({deliveryTime}: IRestaurantOrderDetailDel
     return () => clearTimeout(timeout);
   }, [step]);
 
+  const progressPercent = useMemo(() => {
+    if (orderStatus === 3 || orderStatus === 4) {
+      return "50%";
+    } else if (orderStatus === 5) {
+      return "100%";
+    }
+    return "0";
+  }, [orderStatus]);
+
+  const progressIcon = useMemo(() => {
+    if (orderStatus === 3 || orderStatus === 4) {
+      return (
+        <img src={accept.src} alt="accept" className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]" />
+      );
+    } else if (orderStatus === 5) {
+      return <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />;
+    }
+    return null;
+  }, [orderStatus]);
+
   return (
     <div className="px-screenSpace mt-3">
       <div className="flex items-center justify-between">
@@ -34,22 +56,8 @@ function RestaurantOrderDetailDelivery({deliveryTime}: IRestaurantOrderDetailDel
       </div>
       <div className="mt-12 mb-9 mx-7">
         <div className="relative w-full h-[2px] bg-[#D9D9D9] rounded-full">
-          <div
-            className="absolute right-0 top-0 h-full bg-primary rounded-full transition-width duration-300 ease-linear"
-            style={{width: step === 1 ? "50%" : "100%"}}
-          />
-          <img
-            src={accept.src}
-            alt="accept"
-            className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)] transition-opacity duration-200 ease-linear"
-            style={{opacity: step === 1 ? 1 : 0}}
-          />
-          <img
-            src={delivery.src}
-            alt="delivery"
-            className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px] transition-opacity duration-200 ease-linear"
-            style={{opacity: step === 1 ? 0 : 1}}
-          />
+          <div className="absolute right-0 top-0 h-full bg-primary rounded-full" style={{width: progressPercent}} />
+          {progressIcon}
         </div>
       </div>
       <Button

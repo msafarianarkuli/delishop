@@ -51,4 +51,5 @@ interface IGetOrderDetailDataAddress {
   tel: string;
   latitude: number;
   longitude: number;
+  title: string;
 }

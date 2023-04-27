@@ -36,8 +36,8 @@ function RestaurantOrderDetailContentItems() {
     <>
       <div id="restaurantOrderDetailContentContainer" ref={ref} className="mt-headerNormal">
         <div id="restaurantOrderDetailContentPartOne">
-          <RestaurantOrderDetailAddress title={"عنوان"} address={data?.address.address || ""} />
-          <RestaurantOrderDetailDelivery deliveryTime={deliveryTime || ""} />
+          <RestaurantOrderDetailAddress title={data?.address.title || ""} address={data?.address.address || ""} />
+          <RestaurantOrderDetailDelivery orderStatus={data?.orderstatus || 0} deliveryTime={deliveryTime || ""} />
         </div>
         <RestaurantOrderDetailRestaurantName image={data?.vendor.logo} title={data?.vendor.name || ""} />
         <RestaurantOrderDetailOrder order={data?.productKinds || []} />

@@ -18,6 +18,8 @@ import useDeliveryPrice from "hooks/useDeliveryPrice";
 import {removeCartRestaurantCartListCartOrder} from "redux/cartRestaurant/cartRestaurantReducer";
 import {clearCartSupermarket} from "redux/cartSupermraket/cartSupermarketReducer";
 import {useDispatch} from "react-redux";
+import {useQueryClient} from "react-query";
+import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -83,6 +85,7 @@ function OrderCompleteSubmitBtn() {
   const [isLoading, setIsLoading] = useState(false);
   const vendor = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const queryClient = useQueryClient();
 
   return (
     <SubmitBuyBtn
@@ -156,6 +159,7 @@ function OrderCompleteSubmitBtn() {
                   if (res.data.message) {
                     dispatch(setOrderCompleteError(res.data.message));
                   } else if (res.data.Data) {
+                    queryClient.invalidateQueries(QUERY_KEY_USER_COIN);
                     if (res.data.Data?.payurl) {
                       const url = res.data.Data.payurl;
                       window.open(url, "_blank");

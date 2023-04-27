@@ -1,33 +1,19 @@
 import styles from "view/home/component/homeOrderCard/homeOrderCard.module.scss";
 import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
-import {useEffect, useState} from "react";
 import Link from "next/link";
 import {IconRoundedLeft} from "assets/icons";
 
 interface IHomeOrderCard {
   deliveryTime: string;
-  image: string;
+  image?: string;
   title: string;
-  address: string;
+  id: number;
+  orderStatus: number;
 }
 
 function HomeOrderCard(props: IHomeOrderCard) {
-  const {deliveryTime, image, address, title} = props;
-
-  const [step, setStep] = useState(1);
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    timeout = setTimeout(() => {
-      setStep((prevState) => {
-        if (prevState === 1) return 2;
-        return 1;
-      });
-    }, 2000);
-
-    return () => clearTimeout(timeout);
-  }, [step]);
+  const {deliveryTime, image, title, id, orderStatus} = props;
 
   return (
     <div className={styles.home_order_card_container}>
@@ -42,20 +28,17 @@ function HomeOrderCard(props: IHomeOrderCard) {
         <div className="relative w-full h-[4px] bg-[#D9D9D9] rounded-full">
           <div
             className="absolute right-0 top-0 h-full bg-textColor rounded-full transition-width duration-300 ease-linear"
-            style={{width: step === 1 ? "50%" : "100%"}}
+            style={{width: orderStatus === 3 || orderStatus === 4 ? "50%" : "100%"}}
           />
-          <img
-            src={accept.src}
-            alt="accept"
-            className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)] transition-opacity duration-200 ease-linear"
-            style={{opacity: step === 1 ? 1 : 0}}
-          />
-          <img
-            src={delivery.src}
-            alt="delivery"
-            className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px] transition-opacity duration-200 ease-linear"
-            style={{opacity: step === 1 ? 0 : 1}}
-          />
+          {orderStatus === 3 || orderStatus === 4 ? (
+            <img
+              src={accept.src}
+              alt="accept"
+              className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]"
+            />
+          ) : (
+            <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />
+          )}
         </div>
       </div>
       <div className="flex items-center justify-between">
@@ -63,10 +46,10 @@ function HomeOrderCard(props: IHomeOrderCard) {
           <img src={image} alt={title} className="w-[48px] h-[48px] object-center object-cover rounded-[6px]" />
           <div className="text-[15px]">
             <span className="font-semibold mx-1">{title}</span>
-            <span>({address})</span>
+            {/*<span>({address})</span>*/}
           </div>
         </div>
-        <Link href="/restaurant/order/1?map=1" className="flex items-center text-primary">
+        <Link href={`/restaurant/order/${id}?map=1`} target="_blank" className="flex items-center text-primary">
           <span className="text-[15px] font-semibold">مشاهده سفارش</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>

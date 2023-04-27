@@ -3,9 +3,26 @@
   box-shadow: -2px -2px 14px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.302);
   border-radius: 10px;
   padding: 12px;
-  margin-bottom: 20px;
+  min-width: 260px;
+  margin: 20px 0 20px 20px;
+
+  @media (min-width: 350px) {
+    min-width: 300px;
+  }
+
+  @media (min-width: 400px) {
+    min-width: 330px;
+  }
+
+  @media (min-width: 428px) {
+    min-width: 360px;
+  }
+
+  @media (min-width: 500px) {
+    min-width: 420px;
+  }
 
   &:last-child {
-    margin-bottom: 0;
+    margin-left: 0;
   }
 }

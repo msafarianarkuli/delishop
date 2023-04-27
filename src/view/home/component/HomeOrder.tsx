@@ -1,10 +1,24 @@
 import HomeOrderCard from "view/home/component/homeOrderCard";
-import img from "assets/images/res-order-logo.png";
+import {HomeOrderData} from "view/home/context/HomeOrderDataProvider";
 
 function HomeOrder() {
+  const {data} = HomeOrderData();
   return (
-    <div className="px-screenSpace mt-5">
-      <HomeOrderCard title="آریایی" address="وردآورد" deliveryTime="14:45" image={img.src} />
+    <div className="flex overflow-auto px-screenSpace mt-5">
+      {data?.pages.map((value) => {
+        return value.orders.map((item, index) => {
+          return (
+            <HomeOrderCard
+              key={index}
+              id={item.id}
+              title={item.vendor.name}
+              deliveryTime={item.sendtime === 100 ? "فوری" : item.sendtime.toString()}
+              image={item.vendor.logo}
+              orderStatus={item.orderstatus}
+            />
+          );
+        });
+      })}
     </div>
   );
 }

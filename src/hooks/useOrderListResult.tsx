@@ -7,7 +7,7 @@ import {useSession} from "next-auth/react";
 
 interface IUseVendorListResult {
   queryKey: string;
-  categoryId: number;
+  categoryId?: number;
   statusId: number[];
   staleTime?: number;
 }
@@ -18,9 +18,10 @@ function useOrderListResult(props: IUseVendorListResult) {
   const {status, data} = useSession();
 
   const queries = useMemo(() => {
-    const tmpParams: {[x: string]: any} = {
-      vendor_category_id: categoryId,
-    };
+    const tmpParams: {[x: string]: any} = {};
+    if (categoryId) {
+      tmpParams.vendor_category_id = categoryId;
+    }
     const query = new URLSearchParams(tmpParams);
     if (statusId.length) {
       statusId.forEach((item) => {

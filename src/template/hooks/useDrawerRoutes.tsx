@@ -82,7 +82,7 @@ function useDrawerRoutes(): TData {
         link: "/",
       },
     ];
-  }, [data]);
+  }, [Coin, data]);
 }
 
 export default useDrawerRoutes;

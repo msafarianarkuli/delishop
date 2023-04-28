@@ -12,10 +12,11 @@ interface IUseVendorListResult {
   filterQuery?: string[];
   staleTime?: number;
   initialFilter?: {[x: string]: string};
+  withLocation?: boolean;
 }
 
 function useVendorListResult(props: IUseVendorListResult) {
-  const {queryKey, categoryId, filterQuery, staleTime, initialFilter = {}} = props;
+  const {queryKey, categoryId, filterQuery, staleTime, initialFilter = {}, withLocation = true} = props;
   const router = useRouter();
   const {isStorageLoaded, location, userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
 
@@ -34,8 +35,7 @@ function useVendorListResult(props: IUseVendorListResult) {
       if (tmpParams.hasOwnProperty("page")) {
         delete tmpParams.page;
       }
-      // tmpParams = createPaginationParams(tmpParams);
-      if (isUserAddressStorageLoaded && isStorageLoaded) {
+      if (withLocation && isUserAddressStorageLoaded && isStorageLoaded) {
         if (userAddress?.latitude && userAddress.longitude) {
           tmpParams.lat = userAddress.latitude;
           tmpParams.lon = userAddress.longitude;
@@ -54,6 +54,7 @@ function useVendorListResult(props: IUseVendorListResult) {
   }, [
     categoryId,
     filterQuery,
+    initialFilter,
     isStorageLoaded,
     isUserAddressStorageLoaded,
     location?.lat,
@@ -62,13 +63,14 @@ function useVendorListResult(props: IUseVendorListResult) {
     router.query,
     userAddress?.latitude,
     userAddress?.longitude,
+    withLocation,
   ]);
 
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [queryKey];
     // const page = router.query?.page;
     // tmpKeys = createKeyForUseQuery(tmpKeys, page);
-    if (isUserAddressStorageLoaded && isStorageLoaded) {
+    if (withLocation && isUserAddressStorageLoaded && isStorageLoaded) {
       if (userAddress?.latitude && userAddress.longitude) {
         tmpKeys = createKeyForUseQuery(tmpKeys, userAddress.latitude.toString());
         tmpKeys = createKeyForUseQuery(tmpKeys, userAddress.longitude.toString());
@@ -94,12 +96,16 @@ function useVendorListResult(props: IUseVendorListResult) {
     router.query,
     userAddress?.latitude,
     userAddress?.longitude,
+    withLocation,
   ]);
 
-  const useQueryEnabled = useMemo(
-    () => isStorageLoaded && isUserAddressStorageLoaded && router.isReady,
-    [isStorageLoaded, isUserAddressStorageLoaded, router.isReady]
-  );
+  const useQueryEnabled = useMemo(() => {
+    if (withLocation) {
+      return isStorageLoaded && isUserAddressStorageLoaded && router.isReady;
+    } else {
+      return router.isReady;
+    }
+  }, [isStorageLoaded, isUserAddressStorageLoaded, router.isReady, withLocation]);
 
   // return useQuery(keys, () => getVendors({params}), {staleTime, enabled: useQueryEnabled});
   return useInfiniteQuery(keys, ({pageParam}) => getVendors({params, pageParam}), {

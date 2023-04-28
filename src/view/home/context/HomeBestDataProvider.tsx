@@ -17,6 +17,7 @@ function HomeBestDataProvider({children}: {children: JSX.Element}) {
     categoryId: 1,
     queryKey: QUERY_KEY_HOME_BEST,
     staleTime,
+    withLocation: false,
     initialFilter: {
       sort: "point",
     },

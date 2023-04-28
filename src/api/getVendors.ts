@@ -27,11 +27,14 @@ const getVendors: TGetRestaurants = async (props) => {
     ...params,
   };
   if (isServer) {
-    return fetchService({
+    return fetchService<IGetVendorsListRes>({
       url,
       method: "get",
       params: tmpParams,
-    });
+    }).then((res) => ({
+      vendors: res.data.vendors,
+      total: res.totalCount,
+    }));
   }
   return axiosService<IGetVendorsListRes>({url, method: "get", params: tmpParams}).then((res) => ({
     vendors: res.data.data.vendors,

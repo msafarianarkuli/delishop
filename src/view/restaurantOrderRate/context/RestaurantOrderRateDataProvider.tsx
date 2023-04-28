@@ -1,25 +1,21 @@
 import React, {createContext, useContext} from "react";
-import {useQuery, UseQueryResult} from "react-query";
-import {IGetVendorDetailData} from "types/interfaceVendorDetail";
-import {useRouter} from "next/router";
-import getVendorDetail from "api/getVendorDetail";
-import {QUERY_KEY_RESTAURANT_DETAIL} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
+import {UseQueryResult} from "react-query";
+import {IGetOrderDetailData} from "types/interfaceOrderDetail";
+import useOrderDetailResult from "hooks/useOrderDetailResult";
+import {QUERY_KEY_RESTAURANT_ORDER_DETAIL} from "view/restaurantOrderDetail/component/RestaurantOrderDetailDataProvider";
 
 // @ts-ignore
-const initialState: UseQueryResult<IGetVendorDetailData> = {};
+const initialState: UseQueryResult<IGetOrderDetailData> = {};
 
-const RestaurantOrderRateDataContext = createContext<UseQueryResult<IGetVendorDetailData>>(initialState);
+const RestaurantOrderRateDataContext = createContext<UseQueryResult<IGetOrderDetailData>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 
 function RestaurantOrderRateDataProvider({children}: {children: JSX.Element}) {
-  const router = useRouter();
-
-  const result = useQuery<IGetVendorDetailData>(
-    [QUERY_KEY_RESTAURANT_DETAIL, router.query.id],
-    () => getVendorDetail({id: router.query.id as string}),
-    {staleTime, enabled: router.isReady}
-  );
+  const result = useOrderDetailResult({
+    queryKey: QUERY_KEY_RESTAURANT_ORDER_DETAIL,
+    staleTime,
+  });
 
   return <RestaurantOrderRateDataContext.Provider value={result}>{children}</RestaurantOrderRateDataContext.Provider>;
 }

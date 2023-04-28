@@ -11,6 +11,8 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
+import {useQueryClient} from "react-query";
+import {QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS} from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousDataProvider";
 
 dayjs.extend(jalaliday);
 
@@ -27,12 +29,13 @@ interface IBody {
 }
 
 function RestaurantOrderRate() {
-  const {data: vendorData} = useRestaurantOrderRateData();
+  const {data: orderData} = useRestaurantOrderRateData();
   const {data} = useSession();
   const router = useRouter();
   const methods = useForm<IOrderRateForm>();
   const {handleSubmit} = methods;
   const date = new Date().toISOString();
+  const queryClient = useQueryClient();
 
   async function onSubmit(payload: IOrderRateForm) {
     console.log("payload", payload);
@@ -46,6 +49,7 @@ function RestaurantOrderRate() {
         body.comment = payload.description;
       }
       const res = await axiosService({url, method: "post", token: data?.user.token, body});
+      await queryClient.invalidateQueries(QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS);
       await router.replace("/");
       console.log("RestaurantOrderRate res", res);
     } catch (e) {
@@ -58,7 +62,7 @@ function RestaurantOrderRate() {
       <RestaurantOrderRateHeader />
       <div className="mt-headerNormal px-screenSpace">
         <div className="text-[15px] font-bold">
-          <span>{vendorData?.vendor.name}</span>
+          <span>{orderData?.vendor.name}</span>
           {/*<span className="text-textColorLight mr-1">(وردآورد)</span>*/}
         </div>
         <div className="flex items-center text-textColorLight text-[13px] mt-2">

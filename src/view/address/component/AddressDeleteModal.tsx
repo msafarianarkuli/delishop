@@ -85,7 +85,7 @@ function AddressDeleteModal() {
         .catch((err) => createLog("AddressDeleteModal err", err))
         .finally(() => setIsLoading(false));
     }
-  }, [data?.id, dispatch, dispatchRedux, queryClient, status, userAddress?.id, userData?.user.token]);
+  }, [addressList, data?.id, dispatch, dispatchRedux, queryClient, status, userAddress?.id, userData?.user.token]);
 
   return (
     <>

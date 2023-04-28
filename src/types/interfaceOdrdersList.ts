@@ -17,6 +17,7 @@ export interface IGetOrdersListResOrdersItems {
   address: IGetOrdersListResOrdersItemsAddress;
   created_at: string;
   sendtime: string | number;
+  rate?: IGetOrdersListResOrdersItemsRate;
 }
 
 export type TGetOrdersListResOrdersItemsProductKinds = IGetOrdersListResOrdersItemsProductKindsItems[];
@@ -45,4 +46,18 @@ interface IGetOrdersListResOrdersItemsAddress {
   address: string;
   title?: string;
   is_visible: number;
+}
+
+interface IGetOrdersListResOrdersItemsRate {
+  admin_reply?: string;
+  comment?: string;
+  created_at: string;
+  deliveryrate_num?: string;
+  id: number;
+  name: string;
+  order_fid: number;
+  overallrate_num: null;
+  publish: number;
+  updated_at: string;
+  vendor_reply?: string;
 }

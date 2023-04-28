@@ -50,6 +50,7 @@ function RestaurantOrderPreviousListShow() {
                 date={item.created_at}
                 orders={item.productKinds}
                 totalPrice={Math.round(item.topayprice / 10)}
+                hasRated={!!item.rate}
                 onClickReceipt={() => {
                   dispatch(
                     setRestaurantOrderPreviousReceiptData({

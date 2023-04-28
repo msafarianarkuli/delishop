@@ -26,6 +26,7 @@ interface IRestaurantOrderPreviousCard {
   onClickReceipt: MouseEventHandler;
   coin: number;
   totalPrice: number;
+  hasRated: boolean;
 }
 
 function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
@@ -42,6 +43,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     date,
     id,
     totalPrice,
+    hasRated,
   } = props;
 
   const status = useMemo(() => {
@@ -116,7 +118,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
           </div>
         </div>
       </div>
-      {orderStatus === 6 ? (
+      {orderStatus === 6 && !hasRated ? (
         <Link
           href={`/restaurant/order/rate/${id}`}
           className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor"

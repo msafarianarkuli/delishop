@@ -1,13 +1,10 @@
 import {AppHeaderBackBtn, Map} from "components";
 import {useMap} from "react-leaflet";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {latLng, latLngBounds} from "leaflet";
 import {useRouter} from "next/router";
-
-const data = [
-  {title: "لوکیشن من", lat: 35.704431, lng: 51.392746},
-  {title: "رستوران", lat: 35.711324, lng: 51.406417},
-];
+import {IMapPoint} from "components/map/Map";
+import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
 
 interface IRestaurantOrderMap {
   height: number;
@@ -16,31 +13,67 @@ interface IRestaurantOrderMap {
 function RestaurantOrderMap(props: IRestaurantOrderMap) {
   const {height} = props;
   const router = useRouter();
+  const {data} = useRestaurantOrderDetailData();
+  const [points, setPoints] = useState<IMapPoint[]>([]);
+
+  useEffect(() => {
+    const vendorLat = data?.vendor.lat;
+    const vendorLong = data?.vendor.long;
+    const addressLat = data?.address.latitude;
+    const addressLong = data?.address.longitude;
+    if (vendorLat && vendorLong && addressLong && addressLat) {
+      setPoints([
+        {
+          title: data?.vendor.name || "",
+          lat: vendorLat,
+          lng: vendorLong,
+        },
+        {
+          title: data?.address.title || "",
+          lat: addressLat,
+          lng: addressLong,
+        },
+      ]);
+    }
+  }, [
+    data?.address.latitude,
+    data?.address.longitude,
+    data?.address.title,
+    data?.vendor.lat,
+    data?.vendor.long,
+    data?.vendor.name,
+  ]);
+
   return (
     <>
-      <Map zoom={17} points={[data]} className="w-full" style={{height}}>
+      <Map zoom={15} points={[points]} className="w-full" style={{height}}>
         <AppHeaderBackBtn
           type="white"
           className="absolute z-[999] top-[10px] right-[10px]"
           onClick={() => router.back()}
         />
-        <MapComponent />
+        <MapComponent points={points} />
       </Map>
     </>
   );
 }
 
-function MapComponent() {
+interface IMapComponent {
+  points: IMapPoint[];
+}
+
+function MapComponent({points}: IMapComponent) {
   const map = useMap();
 
   useEffect(() => {
-    // console.log("map", map);
-    const latlng = data.map((item) => {
-      return latLng(item.lat, item.lng);
-    });
-    const bounds = latLngBounds(latlng);
-    map.fitBounds(bounds);
-  }, [map]);
+    if (points.length) {
+      const latlng = points.map((item) => {
+        return latLng(item.lat, item.lng);
+      });
+      const bounds = latLngBounds(latlng);
+      map.fitBounds(bounds);
+    }
+  }, [map, points]);
 
   return null;
 }

@@ -7,7 +7,7 @@ import RestaurantOrderDetailTotal from "view/restaurantOrderDetail/component/Res
 import RestaurantOrderDetailDescription from "view/restaurantOrderDetail/component/RestaurantOrderDetailDescription";
 import RestaurantOrderDetailReceipt from "view/restaurantOrderDetail/component/RestaurantOrderDetailReceipt";
 import {useRouter} from "next/router";
-import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/component/RestaurantOrderDetailDataProvider";
+import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
 
 function RestaurantOrderDetailContentItems() {
   const ref = useRef<HTMLDivElement>(null);

@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 import RestaurantOrderWithMap from "view/restaurantOrderDetail/component/RestaurantOrderWithMap";
 import RestaurantOrderDetailContent from "view/restaurantOrderDetail/component/RestaurantOrderDetailContent";
-import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/component/RestaurantOrderDetailDataProvider";
+import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
 
 function RestaurantOrderDetail() {
   const router = useRouter();

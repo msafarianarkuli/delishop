@@ -1,5 +1,5 @@
 import RestaurantOrderDetail from "view/restaurantOrderDetail";
-import RestaurantOrderDetailDataProvider from "view/restaurantOrderDetail/component/RestaurantOrderDetailDataProvider";
+import RestaurantOrderDetailDataProvider from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
 
 function RestaurantOrderDetailPage() {
   return (

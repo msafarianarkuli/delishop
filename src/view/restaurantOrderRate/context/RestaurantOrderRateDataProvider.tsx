@@ -2,7 +2,7 @@ import React, {createContext, useContext} from "react";
 import {UseQueryResult} from "react-query";
 import {IGetOrderDetailData} from "types/interfaceOrderDetail";
 import useOrderDetailResult from "hooks/useOrderDetailResult";
-import {QUERY_KEY_RESTAURANT_ORDER_DETAIL} from "view/restaurantOrderDetail/component/RestaurantOrderDetailDataProvider";
+import {QUERY_KEY_RESTAURANT_ORDER_DETAIL} from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
 
 // @ts-ignore
 const initialState: UseQueryResult<IGetOrderDetailData> = {};

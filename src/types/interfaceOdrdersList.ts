@@ -31,6 +31,7 @@ interface IGetOrdersListResOrdersItemsVendor {
 export interface IGetOrdersListResOrdersItemsProductKindsItems {
   id: number;
   count_num: number;
+  photo_igu?: string;
   price_prc: number;
   quality: number;
   product: IGetOrdersListResOrdersItemsProductKindsItemsProduct;

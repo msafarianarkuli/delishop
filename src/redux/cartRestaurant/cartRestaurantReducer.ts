@@ -175,7 +175,7 @@ function reorderAddedItem(order: ICartReducerListItem, item: IGetOrdersListResOr
   const extra = typeof item.extra === "object" ? Object.values(item.extra) : [];
   console.log("order.cartOrders[item.id]", order.cartOrders[item.id]);
   order.cartOrders[item.id]?.push({
-    image: "",
+    image: item.photo_igu,
     point: 0,
     extra,
     price: item.price_prc,
@@ -202,6 +202,5 @@ export const {
 } = actions;
 export const selectCartRestaurant = (state: RootState) => state.cartRestaurant;
 export const selectCartRestaurantList = (state: RootState) => state.cartRestaurant.cartList;
-export const selectCartRestaurantLoadFromStorage = (state: RootState) => state.cartRestaurant.isLoadedFromStorage;
 
 export default reducer;

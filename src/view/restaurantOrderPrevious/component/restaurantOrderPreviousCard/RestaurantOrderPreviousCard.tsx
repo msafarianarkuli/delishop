@@ -3,13 +3,12 @@ import {IconCoin, IconRoundedLeft} from "assets/icons";
 import {Button} from "antd";
 import dayjs from "dayjs";
 import jalaliday from "jalaliday";
-import styles from "view/restaurantOrderPrevious/component/restaurantOrderPreviousCard/restaurantOrderPreviousCard.module.scss";
 import {number2Digits} from "utils/utils";
 import Link from "next/link";
-import img1 from "assets/images/res-order-barger.png";
 import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
 import {OrderStatus} from "utils/Const";
 import classNames from "classnames";
+import styles from "view/restaurantOrderPrevious/component/restaurantOrderPreviousCard/restaurantOrderPreviousCard.module.scss";
 
 dayjs.extend(jalaliday);
 
@@ -88,7 +87,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
               <div key={index} className="ml-3">
                 <div className="relative">
                   <img
-                    src={img1.src}
+                    src={item.photo_igu}
                     alt={item.product.displayname}
                     className={styles.restaurant_order_previous_card_order_list_image}
                   />

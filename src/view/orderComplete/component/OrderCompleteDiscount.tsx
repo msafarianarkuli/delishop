@@ -83,7 +83,7 @@ function OrderCompleteDiscount() {
             setText(value);
           }}
           suffix={
-            <Button loading={isLoading} htmlType="button" onClick={onClick} className={btnClassName}>
+            <Button disabled={!text} loading={isLoading} htmlType="button" onClick={onClick} className={btnClassName}>
               ثبت
             </Button>
           }

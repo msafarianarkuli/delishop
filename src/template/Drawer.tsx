@@ -9,6 +9,7 @@ import {useCallback} from "react";
 import {Button} from "antd";
 import useDrawerRoutes from "template/hooks/useDrawerRoutes";
 import {useSession} from "next-auth/react";
+import {iranSans} from "assets/fonts/iranSansFont";
 
 function Drawer() {
   const isDrawerOpen = useSelector(selectIsDrawerOpen);
@@ -24,7 +25,7 @@ function Drawer() {
     <CustomDrawer
       placement="right"
       width={320}
-      className={`${styles.drawer} text-textColor font-IranSans text-[14px]`}
+      className={`${styles.drawer} text-textColor ${iranSans.variable} font-IranSans text-[14px]`}
       rootClassName="z-[10000]"
       open={isDrawerOpen}
       closable={false}

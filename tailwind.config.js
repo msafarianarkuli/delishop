@@ -13,7 +13,7 @@ module.exports = {
       },
       fontFamily: {
         IranSans: [
-          "IRANSans",
+          "var(--font-iransans)",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",

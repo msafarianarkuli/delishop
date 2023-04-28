@@ -8,7 +8,6 @@ import {Provider} from "react-redux";
 import {SessionProvider} from "next-auth/react";
 import wrapper from "redux/store";
 import "styles/globals.scss";
-import "assets/fonts/IRANSans.css";
 
 function App({Component, ...rest}: AppProps) {
   const {

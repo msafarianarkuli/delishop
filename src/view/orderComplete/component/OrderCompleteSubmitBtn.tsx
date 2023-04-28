@@ -20,6 +20,8 @@ import {clearCartSupermarket} from "redux/cartSupermraket/cartSupermarketReducer
 import {useDispatch} from "react-redux";
 import {useQueryClient} from "react-query";
 import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
+import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
+import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -49,12 +51,13 @@ function OrderCompleteSubmitBtnBody() {
 function OrderCompleteSubmitBtnLeft() {
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress} = useOrderComplete();
 
   const {deliveryToman} = useDeliveryPrice({
     location1: {
-      lat: restaurant?.latitude || supermarket?.latitude || 0,
-      long: restaurant?.longitude || supermarket?.longitude || 0,
+      lat: data?.lat || 0,
+      long: data?.long || 0,
     },
     location2: {
       lat: deliveryAddress?.latitude || 0,
@@ -159,7 +162,10 @@ function OrderCompleteSubmitBtn() {
                   if (res.data.message) {
                     dispatch(setOrderCompleteError(res.data.message));
                   } else if (res.data.Data) {
+                    // invalidate for getData again
                     queryClient.invalidateQueries(QUERY_KEY_USER_COIN);
+                    queryClient.invalidateQueries(QUERY_KEY_RESTAURANT_ORDERS_ACTIVE);
+
                     if (res.data.Data?.payurl) {
                       const url = res.data.Data.payurl;
                       window.open(url, "_blank");

@@ -7,6 +7,7 @@ import useCartSupermarket from "hooks/useCartSupermarket";
 import {useMemo} from "react";
 import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
+import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 
 dayjs.extend(jalaliday);
 
@@ -14,12 +15,13 @@ function OrderCompleteReceipt() {
   const type = useTypeColor();
   const restaurant = useCartRestaurant();
   const supermarket = useCartSupermarket();
+  const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress, discountPrice} = useOrderComplete();
 
   const {deliveryToman} = useDeliveryPrice({
     location1: {
-      lat: restaurant?.latitude || supermarket?.latitude || 0,
-      long: restaurant?.longitude || supermarket?.longitude || 0,
+      lat: data?.lat || 0,
+      long: data?.long || 0,
     },
     location2: {
       lat: deliveryAddress?.latitude || 0,

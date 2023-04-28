@@ -16,9 +16,6 @@ export interface ICartSupermarketReducer {
 const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
   title: null,
-  openHours: null,
-  latitude: 0,
-  longitude: 0,
   cartOrders: {},
   totalPrice: 0,
   totalOrderCount: 0,
@@ -40,10 +37,7 @@ const cartSupermarketReducer = createSlice({
       const payload = action.payload;
       state.cart.vendorId = payload.vendorId;
       state.cart.title = payload.title;
-      state.cart.openHours = payload.openHours || null;
       state.cart.totalPoint = payload.point || 0;
-      state.cart.latitude = payload.latitude || 0;
-      state.cart.longitude = payload.longitude || 0;
       state.cart.cartOrders = {};
     },
     setCartSupermarketItem: (state, action: PayloadAction<Omit<ISetCartReducerItem, "vendorId">>) => {

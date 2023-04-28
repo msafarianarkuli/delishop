@@ -12,13 +12,13 @@ const initialState: UseInfiniteQueryResult<IGetOrdersRes> = {};
 
 const RestaurantOrderActiveData = createContext<UseInfiniteQueryResult<IGetOrdersRes>>(initialState);
 
-export const QUERY_KEY_ORDERS_ACTIVE = "ordersActive";
+export const QUERY_KEY_RESTAURANT_ORDERS_ACTIVE = "restaurantOrdersActive";
 
 const staleTime = 10 * 60 * 1000;
 
 function RestaurantOrderActiveDataProvider({children}: IRestaurantOrderActiveDataProvider) {
   const result = useOrderListResult({
-    queryKey: QUERY_KEY_ORDERS_ACTIVE,
+    queryKey: QUERY_KEY_RESTAURANT_ORDERS_ACTIVE,
     categoryId: 1,
     staleTime,
     statusId: [1, 2, 3, 4, 5],

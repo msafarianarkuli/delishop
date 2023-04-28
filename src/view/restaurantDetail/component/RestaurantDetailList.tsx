@@ -87,9 +87,6 @@ function RestaurantDetailList() {
                               vendorId: id,
                               title: data?.vendor?.name,
                               point: data?.vendor.point,
-                              latitude: data?.vendor.lat,
-                              longitude: data?.vendor.long,
-                              openHours: data?.vendor.open_hours,
                             })
                           );
                         }

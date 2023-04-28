@@ -49,7 +49,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
             {/*<span>({address})</span>*/}
           </div>
         </div>
-        <Link href={`/restaurant/order/${id}?map=1`} target="_blank" className="flex items-center text-primary">
+        <Link href={`/restaurant/order/${id}?map=1`} className="flex items-center text-primary">
           <span className="text-[15px] font-semibold">مشاهده سفارش</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>

@@ -7,10 +7,12 @@ import {
   IRemoveCartReducerCartListOrderExtra,
   IRemoveCartReducerLastItem,
   ISetCartReducerItem,
+  ISetCartReducerReorder,
   ISetCartReducerVendorData,
 } from "types/interfaceCartReducer";
 import {findOrderIndex} from "utils/cartReducerUtils";
 import {HYDRATE} from "next-redux-wrapper";
+import {IGetOrdersListResOrdersItemsProductKindsItems} from "types/interfaceOdrdersList";
 
 const initialCartOrder: ICartReducerListItem = {
   vendorId: null,
@@ -134,6 +136,30 @@ const cartRestaurantReducer = createSlice({
       state.cartList = action.payload?.cartList || [];
       state.isLoadedFromStorage = true;
     },
+    setCartRestaurantReorder: (state, action: PayloadAction<ISetCartReducerReorder>) => {
+      state.cartList = state.cartList.filter((item) => item.vendorId !== action.payload.vendorId);
+      const order: ICartReducerListItem = {
+        cartOrders: {},
+        vendorId: action.payload.vendorId,
+        title: action.payload.title,
+        totalPoint: action.payload.point || 0,
+        totalOrderCount: 0,
+        totalPrice: 0,
+      };
+      action.payload.productKinds.forEach((item) => {
+        if (!order.cartOrders.hasOwnProperty(item.id)) {
+          order.cartOrders[item.id] = [];
+        }
+        if (item.count_num > 1) {
+          Array.from(new Array(item.count_num), (_, i) => i + 1).forEach(() => {
+            reorderAddedItem(order, item);
+          });
+        } else {
+          reorderAddedItem(order, item);
+        }
+      });
+      state.cartList.push(order);
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -144,6 +170,22 @@ const cartRestaurantReducer = createSlice({
     },
   },
 });
+
+function reorderAddedItem(order: ICartReducerListItem, item: IGetOrdersListResOrdersItemsProductKindsItems) {
+  const extra = typeof item.extra === "object" ? Object.values(item.extra) : [];
+  console.log("order.cartOrders[item.id]", order.cartOrders[item.id]);
+  order.cartOrders[item.id]?.push({
+    image: "",
+    point: 0,
+    extra,
+    price: item.price_prc,
+    title: item.product.displayname,
+  });
+  const totalPrice = item.price_prc + extra.reduce((arr, current) => arr + current.price, 0);
+  order.totalOrderCount += 1;
+  order.totalPoint += 0;
+  order.totalPrice += totalPrice;
+}
 
 const {reducer, actions} = cartRestaurantReducer;
 
@@ -156,8 +198,10 @@ export const {
   removeCartRestaurantCartListCartOrder,
   removeCartRestaurantCartListOrder,
   removeCartRestaurantCartListOrderExtra,
+  setCartRestaurantReorder,
 } = actions;
 export const selectCartRestaurant = (state: RootState) => state.cartRestaurant;
 export const selectCartRestaurantList = (state: RootState) => state.cartRestaurant.cartList;
+export const selectCartRestaurantLoadFromStorage = (state: RootState) => state.cartRestaurant.isLoadedFromStorage;
 
 export default reducer;

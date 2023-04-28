@@ -8,6 +8,7 @@ import {
   removeCartRestaurantCartListOrderExtra,
   setCartRestaurantItem,
   setCartRestaurantVendorData,
+  setCartRestaurantReorder,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {AppStartListening} from "redux/store";
 import {ICartReducer} from "types/interfaceCartReducer";
@@ -22,7 +23,8 @@ addAppListener({
     clearCartRestaurantCartList,
     removeCartRestaurantCartListCartOrder,
     removeCartRestaurantCartListOrder,
-    removeCartRestaurantCartListOrderExtra
+    removeCartRestaurantCartListOrderExtra,
+    setCartRestaurantReorder
   ),
   effect: (_, api) => {
     const store = api.getState();

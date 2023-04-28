@@ -28,13 +28,13 @@ interface IGetOrdersListResOrdersItemsVendor {
   logo?: string;
 }
 
-interface IGetOrdersListResOrdersItemsProductKindsItems {
+export interface IGetOrdersListResOrdersItemsProductKindsItems {
   id: number;
   count_num: number;
   price_prc: number;
   quality: number;
   product: IGetOrdersListResOrdersItemsProductKindsItemsProduct;
-  extra: boolean;
+  extra: {[x: number]: IGetOrdersListResOrdersItemsProductKindsItemsExtraItems} | boolean;
 }
 
 interface IGetOrdersListResOrdersItemsProductKindsItemsProduct {
@@ -60,4 +60,10 @@ interface IGetOrdersListResOrdersItemsRate {
   publish: number;
   updated_at: string;
   vendor_reply?: string;
+}
+
+interface IGetOrdersListResOrdersItemsProductKindsItemsExtraItems {
+  id: number;
+  name: string;
+  price: number;
 }

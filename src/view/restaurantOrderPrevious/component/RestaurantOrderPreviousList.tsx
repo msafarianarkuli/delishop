@@ -6,6 +6,9 @@ import {
   useRestaurantOrderPreviousReceiptAction,
 } from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousReceiptProvider";
 import {useInView} from "react-intersection-observer";
+import {useDispatch} from "react-redux";
+import {setCartRestaurantReorder} from "redux/cartRestaurant/cartRestaurantReducer";
+import {useRouter} from "next/router";
 
 function RestaurantOrderPreviousList() {
   const {data, isLoading} = useRestaurantOrderPreviousData();
@@ -23,6 +26,8 @@ function RestaurantOrderPreviousListShow() {
   const dispatch = useRestaurantOrderPreviousReceiptAction();
   const {data, fetchNextPage} = useRestaurantOrderPreviousData();
   const {ref, inView} = useInView();
+  const reduxDispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (inView) {
@@ -59,7 +64,17 @@ function RestaurantOrderPreviousListShow() {
                     })
                   );
                 }}
-                onClickReOrder={() => {}}
+                onClickReOrder={() => {
+                  reduxDispatch(
+                    setCartRestaurantReorder({
+                      vendorId: item.vendor.id.toString(),
+                      title: item.vendor.name,
+                      point: 0,
+                      productKinds: item.productKinds,
+                    })
+                  );
+                  router.push(`/ordercomplete/${item.vendor.id}`);
+                }}
               />
             </div>
           );

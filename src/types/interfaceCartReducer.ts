@@ -1,3 +1,5 @@
+import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
+
 export interface ICartReducer {
   cartList: TCartReducerList;
   isLoadedFromStorage: boolean;
@@ -61,4 +63,8 @@ export interface IRemoveCartReducerCartListOrderExtra {
   extraId: number;
   vendorId: string | null;
   productId: number;
+}
+
+export interface ISetCartReducerReorder extends ISetCartReducerVendorData {
+  productKinds: TGetOrdersListResOrdersItemsProductKinds;
 }

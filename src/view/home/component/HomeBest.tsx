@@ -1,43 +1,37 @@
 import HomeVendorCard from "view/home/component/homeVendorCard/HomeVendorCard";
 import {IconRoundedLeft} from "assets/icons";
 import HomeTitle from "view/home/component/HomeTitle";
-import img1 from "assets/images/res01.png";
-
-const arr = Array.from(new Array(5), (_, i) => ({
-  id: i + 1,
-  image: img1.src,
-  title: "ساندویچ برگر 99",
-  address: "خیابان ولی عصر",
-  description: "فست فود برگر پیتزا ساندویچ",
-  star: 4,
-  coin: 15,
-  time: 35,
-}));
+import {useHomeBestData} from "view/home/context/HomeBestDataProvider";
+import Link from "next/link";
 
 function HomeBest() {
+  const {data} = useHomeBestData();
+  if (!data || !data.pages[0].vendors.length) return null;
   return (
     <div>
       <div className="flex items-center justify-between px-screenSpace mb-5">
         <HomeTitle title="برترین ها" />
-        <div className="flex items-center text-primary text-[15px] font-semibold">
+        <Link href="/restaurant?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
           <span>همه</span>
           <IconRoundedLeft className="w-5 h-5" />
-        </div>
+        </Link>
       </div>
       <div className="flex items-center overflow-auto pb-5">
-        {arr.map((item) => {
-          return (
-            <HomeVendorCard
-              key={item.id}
-              image={item.image}
-              title={item.title}
-              address={item.address}
-              description={item.description}
-              star={item.star}
-              time={item.time}
-              coin={item.coin}
-            />
-          );
+        {data.pages.map((value) => {
+          return value.vendors.map((item) => {
+            return (
+              <Link key={item.id} href={`/restaurant/${item.id}`}>
+                <HomeVendorCard
+                  image={item.banner}
+                  title={item.name}
+                  description={item.about}
+                  star={+item.rate}
+                  time={item.max_sendtime}
+                  coin={item.point}
+                />
+              </Link>
+            );
+          });
         })}
       </div>
     </div>

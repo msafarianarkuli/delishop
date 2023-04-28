@@ -9,12 +9,13 @@ import getVendors from "api/getVendors";
 interface IUseVendorListResult {
   queryKey: string;
   categoryId: number;
-  filterQuery: string[];
+  filterQuery?: string[];
   staleTime?: number;
+  initialFilter?: {[x: string]: string};
 }
 
 function useVendorListResult(props: IUseVendorListResult) {
-  const {queryKey, categoryId, filterQuery, staleTime} = props;
+  const {queryKey, categoryId, filterQuery, staleTime, initialFilter = {}} = props;
   const router = useRouter();
   const {isStorageLoaded, location, userAddress, isUserAddressStorageLoaded} = useSelector(selectAddressMap);
 
@@ -23,6 +24,7 @@ function useVendorListResult(props: IUseVendorListResult) {
   const params = useMemo(() => {
     let tmpParams: {[x: string]: any} = {
       "category[]": categoryId,
+      ...initialFilter,
     };
     if (router.isReady) {
       tmpParams = {
@@ -42,7 +44,7 @@ function useVendorListResult(props: IUseVendorListResult) {
           tmpParams.lon = location.lng;
         }
       }
-      filterQuery.forEach((item) => {
+      filterQuery?.forEach((item) => {
         if (router.query.hasOwnProperty(item)) {
           tmpParams[item] = router.query[item];
         }
@@ -75,7 +77,7 @@ function useVendorListResult(props: IUseVendorListResult) {
         tmpKeys = createKeyForUseQuery(tmpKeys, location.lng.toString());
       }
     }
-    filterQuery.forEach((item) => {
+    filterQuery?.forEach((item) => {
       if (router.query.hasOwnProperty(item)) {
         const tmp = router.query[item];
         tmpKeys = createKeyForUseQuery(tmpKeys, tmp);

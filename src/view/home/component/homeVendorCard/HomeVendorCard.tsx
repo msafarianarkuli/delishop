@@ -3,19 +3,18 @@ import {useMemo} from "react";
 import {IconClock, IconCoin, IconStarOutline, IconStarFill} from "assets/icons";
 
 interface IHomeBestCard {
-  image: string;
+  image?: string;
   title: string;
-  address: string;
   description: string;
   star: number;
-  time: number;
+  time: string;
   coin: number;
 }
 
 const maxStar = 5;
 
 function HomeVendorCard(props: IHomeBestCard) {
-  const {image, coin, address, star, title, time, description} = props;
+  const {image, coin, star, title, time, description} = props;
 
   const starFill = useMemo(() => Array.from(new Array(star < maxStar ? Math.round(star) : 0), (_, i) => i + 1), [star]);
   const starEmpty = useMemo(
@@ -32,7 +31,7 @@ function HomeVendorCard(props: IHomeBestCard) {
         <div className="flex items-center justify-between mb-4">
           <div>
             <span className="font-bold">{title}</span>
-            <span className="text-[12px] font-light text-textColorLight mr-2">({address})</span>
+            {/*<span className="text-[12px] font-light text-textColorLight mr-2">({address})</span>*/}
           </div>
           <div className="flex items-center flex-row-reverse">
             {starFill.map((item) => (

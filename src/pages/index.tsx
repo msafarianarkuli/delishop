@@ -6,15 +6,18 @@ import getBanners, {QUERY_KEY_HOME_BANNERS} from "api/getBanners";
 import HomeAdsDataProvider from "view/home/context/HomeAdsDataProvider";
 import getAds, {QUERY_KEY_HOME_ADS} from "api/getAds";
 import HomeOrderDataProvider from "view/home/context/HomeOrderDataProvider";
+import HomeBestDataProvider from "view/home/context/HomeBestDataProvider";
 
 export default function HomePage() {
   return (
     <HomeOrderDataProvider>
-      <HomeBannersDataProvider>
-        <HomeAdsDataProvider>
-          <Home />
-        </HomeAdsDataProvider>
-      </HomeBannersDataProvider>
+      <HomeBestDataProvider>
+        <HomeBannersDataProvider>
+          <HomeAdsDataProvider>
+            <Home />
+          </HomeAdsDataProvider>
+        </HomeBannersDataProvider>
+      </HomeBestDataProvider>
     </HomeOrderDataProvider>
   );
 }
@@ -34,5 +37,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 60,
   };
 };

@@ -24,6 +24,14 @@ interface IProfileForm {
   anniversary?: DayValue;
 }
 
+interface IUpdateUserData {
+  name: string;
+  birthday?: string;
+  email?: string;
+  gender?: string;
+  anniversary?: string;
+}
+
 interface IBody {
   name: string;
   birthday?: string;
@@ -53,7 +61,7 @@ function ProfileForm() {
     reset,
     formState: {isSubmitting},
   } = methods;
-  const {data} = useSession();
+  const {data, update} = useSession();
 
   useEffect(() => {
     setValue("name", data?.user.name || "");
@@ -129,36 +137,34 @@ function ProfileForm() {
       const resData = res.data;
       if (resData.name && data?.user) {
         const {name, birthday, gender, anniversary_date, email} = resData;
-        data.user.name = name;
+        // data.user.name = name;
+        const updateUserData: IUpdateUserData = {
+          name,
+        };
         const resetData: IProfileForm = {
           name,
         };
-        let updateUrl = API.UPDATE_USER_SESSION + `?name=${encodeURI(resData.name)}`;
         if (email) {
-          updateUrl += `&email=${encodeURI(email)}`;
-          data.user.email = email;
+          updateUserData.email = email;
           resetData.email = email;
         }
         if (gender != null) {
-          updateUrl += `&gender=${encodeURI(gender.toString())}`;
+          updateUserData.gender = gender.toString();
           resetData.gender = gender.toString();
-          data.user.gender = gender.toString();
         }
         if (birthday) {
-          updateUrl += `&birthday=${encodeURI(birthday)}`;
-          data.user.birthday = birthday;
+          updateUserData.birthday = birthday;
           const day = dayjs(birthday).calendar("jalali");
           resetData.birthday = {year: day.year(), month: day.month() + 1, day: day.date()};
         }
         if (anniversary_date) {
-          updateUrl += `&anniversary=${encodeURI(anniversary_date)}`;
-          data.user.anniversary_date = anniversary_date;
+          updateUserData.anniversary = anniversary_date;
           const day = dayjs(anniversary_date).calendar("jalali");
           resetData.anniversary = {year: day.year(), month: day.month() + 1, day: day.date()};
         }
-        const resUpdateSession = await axiosService({url: updateUrl, method: "get"});
+        const updateRes = await update(updateUserData);
         reset(resetData);
-        console.log("onSubmit updateProfile resUpdateSession", resUpdateSession);
+        console.log("updateRes", updateRes);
       }
     } catch (e) {
       console.log("onSubmit updateProfile error", e);

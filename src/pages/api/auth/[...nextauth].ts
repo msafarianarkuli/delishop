@@ -1,13 +1,13 @@
-import NextAuth, {NextAuthOptions, Session} from "next-auth";
+import NextAuth, {AuthOptions, Session} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import {JWT} from "next-auth/jwt";
 import {IUser} from "types/interfaces";
-import {NextApiRequest, NextApiResponse} from "next";
 import verifyCode from "api/verifyCode";
 
 type sessionToken = JWT & IUser;
 
-export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
+// export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
+export const authOptions: AuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -60,28 +60,25 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
     }),
   ],
   callbacks: {
-    async jwt({token, user}) {
+    async jwt({token, user, trigger, session}) {
       // console.log("jwt token", token);
       // console.log("jwt user", user);
-      const name = req.query?.name;
-      const birthday = req.query?.birthday;
-      const gender = req.query?.gender;
-      const anniversary_date = req.query?.anniversary;
-      const email = req.query?.email;
-      if (name && !Array.isArray(name)) {
-        token.name = decodeURI(name);
-      }
-      if (email && !Array.isArray(email)) {
-        token.email = decodeURI(email);
-      }
-      if (birthday && !Array.isArray(birthday)) {
-        token.birthday = decodeURI(birthday);
-      }
-      if (gender && !Array.isArray(gender)) {
-        token.gender = decodeURI(gender);
-      }
-      if (anniversary_date && !Array.isArray(anniversary_date)) {
-        token.anniversary_date = decodeURI(anniversary_date);
+      if (trigger === "update") {
+        if (session?.name) {
+          token.name = session.name;
+        }
+        if (session?.email) {
+          token.email = session?.email;
+        }
+        if (session?.gender) {
+          token.gender = session.gender;
+        }
+        if (session?.birthday) {
+          token.birthday = session.birthday;
+        }
+        if (session?.anniversary_date) {
+          token.anniversary_date = session.anniversary_date;
+        }
       }
       return {...token, ...user};
     },
@@ -115,10 +112,12 @@ export const authOptions = (req: NextApiRequest): NextAuthOptions => ({
     signOut: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  return NextAuth(req, res, authOptions(req));
 };
 
-export default handler;
+// const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+//   return NextAuth(req, res, authOptions(req));
+// };
+//
+// export default handler;
+
+export default NextAuth(authOptions);

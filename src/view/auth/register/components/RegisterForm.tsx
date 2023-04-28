@@ -1,4 +1,3 @@
-import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import RegisterSubmit from "view/auth/register/components/RegisterSubmit";
 import RegisterInput from "view/auth/register/components/RegisterInput";
@@ -8,15 +7,13 @@ import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 
-// import {useRouter} from "next/router";
-
 export interface IRegisterForm {
   name: string;
   introPhone: string;
 }
 
 function RegisterForm() {
-  const {data} = useSession();
+  const {data, update} = useSession();
   const router = useRouter();
   const method = useForm<IRegisterForm>({
     mode: "all",
@@ -31,8 +28,7 @@ function RegisterForm() {
         name: payload.name,
       };
       const res = await axiosService({url: API.REGISTER_ADDED_NAME, method: "post", body, token: data?.user.token});
-      const updateUrl = API.UPDATE_USER_SESSION + `?name=${encodeURI(payload.name)}`;
-      const resUpdateSession = await axiosService({url: updateUrl, method: "get"});
+      const resUpdateSession = await update({name: payload.name});
       createLog("res RegisterForm", res);
       createLog("resUpdateSession RegisterForm", resUpdateSession);
       const callbackUrl = router.query?.callbackUrl;

@@ -58,6 +58,7 @@ import IconFilter from "assets/icons/IconFilter";
 import IconDeleteAddressLight from "assets/icons/IconDeleteAddressLight";
 import IconEditAddressLight from "assets/icons/IconEditAddressLight";
 import IconShop from "assets/icons/IconShop";
+import IconCoinProfile from "assets/icons/IconCoinProfile";
 
 export type TIcons = ({className}: {className: string}) => JSX.Element;
 
@@ -122,4 +123,5 @@ export {
   IconDeleteAddressLight,
   IconEditAddressLight,
   IconShop,
+  IconCoinProfile,
 };

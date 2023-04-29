@@ -17,7 +17,7 @@ function ProfileAwardReceivedCard(props: IAwardReceivedCard) {
   const [isTooltip, setIsTooltip] = useState(false);
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
+    let timeout: NodeJS.Timeout;
     if (isTooltip) {
       timeout = setTimeout(() => setIsTooltip(false), 2000);
     }

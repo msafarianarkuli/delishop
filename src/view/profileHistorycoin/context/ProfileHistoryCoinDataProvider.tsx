@@ -1,10 +1,7 @@
-import React, {createContext, useContext, useMemo} from "react";
+import {createContext, useContext} from "react";
+import useCoinHistoryListResult from "hooks/useCoinHistoryListResult";
 import {IUserCoinHistoryData} from "types/interfaceUserCoinHistory";
-import {useRouter} from "next/router";
-import {useSession} from "next-auth/react";
-import {useInfiniteQuery, UseInfiniteQueryResult} from "react-query";
-import getUserCoinHistory, {userAwardReceivedCouponQuery} from "api/getUserCoinHistory";
-import {hasNextPage} from "utils/utils";
+import {UseInfiniteQueryResult} from "react-query";
 
 interface IProfileHistoryCoinDataProvider {
   children: JSX.Element;
@@ -20,34 +17,11 @@ export const QUERY_KEY_USER_COIN_HISTORY = "userCoinHistory";
 const staleTime = 10 * 60 * 1000;
 
 function ProfileHistoryCoinDataProvider({children}: IProfileHistoryCoinDataProvider) {
-  const router = useRouter();
-  const {status, data} = useSession();
-
-  const params = useMemo(
-    () => ({
-      [userAwardReceivedCouponQuery]: 0,
-    }),
-    []
-  );
-
-  const useQueryEnabled = useMemo(() => status === "authenticated" && router.isReady, [router.isReady, status]);
-
-  const result = useInfiniteQuery(
-    QUERY_KEY_USER_COIN_HISTORY,
-    ({pageParam}) => getUserCoinHistory({params, token: data?.user.token || "", pageParam}),
-    {
-      staleTime,
-      enabled: useQueryEnabled,
-      getNextPageParam: (lastPage, allPages) => {
-        const total = lastPage.totalCount;
-        const page = allPages.length;
-        if (hasNextPage({page, total})) {
-          return page + 1;
-        }
-        return undefined;
-      },
-    }
-  );
+  const result = useCoinHistoryListResult({
+    queryKey: QUERY_KEY_USER_COIN_HISTORY,
+    couponId: 0,
+    staleTime,
+  });
 
   return <ProfileHistoryCoinDataContext.Provider value={result}>{children}</ProfileHistoryCoinDataContext.Provider>;
 }

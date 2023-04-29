@@ -11,8 +11,6 @@ dayjs.extend(jalaliday);
 function ProfileHistoryCoinList() {
   const {data, isLoading} = useProfileHistoryCoinData();
 
-  console.log("isLoading", isLoading);
-  console.log("data", data?.pages[0].points_history.length);
   return (
     <div className="px-screenSpace mt-[132px]">
       {isLoading ? <div>loading ...</div> : null}

@@ -1,20 +1,34 @@
-import React from "react";
+import {useEffect} from "react";
 import ProfileWalletCouponCard from "view/profileWallet/component/ProfileWalletCoupon/ProfileWalletCouponCard";
-
-const data = Array.from(new Array(10), (_, i) => i + 1);
+import {useProfileWalletCouponData} from "view/profileWallet/context/ProfileWalletCouponDataProvider";
+import {useInView} from "react-intersection-observer";
 
 function ProfileWalletCoupon() {
+  const {data, fetchNextPage} = useProfileWalletCouponData();
+  const {ref, inView} = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
   return (
     <div>
-      {data.map((item) => {
-        return (
-          <ProfileWalletCouponCard
-            key={item}
-            title="افزایش اعتبار کیف پول"
-            value="50+ هزارتومان"
-            description="5000 سکه مورد نیاز"
-          />
-        );
+      {data?.pages.map((value, index, array) => {
+        return value.points_history.map((item, idx, arr) => {
+          const condition = array.length - 1 === index && arr.length - 1 === idx;
+          const tmpRef = condition ? ref : null;
+          return (
+            <div key={idx} ref={tmpRef}>
+              <ProfileWalletCouponCard
+                title={item.description}
+                value="50+ هزارتومان"
+                description="5000 سکه مورد نیاز"
+              />
+            </div>
+          );
+        });
       })}
     </div>
   );

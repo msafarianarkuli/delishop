@@ -29,7 +29,7 @@ function decrease(value: string): string {
   }
 }
 
-function reducer(state: string, action: IAction) {
+function reducer(state: string, action: IAction): string {
   switch (action.type) {
     case SET_NUMBER:
       return action.payload;

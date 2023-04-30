@@ -13,10 +13,11 @@ interface ISupermarketSubcategoryCard {
   count?: number;
   onAddClick: () => void;
   onMinusClick: () => void;
+  disabled?: boolean;
 }
 
 function SupermarketSubcategoryCard(props: ISupermarketSubcategoryCard) {
-  const {image, description, price, title, coin, count, onMinusClick, onAddClick} = props;
+  const {image, description, price, title, coin, count, onMinusClick, onAddClick, disabled} = props;
   const counterClassNames = classNames({
     "flex-row-reverse w-[100px] h-[34px] mx-auto": true,
     [styles.supermarket_subcategory_card_counter]: count,
@@ -25,6 +26,7 @@ function SupermarketSubcategoryCard(props: ISupermarketSubcategoryCard) {
   return (
     <div className={styles.supermarket_subcategory_card_container}>
       <Counter
+        disabled={disabled}
         count={count}
         className={counterClassNames}
         primaryType="supermarket"

@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useSupermarketCategorySubcategoryFilter} from "view/supermarketCategory/context/SupermarketCategorySubcategoryFilterProvider";
 import {useSupermarketCategoryId} from "view/supermarketCategory/context/SupermarketCategoryIdProvider";
 import {useSupermarketCategoryListData} from "view/supermarketCategory/context/SupermarketCategoryListDataProvider";
+import useVendorWorkTime from "hooks/useVendorWorkTime";
 
 function SupermarketCategoryProductsList() {
   const {data} = useSupermarketCategoryData();
@@ -21,6 +22,7 @@ function SupermarketCategoryProductsList() {
   const dispatch = useDispatch();
   const filterId = useSupermarketCategorySubcategoryFilter();
   const {categoryId, vendorId} = useSupermarketCategoryId();
+  const {time} = useVendorWorkTime({open_hours: supermarketData?.vendor.open_hours});
 
   const finalData = useMemo(() => {
     if (filterId) {
@@ -48,6 +50,7 @@ function SupermarketCategoryProductsList() {
                 return (
                   <Link key={index} href={`/supermarket/product/${item.id}`} prefetch={false}>
                     <SupermarketCategoryCard
+                      disabled={!time.length || !supermarketData?.vendor.open}
                       title={item.displayname}
                       image={product.photo_igu}
                       price={finalPrice}

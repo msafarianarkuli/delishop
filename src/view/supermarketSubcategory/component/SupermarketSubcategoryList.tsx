@@ -11,6 +11,7 @@ import {
 } from "redux/cartSupermraket/cartSupermarketReducer";
 import {useRouter} from "next/router";
 import {useSupermarketSubcategoryCategoryList} from "view/supermarketSubcategory/context/SupermarketSubcategoryCategoryListDataProvider";
+import useVendorWorkTime from "hooks/useVendorWorkTime";
 
 function SupermarketSubcategoryList() {
   const {data} = useSupermarketSubcategoryData();
@@ -18,6 +19,7 @@ function SupermarketSubcategoryList() {
   const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
   const router = useRouter();
+  const {time} = useVendorWorkTime({open_hours: supermarket?.vendor.open_hours});
 
   const vendorId = useMemo(() => {
     const id = router.query.id;
@@ -42,6 +44,7 @@ function SupermarketSubcategoryList() {
             prefetch={false}
           >
             <SupermarketSubcategoryCard
+              disabled={!time.length || !supermarket?.vendor.open}
               title={item.displayname}
               description={item.description_te}
               image={product.photo_igu}

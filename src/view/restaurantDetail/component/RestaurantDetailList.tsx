@@ -18,6 +18,7 @@ import {
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
+import useVendorWorkTime from "hooks/useVendorWorkTime";
 
 function RestaurantDetailList() {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,6 +28,7 @@ function RestaurantDetailList() {
   const router = useRouter();
   const vendor = useCartRestaurant();
   const {isOpen} = useRestaurantDetailExtra();
+  const {time} = useVendorWorkTime({open_hours: data?.vendor.open_hours});
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -72,6 +74,7 @@ function RestaurantDetailList() {
               return (
                 <Link key={item.id} href={`product/${item.id}`} className="block mb-5">
                   <RestaurantDetailCard
+                    disabled={!time.length || !data?.vendor.open}
                     image={product?.photo_igu}
                     title={item.displayname}
                     description={product?.description}

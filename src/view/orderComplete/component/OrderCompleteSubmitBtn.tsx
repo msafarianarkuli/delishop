@@ -22,6 +22,7 @@ import {useQueryClient} from "react-query";
 import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
+import useVendorWorkTime from "hooks/useVendorWorkTime";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -89,11 +90,14 @@ function OrderCompleteSubmitBtn() {
   const vendor = useCartRestaurant();
   const supermarket = useCartSupermarket();
   const queryClient = useQueryClient();
+  const {data: dataVendor} = useOrderCompleteVendorDetailData();
+  const {time} = useVendorWorkTime({open_hours: dataVendor?.open_hours});
 
   return (
     <SubmitBuyBtn
       type={type}
       loading={isLoading}
+      disabled={!time.length || !dataVendor?.open}
       onClick={() => {
         if (status === "authenticated") {
           const sendtime = deliveryTime?.isTemp ? "100" : deliveryTime?.from;

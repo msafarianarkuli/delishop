@@ -14,6 +14,7 @@ interface ICounter {
   showNumberOnlyPositiveNumber?: boolean;
   className?: string;
   primaryType?: TUseTypeColor;
+  disabled?: boolean;
 }
 
 function Counter(props: ICounter) {
@@ -27,6 +28,7 @@ function Counter(props: ICounter) {
     showNumberOnlyPositiveNumber,
     className = "",
     primaryType = "default",
+    disabled,
   } = props;
 
   function showNumber() {
@@ -58,7 +60,7 @@ function Counter(props: ICounter) {
     [className]: className,
   });
   const addClassName = classNames({
-    "flex items-center justify-center w-[30px] h-[30px] rounded-full": true,
+    "flex items-center justify-center w-[30px] h-[30px] rounded-full disabled:bg-gray-300": true,
     "bg-primary": primaryType === "default",
     "bg-primarySupermarket": primaryType === "supermarket",
   });
@@ -66,6 +68,7 @@ function Counter(props: ICounter) {
   return (
     <div className={container}>
       <button
+        disabled={disabled}
         className={addClassName}
         onClick={(e) => {
           e.preventDefault();

@@ -11,10 +11,11 @@ export interface IRestaurantDetailCard {
   count?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
+  disabled?: boolean;
 }
 
 function RestaurantDetailCard(props: IRestaurantDetailCard) {
-  const {description, price, title, count, coin, image, onAddClick, onMinusClick} = props;
+  const {description, price, title, count, coin, image, onAddClick, onMinusClick, disabled} = props;
   // const [counter, setCounter] = useState(count || 0);
 
   return (
@@ -40,6 +41,7 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
           <img src={image} alt={title} className="w-full h-full object-center object-cover rounded-[16px]" />
         </div>
         <Counter
+          disabled={disabled}
           className="mt-4"
           count={count}
           showNumberOnlyPositiveNumber

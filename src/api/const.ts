@@ -32,6 +32,8 @@ export const API = {
   GET_USER_COIN_HISTORY: "/api/users/points/history",
   UPDATE_USER_PROFILE: "/api/users/profile",
   GET_USER_DISCOUNT: "/api/users/discount-codes",
+  GET_USER_COUPON: "/api/point/coupons",
+  GET_COUPON: "/api/point/get-coupon",
 
   //orders
   GET_ORDERS_LIST: "/api/users/orders",

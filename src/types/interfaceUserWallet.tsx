@@ -3,5 +3,5 @@ export interface IUserWalletRes {
 }
 
 export interface IUserWalletData {
-  balance: number;
+  balance: string;
 }

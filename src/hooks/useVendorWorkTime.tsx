@@ -22,6 +22,7 @@ function useVendorWorkTime(props: IUseVendorTime) {
     if (openHours) {
       const today = openHours[day];
       if (today !== "close") {
+        const todayHour = dayjs().get("hour");
         const splitPeriod = today.split(",");
         splitPeriod.forEach((item) => {
           const period = item.split("-");
@@ -40,7 +41,8 @@ function useVendorWorkTime(props: IUseVendorTime) {
             }
           });
           const diff = +HEnd - +HStart;
-          if (!isNaN(diff) && diff > 0) {
+          const hasBetween = todayHour >= +HStart && todayHour < +HEnd;
+          if (!isNaN(diff) && diff > 0 && hasBetween) {
             const tmp = Array.from(new Array(diff), (_, i) => {
               const tmp = +HStart + i;
               const MEndTime = diff - 1 > i ? MStart : MEnd;
@@ -69,7 +71,7 @@ function useVendorWorkTime(props: IUseVendorTime) {
     let tmpTimes: IOrderCompleteDeliverTime[] = [];
     if (hours.length) {
       const tmp = hours.filter((value) => {
-        const tempHour = dayjs(`${basicDate} ${value.from}`).add(30, "minute").valueOf();
+        const tempHour = dayjs(`${basicDate} ${value.from}`).subtract(30, "minute").valueOf();
         return tempHour > todayTimestamp;
       });
       if (tmp.length) {

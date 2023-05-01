@@ -2,6 +2,7 @@ import React, {ReactNode, useEffect, useState} from "react";
 import {Modal, ModalProps} from "antd";
 import classNames from "classnames";
 import styles from "components/customModal/customModal.module.scss";
+import {iranSans} from "assets/fonts/iranSansFont";
 
 interface ICustomModal extends ModalProps {
   header?: ReactNode;
@@ -47,6 +48,7 @@ function CustomModal(props: ICustomModal) {
 
   const classNameWrap = classNames({
     "backdrop-blur-sm": true,
+    [iranSans.variable]: true,
     [wrapClassName]: wrapClassName,
   });
 

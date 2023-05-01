@@ -1,4 +1,4 @@
-import {IconClock, IconCoin, IconStarOutline, IconStarFill} from "assets/icons";
+import {IconClock, IconCoin, IconStarFill, IconStarOutline} from "assets/icons";
 import styles from "view/restaurant/component/restaurantCard/restaurantCard.module.scss";
 import {useMemo} from "react";
 
@@ -18,7 +18,7 @@ function RestaurantCard(props: IRestaurantCard) {
 
   const starFill = useMemo(() => Array.from(new Array(star < maxStar ? Math.round(star) : 0), (_, i) => i + 1), [star]);
   const starEmpty = useMemo(
-    () => Array.from(new Array(star < maxStar ? maxStar - Math.round(star) : 0), (_, i) => i + 1),
+    () => Array.from(new Array(star < maxStar ? maxStar - Math.round(star) : maxStar), (_, i) => i + 1),
     [star]
   );
 

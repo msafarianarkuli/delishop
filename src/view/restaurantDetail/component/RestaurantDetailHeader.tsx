@@ -1,11 +1,14 @@
 import {AppHeader, AppHeaderBackBtn, AppHeaderFavorite} from "components";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import {useRestaurantDetailData} from "view/restaurantDetail/context/RestaurantDetailDataProvider";
 
 function RestaurantDetailHeaderBody() {
+  const {data} = useRestaurantDetailData();
   return (
     <div id="restaurantDetailHeaderTitle" className="opacity-0 transition-opacity ease-linear duration-200">
-      رستوران اریایی
+      <span>رستوران </span>
+      <span>{data?.vendor.name}</span>
     </div>
   );
 }

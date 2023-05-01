@@ -28,7 +28,6 @@ function SupermarketCartSubmit() {
       }
       left={
         <>
-          {" "}
           <span>{totalPrice.toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>

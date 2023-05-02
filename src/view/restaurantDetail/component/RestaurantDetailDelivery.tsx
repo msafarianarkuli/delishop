@@ -36,7 +36,7 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
       bottom={
         <>
           <IconDelivery className="w-4 h-4" />
-          <span className="mr-1">ارسال رستوران</span>
+          <span className="mr-1 whitespace-nowrap">ارسال رستوران</span>
         </>
       }
     />

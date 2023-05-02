@@ -21,7 +21,7 @@ function RestaurantDetailTime({maxSendTime}: {maxSendTime: string}) {
       bottom={
         <>
           <IconClockSolid className="w-4 h-4" />
-          <span className="mr-1">زمان تحویل</span>
+          <span className="mr-1 whitespace-nowrap">زمان تحویل</span>
         </>
       }
     />

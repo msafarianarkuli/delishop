@@ -11,6 +11,7 @@ import {
 } from "view/orderComplete/context/OrderCompleteProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
+import {instant} from "utils/Const";
 
 function OrderCompleteDeliveryTime() {
   const type = useTypeColor();
@@ -27,7 +28,7 @@ function OrderCompleteDeliveryTime() {
 
   const label = useCallback((item: IOrderCompleteDeliverTime) => {
     if (item.isTemp) {
-      return <span>تحویل فوری</span>;
+      return <span>{instant}</span>;
     }
     return (
       <>

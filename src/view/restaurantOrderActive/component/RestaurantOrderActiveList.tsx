@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import {useRestaurantOrderActiveData} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
 import {useInView} from "react-intersection-observer";
 import {useEffect} from "react";
+import {instant} from "utils/Const";
 
 function RestaurantOrderActiveList() {
   const {data, isLoading} = useRestaurantOrderActiveData();
@@ -42,7 +43,7 @@ function RestaurantOrderActiveListShow() {
                 date={item.created_at}
                 coin={15}
                 receiptNumber={item.id}
-                deliveryTime={item.sendtime.toString() === "100" ? "فوری" : item.sendtime.toString()}
+                deliveryTime={item.sendtime.toString() === "100" ? instant : item.sendtime.toString()}
                 totalPrice={Math.round(item.topayprice / 10)}
                 onClickSubmit={() => {
                   router.push(`/restaurant/order/${item.id}`);

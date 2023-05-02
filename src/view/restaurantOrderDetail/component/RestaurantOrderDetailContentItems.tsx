@@ -8,6 +8,7 @@ import RestaurantOrderDetailDescription from "view/restaurantOrderDetail/compone
 import RestaurantOrderDetailReceipt from "view/restaurantOrderDetail/component/RestaurantOrderDetailReceipt";
 import {useRouter} from "next/router";
 import {useRestaurantOrderDetailData} from "view/restaurantOrderDetail/context/RestaurantOrderDetailDataProvider";
+import {instant} from "utils/Const";
 
 function RestaurantOrderDetailContentItems() {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ function RestaurantOrderDetailContentItems() {
 
   const deliveryTime = useMemo(() => {
     if (data?.sendtime === 100) {
-      return "فوری";
+      return instant;
     }
     return data?.sendtime?.toString();
   }, [data?.sendtime]);

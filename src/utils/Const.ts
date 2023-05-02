@@ -40,3 +40,5 @@ export const OrderStatus = [
     title: "لغو وندور",
   },
 ];
+
+export const instant = "در اسرع وقت";

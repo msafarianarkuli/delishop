@@ -1,5 +1,6 @@
 import HomeOrderCard from "view/home/component/homeOrderCard";
 import {HomeOrderData} from "view/home/context/HomeOrderDataProvider";
+import {instant} from "utils/Const";
 
 function HomeOrder() {
   const {data} = HomeOrderData();
@@ -12,7 +13,7 @@ function HomeOrder() {
               key={index}
               id={item.id}
               title={item.vendor.name}
-              deliveryTime={item.sendtime === 100 ? "فوری" : item.sendtime.toString()}
+              deliveryTime={item.sendtime === 100 ? instant : item.sendtime.toString()}
               image={item.vendor.logo}
               orderStatus={item.orderstatus}
             />

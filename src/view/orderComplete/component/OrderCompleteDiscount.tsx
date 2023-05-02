@@ -1,10 +1,10 @@
-import React, {useCallback, useMemo, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {CustomInput} from "components";
 import useTypeColor from "hooks/useTypeColor";
 import classNames from "classnames";
 import getOrderDiscountCalc from "api/getOrderDiscountCalc";
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
@@ -22,6 +22,17 @@ function OrderCompleteDiscount() {
   const supermarket = useCartSupermarket();
   const dispatch = useOrderCompleteAction();
   const [error, setError] = useState("");
+  const [isTooltip, setIsTooltip] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (isTooltip) {
+      timeout = setTimeout(() => setIsTooltip(false), 2000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isTooltip]);
 
   const price = useMemo(
     () => restaurant?.totalPrice || supermarket?.totalPrice || 0,
@@ -57,6 +68,7 @@ function OrderCompleteDiscount() {
           })
         );
         setIsLoading(false);
+        setIsTooltip(true);
       } catch (e: any) {
         if (e.data) {
           const data: IOrderDiscountCalcError = e.data;
@@ -71,26 +83,28 @@ function OrderCompleteDiscount() {
   return (
     <div className="mt-7">
       <OrderCompleteTitle type={type} title="کد تخفیف" />
-      <div className="px-screenSpace">
-        <CustomInput
-          autoComplete="off"
-          id="discount"
-          className={inputClassName}
-          disabled={isLoading}
-          value={text}
-          onChange={(event) => {
-            const value = event.target.value.trim();
-            setText(value);
-          }}
-          suffix={
-            <Button disabled={!text} loading={isLoading} htmlType="button" onClick={onClick} className={btnClassName}>
-              ثبت
-            </Button>
-          }
-          placeholder="کد تخفیف خود را وارد نمایید."
-        />
-        {error ? <div className="my-5 px-screenSpace text-error font-medium text-[14px]">{error}</div> : null}
-      </div>
+      <Tooltip placement="top" title="کد تخفیف با موفقیت ثبت شد" open={isTooltip}>
+        <div className="px-screenSpace">
+          <CustomInput
+            autoComplete="off"
+            id="discount"
+            className={inputClassName}
+            disabled={isLoading}
+            value={text}
+            onChange={(event) => {
+              const value = event.target.value.trim();
+              setText(value);
+            }}
+            suffix={
+              <Button disabled={!text} loading={isLoading} htmlType="button" onClick={onClick} className={btnClassName}>
+                ثبت
+              </Button>
+            }
+            placeholder="کد تخفیف خود را وارد نمایید."
+          />
+          {error ? <div className="my-5 px-screenSpace text-error font-medium text-[14px]">{error}</div> : null}
+        </div>
+      </Tooltip>
     </div>
   );
 }

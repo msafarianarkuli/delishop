@@ -1,6 +1,6 @@
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 import {IconCoinProfile} from "assets/icons";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import getCoupon from "api/getCoupon";
 import {useSession} from "next-auth/react";
 import {useQueryClient} from "react-query";
@@ -23,6 +23,17 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
   const [isLoading, setIsLoading] = useState(false);
   const {data} = useSession();
   const queryClient = useQueryClient();
+  const [isTooltip, setIsTooltip] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (isTooltip) {
+      timeout = setTimeout(() => setIsTooltip(false), 2000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isTooltip]);
 
   const onClick = useCallback(async () => {
     if (data?.user.token) {
@@ -47,6 +58,7 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
         });
         console.log("queryClient", queryClient);
         setIsLoading(false);
+        setIsTooltip(true);
       } catch (err) {
         setIsLoading(false);
         console.log("getCoupon err", err);
@@ -62,9 +74,11 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
           <div className="flex flex-1 justify-center bg-[#E1E2E8] font-semibold text-[10px] rounded-md p-1 border border-dashed border-borderColor break-all">
             {value}
           </div>
-          <Button loading={isLoading} className={styles.profile_award_received_card_copy} onClick={onClick}>
-            دریافت
-          </Button>
+          <Tooltip placement="top" title={`${title} دریافت شد`} open={isTooltip}>
+            <Button loading={isLoading} className={styles.profile_award_received_card_copy} onClick={onClick}>
+              دریافت
+            </Button>
+          </Tooltip>
         </div>
         <div className="font-medium text-[9px]">{description}</div>
       </div>

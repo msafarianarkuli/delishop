@@ -150,7 +150,7 @@ function OrderCompleteSubmitBtn() {
                 body.append("description", description);
               }
               if (discountCode) {
-                body.append("discountcode", JSON.stringify([discountCode]));
+                body.append("discountcode", discountCode);
               }
               // const body: IAddOrderBody = {
               //   location_place_fid,

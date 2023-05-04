@@ -3,6 +3,7 @@ import {ICustomDrawer} from "components/customDrawer/CustomDrawer";
 import {IconClose} from "assets/icons";
 import classNames from "classnames";
 import {DrawerProps} from "antd";
+import {iranSans} from "assets/fonts/iranSansFont";
 
 interface IBottomSheet extends Omit<ICustomDrawer, "placement" | "closable" | "onClose" | "headerStyle"> {
   title?: string;
@@ -18,6 +19,7 @@ function BottomSheet(props: IBottomSheet) {
   });
 
   const tmpClassName = classNames({
+    [`${iranSans.variable} font-IranSans`]: true,
     "bg-transparent rounded-t-[15px]": true,
     [className]: className,
   });

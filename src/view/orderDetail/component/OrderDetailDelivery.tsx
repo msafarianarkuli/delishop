@@ -3,6 +3,8 @@ import {Button} from "antd";
 import {IconSupport} from "assets/icons";
 import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
+import classNames from "classnames";
+import useTypeColor from "hooks/useTypeColor";
 
 interface IOrderDetailDelivery {
   deliveryTime: string;
@@ -11,6 +13,7 @@ interface IOrderDetailDelivery {
 
 function OrderDetailDelivery(props: IOrderDetailDelivery) {
   const {deliveryTime, orderStatus} = props;
+  const typeColor = useTypeColor();
 
   const progressPercent = useMemo(() => {
     if (orderStatus === 3 || orderStatus === 4) {
@@ -32,10 +35,22 @@ function OrderDetailDelivery(props: IOrderDetailDelivery) {
     return null;
   }, [orderStatus]);
 
+  const textClassName = classNames({
+    "text-[15px] font-medium pl-1": true,
+    "text-primary": typeColor === "default",
+    "text-primarySupermarket": typeColor === "supermarket",
+  });
+
+  const processClassName = classNames({
+    "absolute right-0 top-0 h-full rounded-full": true,
+    "bg-primary": typeColor === "default",
+    "bg-primarySupermarket": typeColor === "supermarket",
+  });
+
   return (
     <div className="px-screenSpace mt-3">
       <div className="flex items-center justify-between">
-        <div className="text-[15px] font-medium text-primary pl-1">سفارش شما در حال آماده سازی می باشد.</div>
+        <div className={textClassName}>سفارش شما در حال آماده سازی می باشد.</div>
         <div className="font-semibold whitespace-nowrap">
           <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
           <div className="inner_box text-[13px] text-center">{deliveryTime}</div>
@@ -43,7 +58,7 @@ function OrderDetailDelivery(props: IOrderDetailDelivery) {
       </div>
       <div className="mt-12 mb-9 mx-7">
         <div className="relative w-full h-[2px] bg-[#D9D9D9] rounded-full">
-          <div className="absolute right-0 top-0 h-full bg-primary rounded-full" style={{width: progressPercent}} />
+          <div className={processClassName} style={{width: progressPercent}} />
           {progressIcon}
         </div>
       </div>

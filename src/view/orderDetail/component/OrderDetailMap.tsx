@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {IMapPoint} from "components/map/Map";
 import {AppHeaderBackBtn, Map} from "components";
 import {useMap} from "react-leaflet";
 import {latLng, latLngBounds} from "leaflet";
 import {useOrderDetailData} from "view/orderDetail/context/OrderDetailDataProvider";
+import useMapPin from "hooks/useMapPin";
 
 interface IOrderDetailMap {
   height: number;
@@ -15,6 +16,7 @@ function OrderDetailMap(props: IOrderDetailMap) {
   const router = useRouter();
   const {data} = useOrderDetailData();
   const [points, setPoints] = useState<IMapPoint[]>([]);
+  const pin = useMapPin();
 
   useEffect(() => {
     const vendorLat = data?.vendor.lat;
@@ -46,7 +48,7 @@ function OrderDetailMap(props: IOrderDetailMap) {
 
   return (
     <>
-      <Map zoom={15} points={[points]} className="w-full" style={{height}}>
+      <Map zoom={15} pinIcons={pin} points={[points]} className="w-full" style={{height}}>
         <AppHeaderBackBtn
           type="white"
           className="absolute z-[999] top-[10px] right-[10px]"

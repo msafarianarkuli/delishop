@@ -65,6 +65,13 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
     "modal-submit-btn w-full h-[40px] font-medium text-[17px] rounded-[4px] ml-3": true,
   });
 
+  const href = useMemo(() => {
+    if (color === "supermarket") {
+      return `/order/rate/${id}` + "?supermarket=1";
+    }
+    return `/order/rate/${id}`;
+  }, [color, id]);
+
   return (
     <div className={styles.order_previous_card_container}>
       <div className="flex flex-wrap items-center justify-between px-[29px] pb-[19px] border-b border-borderColor">
@@ -127,10 +134,7 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
         </div>
       </div>
       {orderStatus === 6 && !hasRated ? (
-        <Link
-          href={`/restaurant/order/rate/${id}`}
-          className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor"
-        >
+        <Link href={href} className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor">
           <div className="text-[15px]">به سفارش خود امتیاز دهید</div>
           <IconRoundedLeft className="w-5 h-5 mr-1" />
         </Link>

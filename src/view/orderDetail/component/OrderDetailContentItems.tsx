@@ -39,7 +39,11 @@ function OrderDetailContentItems() {
         <OrderDetailAddress title={data?.address.title || ""} address={data?.address.address || ""} />
         <OrderDetailDelivery orderStatus={data?.orderstatus || 0} deliveryTime={deliveryTime || ""} />
       </div>
-      <OrderDetailVendorName image={data?.vendor.logo} title={data?.vendor.name || ""} />
+      <OrderDetailVendorName
+        vendorId={data?.vendor.id || 0}
+        image={data?.vendor.logo}
+        title={data?.vendor.name || ""}
+      />
       <OrderDetailOrder order={data?.productKinds || []} />
       <OrderDetailTotal price={Math.round((data?.topayprice || 0) / 10)} />
       <OrderDetailDescription text={data?.description?.trim()} />

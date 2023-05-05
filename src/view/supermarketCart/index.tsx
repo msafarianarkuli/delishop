@@ -10,7 +10,7 @@ function SupermarketCart() {
   return (
     <>
       <SupermarketCartHeader />
-      <div className="mt-headerNormal px-screenSpace mb-[170px]">
+      <div className="mt-headerNormal px-screenSpace mb-[185px]">
         <SupermarketCartList />
       </div>
       <SupermarketCartSubmit />

@@ -41,7 +41,9 @@ function OrderActiveListShow(props: IOrderActiveListShow) {
                 deliveryTime={item.sendtime.toString() === "100" ? instant : item.sendtime.toString()}
                 totalPrice={Math.round(item.topayprice / 10)}
                 onClickSubmit={() => {
-                  router.push(`/restaurant/order/${item.id}`);
+                  const query = color === "supermarket" ? "?supermarket=1" : "";
+                  const url = `/order/${item.id}` + query;
+                  router.push(url);
                 }}
               />
             </div>

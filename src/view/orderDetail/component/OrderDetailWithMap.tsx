@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
-import OrderDetailMap from "view/orderDetail/component/OrderDetailMap";
 import OrderDetailFloatPage from "view/orderDetail/component/OrderDetailFloatPage";
+import dynamic from "next/dynamic";
+
+const OrderDetailMap = dynamic(() => import("view/orderDetail/component/OrderDetailMap"), {ssr: false});
 
 function OrderDetailWithMap() {
   const [loading, setLoading] = useState(true);

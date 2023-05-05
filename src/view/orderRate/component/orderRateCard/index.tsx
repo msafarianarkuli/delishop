@@ -3,6 +3,8 @@ import {useController, useFormContext} from "react-hook-form";
 import ReactSlider from "react-slider";
 import {IconStar} from "assets/icons";
 import styles from "view/orderRate/component/orderRateCard/orderRateCard.module.scss";
+import useTypeColor from "hooks/useTypeColor";
+import classNames from "classnames";
 
 interface IOrderRateCard {
   id: string;
@@ -12,6 +14,7 @@ interface IOrderRateCard {
 
 function OrderRateCard(props: IOrderRateCard) {
   const {title, id, rules} = props;
+  const typeColor = useTypeColor();
   const {control} = useFormContext();
   const {
     field,
@@ -22,6 +25,18 @@ function OrderRateCard(props: IOrderRateCard) {
     rules,
   });
 
+  const sliderClassName = classNames({
+    "mb-3": true,
+    rate_slider: typeColor === "default",
+    rate_slider_supermarket: typeColor === "supermarket",
+  });
+
+  const iconClassName = classNames({
+    "w-6 h-6 text-primary": true,
+    "text-primary": typeColor === "default",
+    "text-primarySupermarket": typeColor === "supermarket",
+  });
+
   return (
     <div className={styles.order_rate_card_container}>
       <div className="text-[16px] font-semibold">{title}</div>
@@ -30,12 +45,12 @@ function OrderRateCard(props: IOrderRateCard) {
         min={0}
         max={5}
         step={0.1}
-        className="rate_slider mb-3"
+        className={sliderClassName}
         trackClassName="rate_slider_track"
         renderThumb={(props) => {
           return (
             <div {...props}>
-              <IconStar className="w-6 h-6 text-primary" />
+              <IconStar className={iconClassName} />
             </div>
           );
         }}

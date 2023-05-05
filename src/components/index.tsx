@@ -24,11 +24,12 @@ import CustomSwiper from "components/customSwiper/CustomSwiper";
 import AppHeaderDelete from "components/appHeader/AppHeaderDelete";
 import SubmitBuyBtn from "components/customButton/SubmitBuyBtn";
 import RestaurantInfoAppHeader from "components/appHeader/component/RestaurantInfoAppHeader";
-import RestaurantOrderAppHeader from "components/appHeader/component/RestaurantOrderAppHeader";
+import OrderAppHeader from "components/appHeader/component/OrderAppHeader";
 import AppHeaderFavorite from "components/appHeader/AppHeaderFavorite";
 import Counter from "components/counter/Counter";
 import BottomPageGradient from "components/bottomPageGradient";
 import ProductDetailSwiper from "components/customSwiper/ProductDetailSwiper";
+import OrderActive from "components/orderActive";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -58,9 +59,10 @@ export {
   AppHeaderDelete,
   SubmitBuyBtn,
   RestaurantInfoAppHeader,
-  RestaurantOrderAppHeader,
+  OrderAppHeader,
   AppHeaderFavorite,
   Counter,
   BottomPageGradient,
   ProductDetailSwiper,
+  OrderActive,
 };

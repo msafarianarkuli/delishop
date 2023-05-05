@@ -1,16 +1,17 @@
+import {MouseEventHandler, useMemo} from "react";
 import {IconCoin} from "assets/icons";
 import {number2Digits} from "utils/utils";
 import dayjs from "dayjs";
 import jalaliday from "jalaliday";
-import accept from "assets/images/pin-order-accept.svg";
-import delivery from "assets/images/pin-order-delivery.svg";
-import styles from "view/restaurantOrderActive/component/restaurantOrderActiveCard/restaurantOrderActiveCard.module.scss";
 import {Button} from "antd";
-import {MouseEventHandler, useMemo} from "react";
+import delivery from "assets/images/pin-order-delivery.svg";
+import accept from "assets/images/pin-order-accept.svg";
+import styles from "components/orderActive/component/orderActiveCard/orderActiveCard.module.scss";
+import classNames from "classnames";
 
 dayjs.extend(jalaliday);
 
-interface IRestaurantOrderActiveCard {
+interface IOrderActiveCard {
   title: string;
   receiptNumber: number;
   coin: number;
@@ -21,11 +22,23 @@ interface IRestaurantOrderActiveCard {
   orderStatus: number;
   onClickSubmit: MouseEventHandler;
   totalPrice: number;
+  color: "default" | "supermarket";
 }
 
-function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
-  const {title, image, deliveryTitle, date, deliveryTime, receiptNumber, coin, onClickSubmit, totalPrice, orderStatus} =
-    props;
+function OrderActiveCard(props: IOrderActiveCard) {
+  const {
+    title,
+    image,
+    deliveryTitle,
+    date,
+    deliveryTime,
+    receiptNumber,
+    coin,
+    onClickSubmit,
+    totalPrice,
+    orderStatus,
+    color,
+  } = props;
 
   const statusImage = useMemo(() => {
     if (orderStatus === 3 || orderStatus === 4) {
@@ -46,8 +59,26 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
     return "0";
   }, [orderStatus]);
 
+  const processClassName = classNames({
+    "absolute right-0 top-0 h-full rounded-full": true,
+    "bg-primary": color === "default",
+    "bg-primarySupermarket": color === "supermarket",
+  });
+
+  const hintClassName = classNames({
+    "text-[15px] font-medium pl-1": true,
+    "text-primary": color === "default",
+    "text-primarySupermarket": color === "supermarket",
+  });
+
+  const submitBtnClassName = classNames({
+    "submit-btn": color === "default",
+    "submit-btn-supermarket": color === "supermarket",
+    "modal-submit-btn rounded-[10px] w-full mt-4 text-[17px] font-medium": true,
+  });
+
   return (
-    <div className={styles.restaurant_order_active_card_container}>
+    <div className={styles.order_active_card_container}>
       <div className="flex h-[60px] items-center justify-between bg-textColor px-[19px] text-white">
         <div className="text-[15px] font-medium">
           <span>شماره فاکتور:</span>
@@ -63,7 +94,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
       </div>
       <div className="py-[15px] px-[19px]">
         <div className="flex">
-          <img src={image} alt={title} className={styles.restaurant_order_active_card_image} />
+          <img src={image} alt={title} className={styles.order_active_card_image} />
           <div className="flex flex-col flex-1 mr-3">
             <div className="text-[17px] font-medium">
               <span className="ml-1">{title}</span>
@@ -82,12 +113,12 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
         </div>
         <div className="mt-12 mb-10 mx-7">
           <div className="relative w-full h-[2px] bg-[#D9D9D9] rounded-full">
-            <div className="absolute right-0 top-0 h-full bg-primary rounded-full" style={{width: statusProcess}} />
+            <div className={processClassName} style={{width: statusProcess}} />
             {statusImage}
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <div className="text-[15px] font-medium text-primary pl-1">سفارش شما در حال آماده سازی می باشد.</div>
+          <div className={hintClassName}>سفارش شما در حال آماده سازی می باشد.</div>
           <div className="font-semibold whitespace-nowrap">
             <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
             <div className="inner_box text-[13px] text-center">{deliveryTime}</div>
@@ -98,11 +129,7 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
           <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
           <span className="text-[13px] text-textColorLight">تومان</span>
         </div>
-        <Button
-          type="primary"
-          className="submit-btn modal-submit-btn rounded-[10px] w-full mt-4 text-[17px] font-medium"
-          onClick={onClickSubmit}
-        >
+        <Button type="primary" className={submitBtnClassName} onClick={onClickSubmit}>
           مشاهده سفارش
         </Button>
       </div>
@@ -110,4 +137,4 @@ function RestaurantOrderActiveCard(props: IRestaurantOrderActiveCard) {
   );
 }
 
-export default RestaurantOrderActiveCard;
+export default OrderActiveCard;

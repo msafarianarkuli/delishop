@@ -1,4 +1,4 @@
-import {RestaurantOrderAppHeader} from "components";
+import {OrderAppHeader} from "components";
 import RestaurantOrderPreviousReceipt from "view/restaurantOrderPrevious/component/RestaurantOrderPreviousReceipt";
 import RestaurantOrderPreviousList from "view/restaurantOrderPrevious/component/RestaurantOrderPreviousList";
 import RestaurantOrderPreviousReceiptProvider from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousReceiptProvider";
@@ -6,7 +6,11 @@ import RestaurantOrderPreviousReceiptProvider from "view/restaurantOrderPrevious
 function RestaurantOrderPrevious() {
   return (
     <RestaurantOrderPreviousReceiptProvider>
-      <RestaurantOrderAppHeader active="previous" />
+      <OrderAppHeader
+        active="previous"
+        activeLink="/restaurant/order/active"
+        previousLink="/restaurant/order/previous"
+      />
       <div className="mt-headerNormal">
         <RestaurantOrderPreviousList />
       </div>

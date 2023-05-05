@@ -1,24 +1,18 @@
-import RestaurantOrderActiveCard from "view/restaurantOrderActive/component/restaurantOrderActiveCard/RestaurantOrderActiveCard";
+import React, {useEffect} from "react";
 import {useRouter} from "next/router";
-import {useRestaurantOrderActiveData} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
 import {useInView} from "react-intersection-observer";
-import {useEffect} from "react";
+import {useOrderActiveData} from "components/orderActive/context/OrderActiveDataProvider";
 import {instant} from "utils/Const";
+import OrderActiveCard from "components/orderActive/component/orderActiveCard/index";
 
-function RestaurantOrderActiveList() {
-  const {data, isLoading} = useRestaurantOrderActiveData();
-  return (
-    <div>
-      {isLoading ? <div className="px-screenSpace">loading ...</div> : null}
-      {!isLoading && !data?.pages[0]?.orders.length ? <div className="px-screenSpace">موردی یافت نشد</div> : null}
-      <RestaurantOrderActiveListShow />
-    </div>
-  );
+interface IOrderActiveListShow {
+  color: "default" | "supermarket";
 }
 
-function RestaurantOrderActiveListShow() {
+function OrderActiveListShow(props: IOrderActiveListShow) {
+  const {color} = props;
   const router = useRouter();
-  const {data, fetchNextPage} = useRestaurantOrderActiveData();
+  const {data, fetchNextPage} = useOrderActiveData();
   const {ref, inView} = useInView();
 
   useEffect(() => {
@@ -35,7 +29,8 @@ function RestaurantOrderActiveListShow() {
           const tmpRef = condition ? ref : null;
           return (
             <div ref={tmpRef} key={item.id}>
-              <RestaurantOrderActiveCard
+              <OrderActiveCard
+                color={color}
                 title={item.vendor.name}
                 image={item.vendor.logo}
                 deliveryTitle={item.address.title || ""}
@@ -57,4 +52,4 @@ function RestaurantOrderActiveListShow() {
   );
 }
 
-export default RestaurantOrderActiveList;
+export default OrderActiveListShow;

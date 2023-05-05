@@ -21,8 +21,8 @@ import {useDispatch} from "react-redux";
 import {useQueryClient} from "react-query";
 import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
-import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive/context/RestaurantOrderActiveDataProvider";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
+import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();

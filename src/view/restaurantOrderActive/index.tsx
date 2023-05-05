@@ -1,17 +1,19 @@
-import {BottomNavigation, RestaurantOrderAppHeader} from "components";
+import {OrderActive} from "components";
 import useRestaurantNavigation from "hooks/useRestaurantNavigation";
-import RestaurantOrderActiveList from "view/restaurantOrderActive/component/RestaurantOrderActiveList";
+
+export const QUERY_KEY_RESTAURANT_ORDERS_ACTIVE = "restaurantOrdersActive";
 
 function RestaurantOrderActive() {
   const data = useRestaurantNavigation("order");
   return (
-    <>
-      <RestaurantOrderAppHeader active="active" />
-      <div className="mt-headerNormal px-[10px] mb-bottomNavigation">
-        <RestaurantOrderActiveList />
-      </div>
-      <BottomNavigation data={data} />
-    </>
+    <OrderActive
+      activeLink="/restaurant/order/active"
+      previousLink="/restaurant/order/previous"
+      queryKey={QUERY_KEY_RESTAURANT_ORDERS_ACTIVE}
+      categoryId={[1]}
+      color="default"
+      bottomNavigationData={data}
+    />
   );
 }
 

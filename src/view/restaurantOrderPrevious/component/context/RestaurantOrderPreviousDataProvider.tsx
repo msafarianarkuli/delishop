@@ -19,7 +19,7 @@ const staleTime = 10 * 60 * 1000;
 function RestaurantOrderPreviousDataProvider({children}: IRestaurantOrderPreviousDataProvider) {
   const result = useOrderListResult({
     queryKey: QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS,
-    categoryId: 1,
+    categoryId: [1],
     staleTime,
     statusId: [6, 7, 8],
   });

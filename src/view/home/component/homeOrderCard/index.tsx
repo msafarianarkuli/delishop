@@ -3,6 +3,8 @@ import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
 import Link from "next/link";
 import {IconRoundedLeft} from "assets/icons";
+import {useMemo} from "react";
+import classNames from "classnames";
 
 interface IHomeOrderCard {
   deliveryTime: string;
@@ -10,10 +12,30 @@ interface IHomeOrderCard {
   title: string;
   id: number;
   orderStatus: number;
+  categoryId: number;
 }
 
 function HomeOrderCard(props: IHomeOrderCard) {
-  const {deliveryTime, image, title, id, orderStatus} = props;
+  const {deliveryTime, image, title, id, orderStatus, categoryId} = props;
+
+  const href = useMemo(() => {
+    if (categoryId === 2) {
+      return `/order/${id}?map=1&supermarket=1`;
+    }
+    return `/order/${id}?map=1`;
+  }, [categoryId, id]);
+
+  const deliveryClassName = classNames({
+    "inner_box text-[13px] text-center": true,
+    "text-primary": categoryId !== 2,
+    "text-primarySupermarket": categoryId === 2,
+  });
+
+  const orderClassName = classNames({
+    "flex items-center": true,
+    "text-primary": categoryId !== 2,
+    "text-primarySupermarket": categoryId === 2,
+  });
 
   return (
     <div className={styles.home_order_card_container}>
@@ -21,7 +43,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
         <div className="text-[15px] font-medium pl-1 underline">سفارش شما در حال آماده سازی می باشد.</div>
         <div className="font-semibold whitespace-nowrap">
           <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
-          <div className="inner_box text-[13px] text-center text-primary">{deliveryTime}</div>
+          <div className={deliveryClassName}>{deliveryTime}</div>
         </div>
       </div>
       <div className="mt-12 mb-9 mx-7">
@@ -49,7 +71,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
             {/*<span>({address})</span>*/}
           </div>
         </div>
-        <Link href={`/restaurant/order/${id}?map=1`} className="flex items-center text-primary">
+        <Link href={href} className={orderClassName}>
           <span className="text-[15px] font-semibold">مشاهده سفارش</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>

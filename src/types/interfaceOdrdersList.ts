@@ -26,6 +26,7 @@ interface IGetOrdersListResOrdersItemsVendor {
   id: number;
   name: string;
   logo?: string;
+  vendor_category_id: number;
 }
 
 export interface IGetOrdersListResOrdersItemsProductKindsItems {

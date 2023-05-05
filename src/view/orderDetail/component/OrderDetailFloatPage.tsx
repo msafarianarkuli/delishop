@@ -2,6 +2,8 @@ import React, {useRef} from "react";
 import {IconRoundedTop} from "assets/icons";
 import OrderDetailContent from "view/orderDetail/component/OrderDetailContent";
 import styles from "view/orderDetail/OrderDetail.module.scss";
+import useTypeColor from "hooks/useTypeColor";
+import classNames from "classnames";
 
 interface IOrderDetailFloatPage {
   height: number;
@@ -9,6 +11,7 @@ interface IOrderDetailFloatPage {
 
 function OrderDetailFloatPage(props: IOrderDetailFloatPage) {
   const {height} = props;
+  const typeColor = useTypeColor();
   const containerRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -30,6 +33,12 @@ function OrderDetailFloatPage(props: IOrderDetailFloatPage) {
     contentContainer.classList.add("mt-headerNormal");
   }
 
+  const iconClassName = classNames({
+    "w-5 h-5 text-primary": true,
+    "text-primary": typeColor === "default",
+    "text-primarySupermarket": typeColor === "supermarket",
+  });
+
   return (
     <div
       id="restaurantOrderFloatPage"
@@ -48,7 +57,7 @@ function OrderDetailFloatPage(props: IOrderDetailFloatPage) {
           onClick={onClick}
           className="absolute top-0 lef-0 right-0 flex w-full items-center justify-center header_background h-[36px]"
         >
-          <IconRoundedTop className="w-5 h-5 text-primary" />
+          <IconRoundedTop className={iconClassName} />
         </button>
         <div className="py-[10px]">
           <OrderDetailContent />

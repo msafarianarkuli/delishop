@@ -11,6 +11,7 @@ function HomeOrder() {
           return (
             <HomeOrderCard
               key={index}
+              categoryId={item.vendor.vendor_category_id}
               id={item.id}
               title={item.vendor.name}
               deliveryTime={item.sendtime === 100 ? instant : item.sendtime.toString()}

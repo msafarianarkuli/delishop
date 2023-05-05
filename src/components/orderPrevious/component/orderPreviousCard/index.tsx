@@ -1,18 +1,18 @@
-import {MouseEventHandler, useMemo} from "react";
-import {IconCoin, IconRoundedLeft} from "assets/icons";
-import {Button} from "antd";
-import dayjs from "dayjs";
-import jalaliday from "jalaliday";
-import {number2Digits} from "utils/utils";
-import Link from "next/link";
+import React, {MouseEventHandler, useMemo} from "react";
 import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
 import {OrderStatus} from "utils/Const";
 import classNames from "classnames";
-import styles from "view/restaurantOrderPrevious/component/restaurantOrderPreviousCard/restaurantOrderPreviousCard.module.scss";
+import {number2Digits} from "utils/utils";
+import dayjs from "dayjs";
+import {IconCoin, IconRoundedLeft} from "assets/icons";
+import Link from "next/link";
+import {Button} from "antd";
+import jalaliday from "jalaliday";
+import styles from "components/orderPrevious/component/orderPreviousCard/orderPreviousCard.module.scss";
 
 dayjs.extend(jalaliday);
 
-interface IRestaurantOrderPreviousCard {
+interface IOrderPreviousCard {
   id: string;
   receiptNumber: number;
   date: string;
@@ -26,9 +26,10 @@ interface IRestaurantOrderPreviousCard {
   coin: number;
   totalPrice: number;
   hasRated: boolean;
+  color: "default" | "supermarket";
 }
 
-function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
+function OrderPreviousCard(props: IOrderPreviousCard) {
   const {
     onClickReOrder,
     orders,
@@ -43,6 +44,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
     id,
     totalPrice,
     hasRated,
+    color,
   } = props;
 
   const status = useMemo(() => {
@@ -52,12 +54,19 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
 
   const statusClassName = classNames({
     "inner_box text-[13px] font-semibold": true,
-    "text-primary": orderStatus === 6,
+    "text-primary": orderStatus === 6 && color === "default",
+    "text-primarySupermarket": orderStatus === 6 && color === "supermarket",
     "text-textColorLight": orderStatus !== 6,
   });
 
+  const submitBtnClassName = classNames({
+    "submit-btn": color === "default",
+    "submit-btn-supermarket": color === "supermarket",
+    "modal-submit-btn w-full h-[40px] font-medium text-[17px] rounded-[4px] ml-3": true,
+  });
+
   return (
-    <div className={styles.restaurant_order_previous_card_container}>
+    <div className={styles.order_previous_card_container}>
       <div className="flex flex-wrap items-center justify-between px-[29px] pb-[19px] border-b border-borderColor">
         <div className="text-[15px] font-bold whitespace-nowrap">شماره فاکتور:{receiptNumber}</div>
         <div className="flex items-center text-[15px] font-medium">
@@ -69,7 +78,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
       </div>
       <div className="px-[24px] py-[19px] border-b border-borderColor">
         <div className="flex">
-          <img src={image} alt={title} className={styles.restaurant_order_previous_card_image} />
+          <img src={image} alt={title} className={styles.order_previous_card_image} />
           <div className="flex flex-col flex-1 mr-3">
             <div className="text-[17px] font-medium">
               <span className="ml-1">{title}</span>
@@ -89,7 +98,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
                   <img
                     src={item.photo_igu}
                     alt={item.product.displayname}
-                    className={styles.restaurant_order_previous_card_order_list_image}
+                    className={styles.order_previous_card_order_list_image}
                   />
                   {item.count_num > 1 ? (
                     <div className="absolute flex items-center justify-center top-0 left-0 w-5 h-5 rounded-full bg-iconColor">
@@ -127,11 +136,7 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
         </Link>
       ) : null}
       <div className="flex items-center mt-5 mx-[27px]">
-        <Button
-          type="primary"
-          className="submit-btn modal-submit-btn w-full h-[40px] font-medium text-[17px] rounded-[4px] ml-3"
-          onClick={onClickReOrder}
-        >
+        <Button type="primary" className={submitBtnClassName} onClick={onClickReOrder}>
           سفارش مجدد
         </Button>
         <Button
@@ -145,4 +150,4 @@ function RestaurantOrderPreviousCard(props: IRestaurantOrderPreviousCard) {
   );
 }
 
-export default RestaurantOrderPreviousCard;
+export default OrderPreviousCard;

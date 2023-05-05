@@ -1,6 +1,6 @@
 @import "src/styles/utils/variables";
 
-.restaurant_order_previous_card_container {
+.order_previous_card_container {
   width: 100%;
   background-image: linear-gradient(293.8deg, #edeef2 0%, #f2f3f6 118.73%);
   padding: 19px 0;
@@ -9,7 +9,7 @@
   margin-bottom: 40px;
 }
 
-.restaurant_order_previous_card_image {
+.order_previous_card_image {
   width: 80px;
   height: 80px;
   background-image: linear-gradient(90.93deg, #e5e6ec 0%, #f2f3f6 100%);
@@ -19,7 +19,7 @@
   object-fit: cover;
 }
 
-.restaurant_order_previous_card_order_list_image {
+.order_previous_card_order_list_image {
   min-width: 60px;
   width: 60px;
   height: 60px;

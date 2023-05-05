@@ -1,14 +1,20 @@
-import {BottomSheet} from "components";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
-  setRestaurantOrderPreviousReceiptClose,
-  useRestaurantOrderPreviousReceipt,
-  useRestaurantOrderPreviousReceiptAction,
-} from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousReceiptProvider";
+  setOrderPreviousReceiptClose,
+  useOrderPreviousReceipt,
+  useOrderPreviousReceiptAction,
+} from "components/orderPrevious/context/OrderPreviousReceiptProvider";
+import {BottomSheet} from "components/index";
+import classNames from "classnames";
 
-function RestaurantOrderPreviousReceipt() {
-  const {open, data} = useRestaurantOrderPreviousReceipt();
-  const dispatch = useRestaurantOrderPreviousReceiptAction();
+interface IOrderPreviousReceipt {
+  color: "default" | "supermarket";
+}
+
+function OrderPreviousReceipt(props: IOrderPreviousReceipt) {
+  const {color} = props;
+  const {open, data} = useOrderPreviousReceipt();
+  const dispatch = useOrderPreviousReceiptAction();
   const [height, setHeight] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -22,7 +28,7 @@ function RestaurantOrderPreviousReceipt() {
   }, [open]);
 
   const onClose = useCallback(() => {
-    dispatch(setRestaurantOrderPreviousReceiptClose());
+    dispatch(setOrderPreviousReceiptClose());
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,17 +42,24 @@ function RestaurantOrderPreviousReceipt() {
   return (
     <>
       <div ref={ref} className="fixed -right-[100%]">
-        <RestaurantOrderPreviousReceiptItems />
+        <OrderPreviousReceiptItems color={color} />
       </div>
       <BottomSheet open={open} onClose={onClose} height={height} title="فاکتور">
-        <RestaurantOrderPreviousReceiptItems />
+        <OrderPreviousReceiptItems color={color} />
       </BottomSheet>
     </>
   );
 }
 
-function RestaurantOrderPreviousReceiptItems() {
-  const {data, totalPrice} = useRestaurantOrderPreviousReceipt();
+export default OrderPreviousReceipt;
+
+interface IOrderPreviousReceiptItems {
+  color: "default" | "supermarket";
+}
+
+function OrderPreviousReceiptItems(props: IOrderPreviousReceiptItems) {
+  const {color} = props;
+  const {data, totalPrice} = useOrderPreviousReceipt();
 
   const totalOrder = useMemo(() => {
     if (data.length) {
@@ -63,6 +76,11 @@ function RestaurantOrderPreviousReceiptItems() {
     }
     return 0;
   }, [totalOrder, totalPrice]);
+
+  const primaryText = classNames({
+    "text-primary": color === "default",
+    "text-primarySupermarket": color === "supermarket",
+  });
 
   return (
     <>
@@ -83,7 +101,7 @@ function RestaurantOrderPreviousReceiptItems() {
         })}
       </div>
       <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
-        <div className="text-primary">مجموع سفارش</div>
+        <div className={primaryText}>مجموع سفارش</div>
         <div>
           <span>{Math.round(totalOrder / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
@@ -97,7 +115,7 @@ function RestaurantOrderPreviousReceiptItems() {
         </div>
       </div>
       <div className="flex items-center justify-between pt-5 text-[15px] font-medium border-t border-borderColor">
-        <div className="text-primary">جمع کل</div>
+        <div className={primaryText}>جمع کل</div>
         <div>
           <span>{Math.round(totalPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
@@ -106,5 +124,3 @@ function RestaurantOrderPreviousReceiptItems() {
     </>
   );
 }
-
-export default RestaurantOrderPreviousReceipt;

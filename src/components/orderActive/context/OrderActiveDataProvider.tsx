@@ -3,7 +3,7 @@ import {IGetOrdersRes} from "api/getOrdersList";
 import {createContext, useContext} from "react";
 import useOrderListResult from "hooks/useOrderListResult";
 
-interface IRestaurantOrderActiveDataProvider {
+interface IOrderActiveDataProvider {
   children: JSX.Element[];
   queryKey: string;
   categoryId: number[];
@@ -16,7 +16,7 @@ const OrderActiveDataContext = createContext<UseInfiniteQueryResult<IGetOrdersRe
 
 const staleTime = 10 * 60 * 1000;
 
-function OrderActiveDataProvider(props: IRestaurantOrderActiveDataProvider) {
+function OrderActiveDataProvider(props: IOrderActiveDataProvider) {
   const {queryKey, children, categoryId} = props;
 
   const result = useOrderListResult({

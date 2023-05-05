@@ -12,7 +12,7 @@ import {API} from "api/const";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 import {useQueryClient} from "react-query";
-import {QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS} from "view/restaurantOrderPrevious/component/context/RestaurantOrderPreviousDataProvider";
+import {QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS} from "view/restaurantOrderPrevious";
 
 dayjs.extend(jalaliday);
 

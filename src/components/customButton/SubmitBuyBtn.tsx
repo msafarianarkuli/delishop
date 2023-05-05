@@ -11,14 +11,16 @@ interface ISubmitBuyBtn {
   type?: TUseTypeColor;
   loading?: boolean;
   disabled?: boolean;
+  className?: string;
 }
 
 function SubmitBuyBtn(props: ISubmitBuyBtn) {
-  const {onClick, right, left, body, type = "default", loading, disabled} = props;
+  const {onClick, right, left, body, type = "default", loading, disabled, className = ""} = props;
   const btnClassName = classNames({
     "flex w-full items-center rounded-[5px]": true,
     "submit-btn": type === "default",
     "submit-btn-supermarket": type === "supermarket",
+    [className]: className,
   });
   return (
     <div className="fixed z-10 bottom-0 right-0 left-0">

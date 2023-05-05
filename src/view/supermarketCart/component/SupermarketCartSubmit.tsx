@@ -18,6 +18,7 @@ function SupermarketCartSubmit() {
   if (!totalPrice) return null;
   return (
     <SubmitBuyBtn
+      className="bottom-[65px]"
       type="supermarket"
       onClick={() => router.push(`/ordercomplete/${cart.vendorId}?supermarket=1`)}
       right={<IconDownload className="w-5 h-5" />}

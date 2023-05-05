@@ -20,7 +20,7 @@ function HomeCoin() {
         {data.pages.map((value) => {
           return value.vendors.map((item) => {
             return (
-              <Link key={item.id} href={`/restaurant/${item.id}`}>
+              <Link key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
                 <HomeVendorCard
                   image={item.banner}
                   title={item.name}

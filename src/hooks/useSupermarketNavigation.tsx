@@ -1,15 +1,12 @@
 import {useMemo} from "react";
 import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigation";
-import {IconAccount, IconCart, IconHome, IconSearch} from "assets/icons";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "redux/store";
-import {setIsDrawerOpen} from "redux/template/templateReducer";
+import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
+import {useSelector} from "react-redux";
 import {selectCartSupermarketCount} from "redux/cartSupermraket/cartSupermarketReducer";
 
-type TRestaurantNavigation = "cart" | "search";
+type TSupermarketNavigation = "cart" | "search" | "order";
 
-function useSupermarketNavigation(active?: TRestaurantNavigation) {
-  const dispatch = useDispatch<AppDispatch>();
+function useSupermarketNavigation(active?: TSupermarketNavigation) {
   const count = useSelector(selectCartSupermarketCount);
   return useMemo(() => {
     const data: TDataBottomNavigation = [
@@ -34,14 +31,14 @@ function useSupermarketNavigation(active?: TRestaurantNavigation) {
         active: active === "search",
       },
       {
-        icon: IconAccount,
-        title: "حساب من",
-        onClick: () => dispatch(setIsDrawerOpen(true)),
-        active: false,
+        icon: IconOrder,
+        title: "سفارشات",
+        link: "/supermarket/order/active",
+        active: active === "order",
       },
     ];
     return data;
-  }, [active, count, dispatch]);
+  }, [active, count]);
 }
 
 export default useSupermarketNavigation;

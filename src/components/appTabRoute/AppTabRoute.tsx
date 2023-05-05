@@ -9,10 +9,11 @@ interface IAppTabRoute {
   classNameContainer?: string;
   classNameItem?: string;
   classNameItemActive?: string;
+  color?: "default" | "supermarket";
 }
 
 function AppTabRoute(props: IAppTabRoute) {
-  const {routes, classNameContainer = "", classNameItem = "", classNameItemActive = ""} = props;
+  const {routes, classNameContainer = "", classNameItem = "", classNameItemActive = "", color = "default"} = props;
   const container = classNames({
     "flex w-full items-center h-headerNormal max-width-screen": true,
     [classNameContainer]: classNameContainer,
@@ -24,7 +25,8 @@ function AppTabRoute(props: IAppTabRoute) {
           "flex items-center justify-center h-[40px] rounded-full font-medium": true,
           [styles.app_tab_route_active]: item.active,
           "text-textColorLight": !item.active,
-          "text-primary": item.active && !classNameItemActive,
+          "text-primary": item.active && !classNameItemActive && color === "default",
+          "text-primarySupermarket": item.active && !classNameItemActive && color === "supermarket",
           [classNameItem]: classNameItem,
           [classNameItemActive]: classNameItemActive && item.active,
         });

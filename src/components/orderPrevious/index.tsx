@@ -19,7 +19,7 @@ function OrderPrevious(props: IOrderPrevious) {
   return (
     <OrderPreviousDataProvider categoryId={categoryId} queryKey={queryKey}>
       <OrderPreviousReceiptProvider>
-        <OrderAppHeader active="previous" activeLink={activeLink} previousLink={previousLink} />
+        <OrderAppHeader color={color} active="previous" activeLink={activeLink} previousLink={previousLink} />
         <div className="mt-headerNormal">
           <OrderPreviousList color={color} onClickReOrder={onClickReOrder} />
         </div>

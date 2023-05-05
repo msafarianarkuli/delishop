@@ -17,11 +17,11 @@ function OrderActive(props: IOrderActive) {
   const {activeLink, previousLink, queryKey, color, bottomNavigationData, categoryId} = props;
   return (
     <OrderActiveDataProvider categoryId={categoryId} queryKey={queryKey}>
-      <OrderAppHeader active="active" activeLink={activeLink} previousLink={previousLink} />
+      <OrderAppHeader color={color} active="active" activeLink={activeLink} previousLink={previousLink} />
       <div className="mt-headerNormal px-[10px] mb-bottomNavigation">
         <OrderActiveList color={color} />
       </div>
-      <BottomNavigation data={bottomNavigationData} />
+      <BottomNavigation primary={color === "default" ? "restaurant" : "supermarket"} data={bottomNavigationData} />
     </OrderActiveDataProvider>
   );
 }

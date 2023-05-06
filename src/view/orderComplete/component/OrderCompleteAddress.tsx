@@ -11,8 +11,10 @@ import {
   useOrderCompleteAction,
 } from "view/orderComplete/context/OrderCompleteProvider";
 import {useRouter} from "next/router";
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
+import {useSelector} from "react-redux";
+import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 
 function OrderCompleteTitleLeft() {
   const type = useTypeColor();
@@ -40,27 +42,39 @@ function OrderCompleteAddress() {
   const type = useTypeColor();
   const {deliveryAddress} = useOrderComplete();
   const dispatch = useOrderCompleteAction();
+  const {isUserAddressStorageLoaded, userAddress} = useSelector(selectAddressMap);
+
+  useEffect(() => {
+    if (isUserAddressStorageLoaded && userAddress && data && !deliveryAddress) {
+      const tmp = data.find((item) => item.id === userAddress.id);
+      if (tmp) {
+        dispatch(setOrderCompleteDeliveryAddress(tmp));
+      }
+    }
+  }, [data, deliveryAddress, dispatch, isUserAddressStorageLoaded, userAddress]);
 
   return (
     <div className="mt-headerNormal">
       <OrderCompleteTitle type={type} title="روش تحویل سفارش" left={<OrderCompleteTitleLeft />} />
       <div className="px-screenSpace">
         {isLoading ? <div>درحال دریافت اطلاعات</div> : null}
-        {data?.map((item, index) => {
-          return (
-            <OrderCompleteAddressCard
-              key={index}
-              id={item.id.toString()}
-              title={item.title}
-              address={item.address}
-              point={{lat: item.latitude, lng: item.longitude}}
-              value={deliveryAddress?.id === item.id}
-              onChange={() => {
-                dispatch(setOrderCompleteDeliveryAddress(item));
-              }}
-            />
-          );
-        })}
+        {data
+          ?.filter((element) => element.id === userAddress?.id)
+          .map((item, index) => {
+            return (
+              <OrderCompleteAddressCard
+                key={index}
+                id={item.id.toString()}
+                title={item.title}
+                address={item.address}
+                point={{lat: item.latitude, lng: item.longitude}}
+                value={deliveryAddress?.id === item.id}
+                onChange={() => {
+                  dispatch(setOrderCompleteDeliveryAddress(item));
+                }}
+              />
+            );
+          })}
         {!vendorDataLoading && vendorData?.delivery_at_place ? (
           <OrderCompleteAddressCard
             id={"0"}

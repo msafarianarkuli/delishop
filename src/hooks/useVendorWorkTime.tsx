@@ -78,6 +78,9 @@ function useVendorWorkTime(props: IUseVendorTime) {
         tmpTimes = [{isTemp: true, from: "", to: ""}, ...tmp];
       }
     }
+    if (!tmpTimes.length) {
+      setError("هنوز باز نشده است");
+    }
     setTime(tmpTimes);
   }, [hours]);
 

@@ -1,5 +1,5 @@
 import {Button} from "antd";
-import {IconClose, IconDeleteAddress} from "assets/icons";
+import {IconClose} from "assets/icons";
 import {useMemo} from "react";
 import {TCartDataItemExtra} from "types/interfaces";
 import {Counter} from "components";
@@ -31,7 +31,7 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
   }, [count, extraPrice, price]);
 
   return (
-    <div className="border border-borderColor rounded-[8px] p-3 mb-3">
+    <div className="my-6">
       <div>{title}</div>
       <div className="flex items-center flex-wrap my-3">
         {extra?.map((item, index) => {
@@ -60,7 +60,7 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
         <Counter
           primaryType={primaryType}
           count={count}
-          minusIcon={<IconDeleteAddress className="w-[17px] h-[17px]" />}
+          // minusIcon={<IconDeleteAddress className="w-[17px] h-[17px]" />}
           onAddClick={onAddClick}
           onMinusClick={onMinusClick}
         />

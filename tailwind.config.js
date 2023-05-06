@@ -40,7 +40,7 @@ module.exports = {
       spacing: {
         screenSpace: "19px",
         headerNormal: "56px",
-        bottomNavigation: "84px",
+        bottomNavigation: "63px",
       },
       transitionProperty: {
         height: "height",

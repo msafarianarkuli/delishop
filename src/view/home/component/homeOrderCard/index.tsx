@@ -42,7 +42,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
       <div className="flex items-center justify-between">
         <div className="text-[15px] font-medium pl-1 underline">سفارش شما در حال آماده سازی می باشد.</div>
         <div className="font-semibold whitespace-nowrap">
-          <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
+          <div className="text-[11px] mb-2 text-center">تحویل تا ساعت:</div>
           <div className={deliveryClassName}>{deliveryTime}</div>
         </div>
       </div>
@@ -72,8 +72,8 @@ function HomeOrderCard(props: IHomeOrderCard) {
           </div>
         </div>
         <Link href={href} className={orderClassName}>
-          <span className="text-[15px] font-semibold">مشاهده سفارش</span>
-          <IconRoundedLeft className="w-5 h-5" />
+          <span className="text-[10px] font-medium">مشاهده سفارش</span>
+          <IconRoundedLeft className="w-3 h-3" />
         </Link>
       </div>
     </div>

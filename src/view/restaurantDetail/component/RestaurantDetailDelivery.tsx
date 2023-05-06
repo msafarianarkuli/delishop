@@ -26,7 +26,7 @@ function RestaurantDetailDelivery(props: IRestaurantDetailDelivery) {
 
   return (
     <RestaurantDetailSummaryItem
-      classNameContainer="px-5 mx-5 after:content-[' '] after:absolute after:bg-textColor after:left-0 after:h-[25px] after:w-[1px] before:content-[' '] before:absolute before:bg-textColor before:right-0 before:h-[25px] before:w-[1px]"
+      classNameContainer="px-5 mx-5 mobile:px-7 mobile:mx-7 after:content-[' '] after:absolute after:bg-textColor after:left-0 after:h-[25px] after:w-[1px] before:content-[' '] before:absolute before:bg-textColor before:right-0 before:h-[25px] before:w-[1px]"
       top={
         <>
           <span>{deliveryToman.toLocaleString("en-US")}</span>

@@ -11,10 +11,13 @@ function RestaurantDetailTitle() {
         <span className="text-[15px] font-semibold ml-1">{data?.vendor?.name}</span>
         {/*<span className="text-[14px] font-light text-textColorLight">({data?.vendor?.address})</span>*/}
       </div>
-      <div className="flex items-center inner_box">
-        <IconCoin className="w-5 h-5 ml-1" />
-        <span>{data?.vendor?.point}</span>
-      </div>
+      {data?.vendor?.point ? (
+        <div className="flex items-center">
+          <IconCoin className="w-3 h-3 ml-1" />
+          <span className="text-[13px] font-semibold">{data?.vendor?.point}</span>
+          <span>+</span>
+        </div>
+      ) : null}
     </div>
   );
 }

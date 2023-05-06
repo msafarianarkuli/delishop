@@ -27,13 +27,16 @@ function RestaurantDetailCard(props: IRestaurantDetailCard) {
         </div>
         <div className="flex items-center">
           <div>
-            <span>{price?.toLocaleString("en-US")}</span>
-            <span className="text-[13px]">تومان</span>
+            <span className="text-[17px] font-semibold">{price?.toLocaleString("en-US")}</span>
+            <span className="text-[12px]">تومان</span>
           </div>
-          <div className="flex items-center bg-[#E8E8EE] rounded p-1 mr-1">
-            <IconCoin className="w-5 h-5 ml-1" />
-            <span>{coin}</span>
-          </div>
+          {coin ? (
+            <div className="flex items-center bg-[#E8E8EE] rounded p-1 mr-3">
+              <IconCoin className="w-3 h-3 ml-1" />
+              <span className="font-semibold text-[13px]">{coin}</span>
+              <span>+</span>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="flex flex-col items-center w-[100px]">

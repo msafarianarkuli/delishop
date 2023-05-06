@@ -1,6 +1,7 @@
 import {IconClock, IconCoin, IconStarFill, IconStarOutline} from "assets/icons";
 import styles from "view/restaurant/component/restaurantCard/restaurantCard.module.scss";
 import {useMemo} from "react";
+import classNames from "classnames";
 
 interface IRestaurantCard {
   image?: string;
@@ -22,8 +23,12 @@ function RestaurantCard(props: IRestaurantCard) {
     [star]
   );
 
+  const container = classNames({
+    [styles.restaurant_card_container]: true,
+  });
+
   return (
-    <div className={styles.restaurant_card_container}>
+    <div className={container}>
       <div className="relative w-full pb-[34.1%] overflow-hidden rounded-t-[12px]">
         <img src={image} alt="image" className="absolute inset-0 object-center object-contain w-full h-full" />
       </div>

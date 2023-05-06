@@ -76,7 +76,7 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
     <div className={styles.order_previous_card_container}>
       <div className="flex flex-wrap items-center justify-between px-[29px] pb-[19px] border-b border-borderColor">
         <div className="text-[15px] font-bold whitespace-nowrap">شماره فاکتور:{receiptNumber}</div>
-        <div className="flex items-center text-[15px] font-medium">
+        <div className="flex items-center text-[12px] font-medium">
           <div className="ml-2 whitespace-nowrap">
             {number2Digits(dayjs(date).hour())}:{number2Digits(dayjs(date).minute())}
           </div>
@@ -126,11 +126,13 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
             <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
             <span className="text-[13px] text-textColorLight">تومان</span>
           </div>
-          <div className="flex items-center text-[17px]">
-            <IconCoin className="w-5 h-5 ml-1" />
-            <span>{coin}</span>
-            <span>+</span>
-          </div>
+          {orderStatus === 6 ? (
+            <div className="flex items-center text-[17px]">
+              <IconCoin className="w-5 h-5 ml-1" />
+              <span>{coin}</span>
+              <span>+</span>
+            </div>
+          ) : null}
         </div>
       </div>
       {orderStatus === 6 && !hasRated ? (
@@ -140,10 +142,11 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
         </Link>
       ) : null}
       <div className="flex items-center mt-5 mx-[27px]">
-        <Button type="primary" className={submitBtnClassName} onClick={onClickReOrder}>
+        <Button disabled={orderStatus !== 6} type="primary" className={submitBtnClassName} onClick={onClickReOrder}>
           سفارش مجدد
         </Button>
         <Button
+          disabled={orderStatus !== 6}
           className="secondary-btn w-full h-[40px] text-[17px] font-medium rounded-[4px]"
           onClick={onClickReceipt}
         >

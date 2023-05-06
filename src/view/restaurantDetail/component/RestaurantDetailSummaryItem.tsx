@@ -18,12 +18,17 @@ function RestaurantDetailSummaryItem(props: IRestaurantDetailSummary) {
   });
 
   const bottomClassName = classNames({
-    "flex items-center text-iconColor text-[13px]": true,
+    "flex items-center text-iconColor text-[10px] font-medium": true,
     [classNameBottom]: classNameBottom,
+  });
+
+  const topClassName = classNames({
+    "text-[13px] font-normal": true,
+    [classNameTop]: classNameTop,
   });
   return (
     <div className={container}>
-      <div className={classNameTop}>{top}</div>
+      <div className={topClassName}>{top}</div>
       <div className={bottomClassName}>{bottom}</div>
     </div>
   );

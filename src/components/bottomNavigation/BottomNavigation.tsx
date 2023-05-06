@@ -63,7 +63,7 @@ function BottomNavigation(props: IBottomNavigation) {
             "absolute flex items-center justify-center rounded-full": true,
             [primaryBgColor]: item.badge,
             "w-[7px] h-[7px] top-[2%] right-[25%]": !item.badgeNumber,
-            "w-[20px] h-[20px] -top-[12%] right-[12%]": item.badgeNumber,
+            "w-[20px] h-[20px] -top-[6%] right-[6%]": item.badgeNumber,
           });
           return (
             <Component key={index} {...(item.link ? {href: item.link} : {onClick: item.onClick})} className={className}>

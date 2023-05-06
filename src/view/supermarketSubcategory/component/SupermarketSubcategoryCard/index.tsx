@@ -19,24 +19,28 @@ interface ISupermarketSubcategoryCard {
 function SupermarketSubcategoryCard(props: ISupermarketSubcategoryCard) {
   const {image, description, price, title, coin, count, onMinusClick, onAddClick, disabled} = props;
   const counterClassNames = classNames({
-    "flex-row-reverse w-[100px] h-[34px] mx-auto": true,
+    "absolute top-[8px] z-[5] flex-row-reverse w-[100px] h-[34px] mx-auto": true,
     [styles.supermarket_subcategory_card_counter]: count,
   });
 
   return (
     <div className={styles.supermarket_subcategory_card_container}>
-      <Counter
-        disabled={disabled}
-        count={count}
-        className={counterClassNames}
-        primaryType="supermarket"
-        showMinusOnlyPositiveNumber
-        showNumberOnlyPositiveNumber
-        onAddClick={onAddClick}
-        onMinusClick={onMinusClick}
-      />
-      <div className="flex justify-center items-center h-[70px] w-full">
-        <img src={image} alt={title} className="w-full h-auto max-h-[85%] rounded-[10px]" />
+      <div className="relative flex justify-center items-center w-full pb-[100%]">
+        <Counter
+          disabled={disabled}
+          count={count}
+          className={counterClassNames}
+          primaryType="supermarket"
+          showMinusOnlyPositiveNumber
+          showNumberOnlyPositiveNumber
+          onAddClick={onAddClick}
+          onMinusClick={onMinusClick}
+        />
+        <img
+          src={image}
+          alt={title}
+          className="absolute top-0 w-full h-full rounded-[10px] object-center object-center"
+        />
       </div>
       <div className="flex items-center justify-end">
         <div className="flex items-center p-1 bg-primarySupermarket/10 rounded-[5px]">

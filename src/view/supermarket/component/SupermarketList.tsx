@@ -58,7 +58,7 @@ function SupermarketShowList() {
                 deliveryPrice={Math.round(price / 10)}
                 coin={item.point}
                 rate={item.rate}
-                image={item.logo}
+                image={item.banner}
               />
             </Link>
           );

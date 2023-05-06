@@ -45,7 +45,7 @@ function BottomNavigation(props: IBottomNavigation) {
   });
 
   return (
-    <div className="fixed bottom-0 right-0 left-0">
+    <div className="fixed z-10 bottom-0 right-0 left-0">
       <div className={container}>
         {data.map((item, index) => {
           const icon = classNames({

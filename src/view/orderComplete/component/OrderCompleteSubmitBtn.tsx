@@ -23,6 +23,7 @@ import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
 import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive";
+import {QUERY_KEY_SUPERMARKET_ORDERS_ACTIVE} from "view/supermarketOrderActive";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -169,6 +170,7 @@ function OrderCompleteSubmitBtn() {
                     // invalidate for getData again
                     queryClient.invalidateQueries(QUERY_KEY_USER_COIN);
                     queryClient.invalidateQueries(QUERY_KEY_RESTAURANT_ORDERS_ACTIVE);
+                    queryClient.invalidateQueries(QUERY_KEY_SUPERMARKET_ORDERS_ACTIVE);
 
                     if (res.data.Data?.payurl) {
                       const url = res.data.Data.payurl;
@@ -181,7 +183,7 @@ function OrderCompleteSubmitBtn() {
                           router.replace("/restaurant/order/active");
                         } else if (supermarket?.cartOrders) {
                           dispatchRedux(clearCartSupermarket());
-                          router.replace("/supermarket");
+                          router.replace("/supermarket/order/active");
                         }
                       }
                     }

@@ -28,13 +28,14 @@ function SupermarketCartList() {
   return (
     <div>
       {data.map((item, index) => {
+        const finalPrice = item.price ? Math.round(item.price / 10) : 0;
         return (
           <SupermarketCartCard
             key={index}
             title={item.title}
             image={item.image}
             count={item.count}
-            price={item.price}
+            price={finalPrice}
             onAddClick={() => {
               dispatch(
                 setCartSupermarketItem({

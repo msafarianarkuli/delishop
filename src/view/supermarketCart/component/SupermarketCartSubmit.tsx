@@ -18,7 +18,7 @@ function SupermarketCartSubmit() {
   if (!totalPrice) return null;
   return (
     <SubmitBuyBtn
-      className="bottom-[80px]"
+      className="bottom-[60px]"
       type="supermarket"
       onClick={() => router.push(`/ordercomplete/${cart.vendorId}?supermarket=1`)}
       right={<IconDownload className="w-5 h-5" />}
@@ -29,7 +29,7 @@ function SupermarketCartSubmit() {
       }
       left={
         <>
-          <span>{totalPrice.toLocaleString("en-US")}</span>
+          <span>{Math.round(totalPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

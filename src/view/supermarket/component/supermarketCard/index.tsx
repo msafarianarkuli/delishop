@@ -27,6 +27,14 @@ function SuperMarketCard(props: ISuperMarketCard) {
     [styles.supermarket_card_container_disabled]: vendorIsClose,
   });
 
+  const rateFixed = useMemo(() => {
+    const tmp = +rate;
+    if (!isNaN(tmp)) {
+      return tmp.toFixed(2);
+    }
+    return null;
+  }, [rate]);
+
   return (
     <div className={container}>
       <div className="flex">
@@ -50,7 +58,7 @@ function SuperMarketCard(props: ISuperMarketCard) {
             <span>تومان</span>
           </div>
           <div className="inner_box flex items-center mr-2">
-            <span className="text-[13px] h-4">{rate}</span>
+            <span className="text-[13px] h-4">{rateFixed}</span>
             <IconStarFill className="w-3 h-auto mr-1" />
           </div>
         </div>

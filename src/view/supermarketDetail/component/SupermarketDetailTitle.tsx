@@ -1,6 +1,7 @@
 import {IconCoin, IconRoundedLeft, IconStarFill} from "assets/icons";
 import IconDelivery from "assets/icons/IconDelivery";
 import Link from "next/link";
+import {useMemo} from "react";
 
 interface ISupermarketDetailTitle {
   image?: string;
@@ -13,6 +14,15 @@ interface ISupermarketDetailTitle {
 
 function SupermarketDetailTitle(props: ISupermarketDetailTitle) {
   const {title, rate, image, deliveryPrice, coin, href} = props;
+
+  const rateFixed = useMemo(() => {
+    const tmp = +rate;
+    if (!isNaN(tmp)) {
+      return tmp.toFixed(2);
+    }
+    return null;
+  }, [rate]);
+
   return (
     <div className="flex pt-3">
       <img
@@ -45,7 +55,7 @@ function SupermarketDetailTitle(props: ISupermarketDetailTitle) {
               <span>تومان</span>
             </div>
             <div className="inner_box flex items-center mr-2">
-              <span className="text-[13px] h-4">{rate}</span>
+              <span className="text-[13px] h-4">{rateFixed}</span>
               <IconStarFill className="w-3 h-auto mr-1" />
             </div>
           </div>

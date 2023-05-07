@@ -53,7 +53,7 @@ function SupermarketCategoryProductsList() {
                       disabled={!time.length || !supermarketData?.vendor.open}
                       title={item.displayname}
                       image={product.photo_igu}
-                      price={finalPrice}
+                      price={Math.round(finalPrice / 10)}
                       coin={item.point}
                       description={item.description_te}
                       count={count}

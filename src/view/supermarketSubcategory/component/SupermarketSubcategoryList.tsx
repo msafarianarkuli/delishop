@@ -49,7 +49,7 @@ function SupermarketSubcategoryList() {
               description={item.description_te}
               image={product.photo_igu}
               coin={item.point}
-              price={finalPrice}
+              price={Math.round(finalPrice / 10)}
               count={count}
               onAddClick={() => {
                 if (vendorId) {

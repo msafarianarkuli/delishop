@@ -20,6 +20,7 @@ function RestaurantCartCard(props: IRestaurantCartCard) {
       </div>
       <div className="px-5 py-3">
         {data.map((item, index) => {
+          const finalPrice = item.price ? Math.round((item.count * item.price) / 10) : 0;
           return (
             <div key={index} className="py-3 border-t last:border-b border-borderColor">
               <div className="flex items-center justify-between">
@@ -28,17 +29,18 @@ function RestaurantCartCard(props: IRestaurantCartCard) {
                   <span className="font-extralight mr-1">({item.count})</span>
                 </div>
                 <div className="whitespace-nowrap text-[13px]">
-                  <span>{(item.count * item.price).toLocaleString("en-US")}</span>
+                  <span>{finalPrice.toLocaleString("en-US")}</span>
                   <span className="mr-1">تومان</span>
                 </div>
               </div>
               <div className="flex flex-wrap">
                 {item.extra?.map((element, idx) => {
+                  const finalPrice = element.price ? Math.round(element.price / 10) : 0;
                   return (
                     <div key={idx} className="flex text-[11px] mt-1">
                       <div className="ml-1">{element.name}</div>
                       <div className="whitespace-nowrap">
-                        (<span>{element.price.toLocaleString("en-US")}</span>
+                        (<span>{finalPrice.toLocaleString("en-US")}</span>
                         <span className="mr-1">تومان</span>)
                       </div>
                     </div>

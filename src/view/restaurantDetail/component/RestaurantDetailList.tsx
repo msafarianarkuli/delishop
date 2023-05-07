@@ -77,7 +77,7 @@ function RestaurantDetailList() {
                     disabled={!time.length || !data?.vendor.open}
                     image={product?.photo_igu}
                     title={item.displayname}
-                    description={product?.description}
+                    description={item?.description_te}
                     coin={item?.point}
                     price={Math.round(finalPrice / 10)}
                     count={count}

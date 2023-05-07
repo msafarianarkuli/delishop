@@ -41,6 +41,8 @@ function RestaurantListShow() {
                 star={+item.rate}
                 coin={item.point}
                 time={item.max_sendtime}
+                open={!!item.open}
+                openHours={item.open_hours}
               />
             </Link>
           );

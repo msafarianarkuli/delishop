@@ -1,3 +1,5 @@
+import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
+
 export interface IGetVendorsListRes {
   data: {
     vendors: TGetVendorsListResVendors;
@@ -14,6 +16,7 @@ export interface IGetVendorsListResItem {
   banner?: string;
   status: string;
   open: number;
+  open_hours: IGetVendorsDetailVendorOpenHours;
   max_sendtime: string;
   rate: string;
   rates_count: number;

@@ -59,6 +59,8 @@ function SupermarketShowList() {
                 coin={item.point}
                 rate={item.rate}
                 image={item.banner}
+                open={!!item.open}
+                openHours={item.open_hours}
               />
             </Link>
           );

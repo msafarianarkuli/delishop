@@ -1,6 +1,10 @@
 import styles from "view/supermarket/component/supermarketCard/supermarketCard.module.scss";
 import {IconCoin, IconStarFill} from "assets/icons";
 import IconDelivery from "assets/icons/IconDelivery";
+import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
+import useVendorWorkTime from "hooks/useVendorWorkTime";
+import {useMemo} from "react";
+import classNames from "classnames";
 
 interface ISuperMarketCard {
   image?: string;
@@ -8,12 +12,23 @@ interface ISuperMarketCard {
   rate: string;
   deliveryPrice: number;
   coin: number;
+  open: boolean;
+  openHours: IGetVendorsDetailVendorOpenHours;
 }
 
 function SuperMarketCard(props: ISuperMarketCard) {
-  const {rate, deliveryPrice, title, coin, image} = props;
+  const {rate, deliveryPrice, title, coin, image, openHours, open} = props;
+  const {time: vendorWorkTime} = useVendorWorkTime({open_hours: openHours});
+
+  const vendorIsClose = useMemo(() => !vendorWorkTime.length || !open, [open, vendorWorkTime.length]);
+
+  const container = classNames({
+    [styles.supermarket_card_container]: true,
+    [styles.supermarket_card_container_disabled]: vendorIsClose,
+  });
+
   return (
-    <div className={styles.supermarket_card_container}>
+    <div className={container}>
       <div className="flex">
         <img src={image} alt={title} className="w-[144px] h-[80px] rounded-bl-[10px] object-center object-cover" />
         <div className="text-[15px] font-medium mx-2 mt-1">

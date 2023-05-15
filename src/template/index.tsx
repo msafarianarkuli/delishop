@@ -18,7 +18,7 @@ function Template({children}: ITemplate) {
         <UserWalletProvider>
           <Drawer />
           <div
-            className={`template min-h-screen anti aliased ${iranSans.variable} font-IranSans text-[14px] text-textColor`}
+            className={`template min-h-screen antialiased ${iranSans.variable} font-IranSans text-[14px] text-textColor`}
           >
             <div className="max-width-screen">{children}</div>
           </div>

@@ -42,6 +42,7 @@ function SupermarketCategoryHeaderBody() {
             id={`category_${item.id}`}
             className={container}
             prefetch={false}
+            replace
           >
             {item.displayname}
           </Link>

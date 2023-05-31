@@ -1,23 +1,18 @@
-import React, {createContext, useContext, useMemo} from "react";
-import {IDataContextProvider} from "types/interfaces";
+import {createContext, useContext, useMemo} from "react";
 import getSupermarketGroupProducts, {IGetSupermarketGroupProductsRes} from "api/getSupermarketGroupProducts";
 import {useRouter} from "next/router";
-import {createKeyForUseQuery, createPaginationParams} from "utils/utils";
-import {useQuery} from "react-query";
+import {createKeyForUseQuery, createPaginationParams, hasNextPage} from "utils/utils";
+import {useInfiniteQuery, UseInfiniteQueryResult} from "react-query";
 
 interface ISupermarketSubcategoryDataProvider {
   children: JSX.Element;
 }
 
-const initialState: IDataContextProvider<IGetSupermarketGroupProductsRes> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseInfiniteQueryResult<IGetSupermarketGroupProductsRes> = {};
 
 const SupermarketSubcategoryDataContext =
-  createContext<IDataContextProvider<IGetSupermarketGroupProductsRes>>(initialState);
+  createContext<UseInfiniteQueryResult<IGetSupermarketGroupProductsRes>>(initialState);
 
 export const QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS = "supermarketGroupProducts";
 
@@ -65,27 +60,30 @@ function SupermarketSubcategoryDataProvider({children}: ISupermarketSubcategoryD
     return "";
   }, [router.query.subcategory]);
 
-  const page = useMemo(() => {
-    const page = router.query.page;
-    if (page && !Array.isArray(page)) {
-      return page;
-    }
-    return "1";
-  }, [router.query.page]);
-
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS];
     tmpKeys = createKeyForUseQuery(tmpKeys, vendorId);
     tmpKeys = createKeyForUseQuery(tmpKeys, categoryId);
     tmpKeys = createKeyForUseQuery(tmpKeys, subcategoryId);
-    tmpKeys = createKeyForUseQuery(tmpKeys, page);
     return tmpKeys;
-  }, [categoryId, page, subcategoryId, vendorId]);
+  }, [categoryId, subcategoryId, vendorId]);
 
-  const result = useQuery(keys, () => getSupermarketGroupProducts({params, categoryId: subcategoryId, vendorId}), {
-    staleTime,
-    enabled: router.isReady,
-  });
+  const result = useInfiniteQuery(
+    keys,
+    ({pageParam}) => getSupermarketGroupProducts({params, categoryId: subcategoryId, vendorId, pageParam}),
+    {
+      staleTime,
+      enabled: router.isReady,
+      getNextPageParam: (lastPage, allPages) => {
+        const total = lastPage.totalCount;
+        const page = allPages.length;
+        if (hasNextPage({page, total})) {
+          return page + 1;
+        }
+        return undefined;
+      },
+    }
+  );
 
   return (
     <SupermarketSubcategoryDataContext.Provider value={result}>{children}</SupermarketSubcategoryDataContext.Provider>

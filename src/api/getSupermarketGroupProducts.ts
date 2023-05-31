@@ -5,12 +5,15 @@ import {
 import {API} from "api/const";
 import {axiosService} from "utils/axiosService";
 import fetchService from "utils/fetchService";
+import {paginationCalc} from "utils/utils";
 
 interface IGetSupermarketGroupProducts {
   params?: object;
   isServer?: boolean;
   vendorId: string;
   categoryId: string;
+  pageParam?: number;
+  count?: number;
 }
 
 export interface IGetSupermarketGroupProductsRes {
@@ -19,13 +22,15 @@ export interface IGetSupermarketGroupProductsRes {
 }
 
 type TGetSupermarketGroupProducts = (props: IGetSupermarketGroupProducts) => Promise<IGetSupermarketGroupProductsRes>;
-const getSupermarketGroupProducts: TGetSupermarketGroupProducts = async ({isServer, params, vendorId, categoryId}) => {
-  let url = isServer ? API.DOMAIN + API.GET_SUPERMARKET_GROUP_PRODUCTS : API.GET_SUPERMARKET_GROUP_PRODUCTS;
+const getSupermarketGroupProducts: TGetSupermarketGroupProducts = async (props) => {
+  const {isServer, params, vendorId, categoryId, pageParam = 1, count = 18} = props;
+  const {take, skip} = paginationCalc({page: pageParam, count});
   const tmpParams = {
-    skip: 0,
-    take: 19,
+    skip,
+    take,
     ...params,
   };
+  let url = isServer ? API.DOMAIN + API.GET_SUPERMARKET_GROUP_PRODUCTS : API.GET_SUPERMARKET_GROUP_PRODUCTS;
   url = url.replace("{id}", vendorId).replace("{category}", categoryId);
   if (isServer) {
     return fetchService<ISupermarketGroupProductsRes>({

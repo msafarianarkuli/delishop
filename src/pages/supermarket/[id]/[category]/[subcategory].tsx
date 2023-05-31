@@ -21,7 +21,6 @@ function SupermarketSubcategoryPage() {
 
 export const getServerSideProps: GetServerSideProps = async ({params, query}) => {
   const queryClient = new QueryClient();
-  const page = query?.page;
   let vendorId = "";
   let categoryId = "";
   let subcategoryId = "";
@@ -34,17 +33,15 @@ export const getServerSideProps: GetServerSideProps = async ({params, query}) =>
   if (params?.subcategory && !Array.isArray(params?.subcategory)) {
     subcategoryId = params.subcategory;
   }
-  const queryKey = [QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS, vendorId, categoryId, subcategoryId, "1"];
+  const queryKey = [QUERY_KEY_SUPERMARKET_GROUP_PRODUCTS, vendorId, categoryId, subcategoryId];
   const categoryQueryKey = [QUERY_KEY_SUPERMARKET_DETAIL, vendorId];
   const tmpQuery = {...query};
   delete tmpQuery?.id;
   delete tmpQuery?.category;
   delete tmpQuery?.subcategory;
+  delete tmpQuery?.page;
   let queryParams = createPaginationParams(tmpQuery);
-  if (page && !Array.isArray(page) && !isNaN(+page)) {
-    queryKey[4] = page;
-  }
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey,
     queryFn: () =>
       getSupermarketGroupProducts({isServer: true, params: queryParams, vendorId, categoryId: subcategoryId}),
@@ -62,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async ({params, query}) =>
   }
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
   };
 };

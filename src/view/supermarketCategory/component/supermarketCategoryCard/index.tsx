@@ -47,11 +47,13 @@ function SupermarketCategoryCard(props: ISupermarketCategoryCard) {
           <span className="h-4 text-[13px] font-medium">{coin}</span>
         </div>
       </div>
-      <div className="text-[13px] font-medium mt-2">{title}</div>
-      <div className="text-[11px] font-normal my-1">{description}</div>
-      <div>
-        <span className="text-[13px] font-semibold">{price.toLocaleString("en-US")}</span>
-        <span className="mr-1 text-[11px] font-normal">تومان</span>
+      <div className="flex flex-1 flex-col justify-between">
+        <div className="text-[13px] font-medium mt-2">{title}</div>
+        <div className="text-[11px] font-normal my-1">{description}</div>
+        <div>
+          <span className="text-[13px] font-semibold">{price.toLocaleString("en-US")}</span>
+          <span className="mr-1 text-[11px] font-normal">تومان</span>
+        </div>
       </div>
     </div>
   );

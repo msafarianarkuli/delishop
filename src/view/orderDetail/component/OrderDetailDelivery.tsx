@@ -6,6 +6,7 @@ import delivery from "assets/images/pin-order-delivery.svg";
 import classNames from "classnames";
 import useTypeColor from "hooks/useTypeColor";
 import useOrderStatusText from "hooks/useOrderStatusText";
+import {EOrderStatus} from "utils/Const";
 
 interface IOrderDetailDelivery {
   deliveryTime: string;
@@ -18,20 +19,20 @@ function OrderDetailDelivery(props: IOrderDetailDelivery) {
   const hintText = useOrderStatusText(orderStatus);
 
   const progressPercent = useMemo(() => {
-    if (orderStatus === 3 || orderStatus === 4) {
+    if (orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready) {
       return "50%";
-    } else if (orderStatus === 5) {
+    } else if (orderStatus === EOrderStatus.sent) {
       return "100%";
     }
     return "0";
   }, [orderStatus]);
 
   const progressIcon = useMemo(() => {
-    if (orderStatus === 3 || orderStatus === 4) {
+    if (orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready) {
       return (
         <img src={accept.src} alt="accept" className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]" />
       );
-    } else if (orderStatus === 5) {
+    } else if (orderStatus === EOrderStatus.sent) {
       return <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />;
     }
     return null;

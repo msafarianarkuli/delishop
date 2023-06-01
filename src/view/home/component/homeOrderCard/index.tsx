@@ -6,6 +6,7 @@ import {IconRoundedLeft} from "assets/icons";
 import {useMemo} from "react";
 import classNames from "classnames";
 import useOrderStatusText from "hooks/useOrderStatusText";
+import {EOrderStatus} from "utils/Const";
 
 interface IHomeOrderCard {
   deliveryTime: string;
@@ -52,9 +53,11 @@ function HomeOrderCard(props: IHomeOrderCard) {
         <div className="relative w-full h-[4px] bg-[#D9D9D9] rounded-full">
           <div
             className="absolute right-0 top-0 h-full bg-textColor rounded-full transition-width duration-300 ease-linear"
-            style={{width: orderStatus === 3 || orderStatus === 4 ? "50%" : "100%"}}
+            style={{
+              width: orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready ? "50%" : "100%",
+            }}
           />
-          {orderStatus === 3 || orderStatus === 4 ? (
+          {orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready ? (
             <img
               src={accept.src}
               alt="accept"

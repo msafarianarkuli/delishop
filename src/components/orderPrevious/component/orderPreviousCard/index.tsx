@@ -1,6 +1,6 @@
 import React, {MouseEventHandler, useMemo} from "react";
 import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
-import {OrderStatus} from "utils/Const";
+import {EOrderStatus, OrderStatus} from "utils/Const";
 import classNames from "classnames";
 import {number2Digits} from "utils/utils";
 import dayjs from "dayjs";
@@ -54,9 +54,9 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
 
   const statusClassName = classNames({
     "inner_box text-[13px] font-semibold": true,
-    "text-primary": orderStatus === 6 && color === "default",
-    "text-primarySupermarket": orderStatus === 6 && color === "supermarket",
-    "text-textColorLight": orderStatus !== 6,
+    "text-primary": orderStatus === EOrderStatus.delivered && color === "default",
+    "text-primarySupermarket": orderStatus === EOrderStatus.delivered && color === "supermarket",
+    "text-textColorLight": orderStatus !== EOrderStatus.delivered,
   });
 
   const submitBtnClassName = classNames({
@@ -126,7 +126,7 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
             <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
             <span className="text-[13px] text-textColorLight">تومان</span>
           </div>
-          {orderStatus === 6 ? (
+          {orderStatus === EOrderStatus.delivered ? (
             <div className="flex items-center text-[17px]">
               <IconCoin className="w-5 h-5 ml-1" />
               <span>{coin}</span>
@@ -135,18 +135,23 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
           ) : null}
         </div>
       </div>
-      {orderStatus === 6 && !hasRated ? (
+      {orderStatus === EOrderStatus.delivered && !hasRated ? (
         <Link href={href} className="flex items-center justify-end py-3 px-[24px] border-b border-borderColor">
           <div className="text-[15px]">به سفارش خود امتیاز دهید</div>
           <IconRoundedLeft className="w-5 h-5 mr-1" />
         </Link>
       ) : null}
       <div className="flex items-center mt-5 mx-[27px]">
-        <Button disabled={orderStatus !== 6} type="primary" className={submitBtnClassName} onClick={onClickReOrder}>
+        <Button
+          disabled={orderStatus !== EOrderStatus.delivered}
+          type="primary"
+          className={submitBtnClassName}
+          onClick={onClickReOrder}
+        >
           سفارش مجدد
         </Button>
         <Button
-          disabled={orderStatus !== 6}
+          disabled={orderStatus !== EOrderStatus.delivered}
           className="secondary-btn w-full h-[40px] text-[17px] font-medium rounded-[4px]"
           onClick={onClickReceipt}
         >

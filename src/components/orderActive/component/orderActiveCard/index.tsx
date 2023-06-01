@@ -9,6 +9,7 @@ import accept from "assets/images/pin-order-accept.svg";
 import styles from "components/orderActive/component/orderActiveCard/orderActiveCard.module.scss";
 import classNames from "classnames";
 import useOrderStatusText from "hooks/useOrderStatusText";
+import {EOrderStatus} from "utils/Const";
 
 dayjs.extend(jalaliday);
 
@@ -43,19 +44,19 @@ function OrderActiveCard(props: IOrderActiveCard) {
   const hintText = useOrderStatusText(orderStatus);
 
   const statusImage = useMemo(() => {
-    if (orderStatus === 3 || orderStatus === 4) {
+    if (orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready) {
       return (
         <img src={accept.src} alt="accept" className="absolute w-[19px] h-[28px] bottom-[2px] right-[calc(50%-9px)]" />
       );
-    } else if (orderStatus === 5) {
+    } else if (orderStatus === EOrderStatus.sent) {
       return <img src={delivery.src} alt="delivery" className="absolute w-[19px] h-[28px] bottom-[2px] -left-[9px]" />;
     }
   }, [orderStatus]);
 
   const statusProcess = useMemo(() => {
-    if (orderStatus === 3 || orderStatus === 4) {
+    if (orderStatus === EOrderStatus.confirmed || orderStatus === EOrderStatus.ready) {
       return "50%";
-    } else if (orderStatus === 5) {
+    } else if (orderStatus === EOrderStatus.sent) {
       return "100%";
     }
     return "0";

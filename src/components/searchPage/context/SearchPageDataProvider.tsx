@@ -1,15 +1,20 @@
-import React, {createContext, useContext, useMemo} from "react";
+import {createContext, useContext, useMemo} from "react";
 import {IGetSuggestionSearchData} from "types/interfaceSuggestionSearch";
-import {createKeyForUseQuery, hasNextPage} from "utils/utils";
+import {createKeyForUseQuery} from "utils/utils";
 import {useRouter} from "next/router";
-import {useInfiniteQuery, UseInfiniteQueryResult} from "react-query";
+import {useQuery} from "react-query";
 import getSuggestionSearch from "api/getSuggestionSearch";
 import usePathnameQuery from "hooks/usePathnameQuery";
+import {IDataContextProvider} from "types/interfaces";
 
-// @ts-ignore
-const initialState: UseInfiniteQueryResult<IGetSuggestionSearchData> = {};
+const initialState: IDataContextProvider<IGetSuggestionSearchData> = {
+  data: undefined,
+  error: null,
+  isFetching: false,
+  isLoading: false,
+};
 
-const SearchPageDataContext = createContext<UseInfiniteQueryResult<IGetSuggestionSearchData>>(initialState);
+const SearchPageDataContext = createContext<IDataContextProvider<IGetSuggestionSearchData>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 
@@ -65,18 +70,9 @@ function SearchPageDataProvider({children}: {children: JSX.Element[]}) {
 
   const useQueryEnabled = useMemo(() => router.isReady && !!router.query.name, [router.isReady, router.query.name]);
 
-  const result = useInfiniteQuery(keys, () => getSuggestionSearch(params), {
+  const result = useQuery(keys, () => getSuggestionSearch({params}), {
     staleTime,
     enabled: useQueryEnabled,
-    getNextPageParam: (lastPage, allPages) => {
-      const totalProducts = lastPage.products_suggest.totalCount;
-      const totalVendors = lastPage.vendors_suggest.totalCount;
-      const page = allPages.length;
-      if (hasNextPage({page, total: totalProducts}) || hasNextPage({page, total: totalVendors})) {
-        return page + 1;
-      }
-      return undefined;
-    },
   });
 
   return <SearchPageDataContext.Provider value={result}>{children}</SearchPageDataContext.Provider>;

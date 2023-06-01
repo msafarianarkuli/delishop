@@ -6,8 +6,8 @@ import {useRouter} from "next/router";
 function SearchPageNotfound() {
   const {data, isLoading, isFetching} = useSearchPageData();
   const {querySearch} = usePathnameQuery();
-  const vendors = data?.vendors_suggest.vendors.length;
-  const products = data?.products_suggest.products.length;
+  const vendors = data?.pages[0].vendors_suggest.vendors.length;
+  const products = data?.pages[0].products_suggest.products.length;
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
   const router = useRouter();
 

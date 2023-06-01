@@ -1,20 +1,15 @@
 import React, {createContext, useContext, useMemo} from "react";
-import {IDataContextProvider} from "types/interfaces";
 import {IGetSuggestionSearchData} from "types/interfaceSuggestionSearch";
-import {createKeyForUseQuery} from "utils/utils";
+import {createKeyForUseQuery, hasNextPage} from "utils/utils";
 import {useRouter} from "next/router";
-import {useQuery} from "react-query";
+import {useInfiniteQuery, UseInfiniteQueryResult} from "react-query";
 import getSuggestionSearch from "api/getSuggestionSearch";
 import usePathnameQuery from "hooks/usePathnameQuery";
 
-const initialState: IDataContextProvider<IGetSuggestionSearchData> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseInfiniteQueryResult<IGetSuggestionSearchData> = {};
 
-const SearchPageDataContext = createContext<IDataContextProvider<IGetSuggestionSearchData>>(initialState);
+const SearchPageDataContext = createContext<UseInfiniteQueryResult<IGetSuggestionSearchData>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 
@@ -70,7 +65,19 @@ function SearchPageDataProvider({children}: {children: JSX.Element[]}) {
 
   const useQueryEnabled = useMemo(() => router.isReady && !!router.query.name, [router.isReady, router.query.name]);
 
-  const result = useQuery(keys, () => getSuggestionSearch(params), {staleTime, enabled: useQueryEnabled});
+  const result = useInfiniteQuery(keys, () => getSuggestionSearch(params), {
+    staleTime,
+    enabled: useQueryEnabled,
+    getNextPageParam: (lastPage, allPages) => {
+      const totalProducts = lastPage.products_suggest.totalCount;
+      const totalVendors = lastPage.vendors_suggest.totalCount;
+      const page = allPages.length;
+      if (hasNextPage({page, total: totalProducts}) || hasNextPage({page, total: totalVendors})) {
+        return page + 1;
+      }
+      return undefined;
+    },
+  });
 
   return <SearchPageDataContext.Provider value={result}>{children}</SearchPageDataContext.Provider>;
 }

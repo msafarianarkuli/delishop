@@ -4,10 +4,10 @@ import img from "assets/images/ads-sell.png";
 
 function HomeAdsSell() {
   return (
-    <div className="px-screenSpace">
+    <a href="https://delishop.me/vendor/" className="block px-screenSpace" target="_blank">
       <HomeTitle title="از فروش خود لذت ببرید" />
       <HomeAdsCard title="فروش بیشتر با دلی شاپ!" image={img.src} more="بزن بریم" />
-    </div>
+    </a>
   );
 }
 

@@ -5,6 +5,7 @@ import accept from "assets/images/pin-order-accept.svg";
 import delivery from "assets/images/pin-order-delivery.svg";
 import classNames from "classnames";
 import useTypeColor from "hooks/useTypeColor";
+import useOrderStatusText from "hooks/useOrderStatusText";
 
 interface IOrderDetailDelivery {
   deliveryTime: string;
@@ -14,6 +15,7 @@ interface IOrderDetailDelivery {
 function OrderDetailDelivery(props: IOrderDetailDelivery) {
   const {deliveryTime, orderStatus} = props;
   const typeColor = useTypeColor();
+  const hintText = useOrderStatusText(orderStatus);
 
   const progressPercent = useMemo(() => {
     if (orderStatus === 3 || orderStatus === 4) {
@@ -50,7 +52,7 @@ function OrderDetailDelivery(props: IOrderDetailDelivery) {
   return (
     <div className="px-screenSpace mt-3">
       <div className="flex items-center justify-between">
-        <div className={textClassName}>سفارش شما در حال آماده سازی می باشد.</div>
+        <div className={textClassName}>{hintText}</div>
         <div className="font-semibold whitespace-nowrap">
           <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
           <div className="inner_box text-[13px] text-center">{deliveryTime}</div>

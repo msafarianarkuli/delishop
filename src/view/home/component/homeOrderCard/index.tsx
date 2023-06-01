@@ -5,6 +5,7 @@ import Link from "next/link";
 import {IconRoundedLeft} from "assets/icons";
 import {useMemo} from "react";
 import classNames from "classnames";
+import useOrderStatusText from "hooks/useOrderStatusText";
 
 interface IHomeOrderCard {
   deliveryTime: string;
@@ -17,6 +18,7 @@ interface IHomeOrderCard {
 
 function HomeOrderCard(props: IHomeOrderCard) {
   const {deliveryTime, image, title, id, orderStatus, categoryId} = props;
+  const hintText = useOrderStatusText(orderStatus);
 
   const href = useMemo(() => {
     if (categoryId === 2) {
@@ -40,7 +42,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
   return (
     <div className={styles.home_order_card_container}>
       <div className="flex items-center justify-between">
-        <div className="text-[15px] font-medium pl-1 underline">سفارش شما در حال آماده سازی می باشد.</div>
+        <div className="text-[15px] font-medium pl-1 underline">{hintText}</div>
         <div className="font-semibold whitespace-nowrap">
           <div className="text-[11px] mb-2 text-center">تحویل تا ساعت:</div>
           <div className={deliveryClassName}>{deliveryTime}</div>

@@ -8,6 +8,7 @@ import delivery from "assets/images/pin-order-delivery.svg";
 import accept from "assets/images/pin-order-accept.svg";
 import styles from "components/orderActive/component/orderActiveCard/orderActiveCard.module.scss";
 import classNames from "classnames";
+import useOrderStatusText from "hooks/useOrderStatusText";
 
 dayjs.extend(jalaliday);
 
@@ -39,6 +40,7 @@ function OrderActiveCard(props: IOrderActiveCard) {
     orderStatus,
     color,
   } = props;
+  const hintText = useOrderStatusText(orderStatus);
 
   const statusImage = useMemo(() => {
     if (orderStatus === 3 || orderStatus === 4) {
@@ -118,7 +120,7 @@ function OrderActiveCard(props: IOrderActiveCard) {
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <div className={hintClassName}>سفارش شما در حال آماده سازی می باشد.</div>
+          <div className={hintClassName}>{hintText}</div>
           <div className="font-semibold whitespace-nowrap">
             <div className="text-[11px] mb-2">تحویل تا ساعت:</div>
             <div className="inner_box text-[13px] text-center">{deliveryTime}</div>

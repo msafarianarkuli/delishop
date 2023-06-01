@@ -1,41 +1,52 @@
+export enum EOrderStatus {
+  topay = 1,
+  registered,
+  confirmed,
+  ready,
+  sent,
+  delivered,
+  cancel_by_system,
+  cancel_by_vendor,
+}
+
 export const OrderStatus = [
   {
-    id: 1,
+    id: EOrderStatus.topay,
     name: "topay",
     title: "در انتظار پرداخت",
   },
   {
-    id: 2,
+    id: EOrderStatus.registered,
     name: "registered",
     title: "ثبت شده",
   },
   {
-    id: 3,
+    id: EOrderStatus.confirmed,
     name: "confirmed",
     title: "تایید شده",
   },
   {
-    id: 4,
+    id: EOrderStatus.ready,
     name: "ready",
     title: "آماده",
   },
   {
-    id: 5,
+    id: EOrderStatus.sent,
     name: "sent",
     title: "ارسال شده",
   },
   {
-    id: 6,
+    id: EOrderStatus.delivered,
     name: "delivered",
     title: "تحویل شده",
   },
   {
-    id: 7,
+    id: EOrderStatus.cancel_by_system,
     name: "cancel_by_system",
     title: "لغو سیستم",
   },
   {
-    id: 8,
+    id: EOrderStatus.cancel_by_vendor,
     name: "cancel_by_vendor",
     title: "لغو وندور",
   },

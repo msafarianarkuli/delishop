@@ -5,10 +5,11 @@ import {useMemo} from "react";
 import {createKeyForUseQuery, hasNextPage} from "utils/utils";
 import {useInfiniteQuery} from "react-query";
 import getVendors from "api/getVendors";
+import {EVendorsId} from "utils/Const";
 
 interface IUseVendorListResult {
   queryKey: string;
-  categoryId: number;
+  categoryId: EVendorsId[];
   filterQuery?: string[];
   staleTime?: number;
   initialFilter?: {[x: string]: string};

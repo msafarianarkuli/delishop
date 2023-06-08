@@ -53,3 +53,53 @@ export const OrderStatus = [
 ];
 
 export const instant = "در اسرع وقت";
+
+export enum EVendorsId {
+  restaurant = 1,
+  supermarket,
+  // restaurant vendor
+  coffee = 4,
+  daily,
+  protein,
+  fruit,
+  confectionery,
+  bakery,
+  attari,
+  flower,
+  // supermarket vendor
+  tools,
+  kharazi,
+  homeGoods,
+  clothingGoods,
+  drug,
+  sportsGoods,
+  carTools,
+  electricalTools,
+  culture,
+  cosmetic,
+}
+
+export const restaurantsVendor = [
+  EVendorsId.restaurant,
+  EVendorsId.coffee,
+  EVendorsId.daily,
+  EVendorsId.protein,
+  EVendorsId.fruit,
+  EVendorsId.confectionery,
+  EVendorsId.bakery,
+  EVendorsId.attari,
+  EVendorsId.flower,
+];
+
+export const supermarketVendor = [
+  EVendorsId.tools,
+  EVendorsId.kharazi,
+  EVendorsId.homeGoods,
+  EVendorsId.clothingGoods,
+  EVendorsId.drug,
+  EVendorsId.sportsGoods,
+  EVendorsId.carTools,
+  EVendorsId.electricalTools,
+  EVendorsId.culture,
+  EVendorsId.cosmetic,
+];

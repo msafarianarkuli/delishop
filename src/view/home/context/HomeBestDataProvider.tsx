@@ -2,6 +2,7 @@ import React, {createContext, useContext} from "react";
 import {UseInfiniteQueryResult} from "react-query";
 import {IGetVendorsRes} from "api/getVendors";
 import useVendorListResult from "hooks/useVendorListResult";
+import {EVendorsId} from "utils/Const";
 
 // @ts-ignore
 const initialState: UseInfiniteQueryResult<IGetVendorsRes> = {};
@@ -14,7 +15,7 @@ const staleTime = 10 * 60 * 1000;
 
 function HomeBestDataProvider({children}: {children: JSX.Element}) {
   const result = useVendorListResult({
-    categoryId: 1,
+    categoryId: [EVendorsId.restaurant],
     queryKey: QUERY_KEY_HOME_BEST,
     staleTime,
     withLocation: false,

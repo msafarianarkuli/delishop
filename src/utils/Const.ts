@@ -79,7 +79,7 @@ export enum EVendorsId {
   cosmetic,
 }
 
-export const restaurantsVendor = [
+export const restaurantsVendorIds = [
   EVendorsId.restaurant,
   EVendorsId.coffee,
   EVendorsId.daily,
@@ -91,7 +91,8 @@ export const restaurantsVendor = [
   EVendorsId.flower,
 ];
 
-export const supermarketVendor = [
+export const supermarketVendorIds = [
+  EVendorsId.supermarket,
   EVendorsId.tools,
   EVendorsId.kharazi,
   EVendorsId.homeGoods,

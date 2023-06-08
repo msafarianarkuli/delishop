@@ -2,7 +2,7 @@ import {createContext, useContext} from "react";
 import {IGetVendorsRes} from "api/getVendors";
 import useVendorListResult from "hooks/useVendorListResult";
 import {UseInfiniteQueryResult} from "react-query";
-import {EVendorsId} from "utils/Const";
+import {supermarketVendorIds} from "utils/Const";
 
 interface ISuperMarketDataProvider {
   children: JSX.Element;
@@ -21,7 +21,7 @@ const staleTime = 10 * 60 * 1000;
 
 function SuperMarketDataProvider({children}: ISuperMarketDataProvider) {
   const result = useVendorListResult({
-    categoryId: [EVendorsId.supermarket],
+    categoryId: supermarketVendorIds,
     queryKey: QUERY_KEY_SUPERMARKET,
     filterQuery: [supermarketSortQuery],
     staleTime,

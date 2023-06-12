@@ -71,6 +71,9 @@ function useVendorListResult(props: IUseVendorListResult) {
     let tmpKeys: (string | number)[] = [queryKey];
     // const page = router.query?.page;
     // tmpKeys = createKeyForUseQuery(tmpKeys, page);
+    categoryId.forEach((item) => {
+      tmpKeys = createKeyForUseQuery(tmpKeys, item.toString());
+    });
     if (withLocation && isUserAddressStorageLoaded && isStorageLoaded) {
       if (userAddress?.latitude && userAddress.longitude) {
         tmpKeys = createKeyForUseQuery(tmpKeys, userAddress.latitude.toString());
@@ -88,6 +91,7 @@ function useVendorListResult(props: IUseVendorListResult) {
     });
     return tmpKeys;
   }, [
+    categoryId,
     filterQuery,
     isStorageLoaded,
     isUserAddressStorageLoaded,
@@ -100,7 +104,7 @@ function useVendorListResult(props: IUseVendorListResult) {
     withLocation,
   ]);
 
-  const useQueryEnabled = useMemo(() => {
+  const useInfiniteQueryEnabled = useMemo(() => {
     if (withLocation) {
       return isStorageLoaded && isUserAddressStorageLoaded && router.isReady;
     } else {
@@ -111,7 +115,7 @@ function useVendorListResult(props: IUseVendorListResult) {
   // return useQuery(keys, () => getVendors({params}), {staleTime, enabled: useQueryEnabled});
   return useInfiniteQuery(keys, ({pageParam}) => getVendors({params, pageParam}), {
     staleTime,
-    enabled: useQueryEnabled,
+    enabled: useInfiniteQueryEnabled,
     getNextPageParam: (lastPage, allPages) => {
       const total = lastPage.total;
       const page = allPages.length;

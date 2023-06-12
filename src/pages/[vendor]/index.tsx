@@ -1,19 +1,17 @@
-import React from "react";
-import {GetStaticPaths, GetStaticProps} from "next";
-import {useRouter} from "next/router";
 import {vendorsAddress} from "utils/Const";
+import Vendor from "view/vendor";
+import {GetStaticPaths, GetStaticProps} from "next";
+import VendorDataProvider from "view/vendor/context/VendorDataProvider";
 
-function VendorsPage() {
-  const router = useRouter();
+function VendorPage() {
   return (
-    <div>
-      <span>vendor: </span>
-      <span>{router.query.vendor}</span>
-    </div>
+    <VendorDataProvider>
+      <Vendor />
+    </VendorDataProvider>
   );
 }
 
-export default VendorsPage;
+export default VendorPage;
 
 export const getStaticProps: GetStaticProps = async () => {
   return {

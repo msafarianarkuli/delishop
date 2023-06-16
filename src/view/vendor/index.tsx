@@ -24,10 +24,7 @@ function Vendor() {
       </div>
       <VendorList />
       <div className="w-full h-bottomNavigation" />
-      <BottomNavigation
-        primary={vendorType?.isSupermarket ? "supermarket" : "restaurant"}
-        data={vendorType?.isSupermarket ? restaurantNavigation : supermarketNavigation}
-      />
+      <BottomNavigation data={vendorType?.isSupermarket ? supermarketNavigation : restaurantNavigation} />
     </>
   );
 }

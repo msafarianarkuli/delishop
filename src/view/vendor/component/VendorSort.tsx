@@ -6,8 +6,6 @@ import {IconSort} from "assets/icons";
 import {vendorSortQuery} from "view/vendor/context/VendorDataProvider";
 import VendorOpen from "view/vendor/component/VendorOpen";
 import VendorSortBottomSheet from "view/vendor/component/VendorSortBottomSheet";
-import useVendorType from "hooks/useVendorType";
-import classNames from "classnames";
 
 const data = [
   {
@@ -36,7 +34,7 @@ function VendorSort() {
   const [sort, setSort] = useState(initialValue);
   const {querySearch, pathname} = usePathnameQuery();
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
-  const vendorType = useVendorType();
+  // const vendorType = useVendorType();
 
   useEffect(() => {
     if (router.isReady && query.get(vendorSortQuery)) {
@@ -69,12 +67,12 @@ function VendorSort() {
     return () => document.removeEventListener("scroll", scroll);
   }, []);
 
-  console.log("vendorType?.isSupermarket", vendorType?.isSupermarket);
-  const btnClassName = classNames({
-    "flex items-center border-0 shadow-none": true,
-    "text-primary": vendorType?.isRestaurant,
-    "text-primarySupermarket": vendorType?.isSupermarket,
-  });
+  // console.log("vendorType?.isSupermarket", vendorType?.isSupermarket);
+  // const btnClassName = classNames({
+  //   "flex items-center border-0 shadow-none": true,
+  //   "text-primary": vendorType?.isRestaurant,
+  //   "text-primarySupermarket": vendorType?.isSupermarket,
+  // });
 
   return (
     <div
@@ -85,7 +83,7 @@ function VendorSort() {
       <Button
         onClick={() => setSort((prevState) => ({...prevState, open: true}))}
         icon={<IconSort className="w-5 h-auto ml-1" />}
-        className={btnClassName}
+        className="flex items-center border-0 shadow-none text-primary"
       >
         {sort.title || "به ترتیب..."}
       </Button>

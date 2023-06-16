@@ -3,6 +3,7 @@ export const ReactQueryKey = {
   VENDOR_DETAIL_RESTAURANT: "vendorDetailRestaurant",
   VENDOR_DETAIL_SUPERMARKET: "vendorDetailSupermarket",
   LOGISTIC_CURRENT_PRICE: "logisticCurrentPrice",
+  VENDOR_CATEGORY_PRODUCT_LIST: "vendorCategoryProductList",
 };
 
 export enum EOrderStatus {

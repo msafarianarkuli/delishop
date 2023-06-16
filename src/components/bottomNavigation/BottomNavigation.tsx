@@ -4,7 +4,7 @@ import styles from "components/bottomNavigation/bottomNavigation.module.scss";
 import {ElementType, useMemo} from "react";
 import Link from "next/link";
 
-interface IDataBottomNavigationitem {
+interface IDataBottomNavigationItem {
   icon: TIcons;
   title: string;
   link?: string;
@@ -14,7 +14,7 @@ interface IDataBottomNavigationitem {
   badgeNumber?: number;
 }
 
-export type TDataBottomNavigation = IDataBottomNavigationitem[];
+export type TDataBottomNavigation = IDataBottomNavigationItem[];
 
 interface IBottomNavigation {
   data: TDataBottomNavigation;

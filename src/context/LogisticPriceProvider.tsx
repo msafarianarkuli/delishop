@@ -1,7 +1,8 @@
-import React, {createContext, useContext} from "react";
+import {createContext, useContext} from "react";
 import {IDataContextProvider} from "types/interfaces";
 import {useQuery} from "react-query";
-import getLogisticCurrentPrice, {QUERY_KEY_LOGISTIC_CURRENT_PRICE} from "api/getLogisticCurrentPrice";
+import getLogisticCurrentPrice from "api/getLogisticCurrentPrice";
+import {ReactQueryKey} from "utils/Const";
 
 const initialState: IDataContextProvider<number> = {
   data: undefined,
@@ -15,7 +16,7 @@ const LogisticPriceContext = createContext<IDataContextProvider<number>>(initial
 const staleTime = 60 * 60 * 1000;
 
 function LogisticPriceProvider({children}: {children: JSX.Element}) {
-  const result = useQuery<number>([QUERY_KEY_LOGISTIC_CURRENT_PRICE], () => getLogisticCurrentPrice(), {
+  const result = useQuery<number>([ReactQueryKey.LOGISTIC_CURRENT_PRICE], () => getLogisticCurrentPrice(), {
     staleTime,
   });
 

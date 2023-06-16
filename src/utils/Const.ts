@@ -1,3 +1,10 @@
+export const ReactQueryKey = {
+  VENDOR: "VENDOR",
+  VENDOR_DETAIL_RESTAURANT: "vendorDetailRestaurant",
+  VENDOR_DETAIL_SUPERMARKET: "vendorDetailSupermarket",
+  LOGISTIC_CURRENT_PRICE: "logisticCurrentPrice",
+};
+
 export enum EOrderStatus {
   topay = 1,
   registered,
@@ -111,6 +118,7 @@ interface IVendorsAddress {
   isRestaurant?: boolean;
   isSupermarket?: boolean;
 }
+
 export const vendorsAddress: IVendorsAddress[] = [
   {
     id: EVendorsId.restaurant,

@@ -6,9 +6,10 @@ import getVendorDetail from "api/getVendorDetail";
 import {ReactQueryKey} from "utils/Const";
 
 // @ts-ignore
-const initialState: UseQueryResult<IGetVendorDetailData> = {};
+const initialState: UseQueryResult<IGetVendorDetailData, {status: number}> = {};
 
-const VendorDetailRestaurantDataContext = createContext<UseQueryResult<IGetVendorDetailData>>(initialState);
+const VendorDetailRestaurantDataContext =
+  createContext<UseQueryResult<IGetVendorDetailData, {status: number}>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 

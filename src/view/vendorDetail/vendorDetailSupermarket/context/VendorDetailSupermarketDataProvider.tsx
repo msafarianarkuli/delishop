@@ -6,9 +6,10 @@ import getSupermarketDetail from "api/getSupermarketDetail";
 import {ReactQueryKey} from "utils/Const";
 
 // @ts-ignore
-const initialState: UseQueryResult<IGetSupermarketDetailData> = {};
+const initialState: UseQueryResult<IGetSupermarketDetailData, {status: number}> = {};
 
-const VendorDetailSupermarketDataContext = createContext<UseQueryResult<IGetSupermarketDetailData>>(initialState);
+const VendorDetailSupermarketDataContext =
+  createContext<UseQueryResult<IGetSupermarketDetailData, {status: number}>>(initialState);
 
 const staleTime = 10 * 60 * 1000;
 

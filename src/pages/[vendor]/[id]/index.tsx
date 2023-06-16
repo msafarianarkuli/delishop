@@ -40,7 +40,6 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       queryKey: [ReactQueryKey.LOGISTIC_CURRENT_PRICE],
       queryFn: () => getLogisticCurrentPrice(true),
     });
-    console.log("vendorData", vendorData);
     if (vendorData.isRestaurant) {
       // restaurant detail
       queryKey = [ReactQueryKey.VENDOR_DETAIL_RESTAURANT, id];
@@ -57,7 +56,6 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
       });
     }
     const queryState = queryClient.getQueryState<IGetVendorDetailData, {status: number}>(queryKey);
-    console.log("queryState", queryState);
     const status = queryState?.error?.status;
     if (status === 404) {
       return {

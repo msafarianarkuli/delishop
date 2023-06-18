@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {useSession} from "next-auth/react";
 
 interface IUseVendorListResult {
-  queryKey: string;
+  queryKey: string[];
   categoryId?: number[];
   statusId: number[];
   staleTime?: number;

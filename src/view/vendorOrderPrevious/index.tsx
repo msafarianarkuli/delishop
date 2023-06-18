@@ -1,12 +1,15 @@
+import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
 import {useCallback} from "react";
 import {IGetOrdersListResOrdersItems} from "types/interfaceOdrdersList";
+// import {setCartRestaurantReorder} from "redux/cartRestaurant/cartRestaurantReducer";
 import OrderPrevious from "components/orderPrevious";
+import {useVendorOrderPreviousParams} from "view/vendorOrderPrevious/context/VendorOrderPreviousParamsProvider";
+import {ReactQueryKey} from "utils/Const";
 
-export const QUERY_KEY_SUPERMARKET_ORDERS_PREVIOUS = "supermarketOrdersPrevious";
-
-function SupermarketOrderPrevious() {
-  // const dispatch = useDispatch();
+function VendorOrderPrevious() {
+  const {vendor, id} = useVendorOrderPreviousParams();
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const onClickReOrder = useCallback(
@@ -21,19 +24,19 @@ function SupermarketOrderPrevious() {
       // );
       router.push(`/ordercomplete/${item.vendor.id}`);
     },
-    [router]
+    [dispatch, router]
   );
 
   return (
     <OrderPrevious
-      color="supermarket"
-      activeLink="/supermarket/order/active"
-      previousLink="/supermarket/order/previous"
-      queryKey={[QUERY_KEY_SUPERMARKET_ORDERS_PREVIOUS]}
-      categoryId={[2]}
+      color="default"
+      activeLink={`/${vendor}/order/active`}
+      previousLink={`/${vendor}/order/previous`}
+      queryKey={[ReactQueryKey.VENDOR_ORDER_PREVIOUS, id.toString()]}
+      categoryId={[id]}
       onClickReOrder={onClickReOrder}
     />
   );
 }
 
-export default SupermarketOrderPrevious;
+export default VendorOrderPrevious;

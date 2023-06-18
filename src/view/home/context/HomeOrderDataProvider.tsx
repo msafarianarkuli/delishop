@@ -15,7 +15,7 @@ const staleTime = 10 * 60 * 1000;
 function HomeOrderDataProvider({children}: {children: JSX.Element}) {
   const result = useOrderListResult({
     categoryId: [1, 2],
-    queryKey: QUERY_KEY_HOME_ORDER,
+    queryKey: [QUERY_KEY_HOME_ORDER],
     staleTime,
     statusId: [3, 4, 5],
   });

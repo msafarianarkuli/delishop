@@ -2,17 +2,15 @@ import useRedirectToMap from "hooks/useRedirectToMap";
 import VendorHeader from "view/vendor/component/VendorHeader";
 import VendorFilter from "view/vendor/component/VendorFilter";
 import VendorSort from "view/vendor/component/VendorSort";
-import useVendorType from "hooks/useVendorType";
 import VendorList from "view/vendor/component/VendorList";
 import {BottomNavigation} from "components";
-import useRestaurantNavigation from "hooks/useRestaurantNavigation";
-import useSupermarketNavigation from "hooks/useSupermarketNavigation";
+import useVendorNavigation from "hooks/useVendorNavigation";
+import {useVendorParams} from "view/vendor/context/VendorParamsProvider";
 
 function Vendor() {
-  const restaurantNavigation = useRestaurantNavigation();
-  const supermarketNavigation = useSupermarketNavigation();
+  const {vendor} = useVendorParams();
+  const data = useVendorNavigation({vendor});
   const {hidePage} = useRedirectToMap();
-  const vendorType = useVendorType();
 
   if (hidePage) return null;
   return (
@@ -24,7 +22,7 @@ function Vendor() {
       </div>
       <VendorList />
       <div className="w-full h-bottomNavigation" />
-      <BottomNavigation data={vendorType?.isSupermarket ? supermarketNavigation : restaurantNavigation} />
+      <BottomNavigation data={data} />
     </>
   );
 }

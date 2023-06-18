@@ -4,10 +4,10 @@ import {useQuery} from "react-query";
 import getVendorsTags, {VENDORS_TAGS_KEY} from "api/getVendorsTags";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import classNames from "classnames";
-import {vendorTagQuery} from "view/vendor/context/VendorDataProvider";
 import VendorCategory from "view/vendor/component/VendorCategory";
 import VendorFilterBtn from "view/vendor/component/VendorFilterBtn";
 import VendorFilterBottomSheet from "view/vendor/component/VendorFilterBottomSheet";
+import {ReactQueryKey} from "utils/Const";
 
 const defaultTags = ["کباب", "ایرانی", "دارای سکه"];
 
@@ -19,7 +19,7 @@ function VendorFilter() {
   const {data = []} = useQuery(VENDORS_TAGS_KEY, () => getVendorsTags(), {staleTime: Infinity});
   const {pathname, querySearch} = usePathnameQuery();
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
-  const allTagValues = useMemo(() => query.getAll(vendorTagQuery), [query]);
+  const allTagValues = useMemo(() => query.getAll(ReactQueryKey.VENDOR_FILTER_TAGE), [query]);
 
   const selectedFilter = useMemo(() => {
     return data.filter((item) => allTagValues.includes(item.id.toString()) && !defaultTags.includes(item.displayname));
@@ -35,10 +35,10 @@ function VendorFilter() {
 
   const onRemove = useCallback(
     (id: string) => {
-      query.delete(vendorTagQuery);
+      query.delete(ReactQueryKey.VENDOR_FILTER_TAGE);
       const tmp = allTagValues.filter((value) => id !== value);
       tmp.forEach((value) => {
-        query.append(vendorTagQuery, value);
+        query.append(ReactQueryKey.VENDOR_FILTER_TAGE, value);
       });
     },
     [allTagValues, query]
@@ -46,7 +46,7 @@ function VendorFilter() {
 
   const onAdd = useCallback(
     (id: string) => {
-      query.append(vendorTagQuery, id);
+      query.append(ReactQueryKey.VENDOR_FILTER_TAGE, id);
     },
     [query]
   );

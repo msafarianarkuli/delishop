@@ -5,7 +5,7 @@ import useOrderListResult from "hooks/useOrderListResult";
 
 interface IOrderPreviousDataProvider {
   children: JSX.Element;
-  queryKey: string;
+  queryKey: string[];
   categoryId: number[];
 }
 

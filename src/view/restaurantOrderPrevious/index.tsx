@@ -31,7 +31,7 @@ function RestaurantOrderPrevious() {
       color="default"
       activeLink="/restaurant/order/active"
       previousLink="/restaurant/order/previous"
-      queryKey={QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS}
+      queryKey={[QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS]}
       categoryId={[1]}
       onClickReOrder={onClickReOrder}
     />

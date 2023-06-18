@@ -1,21 +1,41 @@
-import {vendorsAddress} from "utils/Const";
+import {EVendorsId, vendorsAddress} from "utils/Const";
 import Vendor from "view/vendor";
 import {GetStaticPaths, GetStaticProps} from "next";
 import VendorDataProvider from "view/vendor/context/VendorDataProvider";
+import VendorParamsProvider from "view/vendor/context/VendorParamsProvider";
+import LogisticPriceProvider from "context/LogisticPriceProvider";
 
-function VendorPage() {
+export interface IVendorPage {
+  isRestaurant: boolean;
+  isSupermarket: boolean;
+  vendor: string;
+  id: EVendorsId;
+}
+
+function VendorPage(props: IVendorPage) {
   return (
-    <VendorDataProvider>
-      <Vendor />
-    </VendorDataProvider>
+    <VendorParamsProvider {...props}>
+      <LogisticPriceProvider>
+        <VendorDataProvider>
+          <Vendor />
+        </VendorDataProvider>
+      </LogisticPriceProvider>
+    </VendorParamsProvider>
   );
 }
 
 export default VendorPage;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({params}) => {
+  const vendor = params?.vendor;
+  const vendorId = vendorsAddress.find((item) => item.name === vendor);
   return {
-    props: {},
+    props: {
+      vendor,
+      id: vendorId?.id,
+      isRestaurant: !!vendorId?.isRestaurant,
+      isSupermarket: !!vendorId?.isSupermarket,
+    },
   };
 };
 

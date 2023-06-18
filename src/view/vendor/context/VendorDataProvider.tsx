@@ -2,18 +2,13 @@ import {createContext, ReactNode, useContext, useMemo} from "react";
 import {UseInfiniteQueryResult} from "react-query";
 import {IGetVendorsRes} from "api/getVendors";
 import useVendorListResult from "hooks/useVendorListResult";
-import {vendorsAddress} from "utils/Const";
+import {ReactQueryKey, vendorsAddress} from "utils/Const";
 import {useRouter} from "next/router";
 
 // @ts-ignore
 const initialState: UseInfiniteQueryResult<IGetVendorsRes> = {};
 
 const VendorDataContext = createContext<UseInfiniteQueryResult<IGetVendorsRes>>(initialState);
-
-export const QUERY_KEY_VENDOR = "vendor";
-
-export const vendorSortQuery = "sort";
-export const vendorTagQuery = "tag[]";
 
 const staleTime = 10 * 60 * 1000;
 
@@ -29,8 +24,8 @@ function VendorDataProvider({children}: {children: ReactNode}) {
 
   const result = useVendorListResult({
     categoryId,
-    queryKey: QUERY_KEY_VENDOR,
-    filterQuery: [vendorSortQuery, vendorTagQuery],
+    queryKey: ReactQueryKey.VENDOR,
+    filterQuery: [ReactQueryKey.VENDOR_FILTER_SORT, ReactQueryKey.VENDOR_FILTER_TAGE],
     staleTime,
   });
 

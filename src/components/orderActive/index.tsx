@@ -7,7 +7,7 @@ import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigatio
 interface IOrderActive {
   activeLink: string;
   previousLink: string;
-  queryKey: string;
+  queryKey: string[];
   color: "default" | "supermarket";
   bottomNavigationData: TDataBottomNavigation;
   categoryId: number[];

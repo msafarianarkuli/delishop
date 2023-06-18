@@ -3,9 +3,9 @@ import {useRouter} from "next/router";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import {Button} from "antd";
 import {IconSort} from "assets/icons";
-import {vendorSortQuery} from "view/vendor/context/VendorDataProvider";
 import VendorOpen from "view/vendor/component/VendorOpen";
 import VendorSortBottomSheet from "view/vendor/component/VendorSortBottomSheet";
+import {ReactQueryKey} from "utils/Const";
 
 const data = [
   {
@@ -37,8 +37,8 @@ function VendorSort() {
   // const vendorType = useVendorType();
 
   useEffect(() => {
-    if (router.isReady && query.get(vendorSortQuery)) {
-      const value = query.get(vendorSortQuery);
+    if (router.isReady && query.get(ReactQueryKey.VENDOR_FILTER_SORT)) {
+      const value = query.get(ReactQueryKey.VENDOR_FILTER_SORT);
       const item = data.find((item) => item.value === value);
       if (item) {
         setSort({open: false, title: item.title, value: item.value});
@@ -92,12 +92,12 @@ function VendorSort() {
         onClose={() => setSort((prevState) => ({...prevState, open: false}))}
         data={data}
         onClick={(item) => {
-          const querySort = query.get(vendorSortQuery);
+          const querySort = query.get(ReactQueryKey.VENDOR_FILTER_SORT);
           if (querySort && !Array.isArray(querySort) && item.value === querySort) {
-            query.delete(vendorSortQuery);
+            query.delete(ReactQueryKey.VENDOR_FILTER_SORT);
             setSort(initialValue);
           } else {
-            query.set(vendorSortQuery, item.value);
+            query.set(ReactQueryKey.VENDOR_FILTER_SORT, item.value);
           }
           const finalQuery = query.toString() ? "?" + query.toString() : "";
           const url = pathname + finalQuery;

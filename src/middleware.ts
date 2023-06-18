@@ -20,6 +20,7 @@ export const config = {
     "/address/create/:path*",
     "/restaurant/order/:path*",
     "/supermarket/order/:path*",
+    "/:vendor*/order/:path*",
     "/order/:path*",
   ],
 };

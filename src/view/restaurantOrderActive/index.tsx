@@ -9,7 +9,7 @@ function RestaurantOrderActive() {
     <OrderActive
       activeLink="/restaurant/order/active"
       previousLink="/restaurant/order/previous"
-      queryKey={QUERY_KEY_RESTAURANT_ORDERS_ACTIVE}
+      queryKey={[QUERY_KEY_RESTAURANT_ORDERS_ACTIVE]}
       categoryId={[1]}
       color="default"
       bottomNavigationData={data}

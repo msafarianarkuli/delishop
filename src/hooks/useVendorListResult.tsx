@@ -33,9 +33,8 @@ function useVendorListResult(props: IUseVendorListResult) {
         ...tmpParams,
         ...router.query,
       };
-      if (tmpParams.hasOwnProperty("page")) {
-        delete tmpParams.page;
-      }
+      delete tmpParams?.vendor;
+      delete tmpParams?.page;
       if (withLocation && isUserAddressStorageLoaded && isStorageLoaded) {
         if (userAddress?.latitude && userAddress.longitude) {
           tmpParams.lat = userAddress.latitude;

@@ -1,11 +1,15 @@
 export const ReactQueryKey = {
   VENDOR: "VENDOR",
+  VENDOR_FILTER_SORT: "sort",
+  VENDOR_FILTER_TAGE: "tag[]",
   VENDOR_DETAIL_RESTAURANT: "vendorDetailRestaurant",
   VENDOR_DETAIL_SUPERMARKET: "vendorDetailSupermarket",
   LOGISTIC_CURRENT_PRICE: "logisticCurrentPrice",
   VENDOR_CATEGORY_PRODUCT_LIST: "vendorCategoryProductList",
   VENDOR_SUBCATEGORY_GROUP_PRODUCTS: "vendorSubcategoryGroupProducts",
   VENDOR_COMMENT: "vendorComment",
+  VENDOR_ORDER_ACTIVE: "vendorOrderActive",
+  VENDOR_ORDER_PREVIOUS: "vendorOrderPrevious",
 };
 
 export enum EOrderStatus {

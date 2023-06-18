@@ -5,7 +5,7 @@ import useOrderListResult from "hooks/useOrderListResult";
 
 interface IOrderActiveDataProvider {
   children: JSX.Element[];
-  queryKey: string;
+  queryKey: string[];
   categoryId: number[];
 }
 

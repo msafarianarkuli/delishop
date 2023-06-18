@@ -22,6 +22,9 @@ function VendorCategoryDataProvider({children}: {children: ReactNode}) {
         ...tmpParams,
         ...router.query,
       };
+      delete tmpParams.vendor;
+      delete tmpParams.id;
+      delete tmpParams.category;
     }
     return tmpParams;
   }, [router.isReady, router.query]);

@@ -52,7 +52,6 @@ export const getServerSideProps: GetServerSideProps = async ({params, query}) =>
     delete tmpQuery?.id;
     delete tmpQuery?.category;
     delete tmpQuery?.subcategory;
-    delete tmpQuery?.page;
     let queryParams = createPaginationParams(tmpQuery);
     await queryClient.prefetchInfiniteQuery({
       queryKey,

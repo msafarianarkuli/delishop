@@ -5,6 +5,7 @@ export const ReactQueryKey = {
   LOGISTIC_CURRENT_PRICE: "logisticCurrentPrice",
   VENDOR_CATEGORY_PRODUCT_LIST: "vendorCategoryProductList",
   VENDOR_SUBCATEGORY_GROUP_PRODUCTS: "vendorSubcategoryGroupProducts",
+  VENDOR_COMMENT: "vendorComment",
 };
 
 export enum EOrderStatus {

@@ -23,6 +23,7 @@ function VendorSubcategoryDataProvider({children}: {children: ReactNode}) {
         ...tmpParams,
         ...router.query,
       };
+      delete tmpParams.vendor;
       delete tmpParams.id;
       delete tmpParams.category;
       delete tmpParams.subcategory;

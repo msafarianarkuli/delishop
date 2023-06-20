@@ -1,11 +1,11 @@
-import {createContext, useContext, useMemo} from "react";
+import {createContext, ReactNode, useContext, useMemo} from "react";
 import {IGetSuggestionSearchData} from "types/interfaceSuggestionSearch";
 import {createKeyForUseQuery} from "utils/utils";
 import {useRouter} from "next/router";
 import {useQuery} from "react-query";
 import getSuggestionSearch from "api/getSuggestionSearch";
-import usePathnameQuery from "hooks/usePathnameQuery";
 import {IDataContextProvider} from "types/interfaces";
+import {EVendorsId} from "utils/Const";
 
 const initialState: IDataContextProvider<IGetSuggestionSearchData> = {
   data: undefined,
@@ -22,15 +22,21 @@ export const QUERY_KEY_SUGGESTION_SEARCH = "suggestionSearch";
 export const suggestionSearchCategoryQuery = "category[]";
 export const suggestionSearchNameQuery = "name";
 
-function SearchPageDataProvider({children}: {children: JSX.Element[]}) {
-  const router = useRouter();
-  const {pathname} = usePathnameQuery();
+interface ISearchPageDataProvider {
+  children: ReactNode;
+  vendorId?: EVendorsId;
+}
 
-  const categoryId = useMemo(() => {
-    if (pathname.search("/restaurant") !== -1) return 1;
-    if (pathname.search("/supermarket") !== -1) return 2;
-    return 0;
-  }, [pathname]);
+function SearchPageDataProvider(props: ISearchPageDataProvider) {
+  const {vendorId, children} = props;
+  const router = useRouter();
+  // const {pathname} = usePathnameQuery();
+
+  // const categoryId = useMemo(() => {
+  //   if (pathname.search("/restaurant") !== -1) return 1;
+  //   if (pathname.search("/supermarket") !== -1) return 2;
+  //   return 0;
+  // }, [pathname]);
 
   const name = useMemo(() => {
     const name = router.query[suggestionSearchNameQuery];
@@ -47,26 +53,33 @@ function SearchPageDataProvider({children}: {children: JSX.Element[]}) {
         ...tmpParams,
         ...router.query,
       };
-      if (categoryId) {
-        tmpParams[suggestionSearchCategoryQuery] = categoryId;
+      // if (categoryId) {
+      //   tmpParams[suggestionSearchCategoryQuery] = categoryId;
+      // }
+      delete tmpParams?.vendor;
+      if (vendorId) {
+        tmpParams[suggestionSearchCategoryQuery] = vendorId;
       }
       if (name) {
         tmpParams[suggestionSearchNameQuery] = name;
       }
     }
     return tmpParams;
-  }, [categoryId, name, router.isReady, router.query]);
+  }, [name, router.isReady, router.query, vendorId]);
 
   const keys = useMemo(() => {
     let tmpKeys: (string | number)[] = [QUERY_KEY_SUGGESTION_SEARCH];
-    if (categoryId) {
-      tmpKeys = createKeyForUseQuery(tmpKeys, categoryId.toString());
+    // if (categoryId) {
+    //   tmpKeys = createKeyForUseQuery(tmpKeys, categoryId.toString());
+    // }
+    if (vendorId) {
+      tmpKeys = createKeyForUseQuery(tmpKeys, vendorId.toString());
     }
     if (name) {
       tmpKeys = createKeyForUseQuery(tmpKeys, name);
     }
     return tmpKeys;
-  }, [categoryId, name]);
+  }, [name, vendorId]);
 
   const useQueryEnabled = useMemo(() => router.isReady && !!router.query.name, [router.isReady, router.query.name]);
 

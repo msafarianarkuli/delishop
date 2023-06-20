@@ -4,10 +4,16 @@ import SearchPageSearch from "components/searchPage/component/SearchPageSearch";
 import SearchPageVendorsList from "components/searchPage/component/SearchPageVendorsList";
 import SearchPageProductsList from "components/searchPage/component/SearchPageProductsList";
 import SearchPageNotfound from "components/searchPage/component/SearchPageNotfound";
+import {EVendorsId} from "utils/Const";
 
-function SearchPage() {
+interface ISearchPage {
+  vendorId?: EVendorsId;
+}
+
+function SearchPage(props: ISearchPage) {
+  const {vendorId} = props;
   return (
-    <SearchPageDataProvider>
+    <SearchPageDataProvider vendorId={vendorId}>
       <SearchPageHeader />
       <div className="mt-headerNormal px-screenSpace">
         <SearchPageSearch />

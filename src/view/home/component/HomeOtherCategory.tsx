@@ -12,30 +12,37 @@ const data: TDataCustomSwiper = [
   {
     title: "کافه",
     icon: IconCafe,
+    link: "/coffee",
   },
   {
     title: "لبنیاتی",
     icon: IconDairy,
+    link: "/daily",
   },
   {
     title: "پروتئینه",
     icon: IconProtein,
+    link: "/protein",
   },
   {
     title: "قنادی",
     icon: IconConfection,
+    link: "/confectionery",
   },
   {
     title: "میوه",
     icon: IconFruit,
+    link: "/fruit",
   },
   {
     title: "نان",
     icon: IconBread,
+    link: "/bakery",
   },
   {
     title: "بیشتر",
     icon: IconMore,
+    link: "/morejobs",
   },
 ];
 
@@ -76,7 +83,7 @@ function HomeOtherCategory() {
                 className={styles.home_other_category_box}
                 style={{paddingBottom: slidesPreView === 1 ? "29.42%" : "100%"}}
               >
-                <Link href="/" className="absolute flex flex-col items-center justify-center w-full h-full">
+                <Link href={item.link} className="absolute flex flex-col items-center justify-center w-full h-full">
                   <Icon className={iconClassName} />
                   <div className="mt-2">{item.title}</div>
                 </Link>

@@ -91,6 +91,7 @@ export enum EVendorsId {
   electricalTools,
   culture,
   cosmetic,
+  moreJobs,
 }
 
 export const restaurantsVendorIds = [
@@ -117,6 +118,7 @@ export const supermarketVendorIds = [
   EVendorsId.electricalTools,
   EVendorsId.culture,
   EVendorsId.cosmetic,
+  EVendorsId.moreJobs,
 ];
 
 interface IVendorsAddress {
@@ -215,6 +217,11 @@ export const vendorsAddress: IVendorsAddress[] = [
   {
     id: EVendorsId.cosmetic,
     name: "cosmetic",
+    isSupermarket: true,
+  },
+  {
+    id: EVendorsId.moreJobs,
+    name: "morejobs",
     isSupermarket: true,
   },
 ];

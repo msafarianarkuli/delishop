@@ -19,6 +19,7 @@ import {
   useVendorDetailRestaurantExtraAction,
 } from "view/vendorDetail/vendorDetailRestaurant/context/VendorDetailRestaurantExtraProvider";
 import styles from "view/vendorDetail/vendorDetailRestaurant/VendorDetailRestaurant.module.scss";
+import {useVendorDetailParams} from "view/vendorDetail/context/VendorDetailParamsProvider";
 
 function VendorDetailRestaurantList() {
   const ref = useRef<HTMLDivElement>(null);
@@ -28,6 +29,7 @@ function VendorDetailRestaurantList() {
   const router = useRouter();
   const vendor = useCartRestaurant();
   const {isOpen} = useVendorDetailRestaurantExtra();
+  const {vendor: vendorName} = useVendorDetailParams();
   const {time} = useVendorWorkTime({open_hours: data?.vendor.open_hours});
 
   useEffect(() => {
@@ -72,7 +74,7 @@ function VendorDetailRestaurantList() {
               const finalPrice = price + price * addedPercent;
               const count = vendor?.cartOrders[product.id]?.length || 0;
               return (
-                <Link key={item.id} href={`product/${item.id}`} className="block mb-5">
+                <Link key={item.id} href={`/${vendorName}/product/${item.id}`} className="block mb-5">
                   <VendorDetailRestaurantCard
                     disabled={!time.length || !data?.vendor.open}
                     image={product?.photo_igu}

@@ -1,0 +1,22 @@
+.vendor_product_restaurant_extra {
+  background-image: linear-gradient(90.93deg, #e5e6ec 0%, #f2f3f6 100%);
+  //height: 60px;
+  border-radius: 30px;
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 14px rgba(36, 65, 93, 0.33);
+  padding: 0 19px;
+  overflow: hidden;
+  transition: height linear 300ms;
+}
+
+.vendor_product_restaurant_extra_counter_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px !important;
+  height: 24px !important;
+  background-image: linear-gradient(310.59deg, #f2f3f6 3.8%, #e5e6ec 119.99%);
+  box-shadow: -3px -3px 20px #ffffff, 2px 2px 20px rgba(36, 65, 93, 0.302);
+  border-radius: 5px;
+  border: none;
+  padding: 0;
+}

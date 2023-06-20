@@ -9,11 +9,11 @@ const initialState: IVendorSearchPage = {
 
 const VendorSearchParamsContext = createContext<IVendorSearchPage>(initialState);
 
-interface IVendorOrderActiveParams extends IVendorSearchPage {
+interface IVendorSearchParams extends IVendorSearchPage {
   children: ReactNode;
 }
 
-function VendorSearchParamsProvider(props: IVendorOrderActiveParams) {
+function VendorSearchParamsProvider(props: IVendorSearchParams) {
   const {children, ...other} = props;
   return <VendorSearchParamsContext.Provider value={other}>{children}</VendorSearchParamsContext.Provider>;
 }

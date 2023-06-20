@@ -8,7 +8,7 @@ import {useVendorOrderPreviousParams} from "view/vendorOrderPrevious/context/Ven
 import {ReactQueryKey} from "utils/Const";
 
 function VendorOrderPrevious() {
-  const {vendor, id} = useVendorOrderPreviousParams();
+  const {vendor} = useVendorOrderPreviousParams();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -32,8 +32,8 @@ function VendorOrderPrevious() {
       color="default"
       activeLink={`/${vendor}/order/active`}
       previousLink={`/${vendor}/order/previous`}
-      queryKey={[ReactQueryKey.VENDOR_ORDER_PREVIOUS, id.toString()]}
-      categoryId={[id]}
+      queryKey={[ReactQueryKey.VENDOR_ORDER_PREVIOUS]}
+      categoryId={[]}
       onClickReOrder={onClickReOrder}
     />
   );

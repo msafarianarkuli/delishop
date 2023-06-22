@@ -1,19 +1,18 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useEffect} from "react";
 import {useInView} from "react-intersection-observer";
-import {useDispatch, useSelector} from "react-redux";
-import {
-  removeCartSupermarketLastOrder,
-  selectCartSupermarketCart,
-  setCartSupermarketItem,
-  setCartSupermarketVendorData,
-} from "redux/cartSupermraket/cartSupermarketReducer";
-import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
 import Link from "next/link";
 import {useVendorSubcategoryData} from "view/vendorSubcategory/context/VendorSubcategoryDataProvider";
 import {useVendorSubcategoryCategoryListData} from "view/vendorSubcategory/context/VendorSubcategoryCategoryListDataProvider";
 import {useVendorSubcategoryParams} from "view/vendorSubcategory/context/VendorSubcategoryParamsProvider";
 import VendorSubcategoryCard from "view/vendorSubcategory/component/vendorSubcategoryCard";
+import {
+  removeCartRestaurantCartListLastOrder,
+  setCartRestaurantItem,
+  setCartRestaurantVendorData,
+} from "redux/cartRestaurant/cartRestaurantReducer";
+import useCartRestaurant from "hooks/useCartRestaurant";
 
 function VendorSubcategoryList() {
   const {data, isLoading} = useVendorSubcategoryData();
@@ -32,20 +31,11 @@ export default VendorSubcategoryList;
 function VendorSubcategoryShow() {
   const {data, fetchNextPage} = useVendorSubcategoryData();
   const {ref, inView} = useInView();
+  const vendor = useCartRestaurant();
   const {data: supermarket} = useVendorSubcategoryCategoryListData();
-  const {vendor} = useVendorSubcategoryParams();
-  const cart = useSelector(selectCartSupermarketCart);
+  const {vendor: vendorName, vendorId} = useVendorSubcategoryParams();
   const dispatch = useDispatch();
-  const router = useRouter();
   const {time} = useVendorWorkTime({open_hours: supermarket?.vendor.open_hours});
-
-  const vendorId = useMemo(() => {
-    const id = router.query.id;
-    if (id && !Array.isArray(id)) {
-      return id;
-    }
-    return "";
-  }, [router.query.id]);
 
   useEffect(() => {
     if (inView) {
@@ -60,7 +50,8 @@ function VendorSubcategoryShow() {
           const product = item.productKind[0];
           const addedPercent = item.priceClass / 100;
           const finalPrice = product.price + product.price * addedPercent;
-          const count = cart.cartOrders[product.id]?.length || 0;
+          const count = vendor?.cartOrders[product.id]?.length || 0;
+          // const count = cart.cartOrders[product.id]?.length || 0;
           const condition = array.length - 1 === index && arr.length - 1 === idx;
           const tmpRef = condition ? ref : null;
           return (
@@ -68,7 +59,7 @@ function VendorSubcategoryShow() {
               ref={tmpRef}
               key={idx}
               className="block w-1/2 min-[428px]:w-1/3 p-[5px]"
-              href={`/${vendor}/product/${item}`}
+              href={`/${vendorName}/product/${item}`}
               prefetch={false}
             >
               <VendorSubcategoryCard
@@ -80,30 +71,58 @@ function VendorSubcategoryShow() {
                 price={Math.round(finalPrice / 10)}
                 count={count}
                 onAddClick={() => {
-                  if (vendorId) {
-                    if (vendorId !== cart.vendorId) {
+                  // const id = router.query.id;
+                  if (vendorId && supermarket) {
+                    if (!vendor) {
                       dispatch(
-                        setCartSupermarketVendorData({
-                          title: supermarket?.vendor.name || "",
+                        setCartRestaurantVendorData({
                           vendorId,
-                          point: supermarket?.vendor.point || 0,
+                          title: supermarket?.vendor?.name,
+                          point: supermarket?.vendor.point,
                         })
                       );
                     }
                     dispatch(
-                      setCartSupermarketItem({
-                        title: item.displayname,
-                        price: finalPrice,
+                      setCartRestaurantItem({
                         id: product.id,
-                        image: product.photo_igu,
-                        point: item.point || 0,
+                        price: finalPrice,
+                        title: item.displayname,
+                        vendorId,
+                        point: item.point,
                       })
                     );
                   }
                 }}
                 onMinusClick={() => {
-                  dispatch(removeCartSupermarketLastOrder(product.id));
+                  if (vendorId) {
+                    dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId}));
+                  }
                 }}
+                // onAddClick={() => {
+                //   if (vendorId) {
+                //     if (vendorId !== cart.vendorId) {
+                //       dispatch(
+                //         setCartSupermarketVendorData({
+                //           title: supermarket?.vendor.name || "",
+                //           vendorId,
+                //           point: supermarket?.vendor.point || 0,
+                //         })
+                //       );
+                //     }
+                //     dispatch(
+                //       setCartSupermarketItem({
+                //         title: item.displayname,
+                //         price: finalPrice,
+                //         id: product.id,
+                //         image: product.photo_igu,
+                //         point: item.point || 0,
+                //       })
+                //     );
+                //   }
+                // }}
+                // onMinusClick={() => {
+                //   dispatch(removeCartSupermarketLastOrder(product.id));
+                // }}
               />
             </Link>
           );

@@ -3,6 +3,7 @@ import {useVendorSubcategoryParams} from "view/vendorSubcategory/context/VendorS
 import VendorSubcategoryHeader from "view/vendorSubcategory/component/VendorSubcategoryHeader";
 import VendorSubcategoryList from "view/vendorSubcategory/component/VendorSubcategoryList";
 import {BottomNavigation} from "components";
+import VendorSubcategorySubmitBtn from "view/vendorSubcategory/component/VendorSubcategorySubmitBtn";
 
 function VendorSubcategory() {
   const {vendor} = useVendorSubcategoryParams();
@@ -15,6 +16,7 @@ function VendorSubcategory() {
         <div className="w-full h-bottomNavigation" />
         <BottomNavigation data={data} />
       </div>
+      <VendorSubcategorySubmitBtn />
     </>
   );
 }

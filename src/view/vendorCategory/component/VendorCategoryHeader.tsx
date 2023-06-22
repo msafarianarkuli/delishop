@@ -64,7 +64,7 @@ function VendorCategoryHeaderBody() {
       {data?.menus.groups.map((item, index) => {
         const container = classNames({
           "block font-medium text-[15px] text-iconColor ml-4 last:mr-0 whitespace-nowrap": true,
-          "text-white bg-primarySupermarket px-3 py-1 rounded-full": +id === item.id,
+          "text-white bg-primary px-3 py-1 rounded-full": +id === item.id,
         });
         return (
           <Link

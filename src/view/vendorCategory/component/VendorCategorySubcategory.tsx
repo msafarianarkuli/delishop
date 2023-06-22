@@ -53,7 +53,7 @@ function VendorCategorySubcategory() {
         const container = classNames({
           "border rounded-full font-medium text-[15px] py-1 px-3 ml-3 whitespace-nowrap cursor-pointer": true,
           "border-iconColor text-iconColor": item.id !== filterId,
-          "border-primarySupermarket bg-primarySupermarket/10 text-primarySupermarket": item.id === filterId,
+          "border-primary bg-primary/10 text-primary": item.id === filterId,
         });
         return (
           <div onClick={() => setFilterId(item.id)} key={index} className={container}>

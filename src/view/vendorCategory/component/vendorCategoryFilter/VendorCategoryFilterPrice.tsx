@@ -26,8 +26,8 @@ function VendorCategoryFilterPrice() {
           value={field.value}
           minDistance={13}
           pearling
-          className="supermarket_price_rate_slider"
-          trackClassName="supermarket_price_rate_track"
+          className="price_rate_slider"
+          trackClassName="price_rate_track"
           renderThumb={(props) => {
             return (
               <div {...props}>

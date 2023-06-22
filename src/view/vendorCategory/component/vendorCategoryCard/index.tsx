@@ -29,7 +29,7 @@ function VendorCategoryCard(props: IVendorCategoryCard) {
           disabled={disabled}
           count={count}
           className={counterClassNames}
-          primaryType="supermarket"
+          primaryType="default"
           showMinusOnlyPositiveNumber
           showNumberOnlyPositiveNumber
           onAddClick={onAddClick}

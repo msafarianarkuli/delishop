@@ -6,6 +6,7 @@ import VendorCategoryProductsList from "view/vendorCategory/component/VendorCate
 import VendorCategoryFilter from "view/vendorCategory/component/vendorCategoryFilter";
 import {BottomNavigation, BottomPageGradient} from "components";
 import VendorCategorySubcategory from "view/vendorCategory/component/VendorCategorySubcategory";
+import VendorCategorySubmitBtn from "view/vendorCategory/component/VendorCategorySubmitBtn";
 
 function VendorCategory() {
   const {vendor} = useVendorCategoryParams();
@@ -18,6 +19,7 @@ function VendorCategory() {
         <VendorCategorySubcategory />
         <VendorCategoryProductsList />
       </div>
+      <VendorCategorySubmitBtn />
       <VendorCategoryFilter />
       <BottomPageGradient />
       <div className="w-full h-bottomNavigation" />

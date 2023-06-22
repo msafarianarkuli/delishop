@@ -30,6 +30,7 @@ import Counter from "components/counter/Counter";
 import BottomPageGradient from "components/bottomPageGradient";
 import ProductDetailSwiper from "components/customSwiper/ProductDetailSwiper";
 import OrderActive from "components/orderActive";
+import SubmitBtnToCompleteOrder from "components/submitBtnToCompleteOrder";
 
 const Map = dynamic(() => import("components/map/Map"), {ssr: false});
 
@@ -65,4 +66,5 @@ export {
   BottomPageGradient,
   ProductDetailSwiper,
   OrderActive,
+  SubmitBtnToCompleteOrder,
 };

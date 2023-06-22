@@ -4,6 +4,7 @@ import VendorCartCard, {IVendorCartCard} from "view/vendorCart/component/vendorC
 import {useDispatch, useSelector} from "react-redux";
 import {removeCartRestaurantCartListCartOrder, selectCartRestaurant} from "redux/cartRestaurant/cartRestaurantReducer";
 import {mergeCartListToArray} from "utils/cartReducerUtils";
+import {useVendorCartParams} from "view/vendorCart/context/VendorCartParamsProvider";
 
 interface IVendorCartList extends Omit<IVendorCartCard, "onClickRemove" | "onClickOk"> {
   id: string;
@@ -14,6 +15,7 @@ function VendorCartList() {
   const {cartList, isLoadedFromStorage} = useSelector(selectCartRestaurant);
   const [data, setData] = useState<IVendorCartList[]>([]);
   const dispatch = useDispatch();
+  const {vendor} = useVendorCartParams();
 
   useEffect(() => {
     if (isLoadedFromStorage) {
@@ -42,7 +44,7 @@ function VendorCartList() {
             key={index}
             title={item.title}
             data={item.data}
-            onClickOk={() => router.push(`/restaurant/${item.id}`)}
+            onClickOk={() => router.push(`/${vendor}/${item.id}`)}
             onClickRemove={() => {
               dispatch(removeCartRestaurantCartListCartOrder(item.id));
             }}

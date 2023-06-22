@@ -36,7 +36,7 @@ function VendorDetailSupermarketTitle(props: IVendorDetailSupermarketTitle) {
             <span>{title}</span>
             {/*<span className="text-iconColor mr-1">({address})</span>*/}
           </div>
-          <Link href={href} className="flex items-center text-primarySupermarket whitespace-nowrap">
+          <Link href={href} className="flex items-center text-primary whitespace-nowrap">
             <span className="text-[11px]">اطلاعات و نظرات</span>
             <IconRoundedLeft className="w-4 h-4" />
           </Link>

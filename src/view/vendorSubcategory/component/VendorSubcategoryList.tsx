@@ -99,31 +99,6 @@ function VendorSubcategoryShow() {
                     dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId}));
                   }
                 }}
-                // onAddClick={() => {
-                //   if (vendorId) {
-                //     if (vendorId !== cart.vendorId) {
-                //       dispatch(
-                //         setCartSupermarketVendorData({
-                //           title: supermarket?.vendor.name || "",
-                //           vendorId,
-                //           point: supermarket?.vendor.point || 0,
-                //         })
-                //       );
-                //     }
-                //     dispatch(
-                //       setCartSupermarketItem({
-                //         title: item.displayname,
-                //         price: finalPrice,
-                //         id: product.id,
-                //         image: product.photo_igu,
-                //         point: item.point || 0,
-                //       })
-                //     );
-                //   }
-                // }}
-                // onMinusClick={() => {
-                //   dispatch(removeCartSupermarketLastOrder(product.id));
-                // }}
               />
             </Link>
           );

@@ -11,10 +11,6 @@ import {
   CartRestaurantListLocalStorageKey,
   setCartRestaurantFromStorage,
 } from "redux/cartRestaurant/cartRestaurantReducer";
-import {
-  CartSupermarketListLocalStorageKey,
-  setCartSupermarketFromStorage,
-} from "redux/cartSupermraket/cartSupermarketReducer";
 
 function LocalStorageData() {
   const dispatch = useDispatch();
@@ -45,12 +41,6 @@ function LocalStorageData() {
     const cartRestaurant = localStorage.getItem(CartRestaurantListLocalStorageKey);
     const data = cartRestaurant ? JSON.parse(cartRestaurant) : null;
     dispatch(setCartRestaurantFromStorage(data));
-  }, [dispatch]);
-
-  useEffect(() => {
-    const cartSupermarket = localStorage.getItem(CartSupermarketListLocalStorageKey);
-    const data = cartSupermarket ? JSON.parse(cartSupermarket) : null;
-    dispatch(setCartSupermarketFromStorage(data));
   }, [dispatch]);
 
   return null;

@@ -8,6 +8,7 @@ export interface ICartReducer {
 export type TCartReducerList = ICartReducerListItem[];
 
 export interface ICartReducerListItem {
+  vendorAddressName: string;
   vendorId: string | null;
   title: string | null;
   totalPrice: number;
@@ -47,6 +48,7 @@ export interface IRemoveCartReducerLastItem {
 }
 
 export interface ISetCartReducerVendorData {
+  vendorAddressName: string;
   vendorId: string | null;
   title: string | null;
   point: number | null;

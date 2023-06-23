@@ -15,6 +15,7 @@ import {HYDRATE} from "next-redux-wrapper";
 import {IGetOrdersListResOrdersItemsProductKindsItems} from "types/interfaceOdrdersList";
 
 const initialCartOrder: ICartReducerListItem = {
+  vendorAddressName: "",
   vendorId: null,
   title: null,
   cartOrders: {},
@@ -37,6 +38,7 @@ const cartRestaurantReducer = createSlice({
     setCartRestaurantVendorData: (state, action: PayloadAction<ISetCartReducerVendorData>) => {
       state.cartList.push({
         ...initialCartOrder,
+        vendorAddressName: action.payload.vendorAddressName,
         vendorId: action.payload.vendorId,
         title: action.payload.title,
         totalPoint: action.payload.point || 0,
@@ -140,6 +142,7 @@ const cartRestaurantReducer = createSlice({
       state.cartList = state.cartList.filter((item) => item.vendorId !== action.payload.vendorId);
       const order: ICartReducerListItem = {
         cartOrders: {},
+        vendorAddressName: action.payload.vendorAddressName,
         vendorId: action.payload.vendorId,
         title: action.payload.title,
         totalPoint: action.payload.point || 0,
@@ -173,7 +176,6 @@ const cartRestaurantReducer = createSlice({
 
 function reorderAddedItem(order: ICartReducerListItem, item: IGetOrdersListResOrdersItemsProductKindsItems) {
   const extra = typeof item.extra === "object" ? Object.values(item.extra) : [];
-  console.log("order.cartOrders[item.id]", order.cartOrders[item.id]);
   order.cartOrders[item.id]?.push({
     image: item.photo_igu,
     point: 0,

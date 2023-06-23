@@ -45,7 +45,7 @@ function OrderCompleteDeliveryTime() {
       <div className="px-screenSpace">
         <div className={styles.restaurant_complete_delivery_time_container}>
           {isLoading ? <div>در حال دریافت اطلاعات ...</div> : null}
-          {error ? <div>{error}</div> : null}
+          {error && !isLoading ? <div>{error}</div> : null}
           {time.map((item, index) => {
             return (
               <Checkbox

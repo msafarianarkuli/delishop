@@ -1,53 +1,54 @@
 import {createContext, useCallback, useContext, useMemo} from "react";
-import {IDataContextProvider} from "types/interfaces";
 import {IGetVendorsDetailVendor} from "types/interfaceVendorDetail";
 import useCartRestaurant from "hooks/useCartRestaurant";
-import useCartSupermarket from "hooks/useCartSupermarket";
 import getVendorDetail from "api/getVendorDetail";
 import getSupermarketDetail from "api/getSupermarketDetail";
 import {useRouter} from "next/router";
-import {useQuery} from "react-query";
+import {useQuery, UseQueryResult} from "react-query";
+import {useOrderCompleteParams} from "view/orderComplete/context/OrderCompleteParamsProvider";
+import {ReactQueryKey} from "utils/Const";
 
-const initialState: IDataContextProvider<IGetVendorsDetailVendor | null> = {
-  data: undefined,
-  error: null,
-  isFetching: false,
-  isLoading: false,
-};
+// @ts-ignore
+const initialState: UseQueryResult<IGetVendorsDetailVendor | null, {status: number}> = {};
 
 const OrderCompleteVendorDetailDataContext =
-  createContext<IDataContextProvider<IGetVendorsDetailVendor | null>>(initialState);
+  createContext<UseQueryResult<IGetVendorsDetailVendor | null, {status: number}>>(initialState);
 
-export const QUERY_KEY_ORDER_COMPLETE_VENDOR_DETAIL = "orderCompleteVendorDetail";
 const staleTime = 10 * 60 * 1000;
 
 function OrderCompleteVendorDetailDataProvider({children}: {children: JSX.Element}) {
   const router = useRouter();
   const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
+  const {isRestaurant, isSupermarket} = useOrderCompleteParams();
 
   const getData = useCallback(() => {
     if (restaurant?.vendorId) {
-      return getVendorDetail({id: restaurant.vendorId}).then((res) => res.vendor);
-    } else if (supermarket?.vendorId) {
-      return getSupermarketDetail({id: supermarket.vendorId}).then((res) => res.vendor);
+      if (isRestaurant) {
+        return getVendorDetail({id: restaurant.vendorId}).then((res) => res.vendor);
+      }
+      if (isSupermarket) {
+        return getSupermarketDetail({id: restaurant.vendorId}).then((res) => res.vendor);
+      }
     }
     return null;
-  }, [restaurant?.vendorId, supermarket?.vendorId]);
+  }, [isRestaurant, isSupermarket, restaurant?.vendorId]);
 
   const queryKey = useMemo(() => {
-    const key: string[] = [QUERY_KEY_ORDER_COMPLETE_VENDOR_DETAIL];
+    let key: string[] = [];
     if (restaurant?.vendorId) {
-      key.push(restaurant.vendorId);
-    } else if (supermarket?.vendorId) {
-      key.push(supermarket.vendorId);
+      if (isRestaurant) {
+        key = [ReactQueryKey.ORDER_COMPLETE_RESTAURANT_DETAIL, restaurant.vendorId];
+      }
+      if (isSupermarket) {
+        key = [ReactQueryKey.ORDER_COMPLETE_SUPERMARKET_DETAIL, restaurant.vendorId];
+      }
     }
     return key;
-  }, [restaurant?.vendorId, supermarket?.vendorId]);
+  }, [isRestaurant, isSupermarket, restaurant?.vendorId]);
 
   const useQueryEnabled = useMemo(
-    () => router.isReady && (!!restaurant?.vendorId || !!supermarket?.vendorId),
-    [restaurant?.vendorId, router.isReady, supermarket?.vendorId]
+    () => router.isReady && !!restaurant?.vendorId,
+    [restaurant?.vendorId, router.isReady]
   );
 
   const result = useQuery<IGetVendorsDetailVendor | null, {status: number}>(queryKey, () => getData(), {

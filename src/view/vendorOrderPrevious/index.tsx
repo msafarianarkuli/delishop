@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
 import {useCallback} from "react";
 import {IGetOrdersListResOrdersItems} from "types/interfaceOdrdersList";
-// import {setCartRestaurantReorder} from "redux/cartRestaurant/cartRestaurantReducer";
+import {setCartRestaurantReorder} from "redux/cartRestaurant/cartRestaurantReducer";
 import OrderPrevious from "components/orderPrevious";
 import {useVendorOrderPreviousParams} from "view/vendorOrderPrevious/context/VendorOrderPreviousParamsProvider";
 import {ReactQueryKey} from "utils/Const";
@@ -14,17 +14,18 @@ function VendorOrderPrevious() {
 
   const onClickReOrder = useCallback(
     (item: IGetOrdersListResOrdersItems) => {
-      // dispatch(
-      //   setCartRestaurantReorder({
-      //     vendorId: item.vendor.id.toString(),
-      //     title: item.vendor.name,
-      //     point: 0,
-      //     productKinds: item.productKinds,
-      //   })
-      // );
-      router.push(`/ordercomplete/${item.vendor.id}`);
+      dispatch(
+        setCartRestaurantReorder({
+          vendorAddressName: vendor,
+          vendorId: item.vendor.id.toString(),
+          title: item.vendor.name,
+          point: 0,
+          productKinds: item.productKinds,
+        })
+      );
+      router.push(`${vendor}/ordercomplete/${item.vendor.id}`);
     },
-    [dispatch, router]
+    [dispatch, router, vendor]
   );
 
   return (

@@ -9,10 +9,11 @@ interface ISubmitBtnToCompleteOrder {
   open_hours?: IGetVendorsDetailVendorOpenHours;
   open?: number;
   className?: string;
+  vendorName: string;
 }
 
 function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
-  const {open_hours, className, open} = props;
+  const {open_hours, className, open, vendorName} = props;
   const router = useRouter();
   const vendor = useCartRestaurant();
   const {time} = useVendorWorkTime({open_hours});
@@ -22,7 +23,7 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
     <SubmitBuyBtn
       className={className}
       disabled={!time.length || !open}
-      onClick={() => router.push(`/ordercomplete/${router.query.id}`)}
+      onClick={() => router.push(`/${vendorName}/ordercomplete/${router.query.id}`)}
       right={<IconDownload className="w-5 h-5" />}
       body={
         <>

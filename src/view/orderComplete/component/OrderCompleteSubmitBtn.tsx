@@ -1,7 +1,6 @@
 import {SubmitBuyBtn} from "components";
 import {IconRoundedRight} from "assets/icons";
 import useCartRestaurant from "hooks/useCartRestaurant";
-import useCartSupermarket from "hooks/useCartSupermarket";
 import useTypeColor from "hooks/useTypeColor";
 import {
   setOrderCompleteError,
@@ -16,34 +15,32 @@ import {useMemo, useState} from "react";
 import {createAddOrderProductKind} from "utils/cartReducerUtils";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
 import {removeCartRestaurantCartListCartOrder} from "redux/cartRestaurant/cartRestaurantReducer";
-import {clearCartSupermarket} from "redux/cartSupermraket/cartSupermarketReducer";
 import {useDispatch} from "react-redux";
 import {useQueryClient} from "react-query";
 import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
-import {QUERY_KEY_RESTAURANT_ORDERS_ACTIVE} from "view/restaurantOrderActive";
-import {QUERY_KEY_SUPERMARKET_ORDERS_ACTIVE} from "view/supermarketOrderActive";
+import {ReactQueryKey} from "utils/Const";
+import {useOrderCompleteParams} from "view/orderComplete/context/OrderCompleteParamsProvider";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
   const {status} = useSession();
   const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
 
   if (step === 2) return <>پرداخت نهایی</>;
   if (status === "authenticated") {
     return (
       <>
         <span>ادامه</span>
-        <span>({restaurant?.totalOrderCount || supermarket?.totalOrderCount})</span>
+        <span>({restaurant?.totalOrderCount})</span>
       </>
     );
   } else if (status === "unauthenticated") {
     return (
       <>
         <span>ورود و ادامه</span>
-        <span>({restaurant?.totalOrderCount || supermarket?.totalOrderCount})</span>
+        <span>({restaurant?.totalOrderCount})</span>
       </>
     );
   }
@@ -52,7 +49,6 @@ function OrderCompleteSubmitBtnBody() {
 
 function OrderCompleteSubmitBtnLeft() {
   const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
   const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress} = useOrderComplete();
 
@@ -68,9 +64,9 @@ function OrderCompleteSubmitBtnLeft() {
   });
 
   const price = useMemo(() => {
-    const totalPrice = restaurant?.totalPrice || supermarket?.totalPrice || 0;
+    const totalPrice = restaurant?.totalPrice || 0;
     return Math.round(totalPrice / 10);
-  }, [restaurant?.totalPrice, supermarket?.totalPrice]);
+  }, [restaurant?.totalPrice]);
 
   return (
     <>
@@ -89,10 +85,10 @@ function OrderCompleteSubmitBtn() {
   const {status, data} = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const vendor = useCartRestaurant();
-  const supermarket = useCartSupermarket();
   const queryClient = useQueryClient();
   const {data: dataVendor} = useOrderCompleteVendorDetailData();
   const {time} = useVendorWorkTime({open_hours: dataVendor?.open_hours});
+  const {vendor: vendorName} = useOrderCompleteParams();
 
   return (
     <SubmitBuyBtn
@@ -118,7 +114,7 @@ function OrderCompleteSubmitBtn() {
             const paymenttype = paymentType;
             // const sendtime = deliveryTime?.isTemp ? 100 : deliveryTime?.from;
             const token = data?.user.token;
-            const productkinds = createAddOrderProductKind(vendor?.cartOrders || supermarket?.cartOrders || {});
+            const productkinds = createAddOrderProductKind(vendor?.cartOrders || {});
             const addOrderCondition =
               vendor_id &&
               Object.keys(productkinds)?.length &&
@@ -169,9 +165,7 @@ function OrderCompleteSubmitBtn() {
                   } else if (res.data.Data) {
                     // invalidate for getData again
                     queryClient.invalidateQueries(QUERY_KEY_USER_COIN);
-                    queryClient.invalidateQueries(QUERY_KEY_RESTAURANT_ORDERS_ACTIVE);
-                    queryClient.invalidateQueries(QUERY_KEY_SUPERMARKET_ORDERS_ACTIVE);
-
+                    queryClient.invalidateQueries(ReactQueryKey.VENDOR_ORDER_ACTIVE);
                     if (res.data.Data?.payurl) {
                       const url = res.data.Data.payurl;
                       window.open(url, "_blank");
@@ -180,10 +174,7 @@ function OrderCompleteSubmitBtn() {
                       if (id && !Array.isArray(id)) {
                         if (vendor?.cartOrders) {
                           dispatchRedux(removeCartRestaurantCartListCartOrder(id));
-                          router.replace("/restaurant/order/active");
-                        } else if (supermarket?.cartOrders) {
-                          dispatchRedux(clearCartSupermarket());
-                          router.replace("/supermarket/order/active");
+                          router.replace(`/${vendorName}/order/active`);
                         }
                       }
                     }

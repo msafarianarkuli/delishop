@@ -89,6 +89,7 @@ function VendorDetailRestaurantList() {
                         if (!vendor) {
                           dispatch(
                             setCartRestaurantVendorData({
+                              vendorAddressName: vendorName,
                               vendorId: id,
                               title: data?.vendor?.name,
                               point: data?.vendor.point,

@@ -12,8 +12,7 @@ import OrderRateCard from "view/orderRate/component/orderRateCard";
 import OrderRateDescription from "view/orderRate/component/OrderRateDescription";
 import OrderRateSubmit from "view/orderRate/component/OrderRateSubmit";
 import jalaliday from "jalaliday";
-import {QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS} from "view/restaurantOrderPrevious";
-import {QUERY_KEY_SUPERMARKET_ORDERS_PREVIOUS} from "view/supermarketOrderPrevious";
+import {ReactQueryKey} from "utils/Const";
 
 dayjs.extend(jalaliday);
 
@@ -50,8 +49,8 @@ function OrderRate() {
         body.comment = payload.description;
       }
       const res = await axiosService({url, method: "post", token: data?.user.token, body});
-      await queryClient.invalidateQueries(QUERY_KEY_RESTAURANT_ORDERS_PREVIOUS);
-      await queryClient.invalidateQueries(QUERY_KEY_SUPERMARKET_ORDERS_PREVIOUS);
+      await queryClient.invalidateQueries(ReactQueryKey.VENDOR_ORDER_ACTIVE);
+      await queryClient.invalidateQueries(ReactQueryKey.VENDOR_ORDER_PREVIOUS);
       await router.replace("/");
       console.log("OrderRate res", res);
     } catch (e) {

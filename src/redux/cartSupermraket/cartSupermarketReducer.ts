@@ -14,6 +14,7 @@ export interface ICartSupermarketReducer {
 }
 
 const initialCartOrder: ICartReducerListItem = {
+  vendorAddressName: "",
   vendorId: null,
   title: null,
   cartOrders: {},

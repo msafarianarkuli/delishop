@@ -76,6 +76,7 @@ function VendorSubcategoryShow() {
                     if (!vendor) {
                       dispatch(
                         setCartRestaurantVendorData({
+                          vendorAddressName: vendorName,
                           vendorId,
                           title: supermarket?.vendor?.name,
                           point: supermarket?.vendor.point,

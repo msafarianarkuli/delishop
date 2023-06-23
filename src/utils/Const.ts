@@ -10,6 +10,8 @@ export const ReactQueryKey = {
   VENDOR_COMMENT: "vendorComment",
   VENDOR_ORDER_ACTIVE: "vendorOrderActive",
   VENDOR_ORDER_PREVIOUS: "vendorOrderPrevious",
+  ORDER_COMPLETE_RESTAURANT_DETAIL: "orderCompleteRestaurantDetail",
+  ORDER_COMPLETE_SUPERMARKET_DETAIL: "orderCompleteSupermarketDetail",
 };
 
 export enum EOrderStatus {

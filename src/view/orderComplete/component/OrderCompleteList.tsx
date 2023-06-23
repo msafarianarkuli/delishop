@@ -10,40 +10,25 @@ import {
   setCartRestaurantItem,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
-import useCartSupermarket from "hooks/useCartSupermarket";
-import {
-  removeCartSupermarketLastOrder,
-  selectCartSupermarket,
-  setCartSupermarketItem,
-} from "redux/cartSupermraket/cartSupermarketReducer";
 import useTypeColor from "hooks/useTypeColor";
 
 function OrderCompleteList() {
   const router = useRouter();
   const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
   const cartRestaurant = useSelector(selectCartRestaurant);
-  const cartSupermarket = useSelector(selectCartSupermarket);
   const dispatch = useDispatch();
   const type = useTypeColor();
 
   const data = useMemo(() => {
-    if (cartRestaurant.isLoadedFromStorage && cartSupermarket.isLoadedFromStorage) {
+    if (cartRestaurant.isLoadedFromStorage) {
       let cartOrders = {};
       if (restaurant?.cartOrders) {
         cartOrders = restaurant.cartOrders;
-      } else if (supermarket?.cartOrders) {
-        cartOrders = supermarket?.cartOrders;
       }
       return mergeCartListToArray(cartOrders);
     }
     return [];
-  }, [
-    cartRestaurant.isLoadedFromStorage,
-    cartSupermarket.isLoadedFromStorage,
-    supermarket?.cartOrders,
-    restaurant?.cartOrders,
-  ]);
+  }, [cartRestaurant.isLoadedFromStorage, restaurant?.cartOrders]);
 
   return (
     <div className="mt-headerNormal px-screenSpace">
@@ -70,16 +55,6 @@ function OrderCompleteList() {
                       point: item.point,
                     })
                   );
-                } else if (supermarket?.cartOrders) {
-                  dispatch(
-                    setCartSupermarketItem({
-                      title: item.title,
-                      price: item.price,
-                      id: +item.id,
-                      image: item.image,
-                      point: item.point,
-                    })
-                  );
                 }
               }
             }}
@@ -94,8 +69,6 @@ function OrderCompleteList() {
                       vendorId: id,
                     })
                   );
-                } else if (supermarket?.cartOrders) {
-                  dispatch(removeCartSupermarketLastOrder(+item.id));
                 }
               }
             }}

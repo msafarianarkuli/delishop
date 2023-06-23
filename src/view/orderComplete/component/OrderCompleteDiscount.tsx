@@ -1,14 +1,12 @@
-import React, {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import OrderCompleteTitle from "view/orderComplete/component/OrderCompleteTitle";
 import {CustomInput} from "components";
 import useTypeColor from "hooks/useTypeColor";
-import classNames from "classnames";
 import getOrderDiscountCalc from "api/getOrderDiscountCalc";
 import {Button, Tooltip} from "antd";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
-import useCartSupermarket from "hooks/useCartSupermarket";
 import {setOrderCompleteDiscountPrice, useOrderCompleteAction} from "view/orderComplete/context/OrderCompleteProvider";
 import {IOrderDiscountCalcError} from "types/interfaceOrderDiscountCalc";
 
@@ -19,7 +17,6 @@ function OrderCompleteDiscount() {
   const {data} = useSession();
   const router = useRouter();
   const restaurant = useCartRestaurant();
-  const supermarket = useCartSupermarket();
   const dispatch = useOrderCompleteAction();
   const [error, setError] = useState("");
   const [isTooltip, setIsTooltip] = useState(false);
@@ -34,20 +31,7 @@ function OrderCompleteDiscount() {
     };
   }, [isTooltip]);
 
-  const price = useMemo(
-    () => restaurant?.totalPrice || supermarket?.totalPrice || 0,
-    [restaurant?.totalPrice, supermarket?.totalPrice]
-  );
-
-  const btnClassName = classNames({
-    "h-full w-[140px] rounded-full text-white text-[16px] font-semibold border-0": true,
-    "bg-primary": type === "default",
-    "bg-primarySupermarket": type === "supermarket",
-  });
-  const inputClassName = classNames({
-    "input-form h-[50px] p-0 pr-2 rounded-full mt-0 overflow-hidden shadow-[2px_2px_14px_rgba(36,65,93,0.33)]": true,
-    "input-form-supermarket": type === "supermarket",
-  });
+  const price = useMemo(() => restaurant?.totalPrice || 0, [restaurant?.totalPrice]);
 
   const onClick = useCallback(async () => {
     const id = router.query.id;
@@ -88,7 +72,7 @@ function OrderCompleteDiscount() {
           <CustomInput
             autoComplete="off"
             id="discount"
-            className={inputClassName}
+            className="input-form h-[50px] p-0 pr-2 rounded-full mt-0 overflow-hidden shadow-[2px_2px_14px_rgba(36,65,93,0.33)]"
             disabled={isLoading}
             value={text}
             onChange={(event) => {
@@ -96,7 +80,13 @@ function OrderCompleteDiscount() {
               setText(value);
             }}
             suffix={
-              <Button disabled={!text} loading={isLoading} htmlType="button" onClick={onClick} className={btnClassName}>
+              <Button
+                disabled={!text}
+                loading={isLoading}
+                htmlType="button"
+                onClick={onClick}
+                className="h-full w-[140px] rounded-full text-white text-[16px] font-semibold border-0 bg-primary"
+              >
                 ثبت
               </Button>
             }

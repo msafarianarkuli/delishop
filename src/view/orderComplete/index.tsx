@@ -4,18 +4,15 @@ import OrderCompleteSubmitBtn from "view/orderComplete/component/OrderCompleteSu
 import OrderCompletePartOne from "view/orderComplete/component/OrderCompletePartOne";
 import OrderCompletePartTwo from "view/orderComplete/component/OrderCompletePartTwo";
 import useCartRestaurant from "hooks/useCartRestaurant";
-import useCartSupermarket from "hooks/useCartSupermarket";
 import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
 
 function OrderComplete() {
   const vendor = useCartRestaurant();
-  const supermarket = useCartSupermarket();
   const {step} = useOrderComplete();
 
   const cartOrders = useMemo(() => {
     if (vendor?.cartOrders) return vendor.cartOrders;
-    if (supermarket?.cartOrders) return supermarket.cartOrders;
-  }, [supermarket?.cartOrders, vendor?.cartOrders]);
+  }, [vendor?.cartOrders]);
 
   useEffect(() => {
     window.scrollTo({top: 0});

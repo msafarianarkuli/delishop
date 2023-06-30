@@ -54,10 +54,12 @@ function DatePickerReactHook<C extends FieldValues, N extends FieldPath<C>>(prop
         id={field.name}
         value={field.value}
         onChange={(value) => {
+          // @ts-ignore
           field.onChange(value);
           onChange?.(value);
         }}
         onCancel={(e) => {
+          // @ts-ignore
           field.onChange(null);
           onCancel?.(e);
         }}

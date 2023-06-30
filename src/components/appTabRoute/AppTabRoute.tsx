@@ -28,7 +28,7 @@ function AppTabRoute(props: IAppTabRoute) {
           "text-primary": item.active && !classNameItemActive && color === "default",
           "text-primarySupermarket": item.active && !classNameItemActive && color === "supermarket",
           [classNameItem]: classNameItem,
-          [classNameItemActive]: classNameItemActive && item.active,
+          [`${classNameItemActive}`]: classNameItemActive && item.active,
         });
         return (
           <Link key={index} className={className} href={item.link} replace>

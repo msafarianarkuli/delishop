@@ -1,4 +1,4 @@
-import {ForwardedRef, forwardRef} from "react";
+import {ChangeEvent, ForwardedRef, forwardRef} from "react";
 import CustomInput, {IBasicCustomInput, ICustomInputClassNames} from "components/customInput/CustomInput";
 import {InputRef} from "antd";
 import {Control, FieldValues, RegisterOptions, useController} from "react-hook-form";
@@ -89,13 +89,14 @@ function InputReactHook<C extends FieldValues, N extends FieldPath<C>>(
             finalValue = tmp.toLocaleString("en-US");
           }
           // createLog('finalValue', finalValue)
-          field.onChange({
+          const onChangeEvent: ChangeEvent<HTMLInputElement> = {
             ...event,
             target: {
               ...event.target,
               value: finalValue,
             },
-          });
+          };
+          field.onChange(onChangeEvent);
         }}
         onBlur={field.onBlur}
         {...customInputClassNames}

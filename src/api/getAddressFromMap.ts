@@ -1,5 +1,5 @@
 import {axiosService} from "utils/axiosService";
-import {API} from "api/const";
+import {API, NeshanApiKey} from "api/const";
 
 interface IParams {
   lat: number;
@@ -27,7 +27,7 @@ export default async function getAddressFromMap(params: IParams) {
   return axiosService<IGetAddressFromMapRes>({
     url: API.GET_ADDRESS,
     method: "get",
-    headers: {"api-key": "service.162c51de845a4a6fa5dd73ea608664f2"},
+    headers: {"Api-Key": NeshanApiKey},
     params,
   });
 }

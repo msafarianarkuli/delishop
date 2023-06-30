@@ -51,3 +51,5 @@ export const API = {
   GET_BANNERS: "/api/banner/list",
   GET_ADS: "/api/advertisement/list",
 };
+
+export const NeshanApiKey = "service.66fc321f6a1b4ae3baa5244ed7341508";

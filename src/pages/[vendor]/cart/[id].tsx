@@ -2,6 +2,7 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import {vendorsAddress} from "utils/Const";
 import VendorCartDetail from "view/vendorCartDetail";
 import VendorCartDetailParamsProvider from "view/vendorCartDetail/context/VendorCartDetailParamsProvider";
+import VendorCartDetailVendorDetailDataProvider from "view/vendorCartDetail/context/VendorCartDetailVendorDetailDataProvider";
 
 export interface IVendorCartDetailPage {
   vendor: string;
@@ -11,7 +12,9 @@ export interface IVendorCartDetailPage {
 function VendorCartDetailPage(props: IVendorCartDetailPage) {
   return (
     <VendorCartDetailParamsProvider {...props}>
-      <VendorCartDetail />
+      <VendorCartDetailVendorDetailDataProvider>
+        <VendorCartDetail />
+      </VendorCartDetailVendorDetailDataProvider>
     </VendorCartDetailParamsProvider>
   );
 }

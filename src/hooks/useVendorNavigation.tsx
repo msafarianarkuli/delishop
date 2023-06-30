@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {selectCartRestaurantList} from "redux/cartRestaurant/cartRestaurantReducer";
 import {TDataBottomNavigation} from "components/bottomNavigation/BottomNavigation";
 import {IconCart, IconHome, IconOrder, IconSearch} from "assets/icons";
+import usePrivateLink from "hooks/usePrivateLink";
 
 interface IVendorNavigation {
   active?: "cart" | "search" | "order";
@@ -12,6 +13,7 @@ interface IVendorNavigation {
 function useVendorNavigation(props: IVendorNavigation) {
   const {active, vendor} = props;
   const cartList = useSelector(selectCartRestaurantList);
+  const orderLink = usePrivateLink({link: `/${vendor}/order/active`});
 
   return useMemo(() => {
     const data: TDataBottomNavigation = [
@@ -37,12 +39,12 @@ function useVendorNavigation(props: IVendorNavigation) {
       {
         icon: IconOrder,
         title: "سفارشات",
-        link: `/${vendor}/order/active`,
+        link: orderLink,
         active: active === "order",
       },
     ];
     return data;
-  }, [active, cartList?.length, vendor]);
+  }, [active, cartList?.length, orderLink, vendor]);
 }
 
 export default useVendorNavigation;

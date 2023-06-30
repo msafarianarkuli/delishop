@@ -14,6 +14,7 @@ import {
 import {useUserWallet} from "template/context/UserWalletProvider";
 import styles from "template/template.module.scss";
 import {useUserCoin} from "template/context/UserCoinProvider";
+import usePrivateLink from "hooks/usePrivateLink";
 
 interface IDataItems {
   title: string;
@@ -27,6 +28,7 @@ type TData = IDataItems[];
 function useDrawerRoutes(): TData {
   const {data} = useUserWallet();
   const {data: CoinData} = useUserCoin();
+  const walletLink = usePrivateLink({link: "/profile/wallet"});
 
   const Coin = useMemo(() => {
     return (
@@ -43,7 +45,7 @@ function useDrawerRoutes(): TData {
       {
         title: data != null ? `کیف پول (${data} تومان)` : "کیف پول",
         icon: IconWalletSolid,
-        link: "/profile/wallet",
+        link: walletLink,
         left: Coin,
       },
       {
@@ -82,7 +84,7 @@ function useDrawerRoutes(): TData {
         link: "/",
       },
     ];
-  }, [Coin, data]);
+  }, [Coin, data, walletLink]);
 }
 
 export default useDrawerRoutes;

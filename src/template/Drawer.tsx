@@ -10,12 +10,14 @@ import {Button} from "antd";
 import useDrawerRoutes from "template/hooks/useDrawerRoutes";
 import {useSession} from "next-auth/react";
 import {iranSans} from "assets/fonts/iranSansFont";
+import usePrivateLink from "hooks/usePrivateLink";
 
 function Drawer() {
   const isDrawerOpen = useSelector(selectIsDrawerOpen);
   const dispatch = useDispatch<AppDispatch>();
   const data = useDrawerRoutes();
   const {data: useData} = useSession();
+  const profileLink = usePrivateLink({link: "/profile"});
 
   const onClose = useCallback(() => {
     dispatch(setIsDrawerOpen(false));
@@ -44,7 +46,7 @@ function Drawer() {
       </div>
       <div className="flex items-center justify-between mt-[40px] px-[19px] pb-[32px] border-b border-borderColor">
         <div className="font-medium text-[15px]">{useData?.user.name}</div>
-        <Link href="/profile" onClick={onClose} className="flex items-center text-primary">
+        <Link href={profileLink} onClick={onClose} className="flex items-center text-primary">
           <div className="font-medium">اطلاعات کاربر</div>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>

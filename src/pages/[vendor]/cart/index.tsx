@@ -20,11 +20,11 @@ export default VendorCartPage;
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const vendor = params?.vendor;
-  const vendorId = vendorsAddress.find((item) => item.name === vendor);
+  const vendorData = vendorsAddress.find((item) => item.name === vendor);
   return {
     props: {
       vendor,
-      id: vendorId?.id,
+      id: vendorData?.id,
     },
   };
 };

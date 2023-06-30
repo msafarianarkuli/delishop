@@ -4,6 +4,7 @@ import VendorCartCard, {IVendorCartCard} from "view/vendorCart/component/vendorC
 import {useDispatch, useSelector} from "react-redux";
 import {removeCartRestaurantCartListCartOrder, selectCartRestaurant} from "redux/cartRestaurant/cartRestaurantReducer";
 import {mergeCartListToArray} from "utils/cartReducerUtils";
+import {vendorsAddress} from "utils/Const";
 
 interface IVendorCartList extends Omit<IVendorCartCard, "onClickRemove" | "onClickOk"> {
   vendor: string;
@@ -44,7 +45,15 @@ function VendorCartList() {
             key={index}
             title={item.title}
             data={item.data}
-            onClickOk={() => router.push(`/${item.vendor}/${item.id}`)}
+            onClickOk={() => {
+              const data = vendorsAddress.find((element) => element.name === item.vendor);
+              if (data?.isSupermarket) {
+                router.push(`/${item.vendor}/cart/${item.id}`);
+              }
+              if (data?.isRestaurant) {
+                router.push(`/${item.vendor}/${item.id}`);
+              }
+            }}
             onClickRemove={() => {
               dispatch(removeCartRestaurantCartListCartOrder(item.id));
             }}

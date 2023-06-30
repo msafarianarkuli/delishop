@@ -11,7 +11,7 @@ function HomeBest() {
     <div>
       <div className="flex items-center justify-between px-screenSpace mb-5">
         <HomeTitle title="برترین ها" />
-        <Link href="/restaurant_old?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
+        <Link href="/restaurant?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
           <span>همه</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>

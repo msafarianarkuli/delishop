@@ -90,6 +90,7 @@ function VendorSubcategoryShow() {
                         title: item.displayname,
                         vendorId,
                         point: item.point,
+                        image: product.photo_igu,
                       })
                     );
                   }

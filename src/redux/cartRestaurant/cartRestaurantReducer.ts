@@ -55,10 +55,11 @@ const cartRestaurantReducer = createSlice({
         const price = payload.price;
         const title = payload.title;
         const point = payload.point || 0;
+        const image = payload.image;
         if (cartItem[payload.id]) {
-          cartItem[payload.id].push({extra, price, title, point});
+          cartItem[payload.id].push({extra, price, title, point, image});
         } else {
-          cartItem[payload.id] = [{extra, price, title, point}];
+          cartItem[payload.id] = [{extra, price, title, point, image}];
         }
         vendor.totalOrderCount += 1;
         vendor.totalPoint += point;

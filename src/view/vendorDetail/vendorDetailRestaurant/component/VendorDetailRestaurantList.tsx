@@ -104,6 +104,7 @@ function VendorDetailRestaurantList() {
                               price: finalPrice,
                               title: item.displayname,
                               point: item.point,
+                              image: product?.photo_igu || "",
                             })
                           );
                         } else {
@@ -114,6 +115,7 @@ function VendorDetailRestaurantList() {
                               title: item.displayname,
                               vendorId: id,
                               point: item.point,
+                              image: product?.photo_igu,
                             })
                           );
                         }

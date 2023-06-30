@@ -87,6 +87,7 @@ function VendorCategoryProductsList() {
                               title: item.displayname,
                               vendorId: id,
                               point: item.point,
+                              image: product?.photo_igu,
                             })
                           );
                         }

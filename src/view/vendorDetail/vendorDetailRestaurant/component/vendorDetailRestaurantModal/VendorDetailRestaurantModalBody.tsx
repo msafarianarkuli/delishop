@@ -17,7 +17,7 @@ interface IVendorDetailRestaurantModalBodyData extends IGetVendorDetailMenusGrou
 }
 
 function VendorDetailRestaurantModalBody({onClick}: IVendorDetailRestaurantModalBody) {
-  const {data: extraData, isOpen, id, price, title, point} = useVendorDetailRestaurantExtra();
+  const {data: extraData, isOpen, id, price, title, point, image} = useVendorDetailRestaurantExtra();
   const [data, setData] = useState<IVendorDetailRestaurantModalBodyData[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
@@ -105,6 +105,7 @@ function VendorDetailRestaurantModalBody({onClick}: IVendorDetailRestaurantModal
                   title,
                   point,
                   vendorId: vendor.vendorId,
+                  image,
                 })
               );
             }

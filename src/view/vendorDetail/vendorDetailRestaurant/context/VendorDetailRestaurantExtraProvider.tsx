@@ -8,6 +8,7 @@ interface IVendorDetailRestaurantExtra {
   price: number;
   title: string;
   point: number;
+  image: string;
 }
 
 interface IAction {
@@ -22,6 +23,7 @@ const initialState: IVendorDetailRestaurantExtra = {
   price: 0,
   title: "",
   point: 0,
+  image: "",
 };
 
 export const SET_DATA = "data";
@@ -40,6 +42,7 @@ function reducer(state: IVendorDetailRestaurantExtra, action: IAction): IVendorD
         price: action.payload.price,
         title: action.payload.title,
         point: action.payload.point || 0,
+        image: action.payload.image,
       };
     case CLOSE:
       return {
@@ -49,6 +52,7 @@ function reducer(state: IVendorDetailRestaurantExtra, action: IAction): IVendorD
         price: 0,
         title: "",
         point: 0,
+        image: "",
       };
     default:
       return state;
@@ -74,6 +78,7 @@ export const setVendorDetailRestaurantExtraData = (payload: {
   price: number;
   title: string;
   point: number;
+  image: string;
 }) => ({
   type: SET_DATA,
   payload,

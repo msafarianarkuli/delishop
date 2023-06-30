@@ -53,6 +53,7 @@ function OrderCompleteList() {
                       title: item.title,
                       id: +item.id,
                       point: item.point,
+                      image: item.image,
                     })
                   );
                 }

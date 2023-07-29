@@ -25,7 +25,7 @@ function HomeVendorCard(props: IHomeBestCard) {
   return (
     <div className={styles.home_card_container}>
       <div className="relative w-full pb-[34.1%] overflow-hidden rounded-t-[12px]">
-        <img src={image} alt={title} className="absolute inset-0 object-center object-contain w-full h-full" />
+        <img src={image} alt={title} className="absolute inset-0 object-center w-full h-full object-cover" />
       </div>
       <div className="py-[10px] px-[15px]">
         <div className="flex items-center justify-between mb-4">

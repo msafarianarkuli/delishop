@@ -1,0 +1,21 @@
+@import "react-toastify/dist/ReactToastify.css";
+
+:root {
+  --toastify-font-family: var(--font-iransans) !important;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 88vw !important;
+    margin-bottom: 10px !important;
+  }
+  .Toastify__toast-container--bottom-left,
+  .Toastify__toast-container--bottom-center,
+  .Toastify__toast-container--bottom-right {
+    transform: translateX(-5.5%) !important;
+  }
+
+  .Toastify__toast {
+    border-radius: 5px !important;
+  }
+}

@@ -8,11 +8,13 @@ import {AppDispatch} from "redux/store";
 import {useCallback} from "react";
 import {Button} from "antd";
 import useDrawerRoutes from "template/hooks/useDrawerRoutes";
-import {useSession} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import {iranSans} from "assets/fonts/iranSansFont";
 import usePrivateLink from "hooks/usePrivateLink";
+import Image from "next/image";
 
 function Drawer() {
+  const {data: session} = useSession();
   const isDrawerOpen = useSelector(selectIsDrawerOpen);
   const dispatch = useDispatch<AppDispatch>();
   const data = useDrawerRoutes();
@@ -22,6 +24,19 @@ function Drawer() {
   const onClose = useCallback(() => {
     dispatch(setIsDrawerOpen(false));
   }, [dispatch]);
+
+  const handleGameClick = (link: string) => {
+    onClose();
+    if (session?.user.token) {
+      window.open(`${link}?token=${session?.user.token}&userId=${session?.user.useId}`, "_self");
+    } else {
+      signIn(undefined, {
+        redirect: true,
+        callbackUrl: "/redirect",
+      });
+      localStorage.setItem("redirectUrl", link);
+    }
+  };
 
   return (
     <CustomDrawer
@@ -52,24 +67,43 @@ function Drawer() {
         </Link>
       </div>
       <div className="flex flex-col flex-1 overflow-auto">
-        {data.map((item, index) => {
+        {data.map((item) => {
           const Icon = item.icon;
           return (
-            <Link
-              key={index}
-              className="flex items-center justify-between px-[19px] py-[14px] border-b border-borderColor"
-              href={item.link}
-              onClick={onClose}
-            >
-              <div className="flex items-center">
-                <Icon className="w-5 h-auto ml-2" />
-                <div>{item.title}</div>
-              </div>
-              <div className="flex items-center">
-                {item.left}
-                <IconRoundedLeft className="w-5 h-5" />
-              </div>
-            </Link>
+            <>
+              {item.title === "aa" || item.title === "crush" ? (
+                <div
+                  key={item.id}
+                  className="flex items-center justify-between px-[19px] py-[14px] border-b border-borderColor hover:text-primary transition ease-in duration-250 cursor-pointer"
+                  onClick={() => handleGameClick(item.link)}
+                >
+                  <div className="flex items-center">
+                    {item.image && <Image src={item.image} alt={item.title} width="25" height="25" className="ml-2" />}
+                    <div>{item.title}</div>
+                  </div>
+                  <div className="flex items-center">
+                    {item.left}
+                    <IconRoundedLeft className="w-5 h-5" />
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.id}
+                  className="flex items-center justify-between px-[19px] py-[14px] border-b border-borderColor"
+                  href={item.link}
+                  onClick={onClose}
+                >
+                  <div className="flex items-center">
+                    <Icon className="w-5 h-auto ml-2" />
+                    <div>{item.title}</div>
+                  </div>
+                  <div className="flex items-center">
+                    {item.left}
+                    <IconRoundedLeft className="w-5 h-5" />
+                  </div>
+                </Link>
+              )}
+            </>
           );
         })}
       </div>

@@ -30,7 +30,7 @@ module.exports = {
       },
       colors: {
         primary: "#FF5500",
-        primarySupermarket: "#066FAA",
+        primarySupermarket: "#FF5500",
         error: "#ff4d4f",
         textColor: "#2C3036",
         textColorLight: "#8D8D8D",

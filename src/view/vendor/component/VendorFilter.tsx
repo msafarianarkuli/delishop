@@ -4,7 +4,7 @@ import {useQuery} from "react-query";
 import getVendorsTags, {VENDORS_TAGS_KEY} from "api/getVendorsTags";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import classNames from "classnames";
-import VendorCategory from "view/vendor/component/VendorCategory";
+// import VendorCategory from "view/vendor/component/VendorCategory";
 import VendorFilterBtn from "view/vendor/component/VendorFilterBtn";
 import VendorFilterBottomSheet from "view/vendor/component/VendorFilterBottomSheet";
 import {ReactQueryKey} from "utils/Const";
@@ -77,7 +77,7 @@ function VendorFilter() {
   return (
     <>
       <div className={containerClassName}>
-        <VendorCategory count={allTagValues.length} onClick={() => setBottomSheet(true)} />
+        {/* <VendorCategory count={allTagValues.length} onClick={() => setBottomSheet(true)} /> */}
         <div className="flex flex-1 flex-nowrap overflow-auto px-2 py-5">
           {constTags.map((item) => {
             return (

@@ -1,13 +1,13 @@
 import {ReactNode, useMemo} from "react";
 import {
   IconCoin,
-  IconDrawerFavorite,
+  // IconDrawerFavorite,
   IconDrawerGame,
   IconMessageSolid,
   IconOrderSolid,
-  IconShareSolid,
+  // IconShareSolid,
   IconSupportSolid,
-  IconTagSolid,
+  // IconTagSolid,
   IconWalletSolid,
   TIcons,
 } from "assets/icons";
@@ -15,17 +15,23 @@ import {useUserWallet} from "template/context/UserWalletProvider";
 import styles from "template/template.module.scss";
 import {useUserCoin} from "template/context/UserCoinProvider";
 import usePrivateLink from "hooks/usePrivateLink";
+import {useSession} from "next-auth/react";
+import aa from "assets/images/homeGame.svg";
+import crush from "assets/images/homeGame2.svg";
 
 interface IDataItems {
+  id: number;
   title: string;
   icon: TIcons;
   link: string;
   left?: ReactNode;
+  image?: HTMLImageElement;
 }
 
 type TData = IDataItems[];
 
 function useDrawerRoutes(): TData {
+  const {data: session} = useSession();
   const {data} = useUserWallet();
   const {data: CoinData} = useUserCoin();
   const walletLink = usePrivateLink({link: "/profile/wallet"});
@@ -43,45 +49,49 @@ function useDrawerRoutes(): TData {
   return useMemo(() => {
     return [
       {
+        id: 1,
         title: data != null ? `کیف پول (${data} تومان)` : "کیف پول",
         icon: IconWalletSolid,
         link: walletLink,
         left: Coin,
       },
       {
+        id: 2,
         title: "لیست سفارشات",
         icon: IconOrderSolid,
-        link: "/",
+        link: "/restaurant/order/active",
       },
       {
-        title: "پیام ها (0)",
+        id: 3,
+        title: "پیام ها (2)",
         icon: IconMessageSolid,
-        link: "/",
+        link: "/messages",
       },
       {
-        title: "علاقه مندی ها",
-        icon: IconDrawerFavorite,
-        link: "/",
-      },
-      {
-        title: "آگهی ها",
-        icon: IconTagSolid,
-        link: "/",
-      },
-      {
-        title: "بازی ها",
+        id: 4,
+        title: "aa",
         icon: IconDrawerGame,
-        link: "/",
+        image: aa,
+        link: `https://aa.delishop.me?token=${session?.user.token}&userId=${session?.user.useId}`,
       },
       {
+        id: 5,
+        title: "crush",
+        icon: IconDrawerGame,
+        image: crush,
+        link: `https://crush.delishop.me?token=${session?.user.token}&userId=${session?.user.useId}`,
+      },
+      {
+        id: 6,
         title: "پشتیبانی",
         icon: IconSupportSolid,
-        link: "/",
+        link: "/support",
       },
       {
-        title: "معرفی به دوستان",
-        icon: IconShareSolid,
-        link: "/",
+        id: 7,
+        title: "فروشنده شوید",
+        icon: IconSupportSolid,
+        link: "https://delishop.me/vendor/",
       },
     ];
   }, [Coin, data, walletLink]);

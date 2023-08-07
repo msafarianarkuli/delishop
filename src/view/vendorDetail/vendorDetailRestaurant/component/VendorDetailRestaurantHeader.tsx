@@ -77,7 +77,6 @@ function RestaurantDetailHeaderBody() {
   const {data} = useVendorDetailRestaurantData();
   return (
     <div id="restaurantDetailHeaderTitle" className="opacity-0 transition-opacity ease-linear duration-200">
-      <span>رستوران </span>
       <span>{data?.vendor.name}</span>
     </div>
   );

@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {useInView} from "react-intersection-observer";
 import {useDispatch} from "react-redux";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
-import Link from "next/link";
 import {useVendorSubcategoryData} from "view/vendorSubcategory/context/VendorSubcategoryDataProvider";
 import {useVendorSubcategoryCategoryListData} from "view/vendorSubcategory/context/VendorSubcategoryCategoryListDataProvider";
 import {useVendorSubcategoryParams} from "view/vendorSubcategory/context/VendorSubcategoryParamsProvider";
@@ -55,12 +54,12 @@ function VendorSubcategoryShow() {
           const condition = array.length - 1 === index && arr.length - 1 === idx;
           const tmpRef = condition ? ref : null;
           return (
-            <Link
+            <div
               ref={tmpRef}
               key={idx}
               className="block w-1/2 min-[428px]:w-1/3 p-[5px]"
-              href={`/${vendorName}/product/${item}`}
-              prefetch={false}
+              // href={`/${vendorName}/product/${item}`}
+              // prefetch={false}
             >
               <VendorSubcategoryCard
                 disabled={!time.length || !supermarket?.vendor.open}
@@ -101,7 +100,7 @@ function VendorSubcategoryShow() {
                   }
                 }}
               />
-            </Link>
+            </div>
           );
         });
       })}

@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
 import {Fragment, useEffect, useMemo} from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import {useVendorCategoryParams} from "view/vendorCategory/context/VendorCategoryParamsProvider";
 import {useVendorCategoryData} from "view/vendorCategory/context/VendorCategoryDataProvider";
 import {useVendorCategoryListData} from "view/vendorCategory/context/VendorCategoryListDataProvider";
@@ -57,15 +57,18 @@ function VendorCategoryProductsList() {
                 const count = vendor?.cartOrders[product.id]?.length || 0;
                 // const count = cart.cartOrders[product.id]?.length || 0;
                 return (
-                  <Link key={index} href={`/${vendorName}/product/${item.id}`} prefetch={false}>
+                  <div key={index}>
                     <VendorCategoryCard
-                      disabled={!time.length || !supermarketData?.vendor.open}
+                      disabled={
+                        !time.length || !supermarketData?.vendor.open || product.count === 0 || count >= product.count
+                      }
                       title={item.displayname}
                       image={product.photo_igu}
                       price={Math.round(finalPrice / 10)}
                       coin={item.point}
                       description={item.description_te}
                       count={count}
+                      stock={product.count}
                       onAddClick={() => {
                         // const id = router.query.id;
                         const id = vendorId;
@@ -99,7 +102,11 @@ function VendorCategoryProductsList() {
                         }
                       }}
                     />
-                  </Link>
+                  </div>
+
+                  // <Link key={index} href={`/${vendorName}/product/${item.id}`} prefetch={false}>
+
+                  // </Link>
                 );
               })}
             </div>

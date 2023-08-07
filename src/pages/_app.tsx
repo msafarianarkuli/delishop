@@ -2,12 +2,13 @@ import type {AppProps} from "next/app";
 import {Hydrate, QueryClient, QueryClientProvider} from "react-query";
 import Template from "template";
 import Head from "next/head";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ReactQueryDevtools} from "react-query/devtools";
 import {Provider} from "react-redux";
 import {SessionProvider} from "next-auth/react";
 import wrapper from "redux/store";
 import "styles/globals.scss";
+import {ToastContainer} from "react-toastify";
 
 function App({Component, ...rest}: AppProps) {
   const {
@@ -15,6 +16,12 @@ function App({Component, ...rest}: AppProps) {
     props: {pageProps},
   } = wrapper.useWrappedStore(rest);
   const [queryClient] = useState(() => new QueryClient());
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/serviceWorker.js");
+    }
+  }, []);
 
   return (
     <>
@@ -29,6 +36,16 @@ function App({Component, ...rest}: AppProps) {
           <Hydrate state={pageProps.dehydratedState}>
             <Provider store={store}>
               <Template>
+                <ToastContainer
+                  position="bottom-center"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  closeOnClick={true}
+                  pauseOnHover={true}
+                  rtl={true}
+                  draggable={true}
+                  theme="light"
+                />
                 <Component {...pageProps} />
               </Template>
             </Provider>

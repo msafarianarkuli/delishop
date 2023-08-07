@@ -1,20 +1,24 @@
 import HomeTitle from "view/home/component/HomeTitle";
 import HomeAdsCard from "view/home/component/homeAdsCard/HomeAdsCard";
-import img from "assets/images/deli-blog.png";
+import {IBlog} from "types/interfaceBlog";
 
-const arr = Array.from(new Array(5), (_, i) => i + 1);
+interface IHomeDeliBlog {
+  blogs: IBlog[];
+}
 
-function HomeDeliBlog() {
+function HomeDeliBlog(props: IHomeDeliBlog) {
+  const {blogs} = props;
   return (
     <div>
       <HomeTitle className="px-screenSpace" title="وبلاگ دلی شاپ" />
       <div className="flex items-center overflow-auto">
-        {arr.map((item) => (
+        {blogs.map((blog) => (
           <HomeAdsCard
-            key={item}
+            key={blog.id}
+            id={blog.id}
             horizontal
-            title="برای کاهش وزن چه غذاهایی سفارش دهیم؟"
-            image={img.src}
+            title={blog.title}
+            image={blog.image}
             more="بیشتر بدانید"
           />
         ))}

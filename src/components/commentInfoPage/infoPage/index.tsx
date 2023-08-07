@@ -19,7 +19,6 @@ interface IInfoPage
 function InfoPage(props: IInfoPage) {
   const {baseUrl, notfound, lng, lat, open, openHours, address, maxSendTime, minCart, tags, name, logo, point, type} =
     props;
-
   const primaryColor = useMemo(() => {
     let color = "";
     if (type === "restaurant") color = "text-primary";

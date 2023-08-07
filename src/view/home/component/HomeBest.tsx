@@ -3,6 +3,7 @@ import {IconRoundedLeft} from "assets/icons";
 import HomeTitle from "view/home/component/HomeTitle";
 import {useHomeBestData} from "view/home/context/HomeBestDataProvider";
 import Link from "next/link";
+import {restaurantsVendorIds} from "utils/Const";
 
 function HomeBest() {
   const {data} = useHomeBestData();
@@ -20,7 +21,15 @@ function HomeBest() {
         {data.pages.map((value) => {
           return value.vendors.map((item) => {
             return (
-              <Link key={item.id} href={`/restaurant/${item.id}`} prefetch={false}>
+              <Link
+                key={item.id}
+                href={`${
+                  restaurantsVendorIds.includes(item.vendor_category_id)
+                    ? `/restaurant/${item.id}`
+                    : `/supermarket/${item.id}`
+                }`}
+                prefetch={false}
+              >
                 <HomeVendorCard
                   image={item.banner}
                   title={item.name}

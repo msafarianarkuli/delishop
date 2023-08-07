@@ -3,9 +3,11 @@ import {ReactNode} from "react";
 import classNames from "classnames";
 import styles from "components/counter/counter.module.scss";
 import {TUseTypeColor} from "hooks/useTypeColor";
+import {toast} from "react-toastify";
 
 interface ICounter {
   count?: number;
+  stock?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
   addIcon?: ReactNode;
@@ -20,6 +22,7 @@ interface ICounter {
 function Counter(props: ICounter) {
   const {
     count = 0,
+    stock,
     onMinusClick,
     onAddClick,
     addIcon,
@@ -74,6 +77,7 @@ function Counter(props: ICounter) {
           e.preventDefault();
           e.stopPropagation();
           onAddClick?.(count + 1);
+          stock && count === stock - 1 && toast.warn("موجودی محصول به اتمام رسید");
         }}
       >
         {addIcon ? addIcon : <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />}

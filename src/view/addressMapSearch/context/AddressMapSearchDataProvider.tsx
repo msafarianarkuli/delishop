@@ -32,8 +32,8 @@ function AddressMapSearchDataProvider({children}: {children: JSX.Element}) {
 
   const params = useMemo(() => {
     let tmpParams: IGetSearchAddressParams = {
-      lat: 35.801392,
-      lng: 51.41822,
+      lat: 35.73721179002162,
+      lng: 51.137380487902455,
       term: "",
     };
     if (router.isReady) {

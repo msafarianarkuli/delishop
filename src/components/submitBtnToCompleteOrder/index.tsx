@@ -19,6 +19,7 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
   const {time} = useVendorWorkTime({open_hours});
 
   if (!vendor?.totalPrice) return null;
+
   return (
     <SubmitBuyBtn
       className={className}

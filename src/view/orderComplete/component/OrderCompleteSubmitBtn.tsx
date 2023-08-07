@@ -122,6 +122,7 @@ function OrderCompleteSubmitBtn() {
               paymenttype &&
               sendtime &&
               token;
+            console.log(location_place_fid);
             if (location_place_fid == null) {
               dispatch(setOrderCompleteError("آدرس مقصد رو مشخص کنید"));
               return true;

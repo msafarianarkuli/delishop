@@ -9,7 +9,7 @@ import {
   setCartRestaurantItem,
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
-import Link from "next/link";
+// import Link from "next/link";
 import VendorDetailRestaurantListTag from "view/vendorDetail/vendorDetailRestaurant/component/VendorDetailRestaurantListTag";
 import VendorDetailRestaurantCard from "view/vendorDetail/vendorDetailRestaurant/component/vendorDetailRestaurantCard";
 import {useVendorDetailRestaurantData} from "view/vendorDetail/vendorDetailRestaurant/context/VendorDetailRestaurantDataProvider";
@@ -74,13 +74,15 @@ function VendorDetailRestaurantList() {
               const finalPrice = price + price * addedPercent;
               const count = vendor?.cartOrders[product.id]?.length || 0;
               return (
-                <Link key={item.id} href={`/${vendorName}/product/${item.id}`} className="block mb-5">
+                <div key={item.id} className="block mb-5">
+                  {" "}
                   <VendorDetailRestaurantCard
-                    disabled={!time.length || !data?.vendor.open}
+                    disabled={!time.length || !data?.vendor.open || count >= product.count}
                     image={product?.photo_igu}
                     title={item.displayname}
                     description={item?.description_te}
                     coin={item?.point}
+                    stock={product.count}
                     price={Math.round(finalPrice / 10)}
                     count={count}
                     onAddClick={() => {
@@ -128,7 +130,10 @@ function VendorDetailRestaurantList() {
                       }
                     }}
                   />
-                </Link>
+                </div>
+                // <Link key={item.id} href={`/${vendorName}/product/${item.id}`} className="block mb-5">
+
+                // </Link>
               );
             })}
           </Fragment>

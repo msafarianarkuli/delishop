@@ -8,14 +8,21 @@ import getAds, {QUERY_KEY_HOME_ADS} from "api/getAds";
 import HomeOrderDataProvider from "view/home/context/HomeOrderDataProvider";
 import HomeBestDataProvider, {QUERY_KEY_HOME_BEST} from "view/home/context/HomeBestDataProvider";
 import getVendors from "api/getVendors";
+import {IBlog} from "types/interfaceBlog";
+import path from "path";
+import fs from "fs";
 
-export default function HomePage() {
+interface IHomePage {
+  data: IBlog[];
+}
+
+export default function HomePage(props: IHomePage) {
   return (
     <HomeOrderDataProvider>
       <HomeBestDataProvider>
         <HomeBannersDataProvider>
           <HomeAdsDataProvider>
-            <Home />
+            <Home blogs={props.data} />
           </HomeAdsDataProvider>
         </HomeBannersDataProvider>
       </HomeBestDataProvider>
@@ -24,6 +31,9 @@ export default function HomePage() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  const filePath = path.join(process.cwd(), "src", "utils", "fakeBlogs.json");
+  const jsonData = fs.readFileSync(filePath);
+  const data = JSON.parse(jsonData.toString());
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: QUERY_KEY_HOME_BANNERS,
@@ -41,6 +51,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      data: data.blogs,
     },
     revalidate: 60,
   };

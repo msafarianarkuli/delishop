@@ -83,6 +83,7 @@ export interface IGetVendorDetailMenusGroupsProductsProductKinds {
   price: number;
   photo_igu?: string;
   description: string;
+  count: number;
 }
 
 export interface IGetVendorDetailMenusGroupsProductsExtras {

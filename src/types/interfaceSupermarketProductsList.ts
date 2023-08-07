@@ -40,4 +40,5 @@ export interface ISupermarketProductsListDataGroupsItemProductsItemProductKindIt
   quality: number;
   price: number;
   photo_igu?: string;
+  count: number;
 }

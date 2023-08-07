@@ -72,28 +72,28 @@ export const instant = "در اسرع وقت";
 
 export enum EVendorsId {
   restaurant = 1,
-  supermarket,
+  supermarket = 2,
   // restaurant vendor
   coffee = 4,
-  daily,
-  protein,
-  fruit,
-  confectionery,
-  bakery,
-  attari,
-  flower,
+  daily = 5,
+  protein = 6,
+  fruit = 7,
+  confectionery = 8,
+  bakery = 9,
+  attari = 10,
+  flower = 11,
   // supermarket vendor
-  tools,
-  kharazi,
-  homeGoods,
-  clothingGoods,
-  drug,
-  sportsGoods,
-  carTools,
-  electricalTools,
-  culture,
-  cosmetic,
-  moreJobs,
+  tools = 12,
+  kharazi = 13,
+  homeGoods = 14,
+  clothingGoods = 15,
+  drug = 16,
+  sportsGoods = 17,
+  carTools = 18,
+  electricalTools = 19,
+  culture = 20,
+  cosmetic = 21,
+  moreJobs = 22,
 }
 
 export const restaurantsVendorIds = [
@@ -106,6 +106,7 @@ export const restaurantsVendorIds = [
   EVendorsId.bakery,
   EVendorsId.attari,
   EVendorsId.flower,
+  EVendorsId.moreJobs,
 ];
 
 export const supermarketVendorIds = [
@@ -120,7 +121,6 @@ export const supermarketVendorIds = [
   EVendorsId.electricalTools,
   EVendorsId.culture,
   EVendorsId.cosmetic,
-  EVendorsId.moreJobs,
 ];
 
 interface IVendorsAddress {

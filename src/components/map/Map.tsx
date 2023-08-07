@@ -1,4 +1,4 @@
-import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet";
+import {MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent} from "react-leaflet";
 import {Icon, LatLngLiteral, LeafletMouseEvent, Point} from "leaflet";
 import {useCallback, useEffect} from "react";
 import pin from "./pin.svg";
@@ -25,8 +25,8 @@ export interface IMap extends Omit<MapContainerProps, "center"> {
 }
 
 const defaultLocation: LatLngLiteral = {
-  lat: 35.801392,
-  lng: 51.41822,
+  lat: 35.73721179002162,
+  lng: 51.137380487902455,
 };
 
 function Map(props: IMap) {
@@ -100,6 +100,17 @@ function Map(props: IMap) {
     return markers;
   }, [onClickMarker, pinIcons, points]);
 
+  const RecenterAutomatically = ({lat, lng}: any) => {
+    const map = useMap();
+    useEffect(() => {
+      map.flyTo([lat, lng], map.getZoom(), {
+        animate: true,
+        duration: 1.5, // Animation duration in seconds
+      });
+    }, [lat, lng]);
+    return null;
+  };
+
   return (
     <>
       {/*<Head>*/}
@@ -111,6 +122,7 @@ function Map(props: IMap) {
       {/*  />*/}
       {/*</Head>*/}
       <MapContainer center={center} zoom={zoom} {...rest}>
+        <RecenterAutomatically lat={center.lat} lng={center.lng} />
         {onClick ? <MapEvent onClick={onClick} /> : null}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

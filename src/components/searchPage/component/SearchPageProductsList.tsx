@@ -1,10 +1,11 @@
 import {useSearchPageData} from "components/searchPage/context/SearchPageDataProvider";
 import SearchPageProductCard from "components/searchPage/component/SearchPageProductCard";
 import Link from "next/link";
+import {restaurantsVendorIds} from "utils/Const";
 
 function SearchPageProductsList() {
   const {data} = useSearchPageData();
-
+  console.log(data?.products_suggest);
   return (
     <div>
       {data?.products_suggest.products.map((item) => {
@@ -14,10 +15,10 @@ function SearchPageProductsList() {
         const addedPercent = item.priceClass / 100;
         const finalPrice = price + price * addedPercent;
         let url = "";
-        if (item.vendor.vendor_category_id === 1) {
-          url = `/restaurant/product/${item.id}`;
-        } else if (item.vendor.vendor_category_id === 2) {
-          url = `/supermarket/product/${item.id}`;
+        if (restaurantsVendorIds.includes(item.vendor.vendor_category_id)) {
+          url = `/restaurant/${item.vendor.id}`;
+        } else {
+          url = `/supermarket/${item.vendor.id}`;
         }
         return (
           <Link key={item.id} href={url} prefetch={false}>

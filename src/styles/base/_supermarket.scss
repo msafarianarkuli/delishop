@@ -2,21 +2,21 @@
 
 .supermarket_btn {
   &:not(:disabled):active {
-    color: #005691 !important;
+    color: #ff5c01 !important;
   }
 
   &:not(:disabled):hover {
-    color: #2089c4 !important;
+    color: #ff5c0111 !important;
   }
 }
 
 .supermarket_btn_change_border {
   &:not(:disabled):active {
-    border-color: #005691 !important;
+    border-color: #ff5c01 !important;
   }
 
   &:not(:disabled):hover {
-    border-color: #2089c4 !important;
+    border-color: #ff5c0111 !important;
   }
 }
 

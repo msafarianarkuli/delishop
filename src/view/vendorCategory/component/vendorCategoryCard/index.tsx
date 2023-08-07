@@ -10,13 +10,14 @@ interface IVendorCategoryCard {
   description: string;
   price: number;
   count?: number;
+  stock?: number;
   onAddClick: () => void;
   onMinusClick: () => void;
   disabled?: boolean;
 }
 
 function VendorCategoryCard(props: IVendorCategoryCard) {
-  const {image, description, price, title, coin, count, onMinusClick, onAddClick, disabled} = props;
+  const {image, description, price, title, coin, count, stock, onMinusClick, onAddClick, disabled} = props;
   const counterClassNames = classNames({
     "absolute top-[8px] z-[5] flex-row-reverse w-[100px] h-[34px]": true,
     [styles.vendor_category_card_counter]: count,
@@ -28,6 +29,7 @@ function VendorCategoryCard(props: IVendorCategoryCard) {
         <Counter
           disabled={disabled}
           count={count}
+          stock={stock}
           className={counterClassNames}
           primaryType="default"
           showMinusOnlyPositiveNumber
@@ -38,7 +40,7 @@ function VendorCategoryCard(props: IVendorCategoryCard) {
         <img
           src={image}
           alt={title}
-          className="absolute top-0 w-full h-full rounded-[10px] object-center object-center"
+          className="absolute top-0 w-full h-full rounded-[10px] object-center object-contain"
         />
       </div>
       <div className="flex items-center justify-end mt-2">
@@ -51,8 +53,14 @@ function VendorCategoryCard(props: IVendorCategoryCard) {
         <div className="text-[13px] font-medium mt-2">{title}</div>
         <div className="text-[11px] font-normal my-1">{description}</div>
         <div>
-          <span className="text-[13px] font-semibold">{price.toLocaleString("en-US")}</span>
-          <span className="mr-1 text-[11px] font-normal">تومان</span>
+          {stock ? (
+            <>
+              <span className="text-[13px] font-semibold">{price.toLocaleString("en-US")}</span>
+              <span className="mr-1 text-[11px] font-normal">تومان</span>
+            </>
+          ) : (
+            <span className="text-[13px] font-semibold text-error">ناموجود</span>
+          )}
         </div>
       </div>
     </div>

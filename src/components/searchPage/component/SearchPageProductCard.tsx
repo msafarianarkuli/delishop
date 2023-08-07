@@ -17,7 +17,7 @@ function SearchPageProductCard(props: ISearchPageProductCard) {
         <div className="flex items-center justify-between mt-3">
           <div className="font-medium text-[12px]">{name}</div>
           <div className="flex items-center whitespace-nowrap text-[12px]">
-            <span className="font-semibold">{price?.toLocaleString("en-US")}</span>
+            <span className="font-semibold">{Number(price?.toString()?.slice(0, -1)).toLocaleString("en-US")}</span>
             <span className="mr-1 font-light">تومان</span>
           </div>
         </div>

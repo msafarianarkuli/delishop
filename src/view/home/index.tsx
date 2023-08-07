@@ -11,8 +11,13 @@ import HomeCoin from "view/home/component/HomeCoin";
 import HomeUp from "view/home/component/HomeUp";
 import HomeOrder from "view/home/component/HomeOrder";
 import {BottomPageGradient} from "components";
+import {IBlog} from "types/interfaceBlog";
 
-function Home() {
+interface IHome {
+  blogs: IBlog[];
+}
+
+function Home(props: IHome) {
   return (
     <>
       <HomeHeader />
@@ -21,7 +26,7 @@ function Home() {
       <HomeCategory />
       <HomeAdsSwiper />
       <HomeBest />
-      <HomeDeliBlog />
+      <HomeDeliBlog blogs={props.blogs} />
       <HomeAdsSell />
       <HomeAdsSwiper2 />
       <HomeCoin />

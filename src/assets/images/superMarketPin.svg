@@ -4,7 +4,7 @@
               d="M25.5 46.895c-3.362 0-6.57-.675-9.5-1.895l6.666 33.657A2.896 2.896 0 0 0 25.5 81a2.896 2.896 0 0 0 2.834-2.343L35 45a24.661 24.661 0 0 1-9.5 1.895Z"/>
     </g>
     <rect width="50" height="50" x="1" fill="#fff" rx="25"/>
-    <circle cx="26" cy="25" r="20" fill="#066FAA"/>
+    <circle cx="26" cy="25" r="20" fill="#ff5500"/>
     <defs>
         <linearGradient id="b" x1="25.5" x2="25.5" y1="45" y2="81" gradientUnits="userSpaceOnUse">
             <stop stop-color="#575F6B"/>

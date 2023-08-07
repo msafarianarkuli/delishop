@@ -1,3 +1,4 @@
+import {Button} from "antd";
 import {IconCoin} from "assets/icons";
 import {Counter} from "components";
 import styles from "view/vendorDetail/vendorDetailRestaurant/component/vendorDetailRestaurantCard/vendorDetailRestaurantCard.module.scss";
@@ -9,13 +10,14 @@ export interface IVendorDetailRestaurantCard {
   price: number;
   coin: number;
   count?: number;
+  stock?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
   disabled?: boolean;
 }
 
 function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
-  const {description, price, title, count, coin, image, onAddClick, onMinusClick, disabled} = props;
+  const {description, price, title, count, stock, coin, image, onAddClick, onMinusClick, disabled} = props;
 
   return (
     <div className={styles.vendor_detail_restaurant_card}>
@@ -42,15 +44,22 @@ function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
         <div className="w-[100px] h-[100px]">
           <img src={image} alt={title} className="w-full h-full object-center object-cover rounded-[16px]" />
         </div>
-        <Counter
-          disabled={disabled}
-          className="mt-4"
-          count={count}
-          showNumberOnlyPositiveNumber
-          showMinusOnlyPositiveNumber
-          onAddClick={onAddClick}
-          onMinusClick={onMinusClick}
-        />
+        {stock ? (
+          <Counter
+            disabled={disabled}
+            stock={stock}
+            className="mt-4"
+            count={count}
+            showNumberOnlyPositiveNumber
+            showMinusOnlyPositiveNumber
+            onAddClick={onAddClick}
+            onMinusClick={onMinusClick}
+          />
+        ) : (
+          <Button disabled type="primary" className="">
+            تمام شد
+          </Button>
+        )}
       </div>
     </div>
   );

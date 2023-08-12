@@ -62,13 +62,14 @@ function VendorSubcategoryShow() {
               // prefetch={false}
             >
               <VendorSubcategoryCard
-                disabled={!time.length || !supermarket?.vendor.open}
+                disabled={!time.length || !supermarket?.vendor.open || product.count === 0 || count >= product.count}
                 title={item.displayname}
                 description={item.description_te}
                 image={product.photo_igu}
                 coin={item.point}
                 price={Math.round(finalPrice / 10)}
                 count={count}
+                stock={product?.count}
                 onAddClick={() => {
                   // const id = router.query.id;
                   if (vendorId && supermarket) {

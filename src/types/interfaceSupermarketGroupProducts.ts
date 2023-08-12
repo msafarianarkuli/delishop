@@ -33,5 +33,6 @@ export interface ISupermarketGroupProductsDataProductsItemsProductKindItems {
   id: number;
   quality: number;
   price: number;
+  count: number;
   photo_igu?: string;
 }

@@ -14,6 +14,7 @@ import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {IUpdateProfileRes} from "types/interfaces";
 import {useRouter} from "next/router";
+import {toast} from "react-toastify";
 
 dayjs.extend(jalaliday);
 
@@ -135,6 +136,7 @@ function ProfileForm() {
         token: data?.user.token || "",
         body,
       });
+      toast.success("اطلاعات کاربری با موفقیت ویرایش شد");
       await router.replace("/");
       console.log("res", res);
       const resData = res.data;

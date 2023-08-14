@@ -3,15 +3,17 @@ import {IconRoundedLeft} from "assets/icons";
 import classNames from "classnames";
 import useTypeColor from "hooks/useTypeColor";
 import {useMemo} from "react";
+import {supermarketVendorIds} from "utils/Const";
 
 interface IOrderDetailVendorName {
   image?: string;
   title: string;
   vendorId: number;
+  vendorCategory: number;
 }
 
 function OrderDetailVendorName(props: IOrderDetailVendorName) {
-  const {title, image, vendorId} = props;
+  const {title, image, vendorId, vendorCategory} = props;
   const typeColor = useTypeColor();
   const iconClassName = classNames({
     "w-7 h-7": true,
@@ -20,12 +22,12 @@ function OrderDetailVendorName(props: IOrderDetailVendorName) {
   });
 
   const href = useMemo(() => {
-    if (typeColor === "supermarket") {
+    if (supermarketVendorIds.includes(vendorCategory)) {
       return `/supermarket/${vendorId}`;
     } else {
       return `/restaurant/${vendorId}`;
     }
-  }, [typeColor, vendorId]);
+  }, [vendorId]);
 
   return (
     <div className="flex items-center justify-between px-screenSpace mt-8 mb-5">

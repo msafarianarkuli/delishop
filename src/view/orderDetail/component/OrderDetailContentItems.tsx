@@ -41,6 +41,7 @@ function OrderDetailContentItems() {
       </div>
       <OrderDetailVendorName
         vendorId={data?.vendor.id || 0}
+        vendorCategory={data?.vendor.vendor_category_id || 0}
         image={data?.vendor.logo}
         title={data?.vendor.name || ""}
       />

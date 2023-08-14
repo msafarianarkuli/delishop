@@ -44,6 +44,7 @@ interface IGetOrderDetailDataVendor {
   logo: string;
   lat: number;
   long: number;
+  vendor_category_id: number;
 }
 
 interface IGetOrderDetailDataAddress {

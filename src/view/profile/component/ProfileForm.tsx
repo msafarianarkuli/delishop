@@ -13,6 +13,7 @@ import jalaliday from "jalaliday";
 import {axiosService} from "utils/axiosService";
 import {API} from "api/const";
 import {IUpdateProfileRes} from "types/interfaces";
+import {useRouter} from "next/router";
 
 dayjs.extend(jalaliday);
 
@@ -52,6 +53,7 @@ const genders = [
 ];
 
 function ProfileForm() {
+  const router = useRouter();
   const setModal = useProfileAction();
   const methods = useForm<IProfileForm>();
   const {
@@ -133,6 +135,7 @@ function ProfileForm() {
         token: data?.user.token || "",
         body,
       });
+      await router.replace("/");
       console.log("res", res);
       const resData = res.data;
       if (resData.name && data?.user) {

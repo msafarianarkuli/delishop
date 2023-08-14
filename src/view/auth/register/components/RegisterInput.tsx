@@ -11,10 +11,11 @@ interface IRegisterInput {
   classNameContainer?: string;
   numerical?: boolean;
   rules?: Omit<RegisterOptions, "valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled">;
+  placeholder?: string;
 }
 
 function RegisterInput(props: IRegisterInput) {
-  const {id, rules, label, classNameContainer, numerical} = props;
+  const {id, rules, label, classNameContainer, numerical, placeholder} = props;
   const {control} = useFormContext();
   const ref = useRef<InputRef>(null);
 
@@ -47,6 +48,7 @@ function RegisterInput(props: IRegisterInput) {
         inputMode="text"
         rules={rules}
         numerical={numerical}
+        placeholder={placeholder}
       />
     </>
   );

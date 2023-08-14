@@ -27,11 +27,13 @@ function RegisterForm() {
         phone: data?.user.phone,
         name: payload.name,
       };
+
       const res = await axiosService({url: API.REGISTER_ADDED_NAME, method: "post", body, token: data?.user.token});
       const resUpdateSession = await update({name: payload.name});
       createLog("res RegisterForm", res);
       createLog("resUpdateSession RegisterForm", resUpdateSession);
       const callbackUrl = router.query?.callbackUrl;
+      console.log(callbackUrl);
       if (callbackUrl && !Array.isArray(callbackUrl)) {
         await router.replace(callbackUrl);
       } else {
@@ -59,6 +61,7 @@ function RegisterForm() {
           />
           <RegisterInput
             id="introPhone"
+            placeholder="اختیاری"
             numerical
             label="شماره معرف"
             classNameContainer="mt-10"

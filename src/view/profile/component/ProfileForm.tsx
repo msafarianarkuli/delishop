@@ -15,6 +15,7 @@ import {API} from "api/const";
 import {IUpdateProfileRes} from "types/interfaces";
 import {useRouter} from "next/router";
 import {toast} from "react-toastify";
+import IconSuccessAlert from "assets/icons/IconSuccessAlert";
 
 dayjs.extend(jalaliday);
 
@@ -136,7 +137,9 @@ function ProfileForm() {
         token: data?.user.token || "",
         body,
       });
-      toast.success("اطلاعات کاربری با موفقیت ویرایش شد");
+      toast.success("اطلاعات کاربری با موفقیت ویرایش شد", {
+        icon: <IconSuccessAlert className="" />,
+      });
       await router.replace("/");
       console.log("res", res);
       const resData = res.data;

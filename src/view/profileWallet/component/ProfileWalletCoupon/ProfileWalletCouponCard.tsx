@@ -11,20 +11,33 @@ import line from "assets/images/line.png";
 import styles from "view/ProfileAwardReceived/component/profileAwardReceivedCard.module.scss";
 import {QUERY_KEY_USER_AWARD_RECEIVED} from "view/ProfileAwardReceived/context/ProfileAwardReceivedDataProvider";
 import {toast} from "react-toastify";
+import IconErrorAlert from "assets/icons/IconErrorAlert";
+import IconWarnAlert from "assets/icons/IconWarnAllert";
 
 interface ProfileWalletCouponCard {
   id: number;
   title: string;
   value: string;
   description: string | null;
+  name: string;
 }
 
 function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
-  const {value, description, title, id} = props;
+  const {value, description, title, id, name} = props;
   const [isLoading, setIsLoading] = useState(false);
   const {data} = useSession();
   const queryClient = useQueryClient();
   const [isTooltip, setIsTooltip] = useState(false);
+  const [chargeNumber, setChargeNumber] = useState("");
+
+  useEffect(() => {
+    let matches = description?.match(/(\d+)/);
+    if (matches) {
+      setChargeNumber(matches[0]);
+    }
+  }, []);
+
+  console.log("name", name);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -44,7 +57,16 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
           id,
           token: data.user.token,
         });
-        toast.success("شارژ کیف پول با موفقیت انجام شد");
+        if (name.includes("discount")) {
+          toast.warn(`کد تخفیف ${chargeNumber} هزار تومانی دریافت شد`, {
+            icon: <IconWarnAlert className="" />,
+          });
+        } else {
+          toast.warn(`مبلغ ${chargeNumber} هزار تومان کیف پول شما شارژ شد`, {
+            icon: <IconWarnAlert className="" />,
+          });
+        }
+
         console.log("getCoupon res", res);
         await queryClient.invalidateQueries(QUERY_KEY_USER_WALLET, {
           exact: true,
@@ -64,8 +86,15 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
       } catch (err: any) {
         setIsLoading(false);
         if (err?.data?.message === "insufficient points") {
-          toast.error("تعداد سکه شما کافی نیست");
+          toast.error("تعداد سکه شما کافی نیست", {
+            icon: <IconErrorAlert className="" />,
+          });
+        } else {
+          toast.error("خطایی رخ داده، مجددا تلاش کنید", {
+            icon: <IconErrorAlert className="" />,
+          });
         }
+
         console.log("getCoupon err", err);
       }
     }

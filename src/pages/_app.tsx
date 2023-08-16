@@ -39,8 +39,9 @@ function App({Component, ...rest}: AppProps) {
                 <ToastContainer
                   position="bottom-center"
                   autoClose={3000}
-                  hideProgressBar={false}
+                  hideProgressBar={true}
                   closeOnClick={true}
+                  closeButton={false}
                   pauseOnHover={true}
                   rtl={true}
                   draggable={true}

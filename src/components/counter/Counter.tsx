@@ -4,6 +4,7 @@ import classNames from "classnames";
 import styles from "components/counter/counter.module.scss";
 import {TUseTypeColor} from "hooks/useTypeColor";
 import {toast} from "react-toastify";
+import IconErrorAlert from "assets/icons/IconErrorAlert";
 
 interface ICounter {
   count?: number;
@@ -77,7 +78,11 @@ function Counter(props: ICounter) {
           e.preventDefault();
           e.stopPropagation();
           onAddClick?.(count + 1);
-          stock && count === stock - 1 && toast.warn("موجودی محصول به اتمام رسید");
+          stock &&
+            count === stock - 1 &&
+            toast.warn("موجودی محصول به اتمام رسید", {
+              icon: <IconErrorAlert className="" />,
+            });
         }}
       >
         {addIcon ? addIcon : <IconAdd className="w-[15px] h-[15] drop-shadow-[0px_1px_3px_rgba(36,65,93,0.298)]" />}

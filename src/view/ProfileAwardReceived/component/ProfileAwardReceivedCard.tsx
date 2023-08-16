@@ -4,6 +4,8 @@ import {Button, Tooltip} from "antd";
 import line from "assets/images/line.png";
 import {useCallback, useEffect, useState} from "react";
 import {copyContent} from "utils/utils";
+import {toast} from "react-toastify";
+import IconSuccessAlert from "assets/icons/IconSuccessAlert";
 
 interface IAwardReceivedCard {
   title: string;
@@ -31,6 +33,9 @@ function ProfileAwardReceivedCard(props: IAwardReceivedCard) {
     copyContent(discount)
       .then(() => {
         setIsTooltip(true);
+        toast.success("کد تخفیف با موفقیت کپی شد.", {
+          icon: <IconSuccessAlert className="" />,
+        });
         console.log("copy done");
       })
       .catch((err) => console.log("copy err", err))

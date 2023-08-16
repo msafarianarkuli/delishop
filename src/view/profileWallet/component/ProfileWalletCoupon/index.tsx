@@ -15,6 +15,7 @@ function ProfileWalletCoupon() {
             title={item.displayname}
             value={`${item.name.split("-")[1].slice(0, -4)}+ هزار تومان`}
             description={item.description}
+            name={item.name}
           />
         );
       })}

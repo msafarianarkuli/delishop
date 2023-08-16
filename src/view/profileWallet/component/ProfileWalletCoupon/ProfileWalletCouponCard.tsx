@@ -10,6 +10,7 @@ import {QUERY_KEY_USER_WALLET} from "template/context/UserWalletProvider";
 import line from "assets/images/line.png";
 import styles from "view/ProfileAwardReceived/component/profileAwardReceivedCard.module.scss";
 import {QUERY_KEY_USER_AWARD_RECEIVED} from "view/ProfileAwardReceived/context/ProfileAwardReceivedDataProvider";
+import {toast} from "react-toastify";
 
 interface ProfileWalletCouponCard {
   id: number;
@@ -43,6 +44,7 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
           id,
           token: data.user.token,
         });
+        toast.success("شارژ کیف پول با موفقیت انجام شد");
         console.log("getCoupon res", res);
         await queryClient.invalidateQueries(QUERY_KEY_USER_WALLET, {
           exact: true,
@@ -59,8 +61,11 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
         console.log("queryClient", queryClient);
         setIsLoading(false);
         setIsTooltip(true);
-      } catch (err) {
+      } catch (err: any) {
         setIsLoading(false);
+        if (err?.data?.message === "insufficient points") {
+          toast.error("تعداد سکه شما کافی نیست");
+        }
         console.log("getCoupon err", err);
       }
     }

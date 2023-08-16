@@ -15,7 +15,7 @@ function VendorList() {
   const {isRestaurant, isSupermarket} = useVendorParams();
 
   return (
-    <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[160px]">
+    <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[150px] mt-[-54px]">
       {isLoading ? <div>loading ...</div> : null}
       {!isLoading && !data?.pages[0]?.vendors.length ? <div>موردی یافت نشد</div> : null}
       {isRestaurant ? <VendorListShowRestaurant /> : null}

@@ -36,9 +36,9 @@ function VendorRestaurantCard(props: IVendorRestaurantCard) {
   });
 
   return (
-    <div className={container}>
+    <div className={`${container} mt-0`}>
       <div className="relative w-full pb-[34.1%] overflow-hidden rounded-t-[12px]">
-        <img src={image} alt="image" className="absolute inset-0 object-center object-contain w-full h-full" />
+        <img src={image} alt="image" className="absolute inset-0 object-center object-cover w-full h-full" />
       </div>
       <div className={styles.vendor_restaurant_card_content}>
         <div className="flex items-center justify-between mb-4">

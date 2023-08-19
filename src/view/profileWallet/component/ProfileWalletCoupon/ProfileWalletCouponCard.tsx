@@ -28,16 +28,6 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
   const {data} = useSession();
   const queryClient = useQueryClient();
   const [isTooltip, setIsTooltip] = useState(false);
-  const [chargeNumber, setChargeNumber] = useState("");
-
-  useEffect(() => {
-    let matches = description?.match(/(\d+)/);
-    if (matches) {
-      setChargeNumber(matches[0]);
-    }
-  }, []);
-
-  console.log("name", name);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -51,18 +41,17 @@ function ProfileWalletCouponCard(props: ProfileWalletCouponCard) {
 
   const onClick = useCallback(async () => {
     if (data?.user.token) {
-      setIsLoading(true);
       try {
         const res = await getCoupon({
           id,
           token: data.user.token,
         });
         if (name.includes("discount")) {
-          toast.warn(`کد تخفیف ${chargeNumber} هزار تومانی دریافت شد`, {
+          toast.warn(`کد تخفیف ${name?.split("-")?.[1]?.slice(0, -4)} هزار تومانی دریافت شد`, {
             icon: <IconWarnAlert className="" />,
           });
         } else {
-          toast.warn(`مبلغ ${chargeNumber} هزار تومان کیف پول شما شارژ شد`, {
+          toast.warn(`مبلغ ${name?.split("-")?.[1]?.slice(0, -4)} هزار تومان کیف پول شما شارژ شد`, {
             icon: <IconWarnAlert className="" />,
           });
         }

@@ -41,7 +41,6 @@ function useDrawerRoutes(): TData {
       <div className={styles.drawer_coin_container}>
         <IconCoin className="w-5 h-5" />
         <div className="h-5 text-[15px] font-medium mx-2">{CoinData}</div>
-        <div>سکه</div>
       </div>
     );
   }, [CoinData]);
@@ -50,7 +49,10 @@ function useDrawerRoutes(): TData {
     return [
       {
         id: 1,
-        title: data != null ? `کیف پول (${data} تومان)` : "کیف پول",
+        title:
+          data != null
+            ? `کیف پول (${Number(data?.toString()?.slice(0, -1)).toLocaleString("en-US")} تومان)`
+            : "کیف پول",
         icon: IconWalletSolid,
         link: walletLink,
         left: Coin,

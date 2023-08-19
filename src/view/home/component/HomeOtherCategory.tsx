@@ -7,6 +7,8 @@ import {Autoplay, Pagination} from "swiper";
 import "swiper/css/pagination";
 import {useEffect, useState} from "react";
 import styles from "view/home/home.module.scss";
+import IconDrug from "assets/icons/IconDrug";
+import IconTools from "assets/icons/IconTools";
 
 const data: TDataCustomSwiper = [
   {
@@ -38,6 +40,16 @@ const data: TDataCustomSwiper = [
     title: "نان",
     icon: IconBread,
     link: "/bakery",
+  },
+  {
+    title: "داروخانه",
+    icon: IconDrug,
+    link: "/drug",
+  },
+  {
+    title: "رنگ و ابزار",
+    icon: IconTools,
+    link: "/tools",
   },
   {
     title: "بیشتر",

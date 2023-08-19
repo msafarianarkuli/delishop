@@ -222,6 +222,11 @@ export const vendorsAddress: IVendorsAddress[] = [
     isSupermarket: true,
   },
   {
+    id: EVendorsId.drug,
+    name: "drug",
+    isSupermarket: true,
+  },
+  {
     id: EVendorsId.moreJobs,
     name: "morejobs",
     isSupermarket: true,

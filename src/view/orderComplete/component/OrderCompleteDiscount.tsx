@@ -9,10 +9,12 @@ import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import {setOrderCompleteDiscountPrice, useOrderCompleteAction} from "view/orderComplete/context/OrderCompleteProvider";
 import {IOrderDiscountCalcError} from "types/interfaceOrderDiscountCalc";
+import {toast} from "react-toastify";
+import IconSuccessAlert from "assets/icons/IconSuccessAlert";
 
 function OrderCompleteDiscount() {
   const type = useTypeColor();
-  const [text, setText] = useState("");
+  const [text, setText] = useState(localStorage.getItem("discountCode") as string);
   const [isLoading, setIsLoading] = useState(false);
   const {data} = useSession();
   const router = useRouter();
@@ -45,6 +47,11 @@ function OrderCompleteDiscount() {
           vendorId: id,
           token: data.user.token,
         });
+
+        toast.success("کد تخفیف با موفقیت ثبت شد", {
+          icon: <IconSuccessAlert className="" />,
+        });
+
         dispatch(
           setOrderCompleteDiscountPrice({
             discountPrice: res,
@@ -63,6 +70,15 @@ function OrderCompleteDiscount() {
       }
     }
   }, [data?.user.token, dispatch, price, router.query.id, text]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (localStorage.getItem("discountCode")) {
+        onClick();
+        localStorage.removeItem("discountCode");
+      }
+    }, 1000);
+  }, []);
 
   return (
     <div className="mt-7">

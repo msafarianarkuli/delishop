@@ -36,6 +36,7 @@ function ProfileAwardReceivedCard(props: IAwardReceivedCard) {
         toast.success("کد تخفیف با موفقیت کپی شد.", {
           icon: <IconSuccessAlert className="" />,
         });
+        localStorage.setItem("discountCode", discount);
         console.log("copy done");
       })
       .catch((err) => console.log("copy err", err))
@@ -47,7 +48,7 @@ function ProfileAwardReceivedCard(props: IAwardReceivedCard) {
       <div className={styles.profile_award_received_card_content}>
         <div className="text-[13px]">{title}</div>
         <div className="flex my-[10px] items-center">
-          <div className="flex flex-1 justify-center bg-[#E1E2E8] font-medium rounded-md p-1 border border-dashed border-borderColor break-all">
+          <div className="flex flex-1 justify-center bg-[#E1E2E8] text-[10px] md:text-sm font-medium rounded-md p-1 border border-dashed border-borderColor break-all">
             {discount}
           </div>
           <Tooltip placement="top" title="کپی شد" open={isTooltip}>

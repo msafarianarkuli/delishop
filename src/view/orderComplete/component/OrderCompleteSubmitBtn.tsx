@@ -22,6 +22,8 @@ import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/Order
 import useVendorWorkTime from "hooks/useVendorWorkTime";
 import {ReactQueryKey} from "utils/Const";
 import {useOrderCompleteParams} from "view/orderComplete/context/OrderCompleteParamsProvider";
+import {toast} from "react-toastify";
+import IconWarnAlert from "assets/icons/IconWarnAllert";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -50,7 +52,7 @@ function OrderCompleteSubmitBtnBody() {
 function OrderCompleteSubmitBtnLeft() {
   const restaurant = useCartRestaurant();
   const {data} = useOrderCompleteVendorDetailData();
-  const {deliveryAddress} = useOrderComplete();
+  const {deliveryAddress, discountPrice} = useOrderComplete();
 
   const {deliveryToman} = useDeliveryPrice({
     location1: {
@@ -68,9 +70,17 @@ function OrderCompleteSubmitBtnLeft() {
     return Math.round(totalPrice / 10);
   }, [restaurant?.totalPrice]);
 
+  const discount = useMemo(() => {
+    return Math.round((discountPrice || 0) / 10);
+  }, [discountPrice]);
+
+  const totalPrice = useMemo(() => {
+    return price + deliveryToman - discount;
+  }, [deliveryToman, discount, price]);
+
   return (
     <>
-      <span>{(price + deliveryToman).toLocaleString("en-US")}</span>
+      <span>{totalPrice.toLocaleString("en-US")}</span>
       <span className="mr-1">تومان</span>
     </>
   );
@@ -169,9 +179,12 @@ function OrderCompleteSubmitBtn() {
                     queryClient.invalidateQueries(ReactQueryKey.VENDOR_ORDER_ACTIVE);
                     if (res.data.Data?.payurl) {
                       const url = res.data.Data.payurl;
-                      window.open(url, "_blank");
+                      window.open(url, "_self");
                     } else {
                       const id = router.query.id;
+                      toast.success("سفارش شما با موفقیت ثبت شد", {
+                        icon: <IconWarnAlert className="" />,
+                      });
                       if (id && !Array.isArray(id)) {
                         if (vendor?.cartOrders) {
                           dispatchRedux(removeCartRestaurantCartListCartOrder(id));

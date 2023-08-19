@@ -44,7 +44,7 @@ function ProfileWalletCardCharge() {
           id="increase"
           classNameContainer="flex flex-1"
           className={styles.profile_wallet_card_input}
-          value={number}
+          value={`${number ? number : 0} تومان`}
           onChange={onChange}
         />
         <Button

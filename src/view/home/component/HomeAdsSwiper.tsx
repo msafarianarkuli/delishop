@@ -24,7 +24,7 @@ function HomeAdsSwiper() {
         data={data || []}
         renderItem={(item) => {
           return (
-            <div className="relative pb-[31.1%]">
+            <div className="relative pb-[50%]">
               <a href={item.link} className="absolute block w-full h-full" rel="noopener noreferrer nofollow">
                 <img src={item.main_img} alt={item.title} className="w-full h-full object-cover object-center" />
               </a>

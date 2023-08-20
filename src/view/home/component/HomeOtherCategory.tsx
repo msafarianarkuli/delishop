@@ -12,19 +12,9 @@ import IconTools from "assets/icons/IconTools";
 
 const data: TDataCustomSwiper = [
   {
-    title: "کافه",
-    icon: IconCafe,
-    link: "/coffee",
-  },
-  {
-    title: "لبنیاتی",
-    icon: IconDairy,
-    link: "/daily",
-  },
-  {
-    title: "پروتئینه",
-    icon: IconProtein,
-    link: "/protein",
+    title: "نانوایی",
+    icon: IconBread,
+    link: "/bakery",
   },
   {
     title: "قنادی",
@@ -37,17 +27,28 @@ const data: TDataCustomSwiper = [
     link: "/fruit",
   },
   {
-    title: "نان",
-    icon: IconBread,
-    link: "/bakery",
-  },
-  {
     title: "داروخانه",
     icon: IconDrug,
     link: "/drug",
   },
   {
-    title: "رنگ و ابزار",
+    title: "پروتئینی",
+    icon: IconProtein,
+    link: "/protein",
+  },
+  {
+    title: "کافه",
+    icon: IconCafe,
+    link: "/coffee",
+  },
+  {
+    title: "لبنیاتی",
+    icon: IconDairy,
+    link: "/daily",
+  },
+
+  {
+    title: "رنگ ابزار",
     icon: IconTools,
     link: "/tools",
   },

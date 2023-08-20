@@ -8,6 +8,9 @@ import {restaurantsVendorIds} from "utils/Const";
 function HomeCoin() {
   const {data} = useHomeBestData();
   if (!data || !data.pages[0].vendors.length) return null;
+  {
+    console.log(data.pages);
+  }
   return (
     <div>
       <div className="flex items-center justify-between px-screenSpace mb-5">
@@ -20,7 +23,7 @@ function HomeCoin() {
       <div className="flex items-center overflow-auto pb-5">
         {data.pages.map((value) => {
           return value.vendors.map((item) => {
-            return (
+            return item.point ? (
               <Link
                 key={item.id}
                 href={`${
@@ -39,7 +42,7 @@ function HomeCoin() {
                   coin={item.point}
                 />
               </Link>
-            );
+            ) : null;
           });
         })}
       </div>

@@ -7,19 +7,20 @@ export interface IInfoPageDetail {
   name: string;
   minCart: number;
   logo?: string;
+  about?: string | null;
 }
 
 function InfoPageDetail(props: IInfoPageDetail) {
-  const {tags, maxSendTime, name, minCart, logo} = props;
+  const {maxSendTime, name, minCart, logo, about} = props;
 
-  const productType = useMemo(() => {
-    let result = "";
-    tags.forEach((item, index) => {
-      if (index > 0) result += ",";
-      result += item.displayname;
-    });
-    return result;
-  }, [tags]);
+  // const productType = useMemo(() => {
+  //   let result = "";
+  //   tags.forEach((item, index) => {
+  //     if (index > 0) result += ",";
+  //     result += item.displayname;
+  //   });
+  //   return result;
+  // }, [tags]);
 
   const timeDelivery = useMemo(() => {
     let result = "";
@@ -37,21 +38,22 @@ function InfoPageDetail(props: IInfoPageDetail) {
     <div className="flex py-4 px-screenSpace border-b border-borderColor">
       <div className="flex flex-col flex-1">
         <div className="font-medium">{name}</div>
-        <div className="flex items-center font-light text-[13px] mt-2">
+        <div className="flex flex-col items-start font-light text-[13px] mt-2">
           <div>
-            <div>نوع محصولات:</div>
-            <div>حداقل سبد خرید:</div>
-            <div>مدت زمان ارسال:</div>
-            <div>روش پرداخت:</div>
+            <span>نوع محصولات: </span>
+            <span>{about}</span>
           </div>
-          <div className="mr-5">
-            <div>{productType}</div>
-            <div>{(minCart || 0).toLocaleString("en-US")} تومان</div>
-            <div>
-              <span>{timeDelivery}</span>
-              <span className="mr-1">دقیقه</span>
-            </div>
-            <div>آنلاین</div>
+          <div>
+            <span>حداقل سبد خرید: </span>
+            <span>{(minCart || 0).toLocaleString("en-US")} تومان</span>
+          </div>
+          <div>
+            <span>مدت زمان ارسال: </span>
+            <span>{`${timeDelivery} دقیقه`}</span>
+          </div>
+          <div>
+            <span>روش پرداخت: </span>
+            <span>آنلاین/ نقدی</span>
           </div>
         </div>
       </div>

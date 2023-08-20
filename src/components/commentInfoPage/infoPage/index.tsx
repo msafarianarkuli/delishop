@@ -17,8 +17,23 @@ interface IInfoPage
 }
 
 function InfoPage(props: IInfoPage) {
-  const {baseUrl, notfound, lng, lat, open, openHours, address, maxSendTime, minCart, tags, name, logo, point, type} =
-    props;
+  const {
+    baseUrl,
+    notfound,
+    lng,
+    lat,
+    open,
+    openHours,
+    address,
+    maxSendTime,
+    minCart,
+    tags,
+    name,
+    logo,
+    point,
+    type,
+    about,
+  } = props;
   const primaryColor = useMemo(() => {
     let color = "";
     if (type === "restaurant") color = "text-primary";
@@ -36,7 +51,14 @@ function InfoPage(props: IInfoPage) {
           <>
             <InfoPageMap type={type} lat={lat} lng={lng} />
             <InfoPageAddress color={primaryColor} open={open} address={address} openHours={openHours} />
-            <InfoPageDetail maxSendTime={maxSendTime} minCart={minCart} tags={tags} name={name} logo={logo} />
+            <InfoPageDetail
+              maxSendTime={maxSendTime}
+              minCart={minCart}
+              tags={tags}
+              name={name}
+              logo={logo}
+              about={about}
+            />
             <InfoPageCoin color={primaryColor} name={name} point={point} />
           </>
         )}

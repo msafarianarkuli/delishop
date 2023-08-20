@@ -10,6 +10,8 @@ function VendorInfoSupermarket() {
     return error?.status === 404;
   }, [error?.status]);
 
+  console.log(data);
+
   return (
     <>
       <InfoPage

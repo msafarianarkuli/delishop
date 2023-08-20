@@ -26,6 +26,7 @@ function VendorInfoRestaurant() {
       lat={data?.vendor.lat || 0}
       open={data?.vendor.open || 0}
       logo={data?.vendor.logo}
+      about={data?.vendor.about}
     />
   );
 }

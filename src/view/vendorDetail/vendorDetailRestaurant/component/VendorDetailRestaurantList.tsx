@@ -75,7 +75,6 @@ function VendorDetailRestaurantList() {
               const count = vendor?.cartOrders[product.id]?.length || 0;
               return (
                 <div key={item.id} className="block mb-5">
-                  {" "}
                   <VendorDetailRestaurantCard
                     disabled={!time.length || !data?.vendor.open || count >= product.count}
                     image={product?.photo_igu}

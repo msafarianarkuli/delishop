@@ -24,7 +24,7 @@ function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
       <div className="flex flex-col flex-1 ml-2 justify-between">
         <div>
           <div className="text-[15px]">{title}</div>
-          <div className="text-[13px] text-iconColor my-2">{description}</div>
+          <div className="text-[13px] text-iconColor my-2 w-[150px] sm:w-auto">{description}</div>
         </div>
         <div className="flex items-center">
           <div>

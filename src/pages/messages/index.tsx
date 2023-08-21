@@ -1,5 +1,5 @@
 import {IconRoundedLeft} from "assets/icons";
-import {AppHeaderBackBtn} from "components";
+import {AppHeader, AppHeaderBackBtn} from "components";
 import {GetStaticProps} from "next";
 import {useRouter} from "next/router";
 import path from "path";
@@ -21,11 +21,10 @@ const MessageListPage = (props: IMessageListPage) => {
   const router = useRouter();
   return (
     <>
-      <div className="flex items-center justify-between w-full p-2 mb-2">
-        <AppHeaderBackBtn className="" type="black" onClick={() => router.back()} />
-        <h1 className="font-bold ml-6">پیام ها</h1>
-        <p></p>
-      </div>
+      <AppHeader
+        body={<h1 className="font-bold ml-6">پیام ها</h1>}
+        right={<AppHeaderBackBtn onClick={() => router.back()} />}
+      />
       {data.map((message) => (
         <div key={message.id} className="bg-white flex mx-2 rounded-lg gap-1 p-1 my-2">
           <div>

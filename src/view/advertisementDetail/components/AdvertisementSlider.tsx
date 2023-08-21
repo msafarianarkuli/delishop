@@ -11,7 +11,7 @@ const AdvertisementSlider = (props: IAdvertisementSlider) => {
   const {data} = props;
   const images = [{img: data.main_img}, {img: data.img_2}, {img: data.img_3}, {img: data.img_4}];
   return (
-    <div className="mb-5 px-[25px]">
+    <div className="mb-5 px-[14px]">
       <CustomSwiper
         modules={[Pagination, Autoplay, Navigation]}
         slidesPerView={1}
@@ -29,12 +29,12 @@ const AdvertisementSlider = (props: IAdvertisementSlider) => {
         data={images || []}
         renderItem={(item) => {
           return (
-            <div className="relative pb-[50%] rounded-[50px] z-0">
+            <div className="relative pb-[50%] rounded-[33px] sm:rounded-[50px] z-0">
               <div className="absolute block w-full h-full" rel="noopener noreferrer nofollow">
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-cover object-center rounded-[50px]"
+                  className="w-full h-full object-cover object-center rounded-[33px] sm:rounded-[50px]"
                 />
               </div>
             </div>

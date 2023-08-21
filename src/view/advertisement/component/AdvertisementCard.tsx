@@ -14,13 +14,15 @@ const AdvertisementCard = (props: IADvertisementCard) => {
 
   return (
     <div key="1" className="bg-white flex mx-2 rounded-lg gap-1 p-1 my-2">
-      <img
-        className="rounded-[25px] object-cover max-w-[80px] max-h-[70px]"
-        src={`https://app.delishop.me${image}`}
-        alt={title}
-      />
+      <div className="rounded-[25px] object-cover w-[100px] h-[80px]">
+        <img
+          className="rounded-[25px] object-cover h-full w-full"
+          src={`https://app.delishop.me${image}`}
+          alt={title}
+        />
+      </div>
 
-      <div className="w-full mr-3">
+      <div className="w-full mr-2">
         <div className="flex justify-between items-center">
           <h5 className="text-[13px] font-[500]">{title}</h5>
           <div className="flex">

@@ -9,7 +9,7 @@ interface IGetAdData {
 
 export type TGetAdDataAds = IGetAdDataAdsItems[];
 
-interface IGetAdDataAdsItems {
+export interface IGetAdDataAdsItems {
   id: number;
   title: string;
   status: string;

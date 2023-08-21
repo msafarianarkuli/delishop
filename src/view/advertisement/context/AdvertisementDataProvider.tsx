@@ -1,31 +1,19 @@
+import getAds from "api/getAds";
 import {createContext, ReactNode, useContext} from "react";
+import {useQuery} from "react-query";
+import {TGetAdDataAds} from "types/interfaceAd";
 
 // @ts-ignore
 const initialState: any = [];
 
 const AdvertisementDataContext = createContext(initialState);
 
-function AdvertisementDataProvider({children}: {children: ReactNode}) {
-  const result = [
-    {
-      id: 1,
-      title: "string",
-      status: "string",
-      price: 1,
-      contact: "string",
-      description: "string",
-      main_img: "string",
-      img_2: "string",
-      img_3: "string",
-      img_4: "string",
-      show: 1,
-      created_at: "string",
-      updated_at: "string",
-      type: 1,
-      link: "string",
-    },
-  ];
+const staleTime = 60 * 60 * 1000;
 
+function AdvertisementDataProvider({children}: {children: ReactNode}) {
+  const result = useQuery<TGetAdDataAds>([], () => getAds(), {
+    staleTime,
+  });
   return <AdvertisementDataContext.Provider value={result}>{children}</AdvertisementDataContext.Provider>;
 }
 

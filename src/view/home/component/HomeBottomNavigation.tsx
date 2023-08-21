@@ -4,10 +4,11 @@ import divar from "assets/images/homeDivar.svg";
 import game1 from "assets/images/homeGame.svg";
 import game2 from "assets/images/homeGame2.svg";
 import {signIn, useSession} from "next-auth/react";
+import Link from "next/link";
 
 const data = [
-  {title: "پیام ها", link: "", image: message.src},
-  {title: "دیوار", link: "", image: divar.src},
+  {title: "پیام ها", link: "/messages", image: message.src},
+  {title: "دیوار", link: "/advertisement", image: divar.src},
   {title: "aa", link: "https://aa.delishop.me", image: game1.src},
   {title: "crush", link: "https://crush.delishop.me", image: game2.src},
 ];
@@ -42,10 +43,10 @@ function HomeBottomNavigation() {
                 <div className="text-[13px] text-center mt-1">{item.title}</div>
               </div>
             ) : (
-              <div key={index} className="h-[78px] w-full ml-2 last:ml-0">
+              <Link href={item.link} key={index} className="h-[78px] w-full ml-2 last:ml-0">
                 <img src={item.image} alt={item.title} className="w-auto h-auto rounded-[6px] mx-auto" />
                 <div className="text-[13px] text-center mt-1">{item.title}</div>
-              </div>
+              </Link>
             );
           })}
         </div>

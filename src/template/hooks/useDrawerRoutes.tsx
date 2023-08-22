@@ -65,7 +65,7 @@ function useDrawerRoutes(): TData {
       },
       {
         id: 3,
-        title: "پیام ها (6)",
+        title: "پیام ها (8)",
         icon: IconMessageSolid,
         link: "/messages",
       },

@@ -174,6 +174,7 @@ function getDateFormat(uDate: string, option: {}) {
   let date = new Intl.DateTimeFormat("fa-IR", option).format(new Date(uDate));
   return date;
 }
+
 export const dateConvert = (date: string) => {
   const solarDate = {
     day: getDateFormat(date, {day: "2-digit"}),
@@ -183,4 +184,13 @@ export const dateConvert = (date: string) => {
     dayWeek: getDateFormat(date, {weekday: "long"}),
   };
   return solarDate;
+};
+
+//this function gets a string of numbers and seperate it by three
+export const addComma = (str: string) => {
+  const objRegex = new RegExp("(-?[0-9]+)([0-9]{3})");
+  while (objRegex.test(str)) {
+    str = str.replace(objRegex, "$1,$2");
+  }
+  return str;
 };

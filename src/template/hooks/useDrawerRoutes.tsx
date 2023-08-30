@@ -70,6 +70,12 @@ function useDrawerRoutes(): TData {
         link: "/messages",
       },
       {
+        id: 3,
+        title: "املاک",
+        icon: IconOrderSolid,
+        link: "/advertisement",
+      },
+      {
         id: 4,
         title: "aa",
         icon: IconDrawerGame,

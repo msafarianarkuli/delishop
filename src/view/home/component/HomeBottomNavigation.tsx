@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const data = [
   {title: "پیام ها", link: "/messages", image: message.src},
-  {title: "دیوار", link: "/advertisement", image: divar.src},
+  {title: "املاک", link: "/advertisement", image: divar.src},
   {title: "aa", link: "https://aa.delishop.me", image: game1.src},
   {title: "crush", link: "https://crush.delishop.me", image: game2.src},
 ];

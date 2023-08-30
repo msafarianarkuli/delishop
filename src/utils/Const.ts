@@ -5,6 +5,7 @@ export const ReactQueryKey = {
   VENDOR_DETAIL_RESTAURANT: "vendorDetailRestaurant",
   VENDOR_DETAIL_SUPERMARKET: "vendorDetailSupermarket",
   LOGISTIC_CURRENT_PRICE: "logisticCurrentPrice",
+  LOGISTIC_ALL_PRICES: "logisticAllPrices",
   VENDOR_CATEGORY_PRODUCT_LIST: "vendorCategoryProductList",
   VENDOR_SUBCATEGORY_GROUP_PRODUCTS: "vendorSubcategoryGroupProducts",
   VENDOR_COMMENT: "vendorComment",
@@ -94,6 +95,7 @@ export enum EVendorsId {
   culture = 20,
   cosmetic = 21,
   moreJobs = 22,
+  Governmental = 23,
 }
 
 export const restaurantsVendorIds = [
@@ -106,6 +108,7 @@ export const restaurantsVendorIds = [
   EVendorsId.bakery,
   EVendorsId.attari,
   EVendorsId.flower,
+  EVendorsId.Governmental,
   EVendorsId.moreJobs,
 ];
 
@@ -174,6 +177,11 @@ export const vendorsAddress: IVendorsAddress[] = [
   {
     id: EVendorsId.flower,
     name: "flower",
+    isRestaurant: true,
+  },
+  {
+    id: EVendorsId.Governmental,
+    name: "Governmental",
     isRestaurant: true,
   },
   {

@@ -4,6 +4,7 @@ import {GetStaticPaths, GetStaticProps} from "next";
 import VendorDataProvider from "view/vendor/context/VendorDataProvider";
 import VendorParamsProvider from "view/vendor/context/VendorParamsProvider";
 import LogisticPriceProvider from "context/LogisticPriceProvider";
+import LogisticAllPriceProvider from "context/LogisticAllPricesProvider";
 
 export interface IVendorPage {
   isRestaurant: boolean;
@@ -16,9 +17,11 @@ function VendorPage(props: IVendorPage) {
   return (
     <VendorParamsProvider {...props}>
       <LogisticPriceProvider>
-        <VendorDataProvider>
-          <Vendor />
-        </VendorDataProvider>
+        <LogisticAllPriceProvider>
+          <VendorDataProvider>
+            <Vendor />
+          </VendorDataProvider>
+        </LogisticAllPriceProvider>
       </LogisticPriceProvider>
     </VendorParamsProvider>
   );

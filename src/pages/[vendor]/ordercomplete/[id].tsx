@@ -6,6 +6,7 @@ import OrderComplete from "view/orderComplete";
 import {vendorsAddress} from "utils/Const";
 import {GetStaticPaths, GetStaticProps} from "next";
 import OrderCompleteParamsProvider from "view/orderComplete/context/OrderCompleteParamsProvider";
+import LogisticAllPriceProvider from "context/LogisticAllPricesProvider";
 
 export interface IOrderCompletePage {
   vendor: string;
@@ -20,9 +21,11 @@ function OrderCompletePage(props: IOrderCompletePage) {
       <OrderCompleteVendorDetailDataProvider>
         <OrderCompleteProvider>
           <OrderCompleteAddressProvider>
-            <LogisticPriceProvider>
-              <OrderComplete />
-            </LogisticPriceProvider>
+            <LogisticAllPriceProvider>
+              <LogisticPriceProvider>
+                <OrderComplete />
+              </LogisticPriceProvider>
+            </LogisticAllPriceProvider>
           </OrderCompleteAddressProvider>
         </OrderCompleteProvider>
       </OrderCompleteVendorDetailDataProvider>

@@ -1,6 +1,8 @@
 import {useMemo} from "react";
 import {getDistanceFromLatLong} from "utils/utils";
 import {useLogisticPrice} from "context/LogisticPriceProvider";
+import {useLogisticAllPrices} from "context/LogisticAllPricesProvider";
+import {IGetLogisticAllPriceRes} from "types/interfaceLogistic";
 
 interface IUseDeliveryPrice {
   location1: {
@@ -16,6 +18,9 @@ interface IUseDeliveryPrice {
 function useDeliveryPrice(props: IUseDeliveryPrice) {
   const {location1, location2} = props;
   const {data} = useLogisticPrice();
+  const {data: logisticPrices} = useLogisticAllPrices();
+
+  const lessThanOneKmPrice = logisticPrices?.find((item: IGetLogisticAllPriceRes) => item.name === "lessThanOne").price;
 
   const distance = useMemo(() => {
     if (location1.lat && location1.long && location2.lat && location2.long) {
@@ -25,6 +30,9 @@ function useDeliveryPrice(props: IUseDeliveryPrice) {
   }, [location1, location2]);
 
   const deliveryPrice = useMemo(() => {
+    if (distance < 1) {
+      return lessThanOneKmPrice;
+    }
     return Math.round((data || 0) * distance);
   }, [data, distance]);
 

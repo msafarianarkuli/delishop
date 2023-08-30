@@ -37,10 +37,10 @@ function CommentPageListItem(props: ICommentPageListItem) {
         </div>
       </div>
       <div className="my-4">{comment}</div>
-      <div className="flex">
+      <div className="flex flex-wrap">
         {tag.map((item) => {
           return (
-            <div key={item.id} className="w-auto py-1 px-5 rounded bg-[#D0D2DB] text-[12px] font-light mt-2 mb-3 ml-2">
+            <div key={item.id} className="w-auto py-1 px-2 rounded bg-[#D0D2DB] text-[12px] font-light mt-2 mb-3 ml-2">
               {item.displayname}
             </div>
           );

@@ -15,6 +15,8 @@ interface IVendorDetailSupermarketTitle {
 function VendorDetailSupermarketTitle(props: IVendorDetailSupermarketTitle) {
   const {title, rate, image, deliveryPrice, coin, href} = props;
 
+  console.log(deliveryPrice);
+
   const rateFixed = useMemo(() => {
     const tmp = +rate;
     if (!isNaN(tmp)) {

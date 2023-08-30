@@ -43,13 +43,13 @@ function HomeOrderCard(props: IHomeOrderCard) {
   return (
     <div className={styles.home_order_card_container}>
       <div className="flex items-center justify-between">
-        <div className="text-[15px] font-medium pl-1 underline">{hintText}</div>
+        <div className="text-[14px] font-medium pl-1 border-b border-textColor">{hintText}</div>
         <div className="font-semibold whitespace-nowrap">
           <div className="text-[11px] mb-2 text-center">تحویل تا ساعت:</div>
           <div className={deliveryClassName}>{deliveryTime}</div>
         </div>
       </div>
-      <div className="mt-12 mb-9 mx-7">
+      <div className="mt-8 mb-5 mx-7">
         <div className="relative w-full h-[4px] bg-[#D9D9D9] rounded-full">
           <div
             className="absolute right-0 top-0 h-full bg-textColor rounded-full transition-width duration-300 ease-linear"

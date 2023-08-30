@@ -8,6 +8,7 @@ import getLogisticCurrentPrice from "api/getLogisticCurrentPrice";
 import {IGetVendorDetailData} from "types/interfaceVendorDetail";
 import getSupermarketDetail from "api/getSupermarketDetail";
 import LogisticPriceProvider from "context/LogisticPriceProvider";
+import LogisticAllPriceProvider from "context/LogisticAllPricesProvider";
 
 export interface IVendorDetailPage {
   isRestaurant: boolean;
@@ -20,7 +21,9 @@ function VendorDetailPage(props: IVendorDetailPage) {
   return (
     <VendorDetailParamsProvider {...props}>
       <LogisticPriceProvider>
-        <VendorDetail />
+        <LogisticAllPriceProvider>
+          <VendorDetail />
+        </LogisticAllPriceProvider>
       </LogisticPriceProvider>
     </VendorDetailParamsProvider>
   );

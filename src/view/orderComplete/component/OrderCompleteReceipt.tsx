@@ -12,7 +12,7 @@ function OrderCompleteReceipt() {
   const restaurant = useCartRestaurant();
   const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress, discountPrice} = useOrderComplete();
-
+  console.log(data);
   const {deliveryToman} = useDeliveryPrice({
     location1: {
       lat: data?.lat || 0,

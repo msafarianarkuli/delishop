@@ -9,6 +9,8 @@ import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {useLogisticPrice} from "context/LogisticPriceProvider";
 import {getDistanceFromLatLong} from "utils/utils";
 import VendorSupermarketCard from "view/vendor/component/vendorSupermraketCard";
+import {useLogisticAllPrices} from "context/LogisticAllPricesProvider";
+import {IGetLogisticAllPriceRes} from "types/interfaceLogistic";
 
 function VendorList() {
   const {data, isLoading} = useVendorData();
@@ -69,6 +71,10 @@ function VendorListShowSupermarket() {
   const {ref, inView} = useInView();
   const {data: deliveryBasicPrice} = useLogisticPrice();
   const {vendor} = useVendorParams();
+  const logisticPrices = useLogisticAllPrices();
+  const lessThanOneKmPrice = logisticPrices?.data?.find(
+    (item: IGetLogisticAllPriceRes) => item.name === "lessThanOne"
+  ).price;
 
   useEffect(() => {
     if (inView) {
@@ -95,7 +101,7 @@ function VendorListShowSupermarket() {
             long: item.long,
           };
           const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
-          const price = (deliveryBasicPrice || 0) * distance;
+          const price = distance < 1 ? lessThanOneKmPrice : (deliveryBasicPrice || 0) * distance;
           return (
             <Link ref={tmpRef} key={idx} href={`/${vendor}/${item.id}`} prefetch={false}>
               <VendorSupermarketCard

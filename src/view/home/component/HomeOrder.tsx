@@ -5,7 +5,7 @@ import {instant} from "utils/Const";
 function HomeOrder() {
   const {data} = HomeOrderData();
   return (
-    <div className="flex overflow-auto px-screenSpace mt-5">
+    <div className=" overflow-auto px-screenSpace mt-5">
       {data?.pages.map((value) => {
         return value.orders.map((item, index) => {
           return (

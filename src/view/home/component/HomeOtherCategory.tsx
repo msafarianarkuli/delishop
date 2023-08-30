@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import styles from "view/home/home.module.scss";
 import IconDrug from "assets/icons/IconDrug";
 import IconTools from "assets/icons/IconTools";
+import IconKharazi from "assets/icons/IconKharazi";
 
 const data: TDataCustomSwiper = [
   {
@@ -46,7 +47,11 @@ const data: TDataCustomSwiper = [
     icon: IconDairy,
     link: "/daily",
   },
-
+  {
+    title: "خرازی",
+    icon: IconKharazi,
+    link: "/kharazi",
+  },
   {
     title: "رنگ ابزار",
     icon: IconTools,
@@ -97,7 +102,7 @@ function HomeOtherCategory() {
                 style={{paddingBottom: slidesPreView === 1 ? "29.42%" : "100%"}}
               >
                 <Link href={item.link} className="absolute flex flex-col items-center justify-center w-full h-full">
-                  <Icon className={iconClassName} />
+                  <Icon className={`${iconClassName} ${item.title === "drug" && "mt-4"}`} />
                   <div className="mt-2">{item.title}</div>
                 </Link>
               </div>

@@ -65,12 +65,14 @@ function OrderDetailDelivery(props: IOrderDetailDelivery) {
           {progressIcon}
         </div>
       </div>
-      <Button
-        icon={<IconSupport className="w-5 h-5 ml-1" />}
-        className="flex items-center border-0 shadow-none bg-[rgba(44,48,54,0.04)] rounded-[5px] mr-auto"
-      >
-        تماس با پشتیبانی
-      </Button>
+      <a href="tel:02144987989">
+        <Button
+          icon={<IconSupport className="w-5 h-5 ml-1" />}
+          className="flex items-center border-0 shadow-none bg-[rgba(44,48,54,0.04)] rounded-[5px] mr-auto"
+        >
+          تماس با پشتیبانی
+        </Button>
+      </a>
     </div>
   );
 }

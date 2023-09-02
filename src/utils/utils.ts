@@ -195,9 +195,15 @@ export const addComma = (str: string) => {
   return str;
 };
 
-export const roundPrice = (price: number) => {
+export const roundPriceToToman = (price: number) => {
   const priceToToman = Math.round(price / 10);
   const finalPrice = (Math.ceil((priceToToman / 1000) * 2) / 2) * 1000;
 
   return finalPrice;
+};
+
+export const roundPriceToIIR = (price: number) => {
+  const priceToToman = Math.round(price / 10);
+  const finalPrice = (Math.ceil((priceToToman / 1000) * 2) / 2) * 1000;
+  return finalPrice * 10;
 };

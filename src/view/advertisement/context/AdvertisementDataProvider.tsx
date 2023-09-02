@@ -14,6 +14,7 @@ function AdvertisementDataProvider({children}: {children: ReactNode}) {
   const result = useQuery<TGetAdDataAds>([], () => getAds(), {
     staleTime,
   });
+  console.log(result);
   return <AdvertisementDataContext.Provider value={result}>{children}</AdvertisementDataContext.Provider>;
 }
 

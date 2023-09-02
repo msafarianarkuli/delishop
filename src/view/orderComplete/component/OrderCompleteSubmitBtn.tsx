@@ -100,6 +100,11 @@ function OrderCompleteSubmitBtn() {
   const {time} = useVendorWorkTime({open_hours: dataVendor?.open_hours});
   const {vendor: vendorName} = useOrderCompleteParams();
 
+  console.log(
+    "createAddOrderProductKind(vendor?.cartOrders || {})",
+    createAddOrderProductKind(vendor?.cartOrders || {})
+  );
+
   return (
     <SubmitBuyBtn
       type={type}

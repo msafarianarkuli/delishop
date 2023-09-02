@@ -8,9 +8,12 @@ import Link from "next/link";
 const Advertisement = () => {
   const router = useRouter();
   const {data, isLoading} = useAdvertisementData();
+  const reOrder = data?.sort((a: any, b: any) => {
+    return a.id - b.id;
+  });
 
   const body = () => {
-    return data?.map((item: IGetAdDataAdsItems) => (
+    return reOrder?.reverse()?.map((item: IGetAdDataAdsItems) => (
       <Link key={item.id} href={`/advertisement/${item.id}`}>
         <AdvertisementCard
           title={item.title}

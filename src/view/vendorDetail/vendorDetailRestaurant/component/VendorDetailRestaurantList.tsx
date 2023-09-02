@@ -20,6 +20,7 @@ import {
 } from "view/vendorDetail/vendorDetailRestaurant/context/VendorDetailRestaurantExtraProvider";
 import styles from "view/vendorDetail/vendorDetailRestaurant/VendorDetailRestaurant.module.scss";
 import {useVendorDetailParams} from "view/vendorDetail/context/VendorDetailParamsProvider";
+import {roundPriceToToman} from "utils/utils";
 
 function VendorDetailRestaurantList() {
   const ref = useRef<HTMLDivElement>(null);
@@ -82,7 +83,7 @@ function VendorDetailRestaurantList() {
                     description={item?.description_te}
                     coin={item?.point}
                     stock={product.count}
-                    price={Math.round(finalPrice / 10)}
+                    price={roundPriceToToman(finalPrice)}
                     count={count}
                     onAddClick={() => {
                       const id = router.query.id;

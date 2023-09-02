@@ -15,6 +15,7 @@ import {
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import useCartRestaurant from "hooks/useCartRestaurant";
+import {roundPrice} from "utils/utils";
 
 function VendorCategoryProductsList() {
   const {data} = useVendorCategoryData();
@@ -64,7 +65,7 @@ function VendorCategoryProductsList() {
                       }
                       title={item.displayname}
                       image={product.photo_igu}
-                      price={Math.round(finalPrice / 10)}
+                      price={roundPrice(finalPrice)}
                       coin={item.point}
                       description={item.description_te}
                       count={count}

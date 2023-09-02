@@ -1,4 +1,5 @@
 import {TGetOrderDetailDataProductKinds} from "types/interfaceOrderDetail";
+import {roundPrice} from "utils/utils";
 
 interface IOrderDetailOrder {
   order: TGetOrderDetailDataProductKinds;
@@ -25,7 +26,7 @@ function OrderDetailOrder(props: IOrderDetailOrder) {
             </div>
             <div className="whitespace-nowrap">
               <span className="text-[15px]">
-                {Math.round((item.price_prc * item.count_num) / 10).toLocaleString("en-US")}
+                {roundPrice((item.price_prc * item.count_num) / 10).toLocaleString("en-US")}
               </span>
               <span className="mr-1 text-[11px]">تومان</span>
             </div>

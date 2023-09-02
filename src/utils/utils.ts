@@ -207,3 +207,8 @@ export const roundPriceToIIR = (price: number) => {
   const finalPrice = (Math.ceil((priceToToman / 1000) * 2) / 2) * 1000;
   return finalPrice * 10;
 };
+
+export const roundPrice = (price: number) => {
+  const finalPrice = (Math.ceil((price / 1000) * 2) / 2) * 100;
+  return finalPrice * 10;
+};

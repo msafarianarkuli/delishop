@@ -1,6 +1,6 @@
 import {MouseEventHandler, useMemo} from "react";
 import {IconCoin} from "assets/icons";
-import {number2Digits} from "utils/utils";
+import {number2Digits, roundPrice} from "utils/utils";
 import dayjs from "dayjs";
 import jalaliday from "jalaliday";
 import {Button} from "antd";
@@ -129,7 +129,7 @@ function OrderActiveCard(props: IOrderActiveCard) {
         </div>
         <div className="text-[15px] mt-5">
           <span>مجموع:</span>
-          <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
+          <span className="mx-1 font-bold">{roundPrice(totalPrice).toLocaleString("en-US")}</span>
           <span className="text-[13px] text-textColorLight">تومان</span>
         </div>
         <Button type="primary" className={submitBtnClassName} onClick={onClickSubmit}>

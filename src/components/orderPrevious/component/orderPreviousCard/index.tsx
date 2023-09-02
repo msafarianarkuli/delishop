@@ -2,7 +2,7 @@ import React, {MouseEventHandler, useMemo} from "react";
 import {TGetOrdersListResOrdersItemsProductKinds} from "types/interfaceOdrdersList";
 import {EOrderStatus, OrderStatus} from "utils/Const";
 import classNames from "classnames";
-import {number2Digits} from "utils/utils";
+import {number2Digits, roundPrice} from "utils/utils";
 import dayjs from "dayjs";
 import {IconCoin, IconRoundedLeft} from "assets/icons";
 import Link from "next/link";
@@ -114,7 +114,7 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
                   ) : null}
                 </div>
                 <div className="text-[11px] font-medium text-textColorLight text-center mt-1">
-                  {Math.round(item.price_prc / 10).toLocaleString("en-US")}
+                  {roundPrice(item.price_prc / 10).toLocaleString("en-US")}
                 </div>
               </div>
             );
@@ -123,7 +123,7 @@ function OrderPreviousCard(props: IOrderPreviousCard) {
         <div className="flex items-center justify-between">
           <div className="text-[15px]">
             <span>مجموع:</span>
-            <span className="mx-1 font-bold">{totalPrice.toLocaleString("en-US")}</span>
+            <span className="mx-1 font-bold">{roundPrice(totalPrice).toLocaleString("en-US")}</span>
             <span className="text-[13px] text-textColorLight">تومان</span>
           </div>
           {orderStatus === EOrderStatus.delivered ? (

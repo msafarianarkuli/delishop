@@ -15,10 +15,11 @@ interface IHomeOrderCard {
   id: number;
   orderStatus: number;
   categoryId: number;
+  count?: number;
 }
 
 function HomeOrderCard(props: IHomeOrderCard) {
-  const {deliveryTime, image, title, id, orderStatus, categoryId} = props;
+  const {deliveryTime, image, title, id, orderStatus, categoryId, count} = props;
   const hintText = useOrderStatusText(orderStatus);
 
   const href = useMemo(() => {
@@ -41,7 +42,7 @@ function HomeOrderCard(props: IHomeOrderCard) {
   });
 
   return (
-    <div className={styles.home_order_card_container}>
+    <div className={`${styles.home_order_card_container} ${count === 1 && "w-full"}`}>
       <div className="flex items-center justify-between">
         <div className="text-[14px] font-medium pl-1 border-b border-textColor">{hintText}</div>
         <div className="font-semibold whitespace-nowrap">

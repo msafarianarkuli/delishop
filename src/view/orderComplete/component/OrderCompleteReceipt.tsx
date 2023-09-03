@@ -12,7 +12,7 @@ function OrderCompleteReceipt() {
   const restaurant = useCartRestaurant();
   const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress, discountPrice} = useOrderComplete();
-  console.log(data);
+
   const {deliveryToman} = useDeliveryPrice({
     location1: {
       lat: data?.lat || 0,
@@ -32,7 +32,7 @@ function OrderCompleteReceipt() {
   const price = useMemo(() => {
     let tmpPrice = 0;
     if (restaurant) tmpPrice = restaurant.totalPrice;
-    return Math.round(tmpPrice / 10);
+    return Math.round(tmpPrice);
   }, [restaurant]);
 
   const coin = useMemo(() => {

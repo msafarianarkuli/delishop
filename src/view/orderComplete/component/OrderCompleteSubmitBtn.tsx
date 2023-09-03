@@ -67,11 +67,11 @@ function OrderCompleteSubmitBtnLeft() {
 
   const price = useMemo(() => {
     const totalPrice = restaurant?.totalPrice || 0;
-    return Math.round(totalPrice / 10);
+    return Math.round(totalPrice);
   }, [restaurant?.totalPrice]);
 
   const discount = useMemo(() => {
-    return Math.round((discountPrice || 0) / 10);
+    return Math.round(discountPrice || 0);
   }, [discountPrice]);
 
   const totalPrice = useMemo(() => {
@@ -99,11 +99,6 @@ function OrderCompleteSubmitBtn() {
   const {data: dataVendor} = useOrderCompleteVendorDetailData();
   const {time} = useVendorWorkTime({open_hours: dataVendor?.open_hours});
   const {vendor: vendorName} = useOrderCompleteParams();
-
-  console.log(
-    "createAddOrderProductKind(vendor?.cartOrders || {})",
-    createAddOrderProductKind(vendor?.cartOrders || {})
-  );
 
   return (
     <SubmitBuyBtn

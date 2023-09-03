@@ -20,7 +20,7 @@ function VendorCartCard(props: IVendorCartCard) {
       </div>
       <div className="px-5 py-3">
         {data.map((item, index) => {
-          const finalPrice = item.price ? Math.round((item.count * item.price) / 10) : 0;
+          const finalPrice = item.price ? Math.round(item.count * item.price) : 0;
           return (
             <div key={index} className="py-3 border-t last:border-b border-borderColor">
               <div className="flex items-center justify-between">

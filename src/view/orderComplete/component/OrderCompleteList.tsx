@@ -11,6 +11,7 @@ import {
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import {useRouter} from "next/router";
 import useTypeColor from "hooks/useTypeColor";
+import {roundPrice} from "utils/utils";
 
 function OrderCompleteList() {
   const router = useRouter();
@@ -38,7 +39,7 @@ function OrderCompleteList() {
             key={index}
             primaryType={type}
             title={item.title}
-            price={Math.round(item.price / 10)}
+            price={roundPrice(item.price)}
             count={item.count}
             extra={item.extra}
             onAddClick={() => {

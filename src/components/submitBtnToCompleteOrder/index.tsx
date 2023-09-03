@@ -18,6 +18,8 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
   const vendor = useCartRestaurant();
   const {time} = useVendorWorkTime({open_hours});
 
+  console.log(vendor);
+
   if (!vendor?.totalPrice) return null;
 
   return (
@@ -33,7 +35,7 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
       }
       left={
         <>
-          <span>{Math.round(vendor.totalPrice / 10).toLocaleString("en-US")}</span>
+          <span>{Math.round(vendor.totalPrice).toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </>
       }

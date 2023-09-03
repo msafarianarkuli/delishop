@@ -12,6 +12,7 @@ import {
   setCartRestaurantVendorData,
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import useCartRestaurant from "hooks/useCartRestaurant";
+import {roundPrice} from "utils/utils";
 
 function VendorSubcategoryList() {
   const {data, isLoading} = useVendorSubcategoryData();
@@ -67,7 +68,7 @@ function VendorSubcategoryShow() {
                 description={item.description_te}
                 image={product.photo_igu}
                 coin={item.point}
-                price={Math.round(finalPrice / 10)}
+                price={roundPrice(finalPrice / 10)}
                 count={count}
                 stock={product?.count}
                 onAddClick={() => {
@@ -86,7 +87,7 @@ function VendorSubcategoryShow() {
                     dispatch(
                       setCartRestaurantItem({
                         id: product.id,
-                        price: finalPrice,
+                        price: roundPrice(finalPrice / 10),
                         title: item.displayname,
                         vendorId,
                         point: item.point,

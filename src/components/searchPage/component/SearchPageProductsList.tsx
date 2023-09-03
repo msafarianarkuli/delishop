@@ -2,6 +2,7 @@ import {useSearchPageData} from "components/searchPage/context/SearchPageDataPro
 import SearchPageProductCard from "components/searchPage/component/SearchPageProductCard";
 import Link from "next/link";
 import {restaurantsVendorIds} from "utils/Const";
+import {roundPrice} from "utils/utils";
 
 function SearchPageProductsList() {
   const {data} = useSearchPageData();
@@ -25,7 +26,7 @@ function SearchPageProductsList() {
             <SearchPageProductCard
               title={item.displayname}
               name={item.vendor.name}
-              price={finalPrice}
+              price={roundPrice(finalPrice / 10)}
               image={product.photo_igu}
             />
           </Link>

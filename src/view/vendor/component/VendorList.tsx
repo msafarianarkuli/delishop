@@ -7,7 +7,7 @@ import {useVendorParams} from "view/vendor/context/VendorParamsProvider";
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import {useLogisticPrice} from "context/LogisticPriceProvider";
-import {getDistanceFromLatLong} from "utils/utils";
+import {getDistanceFromLatLong, roundPrice} from "utils/utils";
 import VendorSupermarketCard from "view/vendor/component/vendorSupermraketCard";
 import {useLogisticAllPrices} from "context/LogisticAllPricesProvider";
 import {IGetLogisticAllPriceRes} from "types/interfaceLogistic";
@@ -102,11 +102,12 @@ function VendorListShowSupermarket() {
           };
           const distance = getDistanceFromLatLong({location1, location2, unit: "kilometers"});
           const price = distance < 1 ? lessThanOneKmPrice : (deliveryBasicPrice || 0) * distance;
+
           return (
             <Link ref={tmpRef} key={idx} href={`/${vendor}/${item.id}`} prefetch={false}>
               <VendorSupermarketCard
                 title={item.name}
-                deliveryPrice={Math.round(price / 10)}
+                deliveryPrice={roundPrice(price / 10)}
                 coin={item.point}
                 rate={item.rate}
                 image={item.banner}

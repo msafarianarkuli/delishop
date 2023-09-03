@@ -195,20 +195,11 @@ export const addComma = (str: string) => {
   return str;
 };
 
-export const roundPriceToToman = (price: number) => {
-  const priceToToman = Math.round(price / 10);
-  const finalPrice = (Math.ceil((priceToToman / 1000) * 2) / 2) * 1000;
-
-  return finalPrice;
-};
-
-export const roundPriceToIIR = (price: number) => {
-  const priceToToman = Math.round(price / 10);
-  const finalPrice = (Math.ceil((priceToToman / 1000) * 2) / 2) * 1000;
-  return finalPrice * 10;
-};
-
+//this function round prices
 export const roundPrice = (price: number) => {
-  const finalPrice = (Math.ceil((price / 1000) * 2) / 2) * 100;
-  return finalPrice * 10;
+  // const finalPrice = (Math.ceil((price / 1000) * 2) / 2) * 100;
+  // return finalPrice * 10;
+  const finalPrice = Math.round((price * 10) / 100) * 100;
+  return finalPrice / 10;
+  // return price;
 };

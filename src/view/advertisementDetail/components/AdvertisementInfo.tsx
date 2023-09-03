@@ -23,7 +23,9 @@ const AdvertisementInfo = (props: IAdvertisementInfo) => {
       <div className="mb-4 text-[13px]">
         <div className={`${styles.home_other_category_box} p-6 rounded-[50px]`}>
           <span className="font-[500]">قیمت: </span>
-          <span>{addComma(price?.toString().slice(0, -1))} تومان</span>
+          <span>
+            {!price ? "توافقی" : addComma(price?.toString().slice(0, -1))} {!price ? "" : "تومان"}
+          </span>
         </div>
       </div>
       <div className="mb-4 text-[13px]">

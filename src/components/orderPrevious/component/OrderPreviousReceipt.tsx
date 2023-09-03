@@ -6,7 +6,6 @@ import {
 } from "components/orderPrevious/context/OrderPreviousReceiptProvider";
 import {BottomSheet} from "components/index";
 import classNames from "classnames";
-import {roundPriceToToman} from "utils/utils";
 
 interface IOrderPreviousReceipt {
   color: "default" | "supermarket";
@@ -111,7 +110,7 @@ function OrderPreviousReceiptItems(props: IOrderPreviousReceiptItems) {
       <div className="flex items-center justify-between mb-5 text-[15px] font-medium">
         <div>هزینه ارسال</div>
         <div>
-          <span>{roundPriceToToman(deliveryPrice).toLocaleString("en-US")}</span>
+          <span>{Math.round(deliveryPrice / 10).toLocaleString("en-US")}</span>
           <span className="mr-1 text-[13px]">تومان</span>
         </div>
       </div>

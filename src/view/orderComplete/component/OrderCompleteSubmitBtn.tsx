@@ -24,7 +24,6 @@ import {ReactQueryKey} from "utils/Const";
 import {useOrderCompleteParams} from "view/orderComplete/context/OrderCompleteParamsProvider";
 import {toast} from "react-toastify";
 import IconWarnAlert from "assets/icons/IconWarnAllert";
-import {roundPrice} from "utils/utils";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -81,7 +80,7 @@ function OrderCompleteSubmitBtnLeft() {
 
   return (
     <>
-      <span>{roundPrice(totalPrice).toLocaleString("en-US")}</span>
+      <span>{totalPrice.toLocaleString("en-US")}</span>
       <span className="mr-1">تومان</span>
     </>
   );

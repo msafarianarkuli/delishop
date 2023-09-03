@@ -5,7 +5,6 @@ import {useMemo} from "react";
 import {useOrderComplete} from "view/orderComplete/context/OrderCompleteProvider";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
-import {roundPrice} from "utils/utils";
 
 dayjs.extend(jalaliday);
 
@@ -68,7 +67,7 @@ function OrderCompleteReceipt() {
         <div className="flex items-center justify-between mb-3">
           <div>هزینه ارسال</div>
           <div>
-            <span>{roundPrice(deliveryToman).toLocaleString("en-US")}</span>
+            <span>{deliveryToman.toLocaleString("en-US")}</span>
             <span className="mr-1">تومان</span>
           </div>
         </div>
@@ -90,7 +89,7 @@ function OrderCompleteReceipt() {
       <div className="flex items-center justify-between py-3">
         <div>جمع کل پرداختی</div>
         <div>
-          <span>{roundPrice(totalPrice).toLocaleString("en-US")}</span>
+          <span>{totalPrice.toLocaleString("en-US")}</span>
           <span className="mr-1">تومان</span>
         </div>
       </div>

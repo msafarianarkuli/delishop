@@ -12,6 +12,7 @@ function useVendorWorkTime(props: IUseVendorTime) {
   const {open_hours} = props;
   const [time, setTime] = useState<IOrderCompleteDeliverTime[]>([]);
   const [error, setError] = useState("");
+  const [openTime, setOpenTime] = useState(false);
 
   const openHours = useMemo(() => open_hours || null, [open_hours]);
 
@@ -22,7 +23,7 @@ function useVendorWorkTime(props: IUseVendorTime) {
     if (openHours) {
       const today = openHours[day];
       if (today !== "close") {
-        const todayHour = dayjs().get("hour");
+        const todayHour = dayjs().hour();
         const splitPeriod = today.split(",");
         splitPeriod.forEach((item) => {
           const period = item.split("-");
@@ -65,15 +66,26 @@ function useVendorWorkTime(props: IUseVendorTime) {
 
   useEffect(() => {
     const basicDate = "1991-07-30";
-    const todayHour = dayjs().get("hour");
-    const todayMin = dayjs().get("minute");
+    const todayHour = dayjs().hour();
+    const todayMin = dayjs().minute();
+
     const todayTimestamp = dayjs(`${basicDate} ${todayHour}:${todayMin}`).valueOf();
     let tmpTimes: IOrderCompleteDeliverTime[] = [];
     if (hours.length) {
-      const tmp = hours.filter((value) => {
+      const tmp = hours.filter((value, index) => {
         const tempHour = dayjs(`${basicDate} ${value.from}`).subtract(30, "minute").valueOf();
+        const tempHours = dayjs(`${basicDate} ${value.to}`).subtract(30, "minute").valueOf();
+        if (index === hours.length - 1) {
+          if (tempHours > todayTimestamp) {
+            setOpenTime(true);
+          } else {
+            setOpenTime(false);
+          }
+        }
+
         return tempHour > todayTimestamp;
       });
+
       if (tmp.length) {
         tmpTimes = [{isTemp: true, from: "", to: ""}, ...tmp];
       }
@@ -84,7 +96,7 @@ function useVendorWorkTime(props: IUseVendorTime) {
     setTime(tmpTimes);
   }, [hours]);
 
-  return {time, error};
+  return {time, openTime, error};
 }
 
 export default useVendorWorkTime;

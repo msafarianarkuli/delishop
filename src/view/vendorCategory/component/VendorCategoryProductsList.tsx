@@ -25,7 +25,7 @@ function VendorCategoryProductsList() {
   const filterId = useVendorCategorySubcategoryFilter();
   const vendor = useCartRestaurant();
   const {vendor: vendorName, categoryId, vendorId} = useVendorCategoryParams();
-  const {time} = useVendorWorkTime({open_hours: supermarketData?.vendor.open_hours});
+  const {openTime} = useVendorWorkTime({open_hours: supermarketData?.vendor.open_hours});
 
   const finalData = useMemo(() => {
     if (filterId) {
@@ -61,7 +61,7 @@ function VendorCategoryProductsList() {
                   <div key={index}>
                     <VendorCategoryCard
                       disabled={
-                        !time.length || !supermarketData?.vendor.open || product.count === 0 || count >= product.count
+                        !openTime || !supermarketData?.vendor.open || product.count === 0 || count >= product.count
                       }
                       title={item.displayname}
                       image={product.photo_igu}

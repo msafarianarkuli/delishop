@@ -20,7 +20,7 @@ const maxStar = 5;
 
 function VendorRestaurantCard(props: IVendorRestaurantCard) {
   const {time, star, coin, title, image, description, open, openHours} = props;
-  const {time: vendorWorkTime} = useVendorWorkTime({open_hours: openHours});
+  const {time: vendorWorkTime, openTime} = useVendorWorkTime({open_hours: openHours});
 
   const starFill = useMemo(() => Array.from(new Array(star < maxStar ? Math.round(star) : 0), (_, i) => i + 1), [star]);
   const starEmpty = useMemo(
@@ -28,7 +28,7 @@ function VendorRestaurantCard(props: IVendorRestaurantCard) {
     [star]
   );
 
-  const vendorIsClose = useMemo(() => !vendorWorkTime.length || !open, [open, vendorWorkTime.length]);
+  const vendorIsClose = useMemo(() => !openTime || !open, [open, vendorWorkTime.length]);
 
   const container = classNames({
     [styles.vendor_restaurant_card_container]: true,

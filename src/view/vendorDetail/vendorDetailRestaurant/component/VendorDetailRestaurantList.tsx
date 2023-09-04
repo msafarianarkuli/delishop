@@ -30,7 +30,7 @@ function VendorDetailRestaurantList() {
   const vendor = useCartRestaurant();
   const {isOpen} = useVendorDetailRestaurantExtra();
   const {vendor: vendorName} = useVendorDetailParams();
-  const {time} = useVendorWorkTime({open_hours: data?.vendor.open_hours});
+  const {openTime} = useVendorWorkTime({open_hours: data?.vendor.open_hours});
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;
@@ -76,7 +76,7 @@ function VendorDetailRestaurantList() {
               return (
                 <div key={item.id} className="block mb-5">
                   <VendorDetailRestaurantCard
-                    disabled={!time.length || !data?.vendor.open || count >= product.count}
+                    disabled={!openTime || !data?.vendor.open || count >= product.count}
                     image={product?.photo_igu}
                     title={item.displayname}
                     description={item?.description_te}

@@ -4,6 +4,7 @@ import useVendorWorkTime from "hooks/useVendorWorkTime";
 import {IGetVendorsDetailVendorOpenHours} from "types/interfaceVendorDetail";
 import {SubmitBuyBtn} from "components/index";
 import {IconDownload} from "assets/icons";
+import {roundPrice} from "utils/utils";
 
 interface ISubmitBtnToCompleteOrder {
   open_hours?: IGetVendorsDetailVendorOpenHours;
@@ -17,8 +18,6 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
   const router = useRouter();
   const vendor = useCartRestaurant();
   const {time} = useVendorWorkTime({open_hours});
-
-  console.log(vendor);
 
   if (!vendor?.totalPrice) return null;
 
@@ -35,7 +34,11 @@ function SubmitBtnToCompleteOrder(props: ISubmitBtnToCompleteOrder) {
       }
       left={
         <>
-          <span>{Math.round(vendor.totalPrice).toLocaleString("en-US")}</span>
+          <span>
+            {vendorName === "supermarket"
+              ? roundPrice(vendor.totalPrice).toLocaleString("en-US")
+              : roundPrice(vendor.totalPrice / 10).toLocaleString("en-US")}
+          </span>
           <span className="mr-1">تومان</span>
         </>
       }

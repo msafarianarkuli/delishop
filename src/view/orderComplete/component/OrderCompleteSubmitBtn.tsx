@@ -3,6 +3,7 @@ import {IconRoundedRight} from "assets/icons";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import useTypeColor from "hooks/useTypeColor";
 import {
+  setOrderCompleteDeliveryAddress,
   setOrderCompleteError,
   setOrderCompleteStep,
   useOrderComplete,
@@ -11,11 +12,11 @@ import {
 import {signIn, useSession} from "next-auth/react";
 import addOrder from "api/addOrder";
 import {useRouter} from "next/router";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {createAddOrderProductKind} from "utils/cartReducerUtils";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
 import {removeCartRestaurantCartListCartOrder} from "redux/cartRestaurant/cartRestaurantReducer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useQueryClient} from "react-query";
 import {QUERY_KEY_USER_COIN} from "template/context/UserCoinProvider";
 import {useOrderCompleteVendorDetailData} from "view/orderComplete/context/OrderCompleteVendorDetailDataProvider";
@@ -24,6 +25,8 @@ import {ReactQueryKey} from "utils/Const";
 import {useOrderCompleteParams} from "view/orderComplete/context/OrderCompleteParamsProvider";
 import {toast} from "react-toastify";
 import IconWarnAlert from "assets/icons/IconWarnAllert";
+import {selectAddressMap} from "redux/addressMap/addressMapReducer";
+import {useOrderCompleteAddress} from "../context/OrderCompleteAddressProvider";
 
 function OrderCompleteSubmitBtnBody() {
   const {step} = useOrderComplete();
@@ -53,6 +56,18 @@ function OrderCompleteSubmitBtnLeft() {
   const restaurant = useCartRestaurant();
   const {data} = useOrderCompleteVendorDetailData();
   const {deliveryAddress, discountPrice} = useOrderComplete();
+  const {isUserAddressStorageLoaded, userAddress} = useSelector(selectAddressMap);
+  const {data: addressData} = useOrderCompleteAddress();
+  const dispatch = useOrderCompleteAction();
+
+  useEffect(() => {
+    if (isUserAddressStorageLoaded && userAddress && addressData && !deliveryAddress) {
+      const tmp = addressData.find((item) => item.id === userAddress.id);
+      if (tmp) {
+        dispatch(setOrderCompleteDeliveryAddress(tmp));
+      }
+    }
+  }, [addressData, deliveryAddress, dispatch, isUserAddressStorageLoaded, userAddress]);
 
   const {deliveryToman} = useDeliveryPrice({
     location1: {
@@ -70,12 +85,14 @@ function OrderCompleteSubmitBtnLeft() {
     return Math.round(totalPrice);
   }, [restaurant?.totalPrice]);
 
+  const orgPrice = restaurant?.vendorAddressName === "supermarket" ? price : price / 10;
+
   const discount = useMemo(() => {
     return Math.round(discountPrice || 0);
   }, [discountPrice]);
 
   const totalPrice = useMemo(() => {
-    return price + deliveryToman - discount;
+    return orgPrice + deliveryToman - discount;
   }, [deliveryToman, discount, price]);
 
   return (

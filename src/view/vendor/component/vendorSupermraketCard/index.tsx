@@ -20,7 +20,6 @@ function VendorSupermarketCard(props: IVendorSupermarketCard) {
   const {rate, deliveryPrice, title, coin, image, openHours, open} = props;
   const {time: vendorWorkTime} = useVendorWorkTime({open_hours: openHours});
   const vendorIsClose = useMemo(() => !vendorWorkTime.length || !open, [open, vendorWorkTime.length]);
-
   const container = classNames({
     [styles.vendor_supermarket_card_container]: true,
     [styles.vendor_supermarket_card_container_disabled]: vendorIsClose,

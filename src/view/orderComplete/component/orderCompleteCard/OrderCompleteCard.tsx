@@ -4,6 +4,8 @@ import {useMemo} from "react";
 import {TCartDataItemExtra} from "types/interfaces";
 import {Counter} from "components";
 import {TUseTypeColor} from "hooks/useTypeColor";
+import {roundPrice} from "utils/utils";
+import {useRouter} from "next/router";
 
 interface IOrderCompleteCard {
   title: string;
@@ -18,6 +20,8 @@ interface IOrderCompleteCard {
 
 function OrderCompleteCard(props: IOrderCompleteCard) {
   const {count, extra, price, title, onAddClick, onMinusClick, onClickExtra, primaryType} = props;
+  const router = useRouter();
+  const vendorName = router.query.vendor;
 
   const extraPrice = useMemo(() => {
     if (extra?.length) {
@@ -54,7 +58,11 @@ function OrderCompleteCard(props: IOrderCompleteCard) {
       </div>
       <div className="flex items-center justify-between">
         <div>
-          <span>{totalPrice.toLocaleString("en-US")}</span>
+          <span>
+            {vendorName === "supermarket"
+              ? roundPrice(totalPrice).toLocaleString("en-US")
+              : roundPrice(totalPrice / 10).toLocaleString("en-US")}
+          </span>
           <span className="mr-1">تومان</span>
         </div>
         <Counter

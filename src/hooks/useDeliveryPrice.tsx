@@ -30,7 +30,7 @@ function useDeliveryPrice(props: IUseDeliveryPrice) {
   }, [location1, location2]);
 
   const deliveryPrice = useMemo(() => {
-    if (distance < 1) {
+    if (distance > 0 && distance < 1) {
       return lessThanOneKmPrice;
     } else {
       return Math.round((data || 0) * distance);

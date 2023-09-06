@@ -33,9 +33,9 @@ function VendorSort() {
   const router = useRouter();
   const [sort, setSort] = useState(initialValue);
   const {querySearch, pathname} = usePathnameQuery();
+
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
   // const vendorType = useVendorType();
-
   useEffect(() => {
     if (router.isReady && query.get(ReactQueryKey.VENDOR_FILTER_SORT)) {
       const value = query.get(ReactQueryKey.VENDOR_FILTER_SORT);
@@ -45,6 +45,11 @@ function VendorSort() {
       }
     }
   }, [query, router.isReady]);
+
+  useEffect(() => {
+    router.replace(pathname + "?sort=closest");
+    setSort((prevState) => ({...prevState, title: "نزدیک ترین", value: "closest"}));
+  }, []);
 
   useEffect(() => {
     const div = ref.current! as HTMLDivElement;

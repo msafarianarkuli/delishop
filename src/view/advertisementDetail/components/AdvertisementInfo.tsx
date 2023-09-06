@@ -9,10 +9,11 @@ interface IAdvertisementInfo {
   status: string;
   description: string;
   contact: string;
+  link: string;
 }
 
 const AdvertisementInfo = (props: IAdvertisementInfo) => {
-  const {title, price, status, description, contact} = props;
+  const {title, price, status, link, description, contact} = props;
   return (
     <div className="px-[25px]">
       <div className="mb-4 text-[13px]">
@@ -32,6 +33,14 @@ const AdvertisementInfo = (props: IAdvertisementInfo) => {
         <div className={`${styles.home_other_category_box} p-6 rounded-[50px]`}>
           <span className="font-[500]">وضعیت: </span>
           <span>{status}</span>
+        </div>
+      </div>
+      <div className="mb-4 text-[13px]">
+        <div className={`${styles.home_other_category_box} p-6 rounded-[50px]`}>
+          <span className="font-[500]">لینک: </span>
+          <Link href={link}>
+            <bdi className="text-blue-400">{link}</bdi>
+          </Link>
         </div>
       </div>
       <span className="text-[#575F6B] text-[15px]">توضیحات کامل:</span>

@@ -6,7 +6,7 @@ import {useHomeBannersData} from "view/home/context/HomeBannersDataProvider";
 function HomeAdsSwiper() {
   const {data} = useHomeBannersData();
   return (
-    <div className="mb-5">
+    <div className="mt-3">
       <CustomSwiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}

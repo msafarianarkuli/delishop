@@ -37,13 +37,13 @@ function HomeBottomNavigation() {
               <div
                 onClick={() => sendData(item.link)}
                 key={index}
-                className="h-[78px] w-full ml-2 last:ml-0 cursor-pointer"
+                className="h-[64px] sm:h-[74px] w-full ml-2 last:ml-0 cursor-pointer"
               >
                 <img src={item.image} alt={item.title} className="w-auto h-auto rounded-[6px] mx-auto" />
                 <div className="text-[13px] text-center mt-1">{item.title}</div>
               </div>
             ) : (
-              <Link href={item.link} key={index} className="h-[78px] w-full ml-2 last:ml-0">
+              <Link href={item.link} key={index} className="h-[64px] sm:h-[74px] w-full ml-2 last:ml-0">
                 <img src={item.image} alt={item.title} className="w-auto h-auto rounded-[6px] mx-auto" />
                 <div className="text-[13px] text-center mt-1">{item.title}</div>
               </Link>

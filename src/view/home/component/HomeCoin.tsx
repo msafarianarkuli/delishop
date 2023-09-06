@@ -14,9 +14,9 @@ function HomeCoin() {
   return (
     <div>
       <div className="flex items-center justify-between px-screenSpace mb-5">
-        <HomeTitle title="سکه دار ها" />
+        <HomeTitle title="فروشگاه های سکه دار" />
         <Link href="/restaurant?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
-          <span>همه</span>
+          <span>نمایش همه</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>
       </div>

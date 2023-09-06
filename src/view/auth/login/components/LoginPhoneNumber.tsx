@@ -53,7 +53,7 @@ function LoginPhoneNumber() {
   }
 
   return (
-    <div className="w-full h-full mx-screenSpace">
+    <div className="w-full h-full mx-screenSpace relative">
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
         <CustomInputReactHook
           ref={inputRef}
@@ -76,7 +76,7 @@ function LoginPhoneNumber() {
           id="login-btn"
           htmlType="submit"
           type="primary"
-          className="fixed submit-btn bottom-[40px] right-[19px] left-[19px]"
+          className="submit-btn absolute bottom-6 w-full"
           loading={isSubmitting}
         >
           ثبت

@@ -35,6 +35,8 @@ function OrderCompleteReceipt() {
     return Math.round(tmpPrice);
   }, [restaurant]);
 
+  const orgPrice = restaurant?.vendorAddressName === "supermarket" ? price : price / 10;
+
   const coin = useMemo(() => {
     if (restaurant) return restaurant.totalPoint;
     return 0;
@@ -45,7 +47,7 @@ function OrderCompleteReceipt() {
   }, [discountPrice]);
 
   const totalPrice = useMemo(() => {
-    return price + deliveryToman - discount;
+    return orgPrice + deliveryToman - discount;
   }, [deliveryToman, discount, price]);
 
   return (
@@ -60,7 +62,9 @@ function OrderCompleteReceipt() {
             <span>جمع سفارش</span>(<span>{count}</span>)
           </div>
           <div>
-            <span>{price?.toLocaleString("en-US")}</span>
+            <span>
+              {(restaurant?.vendorAddressName === "supermarket" ? price : price / 10)?.toLocaleString("en-US")}
+            </span>
             <span className="mr-1">تومان</span>
           </div>
         </div>

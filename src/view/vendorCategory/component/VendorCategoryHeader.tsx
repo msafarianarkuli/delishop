@@ -58,7 +58,7 @@ function VendorCategoryHeaderBody() {
     }
   }, [id]);
 
-  if (!data?.menus.groups.length) return <div>موردی یافت نشد</div>;
+  if (!data?.menus?.groups?.length) return <div>موردی یافت نشد</div>;
   return (
     <div className="w-full flex items-center overflow-auto h-headerNormal">
       {data?.menus.groups.map((item, index) => {

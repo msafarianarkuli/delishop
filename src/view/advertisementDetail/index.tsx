@@ -28,6 +28,7 @@ const AdvertisementDetail = () => {
             status={info?.status}
             description={info?.description}
             contact={info?.contact}
+            link={info?.link}
           />
         </>
       ) : null}

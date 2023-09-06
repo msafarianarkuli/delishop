@@ -9,14 +9,14 @@ function HomeAdsSwiper2() {
 
   return (
     <div>
-      <div className="flex items-center justify-between px-screenSpace mb-5">
+      <div className="flex items-center justify-between px-screenSpace mt-8">
         <HomeTitle title="املاک دلی شاپ" />
-        <Link href="/restaurant?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
-          <span>همه</span>
+        <Link href="/advertisement" className="flex items-center text-primary text-[15px] font-semibold">
+          <span>نمایش همه</span>
           <IconRoundedLeft className="w-5 h-5" />
         </Link>
       </div>
-      <div className="flex items-center overflow-auto pb-5">
+      <div className="flex items-center overflow-auto">
         {data?.map((item) => {
           return (
             <HomeAdsCard

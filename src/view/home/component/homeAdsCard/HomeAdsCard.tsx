@@ -8,12 +8,13 @@ interface IHomeAdsCard {
   title: string;
   image: string;
   more: string;
-  href: string;
+  href?: string;
   horizontal?: boolean;
+  imgPosition?: string;
 }
 
 function HomeAdsCard(props: IHomeAdsCard) {
-  const {id, title, image, more, href, horizontal = false} = props;
+  const {id, title, image, more, href, imgPosition, horizontal = false} = props;
   const router = useRouter();
 
   const container = classNames({
@@ -27,7 +28,11 @@ function HomeAdsCard(props: IHomeAdsCard) {
   return (
     <div className={container}>
       <div className="relative w-full pb-[34%]">
-        <img src={image} alt={title} className="absolute w-full h-full object-bottom object-cover" />
+        <img
+          src={image}
+          alt={title}
+          className={`absolute w-full h-full ${imgPosition ? imgPosition : "object-center"} object-cover`}
+        />
       </div>
       <div className="flex items-center justify-between p-4">
         <div className="truncate text-[15] mr-1">{title}</div>

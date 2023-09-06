@@ -11,6 +11,8 @@
 @import "src/styles/base/swiper";
 @import "src/styles/base/supermarket";
 
-::-webkit-scrollbar {
-  display: none;
+@media (max-width: 600px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

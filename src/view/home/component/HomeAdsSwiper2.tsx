@@ -1,41 +1,36 @@
-import React from "react";
-import {CustomSwiper} from "components";
-import {Autoplay, Pagination} from "swiper";
 import {useHomeAdsData} from "view/home/context/HomeAdsDataProvider";
+import HomeTitle from "./HomeTitle";
+import Link from "next/link";
+import {IconRoundedLeft} from "assets/icons";
+import HomeAdsCard from "./homeAdsCard/HomeAdsCard";
 
 function HomeAdsSwiper2() {
   const {data} = useHomeAdsData();
+
   return (
-    <div className="mb-5 mt-10">
-      <CustomSwiper
-        modules={[Pagination, Autoplay]}
-        slidesPerView={1}
-        slidesPerGroup={1}
-        spaceBetween={10}
-        className="pb-10"
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-          stopOnLastSlide: false,
-        }}
-        data={data || []}
-        renderItem={(item) => {
+    <div>
+      <div className="flex items-center justify-between px-screenSpace mb-5">
+        <HomeTitle title="املاک دلی شاپ" />
+        <Link href="/restaurant?sort=point" className="flex items-center text-primary text-[15px] font-semibold">
+          <span>همه</span>
+          <IconRoundedLeft className="w-5 h-5" />
+        </Link>
+      </div>
+      <div className="flex items-center overflow-auto pb-5">
+        {data?.map((item) => {
           return (
-            <div className="relative pb-[50%]">
-              <a
-                href={`/advertisement/${item.id}`}
-                className="absolute block w-full h-full"
-                rel="noopener noreferrer nofollow"
-              >
-                <img src={item.main_img} alt={item.title} className="w-full h-full object-cover object-center" />
-              </a>
-            </div>
+            <HomeAdsCard
+              key={item.id}
+              href="advertisement"
+              id={item.id.toString()}
+              horizontal
+              title={item.title}
+              image={item.main_img}
+              more="مشاهده آگهی"
+            />
           );
-        }}
-      />
+        })}
+      </div>
     </div>
   );
 }

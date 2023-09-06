@@ -15,6 +15,7 @@ function HomeDeliBlog(props: IHomeDeliBlog) {
         {blogs.map((blog) => (
           <HomeAdsCard
             key={blog.id}
+            href="blog"
             id={blog.id}
             horizontal
             title={blog.title}

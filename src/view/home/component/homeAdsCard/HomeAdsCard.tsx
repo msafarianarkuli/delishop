@@ -8,11 +8,12 @@ interface IHomeAdsCard {
   title: string;
   image: string;
   more: string;
+  href: string;
   horizontal?: boolean;
 }
 
 function HomeAdsCard(props: IHomeAdsCard) {
-  const {id, title, image, more, horizontal = false} = props;
+  const {id, title, image, more, href, horizontal = false} = props;
   const router = useRouter();
 
   const container = classNames({
@@ -21,7 +22,7 @@ function HomeAdsCard(props: IHomeAdsCard) {
   });
 
   const handleLink = () => {
-    router.push(`/blog/${id}`);
+    router.push(`/${href}/${id}`);
   };
   return (
     <div className={container}>

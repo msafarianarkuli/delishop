@@ -4,14 +4,10 @@ import {useQuery} from "react-query";
 import getVendorsTags, {VENDORS_TAGS_KEY} from "api/getVendorsTags";
 import usePathnameQuery from "hooks/usePathnameQuery";
 import classNames from "classnames";
-// import VendorCategory from "view/vendor/component/VendorCategory";
+import VendorCategory from "view/vendor/component/VendorCategory";
 import VendorFilterBtn from "view/vendor/component/VendorFilterBtn";
 import VendorFilterBottomSheet from "view/vendor/component/VendorFilterBottomSheet";
 import {ReactQueryKey} from "utils/Const";
-
-const defaultTags = ["کباب", "ایرانی", "دارای سکه"];
-
-// const defaultTags = ["فست فود"];
 
 function VendorFilter() {
   const router = useRouter();
@@ -20,6 +16,8 @@ function VendorFilter() {
   const {pathname, querySearch} = usePathnameQuery();
   const query = useMemo(() => new URLSearchParams(querySearch), [querySearch]);
   const allTagValues = useMemo(() => query.getAll(ReactQueryKey.VENDOR_FILTER_TAGE), [query]);
+
+  const defaultTags = data?.map((tag) => tag.name);
 
   const selectedFilter = useMemo(() => {
     return data.filter((item) => allTagValues.includes(item.id.toString()) && !defaultTags.includes(item.displayname));
@@ -77,7 +75,7 @@ function VendorFilter() {
   return (
     <>
       <div className={containerClassName}>
-        {/* <VendorCategory count={allTagValues.length} onClick={() => setBottomSheet(true)} /> */}
+        <VendorCategory count={allTagValues.length} onClick={() => setBottomSheet(true)} />
         <div className="flex flex-1 flex-nowrap overflow-auto px-2 py-5">
           {constTags.map((item) => {
             return (

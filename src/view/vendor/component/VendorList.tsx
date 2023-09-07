@@ -11,13 +11,22 @@ import {getDistanceFromLatLong, roundPrice} from "utils/utils";
 import VendorSupermarketCard from "view/vendor/component/vendorSupermraketCard";
 import {useLogisticAllPrices} from "context/LogisticAllPricesProvider";
 import {IGetLogisticAllPriceRes} from "types/interfaceLogistic";
+import {useRouter} from "next/router";
+import classNames from "classnames";
 
 function VendorList() {
   const {data, isLoading} = useVendorData();
   const {isRestaurant, isSupermarket} = useVendorParams();
+  const router = useRouter();
+  const isJustRestaurant = router.query.vendor === "restaurant";
+
+  const containerClassName = classNames({
+    "pt-[220px]": isJustRestaurant,
+    "pt-[150px]": !isJustRestaurant,
+  });
 
   return (
-    <div className="flex flex-col flex-1 px-screenSpace overflow-auto pt-[150px] mt-[-54px]">
+    <div className={`flex flex-col flex-1 px-screenSpace overflow-auto mt-[-54px] ${containerClassName}`}>
       {isLoading ? <div>loading ...</div> : null}
       {!isLoading && !data?.pages[0]?.vendors.length ? <div>موردی یافت نشد</div> : null}
       {isRestaurant ? <VendorListShowRestaurant /> : null}

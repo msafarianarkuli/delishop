@@ -26,7 +26,7 @@ function VendorFilterBottomSheetList({data, onClick}: IVendorFilterBottomSheetLi
             onClick={() => onClick(item)}
             className="flex w-full h-[45px] px-0 items-center border-0 border-b border-borderColor rounded-none"
           >
-            <img src={item.logo} alt={item.name} className="w-5 h-5 object-cover object-center ml-2" />
+            {/* <img src={item.logo} alt={item.name} className="w-5 h-5 object-cover object-center ml-2" /> */}
             <div>{item.displayname}</div>
           </Button>
         );

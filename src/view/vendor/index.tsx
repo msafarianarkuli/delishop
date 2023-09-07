@@ -1,6 +1,6 @@
 import useRedirectToMap from "hooks/useRedirectToMap";
 import VendorHeader from "view/vendor/component/VendorHeader";
-// import VendorFilter from "view/vendor/component/VendorFilter";
+import VendorFilter from "view/vendor/component/VendorFilter";
 import VendorSort from "view/vendor/component/VendorSort";
 import VendorList from "view/vendor/component/VendorList";
 import {BottomNavigation} from "components";
@@ -17,7 +17,7 @@ function Vendor() {
     <>
       <div className="fixed z-10 top-0 right-0 left-0 header_background">
         <VendorHeader />
-        {/* <VendorFilter /> */}
+        {vendor === "restaurant" && <VendorFilter />}
         <VendorSort />
       </div>
       <VendorList />

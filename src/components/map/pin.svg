@@ -7,8 +7,8 @@
     <circle cx="26" cy="25" r="20" fill="#FF5C01"/>
     <defs>
         <linearGradient id="b" x1="25.5" x2="25.5" y1="45" y2="81" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#575F6B"/>
-            <stop offset="1" stop-color="#2C3036"/>
+            <stop stopColor="#575F6B"/>
+            <stop offset="1" stopColor="#2C3036"/>
         </linearGradient>
         <filter id="a" width="51" height="68" x="0" y="35" color-interpolation-filters="sRGB"
                 filterUnits="userSpaceOnUse">

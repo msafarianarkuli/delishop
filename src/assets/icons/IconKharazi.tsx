@@ -14,8 +14,8 @@ function IconKharazi({className}: {className: string}) {
           y2="34.4993"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
       </defs>
     </svg>

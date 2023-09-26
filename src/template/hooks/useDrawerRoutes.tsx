@@ -101,6 +101,12 @@ function useDrawerRoutes(): TData {
         icon: IconSupportSolid,
         link: "https://delishop.me/vendor/",
       },
+      {
+        id: 8,
+        title: "حریم خصوصی",
+        icon: IconOrderSolid,
+        link: "https://delishop.me/privacy-policy/",
+      },
     ];
   }, [Coin, data, walletLink]);
 }

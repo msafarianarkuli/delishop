@@ -2,7 +2,7 @@ import {useHomeAdsData} from "view/home/context/HomeAdsDataProvider";
 import HomeTitle from "./HomeTitle";
 import Link from "next/link";
 import {IconRoundedLeft} from "assets/icons";
-import HomeAdsCard from "./homeAdsCard/HomeAdsCard";
+import HomeRealStateCard from "./homeAdsCard/HomeRealStateCard";
 
 function HomeAdsSwiper2() {
   const {data} = useHomeAdsData();
@@ -18,15 +18,18 @@ function HomeAdsSwiper2() {
       </div>
       <div className="flex items-center overflow-auto">
         {data?.map((item) => {
+          console.log("item", item);
           return (
-            <HomeAdsCard
+            <HomeRealStateCard
               key={item.id}
               href="advertisement"
               id={item.id.toString()}
               horizontal
               title={item.title}
               image={item.main_img}
-              more="مشاهده آگهی"
+              price={item.price}
+              more="مشاهده "
+              date={item.created_at}
             />
           );
         })}

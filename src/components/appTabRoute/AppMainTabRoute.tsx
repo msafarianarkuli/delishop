@@ -33,7 +33,7 @@ function AppMainTabRoute(props: IAppMainTabRoute) {
         const Icon = item?.icon;
         return (
           <Link key={index} className={`${className} flex flex-col`} href={item.link} replace>
-            {Icon && <Icon className="w-7 md:w-10 mb-1" />}
+            {Icon && <Icon className="w-7 md:w-10 mb-1" fill={item.active ? "#2C3036" : "#7a7d82"} />}
             {item.title}
           </Link>
         );

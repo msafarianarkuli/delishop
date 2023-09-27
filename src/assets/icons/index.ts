@@ -60,7 +60,7 @@ import IconEditAddressLight from "assets/icons/IconEditAddressLight";
 import IconShop from "assets/icons/IconShop";
 import IconCoinProfile from "assets/icons/IconCoinProfile";
 
-export type TIcons = ({className}: {className: string}) => JSX.Element;
+export type TIcons = ({className, fill}: {className: string; fill?: string}) => JSX.Element;
 
 export {
   IconRoundedRight,

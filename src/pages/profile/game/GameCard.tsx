@@ -1,4 +1,5 @@
 import IconAngleLeft from "assets/icons/new/IconAngleLeft";
+import classNames from "classnames";
 import Link from "next/link";
 interface IGameCard {
   image: string;
@@ -8,9 +9,13 @@ interface IGameCard {
 }
 
 const GameCard = (props: IGameCard) => {
-  const {name, image, link, color} = props;
+  const {name, image, link} = props;
+  const color = classNames({
+    "bg-[#feb703]": name === "animal crush",
+    "bg-[#8ecae6]": name === "aa",
+  });
   return (
-    <Link href={link} className={`w-full h-[220px] rounded-[10px] flex relative bg-[${color}]`}>
+    <Link href={link} className={`w-full h-[220px] rounded-[10px] flex gap-4 relative ${color}`}>
       <div className="flex items-center justify-center">
         <img src={image} alt="" className="w-40 h-40 sm:w-auto sm:h-auto" />
       </div>

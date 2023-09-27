@@ -28,8 +28,8 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
       <HomeCategory />
       <HomeMainAdd />
       <HomeBest />
-      <HomeDeliBlog blogs={blogs} />
       <HomeAdsSwiper />
+      <HomeDeliBlog blogs={blogs} />
       <HomeAdsSell />
       <HomeAdsSwiper2 />
       <HomeCoin />

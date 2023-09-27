@@ -12,7 +12,7 @@ const GamePage = () => {
   const data = [
     {
       id: 1,
-      name: "crush",
+      name: "animal crush",
       link: `https://crush.delishop.me?token=${session?.user.token}&userId=${session?.user.useId}`,
       image: crush,
       color: "#FEB703",

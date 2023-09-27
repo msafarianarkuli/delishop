@@ -34,10 +34,10 @@ function HomeAdsCard(props: IHomeAdsCard) {
           className={`absolute w-full h-full ${imgPosition ? imgPosition : "object-center"} object-cover`}
         />
       </div>
-      <div className="flex items-center justify-between p-4">
-        <div className="truncate text-[15] mr-1">{title}</div>
+      <div className="flex items-center justify-between gap-3 p-4 h-[70px]">
+        <div className="text-[15] mr-1">{title}</div>
         <div
-          className="inner_box text-primary text-[15px] font-medium whitespace-nowrap cursor-pointer"
+          className={`text-primary text-[15px] font-medium whitespace-nowrap cursor-pointer ${styles.moreBtn}`}
           onClick={handleLink}
         >
           {more}

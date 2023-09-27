@@ -18,7 +18,6 @@ function HomeAdsSwiper2() {
       </div>
       <div className="flex items-center overflow-auto">
         {data?.map((item) => {
-          console.log("item", item);
           return (
             <HomeRealStateCard
               key={item.id}

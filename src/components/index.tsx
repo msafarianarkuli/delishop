@@ -18,6 +18,7 @@ import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook
 import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
 import AppHeaderLogo from "./appHeader/AppHeaderLogo";
 import ProfileWalletTabRoute from "components/appTabRoute/component/profileWalletTabRoute/ProfileWalletTabRoute";
+import ProfileMainTabRoute from "./appTabRoute/component/profileMainTabRoute/ProfileMainTabRoute";
 import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
 import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
 import AppHeaderLocation from "components/appHeader/AppHeaderLocation";
@@ -55,6 +56,7 @@ export {
   AppHeaderCoin,
   AppHeaderLogo,
   ProfileWalletTabRoute,
+  ProfileMainTabRoute,
   ProfileWalletAppHeader,
   AppHeaderMenu,
   AppHeaderLocation,

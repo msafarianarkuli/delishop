@@ -22,7 +22,7 @@ function ProfileMainTabRoute({active}: IWalletTabRoute) {
       },
       {
         link: "/profile/game",
-        title: active === "home" ? `${data} سکه` : "گنجینه",
+        title: active === "home" ? `سکه` : "گنجینه",
         active: active === "historycoin",
         icon: IconCoin,
       },
@@ -37,7 +37,7 @@ function ProfileMainTabRoute({active}: IWalletTabRoute) {
 
   return (
     <div className={styles.profile_main_tab_route}>
-      <AppMainTabRoute routes={routes} classNameContainer="px-screenSpace" classNameItem="w-1/3" />
+      <AppMainTabRoute routes={routes} classNameContainer="px-screenSpace" classNameItem="w-1/3" data={data} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import {BottomPageGradient} from "components";
+import {BottomPageGradient, ProfileMainTabRoute} from "components";
 import HomeAdsSell from "../HomeAdsSell";
 import HomeAdsSwiper from "../HomeAdsSwiper";
 import HomeAdsSwiper2 from "../HomeAdsSwiper2";
@@ -12,7 +12,6 @@ import HomeOrder from "../HomeOrder";
 import HomeUp from "../HomeUp";
 import HomeMainAdd from "../homeMainAdd";
 import {IBlog} from "types/interfaceBlog";
-import ProfileMainTabRoute from "components/appTabRoute/component/profileMainTabRoute/ProfileMainTabRoute";
 
 interface IHomeAuthenticated {
   blogs: IBlog[];

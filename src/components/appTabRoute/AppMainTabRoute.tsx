@@ -10,10 +10,18 @@ interface IAppMainTabRoute {
   classNameItem?: string;
   classNameItemActive?: string;
   color?: "default" | "supermarket";
+  data?: number;
 }
 
 function AppMainTabRoute(props: IAppMainTabRoute) {
-  const {routes, classNameContainer = "", classNameItem = "", classNameItemActive = "", color = "default"} = props;
+  const {
+    routes,
+    classNameContainer = "",
+    classNameItem = "",
+    classNameItemActive = "",
+    color = "default",
+    data,
+  } = props;
   const container = classNames({
     "flex w-full items-center h-headerNormal max-width-screen": true,
     [classNameContainer]: classNameContainer,
@@ -34,7 +42,9 @@ function AppMainTabRoute(props: IAppMainTabRoute) {
         return (
           <Link key={index} className={`${className} flex flex-col`} href={item.link} replace>
             {Icon && <Icon className="w-7 md:w-10 mb-1" fill={item.active ? "#2C3036" : "#7a7d82"} />}
-            {item.title}
+            <div>
+              <span>{item.title === "سکه" && data}</span> <span>{item.title}</span>
+            </div>
           </Link>
         );
       })}

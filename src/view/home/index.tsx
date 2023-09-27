@@ -1,42 +1,33 @@
-import HomeHeader from "view/home/component/HomeHeader";
-import HomeSearch from "view/home/component/HomeSearch";
-import HomeCategory from "view/home/component/HomeCategory";
-import HomeBest from "view/home/component/HomeBest";
-import HomeAdsSwiper from "view/home/component/HomeAdsSwiper";
-import HomeBottomNavigation from "view/home/component/HomeBottomNavigation";
-import HomeAdsSwiper2 from "view/home/component/HomeAdsSwiper2";
-import HomeDeliBlog from "view/home/component/HomeDeliBlog";
-import HomeAdsSell from "view/home/component/HomeAdsSell";
-import HomeCoin from "view/home/component/HomeCoin";
-import HomeUp from "view/home/component/HomeUp";
-import HomeOrder from "view/home/component/HomeOrder";
-import {BottomPageGradient} from "components";
+import HomeAuthenticated from "./component/homeStatus/HomeAuthenticated";
+import HomeUnauthenticated from "./component/homeStatus/HomeUnauthenticated";
+// import HomeLoading from "./component/homeStatus/HomeLoading";
+
 import {IBlog} from "types/interfaceBlog";
-import HomeMainAdd from "./component/homeMainAdd";
+import {useSession} from "next-auth/react";
+import {useGuest} from "template/context/GuestProvider";
+import {useEffect, useState} from "react";
 
 interface IHome {
   blogs: IBlog[];
 }
 
 function Home(props: IHome) {
-  return (
-    <>
-      <HomeHeader />
-      <HomeSearch />
-      <HomeOrder />
-      <HomeCategory />
-      <HomeMainAdd />
-      <HomeBest />
-      <HomeDeliBlog blogs={props.blogs} />
-      <HomeAdsSwiper />
-      <HomeAdsSell />
-      <HomeAdsSwiper2 />
-      <HomeCoin />
-      <HomeUp />
-      <HomeBottomNavigation />
-      <BottomPageGradient />
-    </>
-  );
+  const {blogs} = props;
+  const {status} = useSession();
+  const {isGuest} = useGuest();
+
+  const [guest, setGuest] = useState<string | null>(null);
+
+  useEffect(() => {
+    const isGuest = localStorage.getItem("isGuest");
+    setGuest(isGuest);
+  }, []);
+
+  return isGuest || guest || status === "authenticated" ? (
+    <HomeAuthenticated blogs={blogs} />
+  ) : status === "unauthenticated" ? (
+    <HomeUnauthenticated />
+  ) : null;
 }
 
 export default Home;

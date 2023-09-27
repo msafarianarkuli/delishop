@@ -60,7 +60,7 @@ function LoginPhoneNumber() {
           id="phone"
           control={control}
           classNameContainer="flex flex-col justify-center h-[50vh]"
-          className="bg-transparent rounded-none border-0 border-b focus:shadow-none text-center text-[14px]"
+          className="bg-transparent rounded-none border-0 border-b-[0.5px] placeholder-[#575F6B] border-[#2C3036] focus:shadow-none text-center text-[14px]"
           placeholder="شماره موبایل خود را وارد کنید"
           inputMode="decimal"
           numerical

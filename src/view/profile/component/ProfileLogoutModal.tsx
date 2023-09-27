@@ -4,19 +4,22 @@ import useProfile from "view/profile/context/useProfile";
 import useProfileAction from "view/profile/context/useProfileAction";
 import {signOut} from "next-auth/react";
 import {Button} from "antd";
+import {useGuest} from "template/context/GuestProvider";
 
 function ProfileLogoutModalBody() {
   const setModal = useProfileAction();
+  const {onRemoveGuest} = useGuest();
   return (
     <>
       <div className="text-center my-5">می خواهید از حساب کاربری خود خارج شوید؟</div>
       <div className="flex items-center">
         <Button
-          onClick={() =>
+          onClick={() => {
             signOut({
               callbackUrl: "/",
-            })
-          }
+            });
+            onRemoveGuest();
+          }}
           type="primary"
           className="submit-btn modal-submit-btn w-full ml-5"
         >

@@ -47,7 +47,7 @@ function CustomModal(props: ICustomModal) {
   });
 
   const classNameWrap = classNames({
-    "backdrop-blur-sm": true,
+    "backdrop-blur-[0.5px]": true,
     [iranSans.variable]: true,
     [wrapClassName]: wrapClassName,
   });

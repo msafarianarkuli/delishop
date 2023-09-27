@@ -50,7 +50,7 @@ function RegisterForm() {
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           <RegisterInput
             id="name"
-            label="نام و نام خانوادگی"
+            label="نام و نام خانوادگی:"
             classNameContainer="pt-5"
             rules={{
               validate: (value) => {
@@ -63,7 +63,7 @@ function RegisterForm() {
             id="introPhone"
             placeholder="اختیاری"
             numerical
-            label="شماره معرف"
+            label="کد معرف:"
             classNameContainer="mt-10"
             rules={{
               validate: (value) => {

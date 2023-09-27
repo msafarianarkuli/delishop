@@ -20,6 +20,10 @@ export interface IDataContextProvider<T> {
   error: any;
 }
 
+export interface IGuestContextProvider<T> {
+  isGuest: boolean;
+}
+
 export interface ICartDataItem {
   id: string;
   count: number;

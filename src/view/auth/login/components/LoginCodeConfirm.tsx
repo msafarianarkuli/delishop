@@ -9,6 +9,7 @@ import LoginReSendBtn from "view/auth/login/components/LoginReSendBtn";
 import {createLog} from "utils/utils";
 import {signIn} from "next-auth/react";
 import {SignInResponse} from "next-auth/react/types";
+import {useGuest} from "template/context/GuestProvider";
 
 interface ICodeConfirm {
   code: string;
@@ -25,6 +26,7 @@ function LoginCodeConfirm() {
   const {phone, isCode} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   // const router = useRouter();
+  const {onRemoveGuest} = useGuest();
 
   const {
     handleSubmit,
@@ -53,6 +55,7 @@ function LoginCodeConfirm() {
         if (res.status !== 200) {
           setError("code", {message: res.error});
         }
+        onRemoveGuest();
       }
     } catch (e: unknown) {
       createLog("err LoginCodeConfirm", e);
@@ -62,7 +65,7 @@ function LoginCodeConfirm() {
   return (
     <div>
       <div className="text-center mt-5">
-        کد ارسالی به شماره <span className="text-primary">{phone}</span> را وارد کنید
+        کد ارسالی به شماره <span className="text-primary">{phone}</span> را وارد نمائید
       </div>
       <div>
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -70,13 +73,13 @@ function LoginCodeConfirm() {
             id="code"
             control={control}
             classNameContainer="mt-12"
-            className="bg-transparent rounded-none border-0 border-b focus:shadow-none text-center"
-            placeholder="کد احراز هویت را وارد کنید"
+            className="bg-transparent rounded-none border-0 border-b placeholder-[#575F6B] border-[#2C3036] focus:shadow-none text-center"
+            placeholder="کد احراز هویت را وارد نمائید"
             inputMode="decimal"
             numerical
             rules={{
               validate: (value) => {
-                if (!value) return "کد احراز هویت را وارد کنید";
+                if (!value) return "کد احراز هویت را وارد نمائید";
                 return true;
               },
             }}

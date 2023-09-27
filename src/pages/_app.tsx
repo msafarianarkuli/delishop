@@ -9,6 +9,7 @@ import {SessionProvider} from "next-auth/react";
 import wrapper from "redux/store";
 import "styles/globals.scss";
 import {ToastContainer} from "react-toastify";
+import {GuestProvider} from "template/context/GuestProvider";
 
 function App({Component, ...rest}: AppProps) {
   const {
@@ -36,18 +37,20 @@ function App({Component, ...rest}: AppProps) {
           <Hydrate state={pageProps.dehydratedState}>
             <Provider store={store}>
               <Template>
-                <ToastContainer
-                  position="bottom-center"
-                  autoClose={3000}
-                  hideProgressBar={true}
-                  closeOnClick={true}
-                  closeButton={false}
-                  pauseOnHover={true}
-                  rtl={true}
-                  draggable={true}
-                  theme="light"
-                />
-                <Component {...pageProps} />
+                <GuestProvider>
+                  <ToastContainer
+                    position="bottom-center"
+                    autoClose={3000}
+                    hideProgressBar={true}
+                    closeOnClick={true}
+                    closeButton={false}
+                    pauseOnHover={true}
+                    rtl={true}
+                    draggable={true}
+                    theme="light"
+                  />
+                  <Component {...pageProps} />
+                </GuestProvider>
               </Template>
             </Provider>
           </Hydrate>

@@ -5,7 +5,6 @@ interface IGameCard {
   image: string;
   name: string;
   link: string;
-  color: string;
 }
 
 const GameCard = (props: IGameCard) => {
@@ -30,7 +29,7 @@ const GameCard = (props: IGameCard) => {
         </p>
         <div className="absolute bottom-4 left-10">
           <p className="text-textColor text-base sm:text-xl font-bold flex gap-3">
-            <span>َشروع بازی</span>
+            <span>شروع بازی</span>
             <IconAngleLeft className="w-3" />
           </p>
         </div>

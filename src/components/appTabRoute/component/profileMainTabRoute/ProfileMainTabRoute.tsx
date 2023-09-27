@@ -5,6 +5,7 @@ import IconHome from "assets/icons/new/IconHome";
 import IconCoin from "assets/icons/new/IconCoin";
 import IconGift from "assets/icons/new/IconGift";
 import {useUserCoin} from "template/context/UserCoinProvider";
+import usePrivateLink from "hooks/usePrivateLink";
 
 interface IWalletTabRoute {
   active: "home" | "historycoin" | "awardreceived";
@@ -12,6 +13,8 @@ interface IWalletTabRoute {
 
 function ProfileMainTabRoute({active}: IWalletTabRoute) {
   const {data} = useUserCoin();
+  const historycoin = usePrivateLink({link: "/profile/game"});
+  const awardreceived = usePrivateLink({link: "/profile/awardreceived"});
   const routes = useMemo(() => {
     return [
       {
@@ -21,13 +24,13 @@ function ProfileMainTabRoute({active}: IWalletTabRoute) {
         icon: IconHome,
       },
       {
-        link: "/profile/game",
+        link: historycoin,
         title: active === "home" ? `سکه` : "گنجینه",
         active: active === "historycoin",
         icon: IconCoin,
       },
       {
-        link: "/profile/awardreceived",
+        link: awardreceived,
         title: "تخفیف ها",
         active: active === "awardreceived",
         icon: IconGift,

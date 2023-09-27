@@ -3,7 +3,7 @@ import HomeAdsSell from "../HomeAdsSell";
 import HomeAdsSwiper from "../HomeAdsSwiper";
 import HomeAdsSwiper2 from "../HomeAdsSwiper2";
 import HomeBest from "../HomeBest";
-import HomeBottomNavigation from "../HomeBottomNavigation";
+// import HomeBottomNavigation from "../HomeBottomNavigation";
 import HomeCategory from "../HomeCategory";
 import HomeCoin from "../HomeCoin";
 import HomeDeliBlog from "../HomeDeliBlog";
@@ -34,7 +34,7 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
       <HomeAdsSwiper2 />
       <HomeCoin />
       <HomeUp />
-      <HomeBottomNavigation />
+      {/* <HomeBottomNavigation /> */}
       <BottomPageGradient />
     </>
   );

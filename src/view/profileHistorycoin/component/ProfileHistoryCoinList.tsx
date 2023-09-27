@@ -12,7 +12,7 @@ function ProfileHistoryCoinList() {
   const {data, isLoading} = useProfileHistoryCoinData();
 
   return (
-    <div className="px-screenSpace mt-[132px]">
+    <div className="px-screenSpace mt-[250px]">
       {isLoading ? <div>loading ...</div> : null}
       {!isLoading && !data?.pages[0]?.points_history.length ? <div>موردی یافت نشد</div> : null}
       <ProfileHistoryCoinListShow />
@@ -35,7 +35,7 @@ function ProfileHistoryCoinListShow() {
     []
   );
   const date = useCallback((date: string) => dayjs(date).calendar("jalali").locale("fa").format("YYYY/MM/DD"), []);
-
+  console.log("dataaaa", data?.pages);
   return (
     <>
       {data?.pages.map((value, index, array) => {

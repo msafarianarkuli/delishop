@@ -6,7 +6,7 @@ function HomeOrder() {
   const {data} = HomeOrderData();
   console.log(data);
   return (
-    <div className="overflow-x-scroll flex gap-4 px-screenSpace mt-5">
+    <div className="overflow-x-scroll flex gap-4 px-screenSpace mt-28">
       {data?.pages.map((value) => {
         return value.orders.map((item, index) => {
           return (

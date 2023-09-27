@@ -12,6 +12,7 @@ import HomeOrder from "../HomeOrder";
 import HomeUp from "../HomeUp";
 import HomeMainAdd from "../homeMainAdd";
 import {IBlog} from "types/interfaceBlog";
+import ProfileMainTabRoute from "components/appTabRoute/component/profileMainTabRoute/ProfileMainTabRoute";
 
 interface IHomeAuthenticated {
   blogs: IBlog[];
@@ -22,6 +23,7 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
   return (
     <>
       <HomeHeader />
+      <ProfileMainTabRoute active="home" />
       <HomeOrder />
       <HomeCategory />
       <HomeMainAdd />

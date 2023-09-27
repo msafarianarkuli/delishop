@@ -3,11 +3,13 @@ import {useProfileWalletCouponData} from "view/profileWallet/context/ProfileWall
 
 function ProfileWalletCoupon() {
   const {data} = useProfileWalletCouponData();
-  console.log(data);
   return (
     <div>
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-primary rounded-full"></div>
+        <p className="my-4">تبدیل سکه به جایزه</p>
+      </div>
       {data?.map((item) => {
-        console.log("first", item);
         return (
           <ProfileWalletCouponCard
             key={item.id}

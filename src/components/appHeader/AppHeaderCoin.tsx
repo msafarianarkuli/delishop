@@ -11,6 +11,7 @@ function AppHeaderCoin() {
     <Link href={link} className={styles.app_header_coin_container}>
       <IconCoin className="w-5 h-5" />
       <div className="h-5 text-[15px] font-medium mx-2">{data}</div>
+      <p>سکه</p>
     </Link>
   );
 }

@@ -1,15 +1,17 @@
-import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
 import {ProfileWalletTabRoute} from "components";
 import ProfileWalletCard from "view/profileWallet/component/profileWalletCard/ProfileWalletCard";
 import ProfileWalletChargeWalletProvider from "view/profileWallet/context/ProfileWalletChargeWalletProvider";
 import ProfileWalletCoupon from "view/profileWallet/component/ProfileWalletCoupon";
+import HomeHeader from "view/home/component/HomeHeader";
+import ProfileMainTabRoute from "components/appTabRoute/component/profileMainTabRoute/ProfileMainTabRoute";
 
 function ProfileWallet() {
   return (
     <ProfileWalletChargeWalletProvider>
-      <ProfileWalletAppHeader />
+      <HomeHeader />
+      <ProfileMainTabRoute active="historycoin" />
       <ProfileWalletTabRoute active="wallet" />
-      <div className="px-screenSpace mt-[132px]">
+      <div className="px-screenSpace mt-[250px]">
         <ProfileWalletCard />
         {/*<ProfileWalletCoinCard />*/}
         <ProfileWalletCoupon />

@@ -20,7 +20,7 @@ export interface IDataContextProvider<T> {
   error: any;
 }
 
-export interface IGuestContextProvider<T> {
+export interface IGuestContextProvider {
   isGuest: boolean;
 }
 

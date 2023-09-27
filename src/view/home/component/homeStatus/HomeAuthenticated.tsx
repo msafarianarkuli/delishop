@@ -9,7 +9,6 @@ import HomeCoin from "../HomeCoin";
 import HomeDeliBlog from "../HomeDeliBlog";
 import HomeHeader from "../HomeHeader";
 import HomeOrder from "../HomeOrder";
-import HomeSearch from "../HomeSearch";
 import HomeUp from "../HomeUp";
 import HomeMainAdd from "../homeMainAdd";
 import {IBlog} from "types/interfaceBlog";
@@ -23,7 +22,6 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
   return (
     <>
       <HomeHeader />
-      <HomeSearch />
       <HomeOrder />
       <HomeCategory />
       <HomeMainAdd />

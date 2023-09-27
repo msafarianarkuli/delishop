@@ -40,7 +40,7 @@ function AppHeaderLocation(props: IAppHeaderLocation) {
   return (
     <Link href={url} className="block text-[13px]">
       <div className="flex items-center">
-        <IconLocationPin className="w-4 h-4 text-iconColor ml-1" />
+        <IconLocationPin className="w-5 h-5 text-iconColor ml-1" />
         {title ? <span className="font-semibold">{title}:</span> : null}
         <div className="font-light mobile:max-w-[140px] max-w-[110px] truncate">{address}</div>
       </div>

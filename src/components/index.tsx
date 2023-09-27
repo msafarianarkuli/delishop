@@ -16,6 +16,7 @@ import DatePickerReactHook from "components/datePicker/DatePickerReactHook";
 import CustomSelect from "components/customSelect/CustomSelect";
 import CustomSelectReactHook from "components/customSelect/CustomSelectReactHook";
 import AppHeaderCoin from "components/appHeader/AppHeaderCoin";
+import AppHeaderLogo from "./appHeader/AppHeaderLogo";
 import ProfileWalletTabRoute from "components/appTabRoute/component/profileWalletTabRoute/ProfileWalletTabRoute";
 import ProfileWalletAppHeader from "components/appHeader/component/ProfileWalletAppHeader";
 import AppHeaderMenu from "components/appHeader/AppHeaderMenu";
@@ -52,6 +53,7 @@ export {
   CustomSelect,
   CustomSelectReactHook,
   AppHeaderCoin,
+  AppHeaderLogo,
   ProfileWalletTabRoute,
   ProfileWalletAppHeader,
   AppHeaderMenu,

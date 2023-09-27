@@ -41,9 +41,9 @@ function AppHeader(props: IAppHeader) {
   });
   return (
     <div className={container}>
-      {right ? <div className={rightClassName}>{right}</div> : null}
+      {left ? <div className={leftClassName}>{left}</div> : null} {/*logo */}
       {body ? <div className={bodyClassName}>{body}</div> : null}
-      {left ? <div className={leftClassName}>{left}</div> : null}
+      {right ? <div className={rightClassName}>{right}</div> : null}
     </div>
   );
 }

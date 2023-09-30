@@ -12,6 +12,7 @@ import HomeOrder from "../HomeOrder";
 import HomeUp from "../HomeUp";
 import HomeMainAdd from "../homeMainAdd";
 import {IBlog} from "types/interfaceBlog";
+import VendorBestRestuarantDataProvider from "view/home/context/HomeBestRestaurant";
 
 interface IHomeAuthenticated {
   blogs: IBlog[];
@@ -26,7 +27,9 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
       <HomeOrder />
       <HomeCategory />
       <HomeMainAdd />
-      <HomeBest />
+      <VendorBestRestuarantDataProvider>
+        <HomeBest />
+      </VendorBestRestuarantDataProvider>
       <HomeAdsSwiper />
       <HomeDeliBlog blogs={blogs} />
       <HomeAdsSell />

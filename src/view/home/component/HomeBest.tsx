@@ -1,12 +1,13 @@
 import HomeVendorCard from "view/home/component/homeVendorCard/HomeVendorCard";
 import {IconRoundedLeft} from "assets/icons";
 import HomeTitle from "view/home/component/HomeTitle";
-import {useHomeBestData} from "view/home/context/HomeBestDataProvider";
 import Link from "next/link";
 import {restaurantsVendorIds} from "utils/Const";
+import {useVendorBestRestuarantData} from "../context/HomeBestRestaurant";
 
 function HomeBest() {
-  const {data} = useHomeBestData();
+  const {data} = useVendorBestRestuarantData();
+
   if (!data || !data.pages[0].vendors.length) return null;
   return (
     <div>

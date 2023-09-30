@@ -6,7 +6,7 @@ import HomeRealStateCard from "./homeAdsCard/HomeRealStateCard";
 
 function HomeAdsSwiper2() {
   const {data} = useHomeAdsData();
-
+  console.log(data, "realstatee");
   return (
     <div>
       <div className="flex items-center justify-between px-screenSpace mt-8">
@@ -29,6 +29,7 @@ function HomeAdsSwiper2() {
               price={item.price}
               more="مشاهده "
               date={item.created_at}
+              status={item.status}
             />
           );
         })}

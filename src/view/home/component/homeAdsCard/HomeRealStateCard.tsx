@@ -15,10 +15,11 @@ interface IHomeRealStateCard {
   imgPosition?: string;
   price: number;
   date: string;
+  status: string;
 }
 
 function HomeRealStateCard(props: IHomeRealStateCard) {
-  const {id, title, image, more, href, horizontal = false, price, date} = props;
+  const {id, title, image, more, href, horizontal = false, price, date, status} = props;
   const {monthTitle, dayWeek, day} = dateConvert(date);
   const router = useRouter();
 
@@ -39,7 +40,11 @@ function HomeRealStateCard(props: IHomeRealStateCard) {
           <span>قیمت: </span>
           <span>{price.toLocaleString("en-US")}</span>
         </p>
-        <div className="absolute bottom-2 flex justify-between items-center w-full">
+        <p className="mt-2 text-xs sm:text-sm">
+          <span>وضعیت: </span>
+          <span>{status}</span>
+        </p>
+        <div className="absolute bottom-2 flex justify-between items-center w-full text-[11px] sm:text-sm">
           <div>
             {dayWeek} {day} {monthTitle}
           </div>

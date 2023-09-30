@@ -39,8 +39,8 @@ function useDrawerRoutes(): TData {
   const Coin = useMemo(() => {
     return (
       <div className={styles.drawer_coin_container}>
-        <IconCoin className="w-5 h-5" />
-        <div className="h-5 text-[15px] font-medium mx-2">{CoinData}</div>
+        <IconCoin className="w-4 h-4" />
+        <div className="h-5 text-[15px] font-medium mx-1">{CoinData}</div>
       </div>
     );
   }, [CoinData]);

@@ -45,7 +45,7 @@ function HomeVendorCard(props: IHomeBestCard) {
         <img src={image} alt={title} className="absolute inset-0 object-center w-full h-full object-cover" />
       </div>
       <div className="py-[10px] px-[15px]">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-1">
           <div>
             <span className="font-bold">{title}</span>
             {/*<span className="text-[12px] font-light text-textColorLight mr-2">({address})</span>*/}
@@ -62,9 +62,9 @@ function HomeVendorCard(props: IHomeBestCard) {
         <div className="flex justify-between items-center">
           <div className="text-textColorLight text-[13px] font-light">
             {description.length > 20 ? description.slice(0, 18) + "..." : description}
-            <div className="flex items-center mt-1">
+            <div className="flex items-center mt-2">
               <IconCoin className="w-4 h-4 ml-1" />
-              <span className="text-[12px]">{coin} سکه جایزه خرید</span>
+              <span className="text-[12px] text-iconColor font-semibold">{coin} سکه جایزه خرید</span>
             </div>
           </div>
           <div className="flex items-center">

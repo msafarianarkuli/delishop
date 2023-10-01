@@ -51,7 +51,7 @@ function SearchPageSearch() {
     <div>
       <CustomInput
         id="search"
-        className="input-form inner_box rounded-full border-none px-5 mb-5"
+        className="input-form search_input rounded-xl border-none px-5 mb-5"
         value={text || nameFromUrl}
         placeholder="جستجو"
         onChange={(event) => {

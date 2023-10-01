@@ -86,18 +86,6 @@ function AddressCreateForm({defaultValues, isEdit}: {defaultValues?: IAddressCre
       <form onSubmit={handleSubmit(onSubmit)}>
         <AddressCreateMap />
         <AddressCreateFormInput
-          id="title"
-          label="عنوان آدرس"
-          classNameContainer="mb-7"
-          placeholder="خانه"
-          rules={{
-            validate: (value) => {
-              if (!value) return "عنوان آدرس را وارد کنید";
-              return true;
-            },
-          }}
-        />
-        <AddressCreateFormInput
           id="address"
           label="آدرس کامل"
           classNameContainer="mb-7"
@@ -117,6 +105,18 @@ function AddressCreateForm({defaultValues, isEdit}: {defaultValues?: IAddressCre
           rules={{
             validate: (value) => {
               if (!value) return "جزئیات آدرس را وارد کنید";
+              return true;
+            },
+          }}
+        />
+        <AddressCreateFormInput
+          id="title"
+          label="عنوان آدرس"
+          classNameContainer="mb-7"
+          placeholder="خانه"
+          rules={{
+            validate: (value) => {
+              if (!value) return "عنوان آدرس را وارد کنید";
               return true;
             },
           }}

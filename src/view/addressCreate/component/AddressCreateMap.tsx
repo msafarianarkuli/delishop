@@ -33,7 +33,7 @@ function AddressCreateMap() {
     <>
       <div className={styles.address_create_map_container}>
         <Map
-          className="w-full h-[100px] z-0 rounded-[10px] border border-borderColor"
+          className="w-full h-[150px] z-0 rounded-[10px] border border-borderColor"
           zoom={17}
           points={[point]}
           pinIcons={pin}

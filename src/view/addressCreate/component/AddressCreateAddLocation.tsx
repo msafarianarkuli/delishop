@@ -1,5 +1,5 @@
 import React, {useMemo} from "react";
-import {IconEditAddress} from "assets/icons";
+import {IconRoundedLeft} from "assets/icons";
 import {useFormContext, useWatch} from "react-hook-form";
 import {useRouter} from "next/router";
 import usePathnameQuery from "hooks/usePathnameQuery";
@@ -28,8 +28,9 @@ function AddressCreateAddLocation() {
         <span className="ml-1">محدوده:</span>
         <span>{address}</span>
       </div>
-      <div>
-        <IconEditAddress className="w-[18px] h-[18px]" />
+      <div className="flex gap-1 text-primary font-bold">
+        <span>ویرایش</span>
+        <IconRoundedLeft className="w-4" />
       </div>
     </button>
   );

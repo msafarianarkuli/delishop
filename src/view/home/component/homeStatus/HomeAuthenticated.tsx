@@ -13,6 +13,7 @@ import HomeUp from "../HomeUp";
 import HomeMainAdd from "../homeMainAdd";
 import {IBlog} from "types/interfaceBlog";
 import VendorBestRestuarantDataProvider from "view/home/context/HomeBestRestaurant";
+import VendorDetailStateGoodsDataProvider from "view/home/context/HomeStateGoodsProvider";
 
 interface IHomeAuthenticated {
   blogs: IBlog[];
@@ -26,7 +27,9 @@ const HomeAuthenticated = (props: IHomeAuthenticated) => {
       <ProfileMainTabRoute active="home" />
       <HomeOrder />
       <HomeCategory />
-      <HomeMainAdd />
+      <VendorDetailStateGoodsDataProvider>
+        <HomeMainAdd />
+      </VendorDetailStateGoodsDataProvider>
       <VendorBestRestuarantDataProvider>
         <HomeBest />
       </VendorBestRestuarantDataProvider>

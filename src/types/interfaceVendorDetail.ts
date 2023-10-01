@@ -73,6 +73,7 @@ export interface IGetVendorDetailMenusGroupsProducts {
   description_te: string;
   price_class: number;
   point: number;
+  discount_num?: number;
   productKinds: IGetVendorDetailMenusGroupsProductsProductKinds[];
   extras: IGetVendorDetailMenusGroupsProductsExtras[];
 }

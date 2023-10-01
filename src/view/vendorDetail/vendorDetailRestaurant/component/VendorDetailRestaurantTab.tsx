@@ -92,7 +92,7 @@ function VendorDetailRestaurantTab() {
       {data?.map((item, index) => {
         const className = classNames({
           "relative text-[15px] font-semibold ml-5 last:ml-0 whitespace-nowrap": true,
-          "after:content-[' '] after:absolute after:bottom-[-3px] after:right-1/3 after:h-[2px] after:w-1/3 after:bg-primary after:rounded-full":
+          "after:content-[' '] after:absolute after:bottom-[-3px] after:right-1/3 text-primary after:h-[2px] after:w-1/3 after:bg-primary after:rounded-full":
             index == active,
         });
         return (

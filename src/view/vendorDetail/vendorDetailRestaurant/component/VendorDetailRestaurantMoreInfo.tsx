@@ -9,7 +9,7 @@ function VendorDetailRestaurantMoreInfo() {
     <>
       <Link href={`/${vendor}/info/${id}`}>
         <VendorDetailRestaurantSummaryItem
-          top="اطلاعات بیشتر"
+          top="اطلاعات و نظرات"
           bottom={<IconMoreInfo className="w-4 h-4 text-primary" />}
         />
       </Link>

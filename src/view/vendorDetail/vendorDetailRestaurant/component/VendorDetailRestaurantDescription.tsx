@@ -11,7 +11,7 @@ function VendorDetailRestaurantDescription() {
       <span className="mr-1">({data?.vendor?.rates_count})</span>
       <div className="flex items-center">
         <IconStar className="w-4 h-4 text-[#FFC003] mx-1" />
-        <span>{+rate}</span>
+        <span>{Number(rate).toFixed(1)}</span>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {selectAddressMap} from "redux/addressMap/addressMapReducer";
 import useDeliveryPrice from "hooks/useDeliveryPrice";
-import IconDelivery from "assets/icons/IconDelivery";
+// import IconDelivery from "assets/icons/IconDelivery";
 import VendorDetailRestaurantSummaryItem from "view/vendorDetail/vendorDetailRestaurant/component/VendorDetailRestaurantSummaryItem";
 
 interface IVendorDetailRestaurantDelivery {
@@ -34,7 +34,7 @@ function VendorDetailRestaurantDelivery(props: IVendorDetailRestaurantDelivery) 
       }
       bottom={
         <>
-          <IconDelivery className="w-4 h-4" />
+          {/* <IconDelivery className="w-4 h-4" /> */}
           <span className="mr-1 whitespace-nowrap">ارسال دلی شاپ</span>
         </>
       }

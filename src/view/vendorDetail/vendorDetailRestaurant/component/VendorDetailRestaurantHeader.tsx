@@ -63,9 +63,9 @@ function VendorDetailRestaurantHeader() {
   return (
     <div id="restaurantDetailHeader" className="fixed top-0 right-0 left-0 z-10">
       <AppHeader
-        right={<AppHeaderBackBtn type={type} onClick={() => router.back()} />}
+        left={<AppHeaderBackBtn type={type} onClick={() => router.back()} />}
         body={<RestaurantDetailHeaderBody />}
-        left={<AppHeaderFavorite type={type} />}
+        right={<AppHeaderFavorite type={type} />}
       />
     </div>
   );

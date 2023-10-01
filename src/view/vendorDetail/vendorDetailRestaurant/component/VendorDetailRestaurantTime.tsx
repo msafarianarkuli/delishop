@@ -1,5 +1,5 @@
 import {useMemo} from "react";
-import {IconClockSolid} from "assets/icons";
+// import {IconClockSolid} from "assets/icons";
 import VendorDetailRestaurantSummaryItem from "view/vendorDetail/vendorDetailRestaurant/component/VendorDetailRestaurantSummaryItem";
 
 function VendorDetailRestaurantTime({maxSendTime}: {maxSendTime: string}) {
@@ -20,7 +20,7 @@ function VendorDetailRestaurantTime({maxSendTime}: {maxSendTime: string}) {
       top={`${timeDelivery} دقیقه`}
       bottom={
         <>
-          <IconClockSolid className="w-4 h-4" />
+          {/* <IconClockSolid className="w-4 h-4" /> */}
           <span className="mr-1 whitespace-nowrap">زمان تحویل</span>
         </>
       }

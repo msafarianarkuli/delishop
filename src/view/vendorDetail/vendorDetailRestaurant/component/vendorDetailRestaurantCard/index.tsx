@@ -10,6 +10,7 @@ export interface IVendorDetailRestaurantCard {
   price: number;
   coin: number;
   count?: number;
+  discount_num?: number;
   stock?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
@@ -17,15 +18,24 @@ export interface IVendorDetailRestaurantCard {
 }
 
 function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
-  const {description, price, title, count, stock, coin, image, onAddClick, onMinusClick, disabled} = props;
+  const {description, price, title, count, discount_num, stock, coin, image, onAddClick, onMinusClick, disabled} =
+    props;
 
   return (
-    <div className={styles.vendor_detail_restaurant_card}>
+    <div className={`${styles.vendor_detail_restaurant_card} ${discount_num ? styles.discount_card : ""}`}>
       <div className="flex flex-col flex-1 ml-2 justify-between">
         <div>
           <div className="text-[15px]">{title}</div>
           <div className="text-[12px] md:text-[13px] text-iconColor my-2 w-[150px] sm:w-auto">{description}</div>
         </div>
+        {discount_num ? (
+          <div className="-mb-8 flex gap-2 items-start">
+            <div className="flex justify-center items-center bg-primary px-[4px] rounded-lg text-white text-[10px]">
+              45%
+            </div>
+            <span className="line-through">{price?.toLocaleString("en-US")}</span>
+          </div>
+        ) : null}
         <div className="flex items-center">
           <div>
             <span className="text-[17px] font-semibold">{price?.toLocaleString("en-US")}</span>
@@ -35,7 +45,6 @@ function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
             <div className="flex items-center bg-[#E8E8EE] rounded p-1 mr-3">
               <IconCoin className="w-3 h-3 ml-1" />
               <span className="font-semibold text-[13px]">{coin}</span>
-              <span>+</span>
             </div>
           ) : null}
         </div>

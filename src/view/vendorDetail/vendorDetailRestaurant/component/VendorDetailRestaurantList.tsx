@@ -67,6 +67,7 @@ function VendorDetailRestaurantList() {
           <Fragment key={item.name}>
             <VendorDetailRestaurantListTag id={item.name} title={item.displayname} />
             {item.products.map((item) => {
+              console.log("item", item);
               if (!item.productKinds.length) return null;
               const product = item.productKinds[0];
               const price = product?.price || 0;
@@ -84,6 +85,7 @@ function VendorDetailRestaurantList() {
                     stock={product.count}
                     price={Math.round(finalPrice / 10)}
                     count={count}
+                    discount_num={item.discount_num}
                     onAddClick={() => {
                       const id = router.query.id;
                       if (id && !Array.isArray(id)) {

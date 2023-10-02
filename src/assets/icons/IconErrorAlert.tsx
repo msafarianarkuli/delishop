@@ -11,8 +11,8 @@ function IconErrorAlert({className}: {className: string}) {
       <g filter="url(#filter0_b_48_1497)">
         <circle cx="17" cy="17" r="17" fill="black" fill-opacity="0.6" />
       </g>
-      <path d="M11 11L23.7279 23.7279" stroke="#E1E1E1" stroke-width="2" stroke-linecap="round" />
-      <path d="M11 23.7275L23.7279 10.9996" stroke="#E1E1E1" stroke-width="2" stroke-linecap="round" />
+      <path d="M11 11L23.7279 23.7279" stroke="#E1E1E1" strokeWidth="2" strokeLinecap="round" />
+      <path d="M11 23.7275L23.7279 10.9996" stroke="#E1E1E1" strokeWidth="2" strokeLinecap="round" />
       <defs>
         <filter
           id="filter0_b_48_1497"

@@ -6,16 +6,16 @@ function IconMenu({className}: {className: string}) {
       <rect width="15" height="4" rx="2" transform="matrix(-1 0 0 1 16 0)" fill="url(#paint2_linear_4_1075)" />
       <defs>
         <linearGradient id="paint0_linear_4_1075" x1="11" y1="0" x2="11" y2="4" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
         <linearGradient id="paint1_linear_4_1075" x1="13.5" y1="0" x2="13.5" y2="4" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
         <linearGradient id="paint2_linear_4_1075" x1="7.5" y1="0" x2="7.5" y2="4" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
       </defs>
     </svg>

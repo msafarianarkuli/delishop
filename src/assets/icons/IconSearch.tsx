@@ -4,16 +4,16 @@ function IconSearch({className}: {className: string}) {
       <path
         d="M20.9517 20.9375L16.4517 16.4375"
         stroke="url(#paint0_linear_4_1082)"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M18 10C18 14.4189 14.4182 18 10.0004 18C5.58252 18 2 14.4189 2 10C2 5.58115 5.58178 2 9.99963 2C14.4175 2 18 5.58195 18 10Z"
         stroke="url(#paint1_linear_4_1082)"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <defs>
         <linearGradient
@@ -24,8 +24,8 @@ function IconSearch({className}: {className: string}) {
           y2="22.6514"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_4_1082"
@@ -35,8 +35,8 @@ function IconSearch({className}: {className: string}) {
           y2="4.66667"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#2C3036" />
-          <stop offset="1" stop-color="#575F6B" />
+          <stop stopColor="#2C3036" />
+          <stop offset="1" stopColor="#575F6B" />
         </linearGradient>
       </defs>
     </svg>

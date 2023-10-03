@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useInView} from "react-intersection-observer";
 import {useDispatch} from "react-redux";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
@@ -13,6 +13,8 @@ import {
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import {roundPrice} from "utils/utils";
+import VendorProductBottomSheet from "view/product/VendorProductBottomSheet";
+import {useRouter} from "next/router";
 
 function VendorSubcategoryList() {
   const {data, isLoading} = useVendorSubcategoryData();
@@ -42,6 +44,21 @@ function VendorSubcategoryShow() {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
+
+  const router = useRouter();
+  const [bottomSheet, setBottomSheet] = useState(false);
+
+  useEffect(() => {
+    setBottomSheet(false);
+  }, [router.asPath]);
+
+  const [product, setProduct] = useState({});
+
+  const handleProductData = (item: any) => {
+    setProduct(item);
+    setBottomSheet(true);
+    console.log(item);
+  };
 
   return (
     <>
@@ -101,11 +118,13 @@ function VendorSubcategoryShow() {
                     dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId}));
                   }
                 }}
+                onClick={() => handleProductData(item)}
               />
             </div>
           );
         });
       })}
+      <VendorProductBottomSheet open={bottomSheet} onClose={() => setBottomSheet(false)} data={product} />
     </>
   );
 }

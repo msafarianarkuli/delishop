@@ -14,15 +14,31 @@ export interface IVendorDetailRestaurantCard {
   stock?: number;
   onAddClick?: (count: number) => void;
   onMinusClick?: (count: number) => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
 function VendorDetailRestaurantCard(props: IVendorDetailRestaurantCard) {
-  const {description, price, title, count, discount_num, stock, coin, image, onAddClick, onMinusClick, disabled} =
-    props;
+  const {
+    description,
+    price,
+    title,
+    count,
+    discount_num,
+    stock,
+    coin,
+    image,
+    onAddClick,
+    onMinusClick,
+    onClick,
+    disabled,
+  } = props;
 
   return (
-    <div className={`${styles.vendor_detail_restaurant_card} ${discount_num ? styles.discount_card : ""}`}>
+    <div
+      className={`${styles.vendor_detail_restaurant_card} ${discount_num ? styles.discount_card : ""} cursor-pointer`}
+      onClick={onClick}
+    >
       <div className="flex flex-col flex-1 ml-2 justify-between">
         <div>
           <div className="text-[15px]">{title}</div>

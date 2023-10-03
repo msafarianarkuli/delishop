@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useRef} from "react";
+import {Fragment, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
 import useCartRestaurant from "hooks/useCartRestaurant";
@@ -20,6 +20,7 @@ import {
 } from "view/vendorDetail/vendorDetailRestaurant/context/VendorDetailRestaurantExtraProvider";
 import styles from "view/vendorDetail/vendorDetailRestaurant/VendorDetailRestaurant.module.scss";
 import {useVendorDetailParams} from "view/vendorDetail/context/VendorDetailParamsProvider";
+import VendorProductBottomSheet from "view/product/VendorProductBottomSheet";
 
 function VendorDetailRestaurantList() {
   const ref = useRef<HTMLDivElement>(null);
@@ -59,6 +60,20 @@ function VendorDetailRestaurantList() {
     }
   }, [dispatch, isOpen, vendor?.cartOrders, vendor?.vendorId]);
 
+  const [bottomSheet, setBottomSheet] = useState(false);
+
+  useEffect(() => {
+    setBottomSheet(false);
+  }, [router.asPath]);
+
+  const [product, setProduct] = useState({});
+
+  const handleProductData = (item: any) => {
+    setProduct(item);
+    setBottomSheet(true);
+    console.log(item);
+  };
+
   return (
     <div ref={ref} className="mb-[100px] px-screenSpace">
       {data?.menus.groups.map((item) => {
@@ -67,7 +82,6 @@ function VendorDetailRestaurantList() {
           <Fragment key={item.name}>
             <VendorDetailRestaurantListTag id={item.name} title={item.displayname} />
             {item.products.map((item) => {
-              console.log("item", item);
               if (!item.productKinds.length) return null;
               const product = item.productKinds[0];
               const price = product?.price || 0;
@@ -130,6 +144,7 @@ function VendorDetailRestaurantList() {
                         dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId: id}));
                       }
                     }}
+                    onClick={() => handleProductData(item)}
                   />
                 </div>
                 // <Link key={item.id} href={`/${vendorName}/product/${item.id}`} className="block mb-5">
@@ -140,6 +155,12 @@ function VendorDetailRestaurantList() {
           </Fragment>
         );
       })}
+      <VendorProductBottomSheet
+        open={bottomSheet}
+        onClose={() => setBottomSheet(false)}
+        data={product}
+        isRestaurant={true}
+      />
     </div>
   );
 }

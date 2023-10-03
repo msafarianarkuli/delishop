@@ -5,13 +5,14 @@ interface ISearchPageProductCard {
   name: string;
   image?: string;
   price?: number;
+  onClick?: () => void;
 }
 
 function SearchPageProductCard(props: ISearchPageProductCard) {
-  const {name, title, price, image} = props;
+  const {name, title, price, image, onClick} = props;
 
   return (
-    <div className="flex items-center py-5 border-b border-borderColor">
+    <div className="flex items-center py-5 border-b border-borderColor" onClick={onClick}>
       <img src={image} alt={title} className="w-[60px] h-[60px] object-center object-cover rounded-[6px]" />
       <div className="flex flex-col flex-1 mr-5">
         <div>{title}</div>

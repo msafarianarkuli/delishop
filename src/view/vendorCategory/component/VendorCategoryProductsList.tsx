@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import useVendorWorkTime from "hooks/useVendorWorkTime";
-import {Fragment, useEffect, useMemo} from "react";
+import {Fragment, useEffect, useMemo, useState} from "react";
 // import Link from "next/link";
 import {useVendorCategoryParams} from "view/vendorCategory/context/VendorCategoryParamsProvider";
 import {useVendorCategoryData} from "view/vendorCategory/context/VendorCategoryDataProvider";
@@ -16,10 +16,13 @@ import {
 } from "redux/cartRestaurant/cartRestaurantReducer";
 import useCartRestaurant from "hooks/useCartRestaurant";
 import {roundPrice} from "utils/utils";
+import VendorProductBottomSheet from "view/product/VendorProductBottomSheet";
+import {useRouter} from "next/router";
 
 function VendorCategoryProductsList() {
   const {data} = useVendorCategoryData();
   const {data: supermarketData} = useVendorCategoryListData();
+
   // const cart = useSelector(selectCartSupermarketCart);
   const dispatch = useDispatch();
   const filterId = useVendorCategorySubcategoryFilter();
@@ -39,6 +42,21 @@ function VendorCategoryProductsList() {
       dispatch(removeCartRestaurantCartListCartOrder(vendor.vendorId));
     }
   }, [dispatch, vendor?.cartOrders, vendor?.vendorId]);
+
+  const router = useRouter();
+  const [bottomSheet, setBottomSheet] = useState(false);
+
+  useEffect(() => {
+    setBottomSheet(false);
+  }, [router.asPath]);
+
+  const [product, setProduct] = useState({});
+
+  const handleProductData = (item: any) => {
+    setProduct(item);
+    setBottomSheet(true);
+    console.log(item);
+  };
 
   return (
     <>
@@ -102,6 +120,7 @@ function VendorCategoryProductsList() {
                           dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId: id}));
                         }
                       }}
+                      onClick={() => handleProductData(item)}
                     />
                   </div>
 
@@ -114,6 +133,7 @@ function VendorCategoryProductsList() {
           </Fragment>
         );
       })}
+      <VendorProductBottomSheet open={bottomSheet} onClose={() => setBottomSheet(false)} data={product} />
     </>
   );
 }

@@ -13,18 +13,19 @@ interface IVendorSubcategoryCard {
   stock?: number;
   onAddClick: () => void;
   onMinusClick: () => void;
+  onClick: () => void;
   disabled?: boolean;
 }
 
 function VendorSubcategoryCard(props: IVendorSubcategoryCard) {
-  const {image, description, price, title, coin, count, stock, onMinusClick, onAddClick, disabled} = props;
+  const {image, description, price, title, coin, count, stock, onMinusClick, onAddClick, onClick, disabled} = props;
   const counterClassNames = classNames({
     "absolute top-[8px] z-[5] flex-row-reverse w-[100px] h-[34px] mx-auto": true,
     [styles.vendor_subcategory_card_counter]: count,
   });
 
   return (
-    <div className={styles.vendor_subcategory_card_container}>
+    <div className={`${styles.vendor_subcategory_card_container} cursor-pointer`} onClick={onClick}>
       <div className="relative flex justify-center items-center w-full pb-[100%]">
         <Counter
           disabled={disabled}

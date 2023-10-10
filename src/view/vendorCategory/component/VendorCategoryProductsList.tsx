@@ -133,7 +133,13 @@ function VendorCategoryProductsList() {
           </Fragment>
         );
       })}
-      <VendorProductBottomSheet open={bottomSheet} onClose={() => setBottomSheet(false)} data={product} />
+      <VendorProductBottomSheet
+        open={bottomSheet}
+        onClose={() => setBottomSheet(false)}
+        data={product}
+        vendor={vendor}
+        openTime={!openTime || !supermarketData?.vendor.open}
+      />
     </>
   );
 }

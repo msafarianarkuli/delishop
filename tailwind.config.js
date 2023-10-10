@@ -28,6 +28,9 @@ module.exports = {
           "Noto Color Emoji",
         ],
       },
+      boxShadow: {
+        inner: "-4px -4px 5px #ffffff inset, 2px 2px 8px rgba(36, 65, 93, 0.25) inset",
+      },
       colors: {
         primary: "#FF5500",
         primarySupermarket: "#FF5500",

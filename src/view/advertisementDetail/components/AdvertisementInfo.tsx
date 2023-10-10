@@ -2,6 +2,8 @@ import styles from "view/home/home.module.scss";
 import IconPhone from "assets/icons/IconPhone";
 import Link from "next/link";
 import {addComma} from "utils/utils";
+import IconPolyganWarning from "assets/icons/new/IconPolyganWarning";
+import IconAngleLeft from "assets/icons/new/IconAngleLeft";
 
 interface IAdvertisementInfo {
   title: string;
@@ -59,6 +61,11 @@ const AdvertisementInfo = (props: IAdvertisementInfo) => {
           <IconPhone className="w-[40px]" />
         </div>
       </div>
+      <Link href="/record" className="flex items-center gap-2 my-4 hover:text-primary">
+        <IconPolyganWarning className="w-6" />
+        <p>ثبت اشکال یا تخلف در آگهی</p>
+        <IconAngleLeft className="w-2 mt-[2px]" />
+      </Link>
     </div>
   );
 };

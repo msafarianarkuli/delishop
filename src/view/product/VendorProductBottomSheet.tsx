@@ -4,15 +4,25 @@ import BottomSheet from "components/customDrawer/BottomSheet";
 import Image from "next/image";
 import {addComma, roundPrice} from "utils/utils";
 import {Counter} from "components";
+import {useVendorCategoryParams} from "view/vendorCategory/context/VendorCategoryParamsProvider";
+import {useVendorCategoryListData} from "view/vendorCategory/context/VendorCategoryListDataProvider";
+import {
+  removeCartRestaurantCartListLastOrder,
+  setCartRestaurantItem,
+  setCartRestaurantVendorData,
+} from "redux/cartRestaurant/cartRestaurantReducer";
+import {useDispatch} from "react-redux";
 
 interface IVendorFilterBottomSheet {
   data: {};
   open: boolean;
+  vendor?: any;
   isRestaurant?: boolean;
   onClose: DrawerProps["onClose"];
+  openTime?: boolean;
 }
 
-function VendorFilterBottomSheetList({data, isRestaurant}: any) {
+function VendorFilterBottomSheetList({data, isRestaurant, vendor, openTime}: any) {
   const product = data;
   const productKind = isRestaurant
     ? product?.productKinds?.length > 0
@@ -21,9 +31,13 @@ function VendorFilterBottomSheetList({data, isRestaurant}: any) {
     : product?.productKind?.length > 0
     ? product?.productKind[0]
     : "";
+  const dispatch = useDispatch();
   const addedPercent = isRestaurant ? product?.price_class / 100 : product?.priceClass / 100;
   const finalPrice = (productKind.price + productKind.price * addedPercent) / 10;
   const discountPrice = roundPrice(finalPrice - (finalPrice * product?.discount_num) / 100);
+  const {vendor: vendorName, vendorId} = useVendorCategoryParams();
+  const {data: supermarketData} = useVendorCategoryListData();
+  const count = vendor?.cartOrders[product.id]?.length || 0;
 
   return (
     <div className="py-4 max-w-lg mx-auto relative h-[380px]">
@@ -54,15 +68,43 @@ function VendorFilterBottomSheetList({data, isRestaurant}: any) {
         </div>
         <div className="absolute bottom-0 left-0">
           <Counter
-            disabled={false}
-            count={1}
+            disabled={openTime || productKind.count === 0 || count >= productKind.count}
+            count={count}
             stock={product?.count}
             // className={counterClassNames}
             primaryType="default"
             showMinusOnlyPositiveNumber
             showNumberOnlyPositiveNumber
-            // onAddClick={onAddClick}
-            // onMinusClick={onMinusClick}
+            onAddClick={() => {
+              if (vendorId && supermarketData) {
+                if (!vendor) {
+                  dispatch(
+                    setCartRestaurantVendorData({
+                      vendorAddressName: vendorName,
+                      vendorId,
+                      title: supermarketData?.vendor?.name,
+                      point: supermarketData?.vendor.point,
+                    })
+                  );
+                }
+                dispatch(
+                  setCartRestaurantItem({
+                    id: product.id,
+                    price: roundPrice(discountPrice),
+                    title: product.displayname,
+                    vendorId,
+                    point: product.point,
+                    image: product.photo_igu,
+                  })
+                );
+              }
+            }}
+            onMinusClick={() => {
+              const id = vendorId;
+              if (id && !Array.isArray(id)) {
+                dispatch(removeCartRestaurantCartListLastOrder({id: product.id, vendorId: id}));
+              }
+            }}
           />
         </div>
       </div>
@@ -71,7 +113,7 @@ function VendorFilterBottomSheetList({data, isRestaurant}: any) {
 }
 
 function VendorProductBottomSheet(props: IVendorFilterBottomSheet) {
-  const {open, onClose, data, isRestaurant} = props;
+  const {open, onClose, data, isRestaurant, vendor, openTime} = props;
 
   const [height, setHeight] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -90,7 +132,7 @@ function VendorProductBottomSheet(props: IVendorFilterBottomSheet) {
         <VendorFilterBottomSheetList data={data} />
       </div>
       <BottomSheet open={open} onClose={onClose} title="جزئیات محصول" height={height} isProduct={true}>
-        <VendorFilterBottomSheetList data={data} isRestaurant={isRestaurant} />
+        <VendorFilterBottomSheetList data={data} isRestaurant={isRestaurant} vendor={vendor} openTime={openTime} />
       </BottomSheet>
     </>
   );

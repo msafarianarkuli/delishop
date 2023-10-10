@@ -10,6 +10,7 @@ import styles from "view/home/home.module.scss";
 import IconDrug from "assets/icons/IconDrug";
 import IconTools from "assets/icons/IconTools";
 import IconKharazi from "assets/icons/IconKharazi";
+import IconPetShop from "assets/icons/IconPetShop";
 
 const data: TDataCustomSwiper = [
   {
@@ -56,6 +57,11 @@ const data: TDataCustomSwiper = [
     title: "رنگ ابزار",
     icon: IconTools,
     link: "/tools",
+  },
+  {
+    title: "پت شاپ",
+    icon: IconPetShop,
+    link: "/petshop",
   },
   {
     title: "بیشتر",

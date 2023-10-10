@@ -96,6 +96,7 @@ export enum EVendorsId {
   cosmetic = 21,
   moreJobs = 22,
   Governmental = 23,
+  petshop = 25,
 }
 
 export const restaurantsVendorIds = [
@@ -109,6 +110,7 @@ export const restaurantsVendorIds = [
   EVendorsId.attari,
   EVendorsId.flower,
   EVendorsId.Governmental,
+  EVendorsId.petshop,
   EVendorsId.moreJobs,
 ];
 
@@ -172,6 +174,11 @@ export const vendorsAddress: IVendorsAddress[] = [
   {
     id: EVendorsId.attari,
     name: "attari",
+    isRestaurant: true,
+  },
+  {
+    id: EVendorsId.petshop,
+    name: "petshop",
     isRestaurant: true,
   },
   {
